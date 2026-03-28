@@ -24,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 12px 20px;
+    padding: 12px 15px;
     background: #6c7a6b;
     flex-wrap: wrap;
 }
@@ -38,8 +38,8 @@ body {
 }
 
 .logoimage {
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background-image: url("../../Assets/Images/ArmsDealerLogo.png");
     background-size: cover;
     background-position: center;
@@ -48,7 +48,7 @@ body {
 
 .logo {
     font-weight: bold;
-    font-size: 30px;
+    font-size: 25px;
 }
 
 .nav-links {
@@ -70,6 +70,11 @@ body {
     text-decoration: none;
     color: #000;
     font-size: 14px;
+}
+
+.nav-links .active {
+    color: darkred;
+    text-decoration: underline;
 }
 
 .top-bar {
@@ -97,24 +102,24 @@ body {
     background: #6c7a6b;
     color: #303030;
     border: none;
-    padding: 3px 6px;
     border-radius: 4px;
     cursor: pointer;
 
 }
 
-.top-bar.left {
-    display: flex;
-    gap: 10px;
-}
-
-.top-bar.right {
+.top-bar .right {
     display: flex;
     gap: 30px;
 }
 
-.top-bar a {
+.top-bar .right a {
     text-decoration: none;
     font-size: 13px;
-    color: #353535;
+    gap: 30px;
+    color: #2b2b2b;
+}
+
+.top-bar .right .active {
+    color: darkred;
+    text-decoration: underline;
 }
