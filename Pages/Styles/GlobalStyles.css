@@ -9,7 +9,7 @@ body {
     background-image: url("../../Assets/Images/camobackground.png");
     background-size: cover;
     background-position: center;
-    background-repeat: no-repeat;
+    background-repeat: repeat;
     height: 100vh;
 }
 
@@ -48,7 +48,7 @@ body {
 
 .logo {
     font-weight: bold;
-    font-size: 25px;
+    font-size: 30px;
 }
 
 .nav-links {
