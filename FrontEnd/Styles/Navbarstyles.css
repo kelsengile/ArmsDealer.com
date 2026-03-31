@@ -238,7 +238,7 @@
     background-image: url("../../Assets/Images/ArmsDealerLogo.png");
     background-size: cover;
     background-position: center;
-    filter: drop-shadow(0 0 8px rgba(138, 170, 106, 0.45));
+    filter: drop-shadow(0 0 8px rgba(183, 219, 146, 0.45));
 }
 
 .logo-text-wrap {
@@ -273,6 +273,7 @@
     flex: 1;
     justify-content: flex-end;
     z-index: 2;
+    gap: 0;
 }
 
 .nav-links a {
@@ -290,14 +291,16 @@
     position: relative;
     transition: color 0.2s, background 0.2s;
     white-space: nowrap;
+    margin-right: 0px;
+    /* removed margin-left: -1px */
 }
 
-/* Slide-up green underline on hover */
 .nav-links a::after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: -1px;
+    /* ← bleed 1px left to cover the border */
     right: 0;
     height: 2px;
     background: var(--mil-bright);
@@ -309,6 +312,8 @@
 .nav-links a:hover {
     color: var(--mil-bright);
     background: rgba(138, 170, 106, 0.06);
+    border-left-color: rgba(138, 170, 106, 0.06);
+    /* ← blend border into hover bg */
 }
 
 .nav-links a:hover::after {
