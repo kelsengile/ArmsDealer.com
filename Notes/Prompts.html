@@ -4,1076 +4,445 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArmsDealer — Featured Carousel</title>
+    <title>Category Carousel - ArmsDealer</title>
     <style>
         * {
-            box-sizing: border-box;
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: rgba(62, 74, 63, 0.92);
+            color: #e8ede8;
             padding: 0;
         }
 
-        .fc-root {
-            background: #1a1f1a;
-            padding: 48px 0 40px;
+        .page-container {
+            width: 100%;
+            padding: 2rem 0;
+            background: transparent;
             font-family: 'Segoe UI', sans-serif;
-            position: relative;
-            overflow: visible;
-        }
-
-        .fc-root::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.06) 3px, rgba(0, 0, 0, 0.06) 4px);
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .fc-header {
-            text-align: center;
-            margin-bottom: 32px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .fc-header-tag {
-            display: inline-block;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            letter-spacing: 0.25em;
-            text-transform: uppercase;
-            color: #a8c49a;
-            background: rgba(168, 196, 154, 0.1);
-            border: 1px solid rgba(168, 196, 154, 0.3);
-            padding: 4px 14px;
-            margin-bottom: 10px;
-        }
-
-        .fc-header h2 {
-            font-family: Georgia, serif;
-            font-size: 28px;
-            font-weight: 700;
-            color: #e8ede8;
-            letter-spacing: 0.04em;
-            text-transform: uppercase;
-        }
-
-        .fc-stage {
-            position: relative;
-            z-index: 1;
-            padding: 0 20px;
-            max-width: 1100px;
+            max-width: 1500px;
             margin: 0 auto;
         }
 
-        .fc-page {
-            display: none;
+        .section-group {
+            margin-bottom: 4rem;
         }
 
-        .fc-page.active {
-            display: block;
+        .main-title {
+            font-size: 24px;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #e8ede8;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
         }
 
-        /* Square collage — 1:1 aspect ratio enforced via padding-bottom trick */
-        .fc-collage {
-            position: relative;
-            width: 100%;
-            padding-bottom: 100%;
-        }
-
-        .fc-collage-inner {
-            position: absolute;
-            inset: 0;
-            display: grid;
-            gap: 10px;
-        }
-
-        .fc-grid-hero {
-            grid-template-columns: 2fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-
-        .fc-grid-3col {
-            grid-template-columns: 1.4fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-
-        .fc-grid-2col {
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-
-        .fc-grid-quad {
-            grid-template-columns: 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr;
-        }
-
-        .fc-grid-asym {
-            grid-template-columns: 1fr 1.5fr;
-            grid-template-rows: 1fr 1fr;
-        }
-
-        /* Cards — position:relative is the popup anchor */
-        .fc-card {
-            position: relative;
-            background: #232a23;
-            border: 1px solid rgba(168, 196, 154, 0.15);
-            overflow: visible;
-            /* allow popup to escape card bounds */
-            cursor: pointer;
-            transition: border-color 0.2s ease, transform 0.2s ease;
-            min-height: 0;
-            z-index: 1;
-        }
-
-        .fc-card:hover {
-            border-color: rgba(168, 196, 154, 0.6);
-            transform: translateY(-2px);
-            z-index: 100;
-            /* lift above siblings so popup isn't clipped */
-        }
-
-        /* Clip only the background image, not the popup */
-        .fc-card-bg {
-            position: absolute;
-            inset: 0;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .fc-card.span2r {
-            grid-row: span 2;
-        }
-
-        .fc-card.span2c {
-            grid-column: span 2;
-        }
-
-        .fc-img-placeholder {
-            position: absolute;
-            inset: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 48px;
-            opacity: 0.18;
-        }
-
-        .fc-overlay {
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(to top, rgba(10, 14, 10, 0.88) 0%, rgba(10, 14, 10, 0.3) 50%, rgba(10, 14, 10, 0.15) 100%);
-        }
-
-        .fc-content {
-            position: absolute;
-            inset: 0;
+        .products-container {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            padding: 10px 12px;
-            z-index: 2;
+            gap: 2rem;
+            padding: 0 1rem;
         }
 
-        .fc-name {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #a8c49a;
-            background: rgba(10, 14, 10, 0.6);
-            display: inline-block;
-            padding: 3px 8px;
-            border-left: 2px solid #a8c49a;
-            align-self: flex-start;
+        .carousel-section {
+            width: 100%;
         }
 
-        .fc-name.large {
-            font-size: 12px;
-            padding: 4px 10px;
-        }
-
-        .fc-pricing {
-            background: rgba(10, 14, 10, 0.82);
-            border: 1px solid rgba(168, 196, 154, 0.2);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 5px 10px;
-            gap: 8px;
-        }
-
-        .fc-discount {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            font-weight: bold;
-            color: #e8644a;
-            background: rgba(232, 100, 74, 0.15);
-            border: 1px solid rgba(232, 100, 74, 0.4);
-            padding: 2px 6px;
-            flex-shrink: 0;
-        }
-
-        .fc-prices {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-        }
-
-        .fc-old {
-            font-family: 'Courier New', monospace;
-            font-size: 11px;
-            color: rgba(168, 196, 154, 0.45);
-            text-decoration: line-through;
-        }
-
-        .fc-new {
-            font-family: 'Courier New', monospace;
-            font-size: 13px;
-            font-weight: bold;
-            color: #a8c49a;
-        }
-
-        .fc-new.large {
-            font-size: 16px;
-        }
-
-        /* ── POPUP ──
-       Anchored to .fc-card via position:absolute.
-       Default: appears to the RIGHT, top-aligned.
-       .pop-left class flips it to the LEFT.
-       .pop-up   class flips it to bottom-aligned.
-    */
-        .fc-popup {
-            display: none;
-            position: absolute;
-            z-index: 200;
-            top: 0;
-            left: 100%;
-            margin-left: 10px;
-            width: 220px;
-            background: #1a1f1a;
-            border: 1px solid rgba(168, 196, 154, 0.5);
-            padding: 14px 16px;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.7);
-            pointer-events: auto;
-        }
-
-        .fc-card.pop-left .fc-popup {
-            left: auto;
-            right: 100%;
-            margin-left: 0;
-            margin-right: 10px;
-        }
-
-        .fc-card.pop-up .fc-popup {
-            top: auto;
-            bottom: 0;
-        }
-
-        .fc-popup-name {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: #a8c49a;
-            margin-bottom: 6px;
-            border-bottom: 1px solid rgba(168, 196, 154, 0.2);
-            padding-bottom: 6px;
-        }
-
-        .fc-popup-desc {
-            font-size: 12px;
-            color: rgba(232, 237, 232, 0.75);
-            line-height: 1.5;
-            margin-bottom: 10px;
-        }
-
-        .fc-popup-tags {
-            display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            margin-bottom: 10px;
-        }
-
-        .fc-popup-tag {
-            font-family: 'Courier New', monospace;
-            font-size: 9px;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            color: #a8c49a;
-            border: 1px solid rgba(168, 196, 154, 0.35);
-            padding: 2px 6px;
-        }
-
-        .fc-popup-btns {
-            display: flex;
-            gap: 6px;
-        }
-
-        .fc-popup-btn {
-            flex: 1;
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            letter-spacing: 0.1em;
-            text-transform: uppercase;
-            border: 1px solid rgba(168, 196, 154, 0.4);
-            background: transparent;
-            color: #a8c49a;
-            padding: 6px 4px;
-            cursor: pointer;
-            transition: background 0.2s;
-        }
-
-        .fc-popup-btn:hover {
-            background: rgba(168, 196, 154, 0.15);
-        }
-
-        .fc-popup-btn.primary {
-            background: rgba(168, 196, 154, 0.18);
-            border-color: #a8c49a;
-        }
-
-        .fc-popup-btn.primary:hover {
-            background: rgba(168, 196, 154, 0.32);
-        }
-
-        /* ── NAV ── */
-        .fc-nav {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 28px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .fc-nav-arrow {
-            background: transparent;
-            border: 1px solid rgba(168, 196, 154, 0.3);
-            color: #a8c49a;
-            width: 32px;
-            height: 32px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+        .section-title {
             font-size: 14px;
-            transition: background 0.2s, border-color 0.2s;
+            font-weight: 500;
+            color: #e8ede8;
+            margin-bottom: 1rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            font-family: 'Courier New', monospace;
         }
 
-        .fc-nav-arrow:hover {
-            background: rgba(168, 196, 154, 0.15);
-            border-color: #a8c49a;
+        .carousel-wrapper {
+            position: relative;
+            overflow-x: auto;
+            overflow-y: hidden;
+            padding: 0.5rem 0;
+            scroll-behavior: auto;
         }
 
-        .fc-dots-wrap {
+        .carousel-wrapper::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .carousel-wrapper::-webkit-scrollbar-track {
+            background: rgba(168, 196, 154, 0.1);
+            border-radius: 4px;
+        }
+
+        .carousel-wrapper::-webkit-scrollbar-thumb {
+            background: rgba(168, 196, 154, 0.5);
+            border-radius: 4px;
+            border: 2px solid rgba(62, 74, 63, 0.92);
+        }
+
+        .carousel-wrapper::-webkit-scrollbar-thumb:hover {
+            background: rgba(168, 196, 154, 0.8);
+        }
+
+        .carousel-track {
             display: flex;
-            gap: 10px;
+            gap: 12px;
+            padding: 0.5rem;
+            cursor: grab;
+            user-select: none;
+            width: max-content;
+        }
+
+        .carousel-track:active {
+            cursor: grabbing;
+        }
+
+        .category-rect {
+            flex-shrink: 0;
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #3e4a3f 0%, #2a3129 100%);
+            border: 1px solid rgba(168, 196, 154, 0.3);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
             align-items: center;
-        }
-
-        .fc-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            border: 1.5px solid rgba(168, 196, 154, 0.5);
-            background: transparent;
+            justify-content: center;
+            padding: 0.75rem;
             cursor: pointer;
-            transition: background 0.25s, border-color 0.25s, transform 0.2s;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
             position: relative;
+            overflow: hidden;
         }
 
-        .fc-dot.active {
-            background: #a8c49a;
+        .category-rect:hover {
+            background: linear-gradient(135deg, #4a5a50 0%, #3a4139 100%);
+            border-color: rgba(168, 196, 154, 0.7);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .category-rect.active {
+            background: linear-gradient(135deg, #6c7a6b 0%, #4a5a50 100%);
             border-color: #a8c49a;
-            transform: scale(1.25);
+            box-shadow: 0 0 0 2px rgba(168, 196, 154, 0.4);
         }
 
-        .fc-dot-label {
-            position: absolute;
-            bottom: calc(100% + 6px);
-            left: 50%;
-            transform: translateX(-50%);
-            background: #1a1f1a;
-            border: 1px solid rgba(168, 196, 154, 0.35);
-            font-family: 'Courier New', monospace;
-            font-size: 9px;
-            letter-spacing: 0.12em;
-            text-transform: uppercase;
-            color: #a8c49a;
-            padding: 3px 7px;
-            white-space: nowrap;
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.2s;
+        /* Image styling */
+        .category-image {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            margin-bottom: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .fc-dot:hover .fc-dot-label {
-            opacity: 1;
+        .category-image img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
         }
 
-        .fc-page-label {
-            font-family: 'Courier New', monospace;
-            font-size: 10px;
-            letter-spacing: 0.15em;
-            color: rgba(168, 196, 154, 0.5);
-            margin-top: 10px;
+        /* Text styling - positioned at bottom center */
+        .category-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #e8ede8;
             text-align: center;
-            text-transform: uppercase;
-            position: relative;
-            z-index: 1;
+            letter-spacing: 0.05em;
+            line-height: 1.2;
+            margin-top: auto;
+            width: 100%;
+            padding: 0.25rem 0;
+        }
+
+        .category-rect.active .category-label {
+            color: #a8c49a;
+        }
+
+        .services-container {
+            padding: 0 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .category-rect {
+                width: 100px;
+                height: 100px;
+            }
+
+            .category-label {
+                font-size: 11px;
+            }
+
+            .main-title {
+                font-size: 20px;
+                margin-bottom: 2rem;
+            }
         }
     </style>
 </head>
 
 <body>
+    <div class="page-container">
 
-    <div class="fc-root" id="fcRoot">
+        <!-- PRODUCTS SECTION -->
+        <div class="section-group">
+            <h2 class="main-title">Products</h2>
 
-        <div class="fc-header">
-            <div class="fc-header-tag">Featured Selection</div>
-            <h2>Products &amp; Services</h2>
+            <div class="products-container">
+                <!-- Weapons Carousel -->
+                <div class="carousel-section">
+                    <div class="section-title">Weapons</div>
+                    <div class="carousel-wrapper" data-section="weapons">
+                        <div class="carousel-track" data-section="weapons"></div>
+                    </div>
+                </div>
+
+                <!-- Equipment Carousel -->
+                <div class="carousel-section">
+                    <div class="section-title">Equipment</div>
+                    <div class="carousel-wrapper" data-section="equipment">
+                        <div class="carousel-track" data-section="equipment"></div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="fc-stage">
+        <!-- SERVICES SECTION -->
+        <div class="section-group">
+            <h2 class="main-title">Services</h2>
 
-            <!-- PAGE 1: Rifles -->
-            <div class="fc-page active" data-label="Rifles">
-                <div class="fc-collage">
-                    <div class="fc-collage-inner fc-grid-hero">
-
-                        <div class="fc-card span2r"
-                            data-popup='{"name":"M4A1 Carbine — Tactical Edition","desc":"Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.","tags":["5.56mm","Semi-Auto","M-LOK"],"old":"₱185,000","new":"₱138,750"}'>
-                            <div class="fc-card-bg" style="background-image: url('images/m4a1.jpg');">
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name large">M4A1 Carbine</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱185,000</span><span
-                                            class="fc-new large">₱138,750</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"SR-25 Precision Rifle","desc":"7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.","tags":["7.62mm","DMR","Precision"],"old":"₱230,000","new":"₱195,500"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🎯</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">SR-25 Marksman</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–15%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱230,000</span><span
-                                            class="fc-new">₱195,500</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"AK-103 Assault Rifle","desc":"7.62x39mm battle-proven platform. Side-folding stock, chrome-lined barrel, enhanced pistol grip. Legendary reliability in adverse conditions.","tags":["7.62x39","AK Platform","Folding Stock"],"old":"₱145,000","new":"₱115,000"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">⚔</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">AK-103</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–21%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱145,000</span><span
-                                            class="fc-new">₱115,000</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
+            <div class="services-container">
+                <div class="carousel-section">
+                    <div class="section-title">All Services</div>
+                    <div class="carousel-wrapper" data-section="services">
+                        <div class="carousel-track" data-section="services"></div>
                     </div>
                 </div>
             </div>
-
-            <!-- PAGE 2: Handguns -->
-            <div class="fc-page" data-label="Handguns">
-                <div class="fc-collage">
-                    <div class="fc-collage-inner fc-grid-3col">
-
-                        <div class="fc-card span2r"
-                            data-popup='{"name":"Glock 17 Gen5 — Service Pistol","desc":"9mm striker-fired duty pistol. Marksman barrel, flared mag well, ambidextrous slide stop. Standard issue across 50+ law enforcement agencies.","tags":["9mm","Gen5","LE Standard"],"old":"₱68,000","new":"₱54,400"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔫</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name large">Glock 17 Gen5</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱68,000</span><span
-                                            class="fc-new large">₱54,400</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"1911 Custom Operator","desc":".45 ACP single-action platform. Match barrel bushing, extended beavertail, G10 grips. Classic reliability, modern upgrades.","tags":[".45 ACP","1911","Single-Action"],"old":"₱95,000","new":"₱76,000"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🎯</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">1911 Operator</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱95,000</span><span
-                                            class="fc-new">₱76,000</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"SIG P320 Compact","desc":"9mm modular pistol system. Serialized fire control unit, interchangeable grip modules. US Army M17 basis.","tags":["9mm","Modular","Compact"],"old":"₱82,000","new":"₱72,000"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔰</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">SIG P320</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–12%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱82,000</span><span
-                                            class="fc-new">₱72,000</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Beretta M9A3","desc":"9mm DA/SA pistol. Vertec grip, decocker/safety, extended tang. Time-tested military sidearm with modern enhancements.","tags":["9mm","DA/SA","Military"],"old":"₱74,500","new":"₱59,600"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">⚙</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">Beretta M9A3</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱74,500</span><span
-                                            class="fc-new">₱59,600</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"CZ P-10F Full Size","desc":"9mm striker-fired pistol. Interchangeable back straps, suppressor-ready, Omega trigger. Czech precision engineering.","tags":["9mm","Striker","Full-Size"],"old":"₱71,000","new":"₱56,800"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔩</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">CZ P-10F</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱71,000</span><span
-                                            class="fc-new">₱56,800</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- PAGE 3: Tactical Gear -->
-            <div class="fc-page" data-label="Gear">
-                <div class="fc-collage">
-                    <div class="fc-collage-inner fc-grid-2col">
-
-                        <div class="fc-card span2r"
-                            data-popup='{"name":"Plate Carrier — Level IV MOLLE","desc":"Certified Level IV ballistic protection. MOLLE webbing, cummerbund, quick-release system. Accepts up to 10x12 hard plates.","tags":["Level IV","MOLLE","Quick-Release"],"old":"₱42,000","new":"₱33,600"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🛡</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name large">Plate Carrier Lv.IV</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱42,000</span><span
-                                            class="fc-new large">₱33,600</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Tactical Helmet — MICH 2000","desc":"High-cut ballistic helmet. Dial-fit retention, NVG shroud mount, rails for accessories. NIJ Level IIIA rated.","tags":["IIIA Rated","NVG Mount","High-Cut"],"old":"₱28,000","new":"₱22,400"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">⛑</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">MICH 2000 Helmet</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱28,000</span><span
-                                            class="fc-new">₱22,400</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Chest Rig — Modular 500D","desc":"500D Cordura chest rig. 6 magazine pouches, admin pouch, hydration compatible. Low-profile combat use.","tags":["500D Cordura","Low-Profile","Modular"],"old":"₱8,500","new":"₱6,800"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🎒</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">Chest Rig 500D</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱8,500</span><span
-                                            class="fc-new">₱6,800</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Kydex Holster — OWB Retention","desc":"Level II retention OWB holster. Adjustable cant, Picatinny-compatible, hand-formed Kydex shell. Fits most duty pistols.","tags":["Kydex","OWB","Retention"],"old":"₱5,200","new":"₱3,900"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔒</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">OWB Kydex Holster</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱5,200</span><span
-                                            class="fc-new">₱3,900</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- PAGE 4: Ammunition -->
-            <div class="fc-page" data-label="Ammo">
-                <div class="fc-collage">
-                    <div class="fc-collage-inner fc-grid-quad">
-
-                        <div class="fc-card span2c"
-                            data-popup='{"name":"5.56mm NATO — 1,000 Round Case","desc":"M855 62gr green-tip penetrator. Lake City production, mil-spec brass, boxer-primed. Optimized for AR-platform rifles.","tags":["M855","62gr","1000 Rounds"],"old":"₱18,500","new":"₱13,875"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">💥</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name large">5.56mm NATO — Case of 1,000</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱18,500</span><span
-                                            class="fc-new large">₱13,875</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"9mm FMJ — 500 Round Box","desc":"124gr full metal jacket 9mm. Reloadable brass, consistent velocity, clean-burning powder. Ideal for training.","tags":["124gr FMJ","9mm","Training"],"old":"₱6,200","new":"₱5,270"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔵</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">9mm FMJ ×500</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–15%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱6,200</span><span
-                                            class="fc-new">₱5,270</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"7.62x39mm — 500 Round Pack","desc":"122gr FMJ steel-core 7.62x39. Corrosion-resistant, lacquered steel case. Optimized for AK-platform rifles.","tags":["122gr","Steel Case","AK Platform"],"old":"₱9,500","new":"₱7,600"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🟤</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">7.62×39 ×500</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱9,500</span><span
-                                            class="fc-new">₱7,600</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":".45 ACP HP — 200 Round Box","desc":"230gr jacketed hollow point. Controlled expansion, bonded core, nickel-plated brass. Duty and self-defense rated.","tags":["JHP","230gr","Duty Round"],"old":"₱7,800","new":"₱6,630"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔶</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">.45 ACP HP ×200</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–15%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱7,800</span><span
-                                            class="fc-new">₱6,630</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":".308 Win Match — 100 Round Box","desc":"168gr BTHP match grade .308 Winchester. Sierra MatchKing projectile, consistent OAL, sub-MOA accuracy guaranteed.","tags":["168gr BTHP","Match Grade","Sub-MOA"],"old":"₱8,900","new":"₱7,120"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🟡</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">.308 Win Match ×100</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱8,900</span><span
-                                            class="fc-new">₱7,120</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"12ga 00 Buck — 100 Round Case","desc":"2.75in 00 buckshot, 9 pellets. Hard shot, copper-plated, buffered wad. Maximum terminal effect at close range.","tags":["00 Buck","12ga","Defensive"],"old":"₱5,500","new":"₱4,125"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🟠</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">12ga 00 Buck ×100</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱5,500</span><span
-                                            class="fc-new">₱4,125</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- PAGE 5: Services -->
-            <div class="fc-page" data-label="Services">
-                <div class="fc-collage">
-                    <div class="fc-collage-inner fc-grid-asym">
-
-                        <div class="fc-card span2r"
-                            data-popup='{"name":"Full Gunsmith Overhaul Package","desc":"Complete weapon inspection, deep clean, barrel crown recutting, trigger job, parts replacement, test fire report. 72-hour turnaround.","tags":["Full Service","72hr Turnaround","Certified"],"old":"₱12,000","new":"₱9,600"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔧</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name large">Gunsmith Overhaul</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱12,000</span><span
-                                            class="fc-new large">₱9,600</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Custom Cerakote Refinish","desc":"Mil-spec Cerakote application in any color or camo pattern. Surface prep, bead blast, cure. Rated to 1,200°F. UV, chemical, and corrosion resistant.","tags":["Cerakote","Custom Color","Mil-Spec"],"old":"₱8,000","new":"₱6,400"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🎨</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">Cerakote Refinish</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱8,000</span><span
-                                            class="fc-new">₱6,400</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Optics Mounting & Zero Service","desc":"Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.","tags":["Mounting","Zeroing","Range Included"],"old":"₱4,500","new":"₱3,375"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">🔭</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">Optics Mount & Zero</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱4,500</span><span
-                                            class="fc-new">₱3,375</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                        <div class="fc-card"
-                            data-popup='{"name":"Trigger Upgrade & Job","desc":"Drop-in or custom trigger installation, spring kit, trigger shoe, reset tuning. Reduces pull weight to 3.5–4.5 lbs. Improves accuracy and consistency.","tags":["Trigger Job","Spring Kit","Pull Tuning"],"old":"₱6,000","new":"₱4,800"}'>
-                            <div class="fc-card-bg">
-                                <div class="fc-img-placeholder">⚙</div>
-                                <div class="fc-overlay"></div>
-                            </div>
-                            <div class="fc-content">
-                                <div class="fc-name">Trigger Upgrade</div>
-                                <div class="fc-pricing">
-                                    <div class="fc-discount">–20%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱6,000</span><span
-                                            class="fc-new">₱4,800</span></div>
-                                </div>
-                            </div>
-                            <div class="fc-popup">
-                                <div class="fc-popup-name"></div>
-                                <div class="fc-popup-desc"></div>
-                                <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-
-        <!-- NAV -->
-        <div class="fc-nav">
-            <button class="fc-nav-arrow" id="fcPrev">&#8249;</button>
-            <div class="fc-dots-wrap" id="fcDots"></div>
-            <button class="fc-nav-arrow" id="fcNext">&#8250;</button>
-        </div>
-        <div class="fc-page-label" id="fcPageLabel">Rifles</div>
 
     </div>
 
     <script>
-        (function () {
-            const pages = Array.from(document.querySelectorAll('.fc-page'));
-            const dotsWrap = document.getElementById('fcDots');
-            const pageLabel = document.getElementById('fcPageLabel');
-            let cur = 0;
+        const carouselData = {
+            weapons: [
+                { name: 'Firearms', image: '/path/to/firearms-icon.png' },
+                { name: 'Blades', image: '/path/to/blades-icon.png' },
+                { name: 'Blunts', image: '/path/to/blunts-icon.png' },
+                { name: 'Projectile', image: '/path/to/projectile-icon.png' },
+                { name: 'Explosives', image: '/path/to/explosives-icon.png' },
+                { name: 'Electronic', image: '/path/to/electronic-icon.png' },
+                { name: 'Chemical', image: '/path/to/chemical-icon.png' },
+                { name: 'Biological', image: '/path/to/biological-icon.png' },
+                { name: 'Vehicle', image: '/path/to/vehicle-icon.png' },
+                { name: 'Cyber', image: '/path/to/cyber-icon.png' },
+                { name: 'Security', image: '/path/to/security-icon.png' }
+            ],
+            equipment: [
+                { name: 'Ammunition', image: '/path/to/ammunition-icon.png' },
+                { name: 'Protective', image: '/path/to/protective-icon.png' },
+                { name: 'Tactical', image: '/path/to/tactical-icon.png' },
+                { name: 'Attachments', image: '/path/to/attachments-icon.png' },
+                { name: 'Maintenance', image: '/path/to/maintenance-icon.png' },
+                { name: 'Storage', image: '/path/to/storage-icon.png' },
+                { name: 'Cases', image: '/path/to/cases-icon.png' },
+                { name: 'Communication', image: '/path/to/communication-icon.png' },
+                { name: 'Survival', image: '/path/to/survival-icon.png' },
+                { name: 'Training', image: '/path/to/training-icon.png' }
+            ],
+            services: [
+                { name: 'Manufacturing', image: '/path/to/manufacturing-icon.png' },
+                { name: 'Customization', image: '/path/to/customization-icon.png' },
+                { name: 'Maintenance', image: '/path/to/maintenance-icon.png' },
+                { name: 'Transport', image: '/path/to/transport-icon.png' },
+                { name: 'Storage', image: '/path/to/storage-icon.png' },
+                { name: 'Training', image: '/path/to/training-icon.png' },
+                { name: 'Protection', image: '/path/to/protection-icon.png' },
+                { name: 'Consulting', image: '/path/to/consulting-icon.png' },
+                { name: 'Research', image: '/path/to/research-icon.png' },
+                { name: 'Testing', image: '/path/to/testing-icon.png' },
+                { name: 'Disposal', image: '/path/to/disposal-icon.png' },
+                { name: 'Surveillance', image: '/path/to/surveillance-icon.png' },
+                { name: 'Contracting', image: '/path/to/contracting-icon.png' }
+            ]
+        };
 
-            pages.forEach((p, i) => {
-                const dot = document.createElement('div');
-                dot.className = 'fc-dot' + (i === 0 ? ' active' : '');
+        // Category to page mapping
+        const categoryPageMap = {
+            'Firearms': '/pages/products/firearms.html',
+            'Blades': '/pages/products/blades.html',
+            'Blunts': '/pages/products/blunts.html',
+            'Projectile': '/pages/products/projectile.html',
+            'Explosives': '/pages/products/explosives.html',
+            'Electronic': '/pages/products/electronic.html',
+            'Chemical': '/pages/products/chemical.html',
+            'Biological': '/pages/products/biological.html',
+            'Vehicle': '/pages/products/vehicle.html',
+            'Cyber': '/pages/products/cyber.html',
+            'Security': '/pages/products/security.html',
+            'Ammunition': '/pages/products/ammunition.html',
+            'Protective': '/pages/products/protective.html',
+            'Tactical': '/pages/products/tactical.html',
+            'Attachments': '/pages/products/attachments.html',
+            'Maintenance': '/pages/products/maintenance.html',
+            'Storage': '/pages/products/storage.html',
+            'Cases': '/pages/products/cases.html',
+            'Communication': '/pages/products/communication.html',
+            'Survival': '/pages/products/survival.html',
+            'Training': '/pages/products/training.html',
+            'Manufacturing': '/pages/services/manufacturing.html',
+            'Customization': '/pages/services/customization.html',
+            'Transport': '/pages/services/transport.html',
+            'Protection': '/pages/services/protection.html',
+            'Consulting': '/pages/services/consulting.html',
+            'Research': '/pages/services/research.html',
+            'Testing': '/pages/services/testing.html',
+            'Disposal': '/pages/services/disposal.html',
+            'Surveillance': '/pages/services/surveillance.html',
+            'Contracting': '/pages/services/contracting.html'
+        };
+
+        function initCarousel(section, data) {
+            const wrapperEl = document.querySelector(`.carousel-wrapper[data-section="${section}"]`);
+            const trackEl = wrapperEl.querySelector(`.carousel-track[data-section="${section}"]`);
+
+            let isScrolling = false;
+            let direction = 1; // 1 = right, -1 = left
+            let autoScrollId = null;
+            let resetTimeoutId = null;
+
+            // Create category rectangles with images and labels
+            data.forEach((item, index) => {
+                const card = document.createElement('div');
+                card.className = 'category-rect';
+                card.dataset.index = index;
+                card.dataset.name = item.name;
+
+                // Create image container
+                const imageDiv = document.createElement('div');
+                imageDiv.className = 'category-image';
+
+                const img = document.createElement('img');
+                img.src = item.image;
+                img.alt = item.name;
+                imageDiv.appendChild(img);
+
+                // Create label
                 const label = document.createElement('div');
-                label.className = 'fc-dot-label';
-                label.textContent = p.dataset.label || ('Page ' + (i + 1));
-                dot.appendChild(label);
-                dot.addEventListener('click', () => go(i));
-                dotsWrap.appendChild(dot);
+                label.className = 'category-label';
+                label.textContent = item.name;
+
+                // Append to card
+                card.appendChild(imageDiv);
+                card.appendChild(label);
+                trackEl.appendChild(card);
             });
 
-            const dots = dotsWrap.querySelectorAll('.fc-dot');
-
-            function go(n) {
-                pages[cur].classList.remove('active');
-                dots[cur].classList.remove('active');
-                cur = (n + pages.length) % pages.length;
-                pages[cur].classList.add('active');
-                dots[cur].classList.add('active');
-                pageLabel.textContent = pages[cur].dataset.label || ('Page ' + (cur + 1));
+            function getMaxScroll() {
+                return trackEl.scrollWidth - wrapperEl.clientWidth;
             }
 
-            document.getElementById('fcPrev').addEventListener('click', () => go(cur - 1));
-            document.getElementById('fcNext').addEventListener('click', () => go(cur + 1));
+            function startAutoScroll() {
+                clearInterval(autoScrollId);
+                clearTimeout(resetTimeoutId);
 
-            document.addEventListener('keydown', e => {
-                if (e.key === 'ArrowLeft') go(cur - 1);
-                if (e.key === 'ArrowRight') go(cur + 1);
+                let scrollSpeed = 1.5; // pixels per interval
+                autoScrollId = setInterval(() => {
+                    const currentScroll = wrapperEl.scrollLeft;
+                    const maxScroll = getMaxScroll();
+
+                    let newScroll = currentScroll + scrollSpeed * direction;
+
+                    // Reverse direction at boundaries
+                    if (newScroll >= maxScroll) {
+                        newScroll = maxScroll;
+                        direction = -1;
+                    } else if (newScroll <= 0) {
+                        newScroll = 0;
+                        direction = 1;
+                    }
+
+                    wrapperEl.scrollLeft = newScroll;
+                }, 30);
+            }
+
+            function stopAutoScroll() {
+                clearInterval(autoScrollId);
+                clearTimeout(resetTimeoutId);
+            }
+
+            // Stop auto-scroll when user scrolls
+            wrapperEl.addEventListener('mousedown', () => {
+                isScrolling = true;
+                stopAutoScroll();
             });
 
-            document.querySelectorAll('.fc-card').forEach(card => {
-                const popup = card.querySelector('.fc-popup');
-                if (!popup) return;
+            wrapperEl.addEventListener('wheel', (e) => {
+                isScrolling = true;
+                stopAutoScroll();
+            }, { passive: true });
 
-                card.addEventListener('mouseenter', function () {
-                    const data = JSON.parse(this.dataset.popup || '{}');
-                    if (!data.name) return;
+            wrapperEl.addEventListener('scroll', () => {
+                if (isScrolling) {
+                    clearTimeout(resetTimeoutId);
+                    resetTimeoutId = setTimeout(() => {
+                        isScrolling = false;
+                        startAutoScroll();
+                    }, 3000); // Resume after 3 seconds of no scroll
+                }
+            });
 
-                    popup.querySelector('.fc-popup-name').textContent = data.name;
-                    popup.querySelector('.fc-popup-desc').textContent = data.desc;
-                    const tagsEl = popup.querySelector('.fc-popup-tags');
-                    tagsEl.innerHTML = '';
-                    (data.tags || []).forEach(t => {
-                        const span = document.createElement('span');
-                        span.className = 'fc-popup-tag';
-                        span.textContent = t;
-                        tagsEl.appendChild(span);
-                    });
+            wrapperEl.addEventListener('mouseup', () => {
+                isScrolling = false;
+            });
 
-                    // Use card's viewport position to decide pop direction
-                    const rect = this.getBoundingClientRect();
-                    this.classList.toggle('pop-left', rect.left + rect.width / 2 > window.innerWidth / 2);
-                    this.classList.toggle('pop-up', rect.top + rect.height / 2 > window.innerHeight / 2);
+            wrapperEl.addEventListener('mouseleave', () => {
+                if (isScrolling) {
+                    isScrolling = false;
+                    resetTimeoutId = setTimeout(() => {
+                        startAutoScroll();
+                    }, 3000);
+                }
+            });
 
-                    popup.style.display = 'block';
-                });
+            // Card click - with page navigation
+            trackEl.querySelectorAll('.category-rect').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    const categoryName = card.dataset.name;
+                    const targetPage = categoryPageMap[categoryName];
 
-                card.addEventListener('mouseleave', function () {
-                    popup.style.display = 'none';
+                    // Update active state
+                    trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    // Navigate to page if mapping exists
+                    if (targetPage) {
+                        window.location.href = targetPage;
+                    } else {
+                        console.warn(`No page mapping found for: ${categoryName}`);
+                    }
                 });
             });
-        })();
+
+            // Initialize
+            startAutoScroll();
+        }
+
+        // Initialize all carousels
+        initCarousel('weapons', carouselData.weapons);
+        initCarousel('equipment', carouselData.equipment);
+        initCarousel('services', carouselData.services);
     </script>
-
 </body>
 
 </html>

@@ -9,7 +9,7 @@
     background: rgba(62, 74, 63, 0.92);
     width: 100%;
     max-width: 1500px;
-    min-height: 200vh;
+    min-height: 500vh;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -306,7 +306,7 @@
    ======================================================================================================================================================== */
 
 .fc-root {
-    background: #1a1f1a80;
+    background: #1a1f1a5d;
     height: 100%;
     max-height: 880px;
     padding: 48px 0 40px;
@@ -743,7 +743,184 @@
     z-index: 1;
 }
 
-.product-category {
-    height: 1000px;
+/* ========================================================================================================================================================
+   PRODUCT & SERVICES CATEGORIES
+   ======================================================================================================================================================== */
 
+
+.pands-categories {
+    width: 100%;
+    padding: 2rem 0;
+    background: transparent;
+    font-family: 'Segoe UI', sans-serif;
+    max-width: 1500px;
+    background-color: #232922d2;
+    margin: 0 auto;
+}
+
+
+.section-group {
+    margin-bottom: 0rem;
+}
+
+.main-title {
+    font-size: 24px;
+    font-family: 'Times New Roman', serif;
+    font-weight: 700;
+    text-align: left;
+    padding: 30px 20px 10px 50px;
+    margin-bottom: 0rem;
+    color: #e8ede8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.products-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 0 3rem;
+}
+
+.carousel-section {
+    width: 100%;
+}
+
+.section-title {
+    font-size: 20px;
+    font-weight: 500;
+    color: #e8ede8;
+    margin-bottom: 1rem;
+    margin-left: 2rem;
+    margin-top: 0rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-family: 'Courier New', monospace;
+}
+
+.carousel-wrapper {
+    position: relative;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 0.5rem 0;
+    scroll-behavior: auto;
+
+}
+
+.carousel-wrapper::-webkit-scrollbar {
+    height: 8px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-track {
+    background: rgba(168, 196, 154, 0.1);
+    border-radius: 4px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(168, 196, 154, 0.151);
+    border-radius: 4px;
+    border: 2px solid rgba(62, 74, 63, 0.92);
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(168, 196, 154, 0.205);
+}
+
+.carousel-track {
+    display: flex;
+    gap: 12px;
+    padding: 0.5rem;
+    cursor: grab;
+    user-select: none;
+    width: max-content;
+}
+
+.carousel-track:active {
+    cursor: grabbing;
+}
+
+.category-rect {
+    flex-shrink: 0;
+    width: 150px;
+    height: 200px;
+    background: linear-gradient(135deg, #3e4a3f 0%, #2a3129 100%);
+    border: 1px solid rgba(168, 196, 154, 0.3);
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    position: relative;
+    overflow: hidden;
+}
+
+.category-rect:hover {
+    background: linear-gradient(135deg, #4a5a50 0%, #3a4139 100%);
+    border-color: rgba(168, 196, 154, 0.7);
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+
+.category-rect.active {
+    background: linear-gradient(135deg, #6c7a6b 0%, #4a5a50 100%);
+    border-color: #a8c49a;
+    color: #a8c49a;
+    box-shadow: 0 0 0 2px rgba(168, 196, 154, 0.4);
+}
+
+.category-rect.active .category-label {
+    color: #a8c49a;
+}
+
+/* Image styling */
+.category-image {
+    width: 70%;
+    height: 70%;
+    object-fit: contain;
+    margin-bottom: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.category-image img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Text styling - positioned at bottom center */
+.category-label {
+    font-size: 12px;
+    font-weight: 500;
+    color: #e8ede8;
+    text-align: center;
+    letter-spacing: 0.05em;
+    line-height: 1.2;
+    margin-top: auto;
+    width: 100%;
+    padding: 0.25rem 0;
+}
+
+.services-container {
+    padding: 0 3rem;
+}
+
+@media (max-width: 768px) {
+    .category-rect {
+        width: 200px;
+        height: 350px;
+        font-size: 11px;
+    }
+
+    .main-title {
+        font-size: 20px;
+        margin-bottom: 2rem;
+    }
 }

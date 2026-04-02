@@ -103,9 +103,8 @@
         </div>
 
     </header>
-    <!-- END STICKY HEADER -->
 
-    <div class="container">
+    <main class="container">
 
         <!-- ═══════════════════════════════════════════════════════════ -->
         <!-- HERO CAROUSEL                                               -->
@@ -195,11 +194,11 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- Feature Carousel                                              -->
+        <!-- Feature Carousel                                            -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
 
-        <div class="fc-root" id="fcRoot">
+        <section class="fc-root" id="fcRoot">
 
             <div class="fc-header">
                 <div class="fc-header-tag">Products & Services</div>
@@ -703,16 +702,58 @@
                     <button class="fc-nav-arrow" id="fcNext">&#8250;</button>
                 </div>
                 <div class="fc-page-label" id="fcPageLabel">Rifles</div>
-
             </div>
-        </div>
-        <section class="product-category">
+
         </section>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- Products & Service Categories                               -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+
+        <section class="pands-categories">
+            <!-- PRODUCTS SECTION -->
+            <div class="section-group">
+                <h2 class="main-title">Product Categories:</h2>
+
+                <div class="products-container">
+                    <!-- Weapons Carousel -->
+                    <div class="carousel-section">
+                        <div class="section-title">Weapons</div>
+                        <div class="carousel-wrapper" data-section="weapons">
+                            <div class="carousel-track" data-section="weapons"></div>
+                        </div>
+                    </div>
+
+                    <!-- Equipment Carousel -->
+                    <div class="carousel-section">
+                        <div class="section-title">Equipment</div>
+                        <div class="carousel-wrapper" data-section="equipment">
+                            <div class="carousel-track" data-section="equipment"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SERVICES SECTION -->
+            <div class="section-group">
+                <h2 class="main-title">Services Categories:</h2>
+
+                <div class="services-container">
+                    <div class="carousel-section">
+                        <div class="carousel-wrapper" data-section="services">
+                            <div class="carousel-track" data-section="services"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
         <script src="../../Design/Functions/Navbarscript.js"></script>
         <script src="../../Design/Functions/PageFunctions/HomePage/Homepagecarousel.js"></script>
         <script src="../../Design/Functions/PageFunctions/HomePage/Homepagefeatured.js"></script>
-
-    </div>
+        <script src="../../Design/Functions/PageFunctions/HomePage/HomepageP&SCategories.js"></script>
+    </main>
 </body>
 
 </html>
