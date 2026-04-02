@@ -537,7 +537,7 @@
 /* Old price */
 .fc-old {
     font-family: 'Courier New', monospace;
-    font-size: clamp(10px, 1.4vw, 16px);
+    font-size: clamp(10px, 1.4vw, 14px);
     color: rgba(168, 196, 154, 0.45);
     text-decoration: line-through;
     min-width: 0;
