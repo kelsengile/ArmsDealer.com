@@ -106,15 +106,28 @@ body {
     min-height: 100vh;
 }
 
+/* ============================================================================================================================
+    UTILITY CLASSES
+   ============================================================================================================================ */
+
 /* ============================================================================
-   CONTAINER
+   SCROLLBAR STYLING
    ============================================================================ */
 
-.container {
-    max-width: var(--container-max-width);
-    margin: 0 auto;
-    background: rgba(62, 74, 63, 0.92);
-    width: 1500px;
-    min-height: 200vh;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-primary-light);
+    border-radius: var(--radius-md);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-hover);
 }

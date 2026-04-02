@@ -1,7 +1,17 @@
-/* ══════════════════════════════════════════════════════════
-   HomepageStyles.css — Hero Carousel only
-   Navbar styles are in NavbarStyles.css
-══════════════════════════════════════════════════════════ */
+/* ============================================================================
+   CONTAINER
+   ============================================================================ */
+
+
+.container {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    background: rgba(62, 74, 63, 0.92);
+    width: 100%;
+    max-width: 1500px;
+    min-height: 200vh;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
 
 /* ── HERO CAROUSEL ─────────────────────────────────────── */
 .hero {
@@ -299,7 +309,8 @@
 
 .fc-root {
     background: #1a1f1a80;
-    height: 880px;
+    height: 100%;
+    max-height: 880px;
     padding: 48px 0 40px;
     font-family: 'Segoe UI', sans-serif;
     position: relative;
@@ -349,6 +360,7 @@
     position: relative;
     z-index: 1;
     padding: 0 20px;
+    width: 100%;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -465,10 +477,11 @@
     z-index: 2;
 }
 
+/* Name */
 .fc-name {
     font-family: 'Courier New', monospace;
-    font-size: 15px;
-    letter-spacing: 0.2em;
+    font-size: clamp(8px, 1.5vw, 18px);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
     color: #cfcfcf;
     background: rgba(10, 14, 10, 0.6);
@@ -476,13 +489,18 @@
     padding: 3px 8px;
     border-left: 2px solid #a8c49a;
     align-self: flex-start;
+
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .fc-name.large {
-    font-size: 18px;
+    font-size: clamp(10px, 1.8vw, 22px);
     padding: 4px 10px;
 }
 
+/* Pricing container */
 .fc-pricing {
     background: rgba(10, 14, 10, 0.82);
     border: 1px solid rgba(168, 196, 154, 0.2);
@@ -491,11 +509,13 @@
     justify-content: space-between;
     padding: 5px 10px;
     gap: 8px;
+    flex-wrap: wrap;
 }
 
+/* Discount badge */
 .fc-discount {
     font-family: 'Courier New', monospace;
-    font-size: 15px;
+    font-size: clamp(10px, 1.4vw, 16px);
     font-weight: bold;
     color: #e8644a;
     background: rgba(232, 100, 74, 0.15);
@@ -504,30 +524,37 @@
     flex-shrink: 0;
 }
 
+/* Prices container */
 .fc-prices {
     display: flex;
     align-items: center;
     gap: 8px;
     flex-wrap: wrap;
     justify-content: flex-end;
+    min-width: 0;
 }
 
+/* Old price */
 .fc-old {
     font-family: 'Courier New', monospace;
-    font-size: 15px;
+    font-size: clamp(10px, 1.4vw, 16px);
     color: rgba(168, 196, 154, 0.45);
     text-decoration: line-through;
+    min-width: 0;
 }
 
+/* New price */
 .fc-new {
     font-family: 'Courier New', monospace;
-    font-size: 17px;
+    font-size: clamp(10px, 1.8vw, 20px);
     font-weight: bold;
     color: #a8c49a;
+    min-width: 0;
 }
 
 .fc-new.large {
-    font-size: 20px;
+    font-size: clamp(16px, 2.2vw, 26px);
+
 }
 
 /* ── POPUP ──
@@ -716,4 +743,9 @@
     text-transform: uppercase;
     position: relative;
     z-index: 1;
+}
+
+.product-category {
+    height: 1000px;
+
 }
