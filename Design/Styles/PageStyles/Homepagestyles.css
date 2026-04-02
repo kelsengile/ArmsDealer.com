@@ -11,6 +11,8 @@
     max-width: 1500px;
     min-height: 500vh;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
 /* ========================================================================================================================================================
@@ -750,10 +752,10 @@
 
 .pands-categories {
     width: 100%;
-    padding: 2rem 0;
+    padding: 1rem 0;
     background: transparent;
     font-family: 'Segoe UI', sans-serif;
-    max-width: 1500px;
+    max-height: 880px;
     background-color: #232922d2;
     margin: 0 auto;
 }
@@ -763,14 +765,28 @@
     margin-bottom: 0rem;
 }
 
-.main-title {
-    font-size: 24px;
+.category-title {
+    font-size: 20px;
     font-family: 'Times New Roman', serif;
     font-weight: 700;
     text-align: left;
-    padding: 30px 20px 10px 50px;
+    padding: 10px 20px 10px 100px;
     margin-bottom: 0rem;
     color: #e8ede8;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+
+.main-title {
+    text-align: left;
+    font-size: 30px;
+    font-family: 'Oswald', sans-serif;
+    font-weight: 700;
+    margin-bottom: 0rem;
+    color: #e8ede8;
+    background-color: #232a23;
+    padding: 10px 20px 10px 80px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
 }
@@ -780,6 +796,10 @@
     flex-direction: column;
     gap: 2rem;
     padding: 0 3rem;
+    width: 100%;
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .carousel-section {
@@ -787,7 +807,7 @@
 }
 
 .section-title {
-    font-size: 20px;
+    font-size: 15px;
     font-weight: 500;
     color: #e8ede8;
     margin-bottom: 1rem;
@@ -795,6 +815,7 @@
     margin-top: 0rem;
     letter-spacing: 0.08em;
     text-transform: uppercase;
+    text-align: center;
     font-family: 'Courier New', monospace;
 }
 
@@ -840,9 +861,12 @@
 }
 
 .category-rect {
-    flex-shrink: 0;
-    width: 150px;
-    height: 200px;
+    flex-shrink: 1;
+    /* allow shrinking on smaller screens */
+    width: clamp(80px, 20vw, 100px);
+    /* responsive width */
+    height: clamp(120px, 30vw, 150px);
+    /* responsive height */
     background: linear-gradient(135deg, #3e4a3f 0%, #2a3129 100%);
     border: 1px solid rgba(168, 196, 154, 0.3);
     border-radius: 8px;
@@ -850,8 +874,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0.75rem;
-    font-size: 12px;
+    padding: 0.5rem;
+    font-size: clamp(8px, 2.5vw, 10px);
+    /* responsive text */
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
@@ -897,7 +922,7 @@
 
 /* Text styling - positioned at bottom center */
 .category-label {
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 500;
     color: #e8ede8;
     text-align: center;
@@ -910,17 +935,32 @@
 
 .services-container {
     padding: 0 3rem;
+    width: 100%;
+    max-width: 1150px;
+    margin-left: auto;
+    margin-right: auto;
+
 }
 
 @media (max-width: 768px) {
     .category-rect {
-        width: 200px;
-        height: 350px;
-        font-size: 11px;
+        width: 90px;
+        height: 130px;
+        font-size: 9px;
     }
 
     .main-title {
         font-size: 20px;
         margin-bottom: 2rem;
+    }
+}
+
+/* Phones */
+@media (max-width: 480px) {
+    .category-rect {
+        width: 70px;
+        height: 110px;
+        font-size: 8px;
+        padding: 0.4rem;
     }
 }
