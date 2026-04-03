@@ -85,23 +85,71 @@ const categoryPageMap = {
 };
 
 
-function initCarousel(section, data) {
-    const wrapperEl = document.querySelector(`.carousel-wrapper[data-section="${section}"]`);
-    const trackEl = wrapperEl.querySelector(`.carousel-track[data-section="${section}"]`);
+let currentCategory = 'weapons';
+let autoScrollId = null;
+let resetTimeoutId = null;
+let isScrolling = false;
+let direction = 1; // 1 = right, -1 = left
 
-    let isScrolling = false;
-    let direction = 1; // 1 = right, -1 = left
-    let autoScrollId = null;
-    let resetTimeoutId = null;
+function getWrapperEl() {
+    return document.querySelector('.carousel-wrapper');
+}
 
-    // Create category rectangles with images and labels
+function getTrackEl() {
+    return document.querySelector('.carousel-track');
+}
+
+function getMaxScroll() {
+    const wrapperEl = getWrapperEl();
+    const trackEl = getTrackEl();
+    return trackEl.scrollWidth - wrapperEl.clientWidth;
+}
+
+function startAutoScroll() {
+    clearInterval(autoScrollId);
+    clearTimeout(resetTimeoutId);
+
+    let scrollSpeed = 1.5;
+    const wrapperEl = getWrapperEl();
+
+    autoScrollId = setInterval(() => {
+        const currentScroll = wrapperEl.scrollLeft;
+        const maxScroll = getMaxScroll();
+
+        let newScroll = currentScroll + scrollSpeed * direction;
+
+        if (newScroll >= maxScroll) {
+            newScroll = maxScroll;
+            direction = -1;
+        } else if (newScroll <= 0) {
+            newScroll = 0;
+            direction = 1;
+        }
+
+        wrapperEl.scrollLeft = newScroll;
+    }, 30);
+}
+
+function stopAutoScroll() {
+    clearInterval(autoScrollId);
+    clearTimeout(resetTimeoutId);
+}
+
+function renderCategory(categoryName) {
+    const wrapperEl = getWrapperEl();
+    const trackEl = getTrackEl();
+    const data = carouselData[categoryName];
+
+    // Clear existing cards
+    trackEl.innerHTML = '';
+
+    // Create new cards for the selected category
     data.forEach((item, index) => {
         const card = document.createElement('div');
         card.className = 'category-rect';
         card.dataset.index = index;
         card.dataset.name = item.name;
 
-        // Create image container
         const imageDiv = document.createElement('div');
         imageDiv.className = 'category-image';
 
@@ -110,51 +158,73 @@ function initCarousel(section, data) {
         img.alt = item.name;
         imageDiv.appendChild(img);
 
-        // Create label
         const label = document.createElement('div');
         label.className = 'category-label';
         label.textContent = item.name;
 
-        // Append to card
         card.appendChild(imageDiv);
         card.appendChild(label);
         trackEl.appendChild(card);
+
+        // Add click handler
+        card.addEventListener('click', (e) => {
+            const categoryName = card.dataset.name;
+            const targetPage = categoryPageMap[categoryName];
+
+            trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
+            card.classList.add('active');
+
+            if (targetPage) {
+                window.location.href = targetPage;
+            } else {
+                console.warn(`No page mapping found for: ${categoryName}`);
+            }
+        });
     });
 
-    function getMaxScroll() {
-        return trackEl.scrollWidth - wrapperEl.clientWidth;
-    }
+    // Reset scroll position
+    wrapperEl.scrollLeft = 0;
+    direction = 1;
+    isScrolling = false;
 
-    function startAutoScroll() {
-        clearInterval(autoScrollId);
-        clearTimeout(resetTimeoutId);
+    // Restart auto scroll
+    startAutoScroll();
+}
 
-        let scrollSpeed = 1.5; // pixels per interval
-        autoScrollId = setInterval(() => {
-            const currentScroll = wrapperEl.scrollLeft;
-            const maxScroll = getMaxScroll();
+function setupCategoryButtons() {
+    const buttonContainer = document.querySelector('.category-buttons');
+    if (!buttonContainer) return;
 
-            let newScroll = currentScroll + scrollSpeed * direction;
+    ['Weapons', 'Equipment', 'Services'].forEach((label) => {
+        const button = document.createElement('button');
+        button.className = 'category-btn';
+        button.textContent = label;
+        button.dataset.category = label.toLowerCase();
 
-            // Reverse direction at boundaries
-            if (newScroll >= maxScroll) {
-                newScroll = maxScroll;
-                direction = -1;
-            } else if (newScroll <= 0) {
-                newScroll = 0;
-                direction = 1;
-            }
+        if (label.toLowerCase() === currentCategory) {
+            button.classList.add('active');
+        }
 
-            wrapperEl.scrollLeft = newScroll;
-        }, 30);
-    }
+        button.addEventListener('click', () => {
+            const categoryName = button.dataset.category;
 
-    function stopAutoScroll() {
-        clearInterval(autoScrollId);
-        clearTimeout(resetTimeoutId);
-    }
+            // Update active button
+            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-    // Stop auto-scroll when user scrolls
+            // Update category and render
+            currentCategory = categoryName;
+            renderCategory(categoryName);
+        });
+
+        buttonContainer.appendChild(button);
+    });
+}
+
+function setupScrollListeners() {
+    const wrapperEl = getWrapperEl();
+    const trackEl = getTrackEl();
+
     wrapperEl.addEventListener('mousedown', () => {
         isScrolling = true;
         stopAutoScroll();
@@ -171,7 +241,7 @@ function initCarousel(section, data) {
             resetTimeoutId = setTimeout(() => {
                 isScrolling = false;
                 startAutoScroll();
-            }, 3000); // Resume after 3 seconds of no scroll
+            }, 3000);
         }
     });
 
@@ -187,31 +257,11 @@ function initCarousel(section, data) {
             }, 3000);
         }
     });
-
-    // Card click - with page navigation
-    trackEl.querySelectorAll('.category-rect').forEach(card => {
-        card.addEventListener('click', (e) => {
-            const categoryName = card.dataset.name;
-            const targetPage = categoryPageMap[categoryName];
-
-            // Update active state
-            trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
-
-            // Navigate to page if mapping exists
-            if (targetPage) {
-                window.location.href = targetPage;
-            } else {
-                console.warn(`No page mapping found for: ${categoryName}`);
-            }
-        });
-    });
-
-    // Initialize
-    startAutoScroll();
 }
 
-// Initialize all carousels
-initCarousel('weapons', carouselData.weapons);
-initCarousel('equipment', carouselData.equipment);
-initCarousel('services', carouselData.services);
+// Initialize
+document.addEventListener('DOMContentLoaded', () => {
+    setupCategoryButtons();
+    setupScrollListeners();
+    renderCategory(currentCategory);
+});

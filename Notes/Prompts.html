@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Category Carousel - ArmsDealer</title>
+    <title>Category Carousel - Sample</title>
     <style>
         * {
             margin: 0;
@@ -13,137 +13,116 @@
         }
 
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: rgba(62, 74, 63, 0.92);
-            color: #e8ede8;
-            padding: 0;
+            background-color: #1a2e1f;
+            color: #d4af37;
+            font-family: Arial, sans-serif;
+            padding: 40px 20px;
         }
 
-        .page-container {
-            width: 100%;
-            padding: 2rem 0;
-            background: transparent;
-            font-family: 'Segoe UI', sans-serif;
-            max-width: 1500px;
+        .container {
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        .section-group {
-            margin-bottom: 4rem;
-        }
-
-        .main-title {
+        h1 {
             font-size: 24px;
-            font-weight: 700;
+            letter-spacing: 2px;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+
+        .category-label {
             text-align: center;
-            margin-bottom: 3rem;
-            color: #e8ede8;
-            letter-spacing: 0.05em;
-            text-transform: uppercase;
-        }
-
-        .products-container {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-            padding: 0 1rem;
-        }
-
-        .carousel-section {
-            width: 100%;
-        }
-
-        .section-title {
             font-size: 14px;
-            font-weight: 500;
-            color: #e8ede8;
-            margin-bottom: 1rem;
-            letter-spacing: 0.08em;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
             text-transform: uppercase;
-            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            color: #d4af37;
         }
 
+        /* Category Buttons */
+        .category-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .category-btn {
+            padding: 12px 30px;
+            background-color: #2a4a35;
+            color: #d4af37;
+            border: 2px solid #4a7a55;
+            cursor: pointer;
+            font-size: 14px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .category-btn:hover {
+            background-color: #3a6a45;
+            border-color: #6a9a75;
+        }
+
+        .category-btn.active {
+            background-color: #4a7a55;
+            border-color: #d4af37;
+            color: #fff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+        }
+
+        /* Carousel */
         .carousel-wrapper {
-            position: relative;
+            background-color: #0f1f14;
+            padding: 20px;
+            border: 1px solid #4a7a55;
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 0.5rem 0;
-            scroll-behavior: auto;
-        }
-
-        .carousel-wrapper::-webkit-scrollbar {
-            height: 8px;
-        }
-
-        .carousel-wrapper::-webkit-scrollbar-track {
-            background: rgba(168, 196, 154, 0.1);
-            border-radius: 4px;
-        }
-
-        .carousel-wrapper::-webkit-scrollbar-thumb {
-            background: rgba(168, 196, 154, 0.5);
-            border-radius: 4px;
-            border: 2px solid rgba(62, 74, 63, 0.92);
-        }
-
-        .carousel-wrapper::-webkit-scrollbar-thumb:hover {
-            background: rgba(168, 196, 154, 0.8);
+            scroll-behavior: smooth;
         }
 
         .carousel-track {
             display: flex;
-            gap: 12px;
-            padding: 0.5rem;
-            cursor: grab;
-            user-select: none;
-            width: max-content;
-        }
-
-        .carousel-track:active {
-            cursor: grabbing;
+            gap: 15px;
+            min-width: min-content;
+            padding: 10px 0;
         }
 
         .category-rect {
-            flex-shrink: 0;
-            width: 120px;
-            height: 120px;
-            background: linear-gradient(135deg, #3e4a3f 0%, #2a3129 100%);
-            border: 1px solid rgba(168, 196, 154, 0.3);
-            border-radius: 8px;
+            flex: 0 0 120px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 0.75rem;
+            gap: 10px;
             cursor: pointer;
+            padding: 10px;
+            border: 2px solid #4a7a55;
+            background-color: #1a3a25;
             transition: all 0.3s ease;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            position: relative;
-            overflow: hidden;
         }
 
         .category-rect:hover {
-            background: linear-gradient(135deg, #4a5a50 0%, #3a4139 100%);
-            border-color: rgba(168, 196, 154, 0.7);
-            transform: translateY(-4px);
-            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+            border-color: #d4af37;
+            background-color: #2a5a35;
+            transform: translateY(-5px);
         }
 
         .category-rect.active {
-            background: linear-gradient(135deg, #6c7a6b 0%, #4a5a50 100%);
-            border-color: #a8c49a;
-            box-shadow: 0 0 0 2px rgba(168, 196, 154, 0.4);
+            border-color: #d4af37;
+            background-color: #3a6a45;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
-        /* Image styling */
         .category-image {
-            width: 70%;
-            height: 70%;
-            object-fit: contain;
-            margin-bottom: auto;
+            width: 80px;
+            height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
         }
 
         .category-image img {
@@ -152,133 +131,99 @@
             object-fit: contain;
         }
 
-        /* Text styling - positioned at bottom center */
         .category-label {
             font-size: 12px;
-            font-weight: 500;
-            color: #e8ede8;
             text-align: center;
-            letter-spacing: 0.05em;
-            line-height: 1.2;
-            margin-top: auto;
             width: 100%;
-            padding: 0.25rem 0;
+            word-wrap: break-word;
+            color: #d4af37;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
-        .category-rect.active .category-label {
-            color: #a8c49a;
+        /* Scrollbar styling */
+        .carousel-wrapper::-webkit-scrollbar {
+            height: 8px;
         }
 
-        .services-container {
-            padding: 0 1rem;
+        .carousel-wrapper::-webkit-scrollbar-track {
+            background: #1a2e1f;
         }
 
-        @media (max-width: 768px) {
-            .category-rect {
-                width: 100px;
-                height: 100px;
-            }
+        .carousel-wrapper::-webkit-scrollbar-thumb {
+            background: #4a7a55;
+            border-radius: 4px;
+        }
 
-            .category-label {
-                font-size: 11px;
-            }
-
-            .main-title {
-                font-size: 20px;
-                margin-bottom: 2rem;
-            }
+        .carousel-wrapper::-webkit-scrollbar-thumb:hover {
+            background: #6a9a75;
         }
     </style>
 </head>
 
 <body>
-    <div class="page-container">
+    <div class="container">
+        <h1>🔫 Explore Our Categories</h1>
 
-        <!-- PRODUCTS SECTION -->
-        <div class="section-group">
-            <h2 class="main-title">Products</h2>
+        <!-- Category Toggle Buttons -->
+        <div class="category-buttons"></div>
 
-            <div class="products-container">
-                <!-- Weapons Carousel -->
-                <div class="carousel-section">
-                    <div class="section-title">Weapons</div>
-                    <div class="carousel-wrapper" data-section="weapons">
-                        <div class="carousel-track" data-section="weapons"></div>
-                    </div>
-                </div>
+        <!-- Current Category Label -->
+        <div class="category-label" id="currentCategoryLabel">WEAPONS</div>
 
-                <!-- Equipment Carousel -->
-                <div class="carousel-section">
-                    <div class="section-title">Equipment</div>
-                    <div class="carousel-wrapper" data-section="equipment">
-                        <div class="carousel-track" data-section="equipment"></div>
-                    </div>
-                </div>
-            </div>
+        <!-- Single Carousel -->
+        <div class="carousel-wrapper">
+            <div class="carousel-track"></div>
         </div>
-
-        <!-- SERVICES SECTION -->
-        <div class="section-group">
-            <h2 class="main-title">Services</h2>
-
-            <div class="services-container">
-                <div class="carousel-section">
-                    <div class="section-title">All Services</div>
-                    <div class="carousel-wrapper" data-section="services">
-                        <div class="carousel-track" data-section="services"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </div>
 
     <script>
         const carouselData = {
             weapons: [
-                { name: 'Firearms', image: '/path/to/firearms-icon.png' },
-                { name: 'Blades', image: '/path/to/blades-icon.png' },
-                { name: 'Blunts', image: '/path/to/blunts-icon.png' },
-                { name: 'Projectile', image: '/path/to/projectile-icon.png' },
-                { name: 'Explosives', image: '/path/to/explosives-icon.png' },
-                { name: 'Electronic', image: '/path/to/electronic-icon.png' },
-                { name: 'Chemical', image: '/path/to/chemical-icon.png' },
-                { name: 'Biological', image: '/path/to/biological-icon.png' },
-                { name: 'Vehicle', image: '/path/to/vehicle-icon.png' },
-                { name: 'Cyber', image: '/path/to/cyber-icon.png' },
-                { name: 'Security', image: '/path/to/security-icon.png' }
+                { name: 'Firearms', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Blades', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Blunts', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Projectile', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Explosives', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Electronic', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Chemical', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Biological', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Vehicle', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Cyber', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Security', image: '../../../Assets/Images/ArmsDealerLogo.png' }
             ],
             equipment: [
-                { name: 'Ammunition', image: '/path/to/ammunition-icon.png' },
-                { name: 'Protective', image: '/path/to/protective-icon.png' },
-                { name: 'Tactical', image: '/path/to/tactical-icon.png' },
-                { name: 'Attachments', image: '/path/to/attachments-icon.png' },
-                { name: 'Maintenance', image: '/path/to/maintenance-icon.png' },
-                { name: 'Storage', image: '/path/to/storage-icon.png' },
-                { name: 'Cases', image: '/path/to/cases-icon.png' },
-                { name: 'Communication', image: '/path/to/communication-icon.png' },
-                { name: 'Survival', image: '/path/to/survival-icon.png' },
-                { name: 'Training', image: '/path/to/training-icon.png' }
+                { name: 'Ammunition', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Protective', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Tactical', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Attachments', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Maintenance', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Storage', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Cases', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Communication', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Survival', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Training', image: '../../../Assets/Images/ArmsDealerLogo.png' }
             ],
             services: [
-                { name: 'Manufacturing', image: '/path/to/manufacturing-icon.png' },
-                { name: 'Customization', image: '/path/to/customization-icon.png' },
-                { name: 'Maintenance', image: '/path/to/maintenance-icon.png' },
-                { name: 'Transport', image: '/path/to/transport-icon.png' },
-                { name: 'Storage', image: '/path/to/storage-icon.png' },
-                { name: 'Training', image: '/path/to/training-icon.png' },
-                { name: 'Protection', image: '/path/to/protection-icon.png' },
-                { name: 'Consulting', image: '/path/to/consulting-icon.png' },
-                { name: 'Research', image: '/path/to/research-icon.png' },
-                { name: 'Testing', image: '/path/to/testing-icon.png' },
-                { name: 'Disposal', image: '/path/to/disposal-icon.png' },
-                { name: 'Surveillance', image: '/path/to/surveillance-icon.png' },
-                { name: 'Contracting', image: '/path/to/contracting-icon.png' }
+                { name: 'Manufacturing', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Customization', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Maintenance', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Transport', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Storage', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Training', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Protection', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Consulting', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Research', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Testing', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Disposal', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Surveillance', image: '../../../Assets/Images/ArmsDealerLogo.png' },
+                { name: 'Contracting', image: '../../../Assets/Images/ArmsDealerLogo.png' }
             ]
         };
 
-        // Category to page mapping
         const categoryPageMap = {
+            // WEAPONS CATEGORIES
             'Firearms': '/pages/products/firearms.html',
             'Blades': '/pages/products/blades.html',
             'Blunts': '/pages/products/blunts.html',
@@ -290,6 +235,8 @@
             'Vehicle': '/pages/products/vehicle.html',
             'Cyber': '/pages/products/cyber.html',
             'Security': '/pages/products/security.html',
+
+            // EQUIPMENT CATEGORIES
             'Ammunition': '/pages/products/ammunition.html',
             'Protective': '/pages/products/protective.html',
             'Tactical': '/pages/products/tactical.html',
@@ -300,9 +247,14 @@
             'Communication': '/pages/products/communication.html',
             'Survival': '/pages/products/survival.html',
             'Training': '/pages/products/training.html',
+
+            // SERVICES CATEGORIES
             'Manufacturing': '/pages/services/manufacturing.html',
             'Customization': '/pages/services/customization.html',
+            'Maintenance': '/pages/services/maintenance.html',
             'Transport': '/pages/services/transport.html',
+            'Storage': '/pages/services/storage.html',
+            'Training': '/pages/services/training.html',
             'Protection': '/pages/services/protection.html',
             'Consulting': '/pages/services/consulting.html',
             'Research': '/pages/services/research.html',
@@ -312,23 +264,69 @@
             'Contracting': '/pages/services/contracting.html'
         };
 
-        function initCarousel(section, data) {
-            const wrapperEl = document.querySelector(`.carousel-wrapper[data-section="${section}"]`);
-            const trackEl = wrapperEl.querySelector(`.carousel-track[data-section="${section}"]`);
+        let currentCategory = 'weapons';
+        let autoScrollId = null;
+        let resetTimeoutId = null;
+        let isScrolling = false;
+        let direction = 1;
 
-            let isScrolling = false;
-            let direction = 1; // 1 = right, -1 = left
-            let autoScrollId = null;
-            let resetTimeoutId = null;
+        function getWrapperEl() {
+            return document.querySelector('.carousel-wrapper');
+        }
 
-            // Create category rectangles with images and labels
+        function getTrackEl() {
+            return document.querySelector('.carousel-track');
+        }
+
+        function getMaxScroll() {
+            const wrapperEl = getWrapperEl();
+            const trackEl = getTrackEl();
+            return trackEl.scrollWidth - wrapperEl.clientWidth;
+        }
+
+        function startAutoScroll() {
+            clearInterval(autoScrollId);
+            clearTimeout(resetTimeoutId);
+
+            let scrollSpeed = 1.5;
+            const wrapperEl = getWrapperEl();
+
+            autoScrollId = setInterval(() => {
+                const currentScroll = wrapperEl.scrollLeft;
+                const maxScroll = getMaxScroll();
+
+                let newScroll = currentScroll + scrollSpeed * direction;
+
+                if (newScroll >= maxScroll) {
+                    newScroll = maxScroll;
+                    direction = -1;
+                } else if (newScroll <= 0) {
+                    newScroll = 0;
+                    direction = 1;
+                }
+
+                wrapperEl.scrollLeft = newScroll;
+            }, 30);
+        }
+
+        function stopAutoScroll() {
+            clearInterval(autoScrollId);
+            clearTimeout(resetTimeoutId);
+        }
+
+        function renderCategory(categoryName) {
+            const wrapperEl = getWrapperEl();
+            const trackEl = getTrackEl();
+            const data = carouselData[categoryName];
+
+            trackEl.innerHTML = '';
+
             data.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = 'category-rect';
                 card.dataset.index = index;
                 card.dataset.name = item.name;
 
-                // Create image container
                 const imageDiv = document.createElement('div');
                 imageDiv.className = 'category-image';
 
@@ -337,51 +335,69 @@
                 img.alt = item.name;
                 imageDiv.appendChild(img);
 
-                // Create label
                 const label = document.createElement('div');
                 label.className = 'category-label';
                 label.textContent = item.name;
 
-                // Append to card
                 card.appendChild(imageDiv);
                 card.appendChild(label);
                 trackEl.appendChild(card);
+
+                card.addEventListener('click', (e) => {
+                    const categoryName = card.dataset.name;
+                    const targetPage = categoryPageMap[categoryName];
+
+                    trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
+                    card.classList.add('active');
+
+                    if (targetPage) {
+                        window.location.href = targetPage;
+                    } else {
+                        console.warn(`No page mapping found for: ${categoryName}`);
+                    }
+                });
             });
 
-            function getMaxScroll() {
-                return trackEl.scrollWidth - wrapperEl.clientWidth;
-            }
+            // Update category label
+            document.getElementById('currentCategoryLabel').textContent = categoryName.toUpperCase();
 
-            function startAutoScroll() {
-                clearInterval(autoScrollId);
-                clearTimeout(resetTimeoutId);
+            wrapperEl.scrollLeft = 0;
+            direction = 1;
+            isScrolling = false;
 
-                let scrollSpeed = 1.5; // pixels per interval
-                autoScrollId = setInterval(() => {
-                    const currentScroll = wrapperEl.scrollLeft;
-                    const maxScroll = getMaxScroll();
+            startAutoScroll();
+        }
 
-                    let newScroll = currentScroll + scrollSpeed * direction;
+        function setupCategoryButtons() {
+            const buttonContainer = document.querySelector('.category-buttons');
 
-                    // Reverse direction at boundaries
-                    if (newScroll >= maxScroll) {
-                        newScroll = maxScroll;
-                        direction = -1;
-                    } else if (newScroll <= 0) {
-                        newScroll = 0;
-                        direction = 1;
-                    }
+            ['Weapons', 'Equipment', 'Services'].forEach((label) => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = label;
+                button.dataset.category = label.toLowerCase();
 
-                    wrapperEl.scrollLeft = newScroll;
-                }, 30);
-            }
+                if (label.toLowerCase() === currentCategory) {
+                    button.classList.add('active');
+                }
 
-            function stopAutoScroll() {
-                clearInterval(autoScrollId);
-                clearTimeout(resetTimeoutId);
-            }
+                button.addEventListener('click', () => {
+                    const categoryName = button.dataset.category;
 
-            // Stop auto-scroll when user scrolls
+                    document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                    button.classList.add('active');
+
+                    currentCategory = categoryName;
+                    renderCategory(categoryName);
+                });
+
+                buttonContainer.appendChild(button);
+            });
+        }
+
+        function setupScrollListeners() {
+            const wrapperEl = getWrapperEl();
+
             wrapperEl.addEventListener('mousedown', () => {
                 isScrolling = true;
                 stopAutoScroll();
@@ -398,7 +414,7 @@
                     resetTimeoutId = setTimeout(() => {
                         isScrolling = false;
                         startAutoScroll();
-                    }, 3000); // Resume after 3 seconds of no scroll
+                    }, 3000);
                 }
             });
 
@@ -414,34 +430,13 @@
                     }, 3000);
                 }
             });
-
-            // Card click - with page navigation
-            trackEl.querySelectorAll('.category-rect').forEach(card => {
-                card.addEventListener('click', (e) => {
-                    const categoryName = card.dataset.name;
-                    const targetPage = categoryPageMap[categoryName];
-
-                    // Update active state
-                    trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
-                    card.classList.add('active');
-
-                    // Navigate to page if mapping exists
-                    if (targetPage) {
-                        window.location.href = targetPage;
-                    } else {
-                        console.warn(`No page mapping found for: ${categoryName}`);
-                    }
-                });
-            });
-
-            // Initialize
-            startAutoScroll();
         }
 
-        // Initialize all carousels
-        initCarousel('weapons', carouselData.weapons);
-        initCarousel('equipment', carouselData.equipment);
-        initCarousel('services', carouselData.services);
+        document.addEventListener('DOMContentLoaded', () => {
+            setupCategoryButtons();
+            setupScrollListeners();
+            renderCategory(currentCategory);
+        });
     </script>
 </body>
 
