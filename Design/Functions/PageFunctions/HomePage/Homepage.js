@@ -397,85 +397,8 @@ function setupScrollListeners() {
     });
 }
 
-
 // ===========================================
-// SECTION 4: SMOOTH SCROLL & CTA HANDLERS
-// ===========================================
-/**
- * Smooth scroll behavior for anchor links
- */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.log('Navigate to: ' + this.getAttribute('href'));
-        }
-    });
-});
-
-/**
- * CTA Button Handler
- */
-function handleCTA(action) {
-    console.log('User clicked: ' + action);
-    // Replace with your actual navigation logic
-    if (action === 'browse') {
-        alert('Redirecting to product catalog...');
-    } else if (action === 'contact') {
-        alert('Opening contact form...');
-    }
-}
-
-
-// ===========================================
-// SECTION 5: INTERSECTION OBSERVER (SCROLL ANIMATION)
-// ===========================================
-/**
- * Add subtle animation to trust cards on scroll
- */
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe elements for lazy animation
-document.querySelectorAll('.trust-card, .process-step').forEach(el => {
-    el.style.opacity = '0.95'; // Ensure visibility
-    observer.observe(el);
-});
-
-
-// ===========================================
-// SECTION 6: HOVER EFFECTS & Z-INDEX
-// ===========================================
-/**
- * Add hover effects to interactive elements
- */
-document.querySelectorAll('.cta-btn, .trust-card, .process-step').forEach(element => {
-    element.addEventListener('mouseenter', function () {
-        // Optional: Add subtle feedback here
-        this.style.zIndex = '100';
-    });
-    element.addEventListener('mouseleave', function () {
-        this.style.zIndex = '1';
-    });
-});
-
-
-// ===========================================
-// SECTION 7: FEATURED CAROUSEL (FC)
+// SECTION 4: FEATURED CAROUSEL (FC)
 // ===========================================
 (function () {
     const pages = Array.from(document.querySelectorAll('.fc-page'));
@@ -548,7 +471,7 @@ document.querySelectorAll('.cta-btn, .trust-card, .process-step').forEach(elemen
 
 
 // ===========================================
-// SECTION 8: INITIALIZATION
+// SECTION 5: INITIALIZATION
 // ===========================================
 /**
  * Initialize category carousel on DOM ready
@@ -561,7 +484,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 // ===========================================
-// SECTION 9: DEVELOPER CONSOLE MESSAGE
+// SECTION 6: DEVELOPER CONSOLE MESSAGE
 // ===========================================
 /**
  * Console message for developers
