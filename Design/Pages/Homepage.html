@@ -195,7 +195,6 @@
         <!-- Feature Carousel                                            -->
         <!-- ═══════════════════════════════════════════════════════════ -->
 
-
         <section class="fc-root" id="fcRoot">
             <!-- Time -->
             <div class="fc-timer"> Valid until: July 29, 2026</div>
@@ -742,6 +741,248 @@
         </section>
 
         <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- BUNDLES SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+
+        <section class="bundles-section">
+            <div class="bundle-timer-box">
+                <span class="bundle-timer-label">Expires in:<span class="bundle-timer-value" id="bundleTimerTop">14
+                        days</span></span>
+
+            </div>
+            <div class="bundles-container">
+                <!-- Arrow controls -->
+                <button class="carousel-arrow carousel-arrow-prev" id="bundlePrevBtn">←</button>
+                <button class="carousel-arrow carousel-arrow-next" id="bundleNextBtn">→</button>
+                <h2 class="section-title">Limited-Time Bundles</h2>
+
+                <!-- Title & Description -->
+                <div class="bundle-title-desc">
+                    <h3 id="bundleTitle">Seasonal Bundle</h3>
+                    <p id="bundleDesc">Limited-time curated collection for tactical enthusiasts and professionals</p>
+                </div>
+
+                <div class="bundles-wrapper" id="bundlesWrapper">
+                    <!-- Billboard image with overlay pricing -->
+                    <div class="bundle-billboard" id="bundleBillboard">
+                        <div class="bundle-billboard-content">
+                            <div class="bundle-label" id="bundleLabel">Seasonal Bundle</div>
+                            <div class="bundle-product-image" id="bundleProductImage">📦</div>
+                            <div class="bundle-overlay-pricing">
+                                <div class="bundle-discount-display" id="bundleDiscountDisplay">-22%</div>
+                                <div class="bundle-pricing-display">
+                                    <div class="bundle-old-price-display" id="bundleOldPriceDisplay">₱2,450</div>
+                                    <div class="bundle-new-price-display" id="bundleNewPriceDisplay">₱1,911</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <!-- Expandable items section (includes info grid) -->
+                    <div class="bundle-items-container" id="bundleItemsContainer">
+                        <div class="bundle-items-inner">
+                            <!-- Info grid inside expandable section -->
+                            <div class="bundle-info-grid">
+                                <!-- Description -->
+                                <div>
+                                    <p style="font-size: 13px; color: #b0bdb0; line-height: 1.6; margin-bottom: 1rem;"
+                                        id="bundleFullDesc">
+                                        Limited-time curated collection for tactical enthusiasts and professionals
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="bundle-items-title">Included Items:</div>
+                            <div class="bundle-items-grid" id="bundleItemsGrid">
+                                <!-- Items will be populated by JavaScript -->
+                                <div class="bundle-actions-box"></div>
+                            </div>
+                            <div class="bundle-buttons">
+                                <button class="bundle-btn bundle-btn-primary">+ Add to Cart</button>
+                                <button class="bundle-btn bundle-btn-secondary">Know More</button>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dot indicators -->
+                <div class="bundle-dots-wrapper" id="bundleDotsWrapper">
+                </div>
+
+            </div>
+            <div class="bundle-timer-box">
+                <span class="bundle-timer-label">Expires in:<span class="bundle-timer-value" id="bundleTimerBottom">14
+                        days</span></span>
+
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <!-- BEST SELLERS SECTION -->
+        <!-- ═══════════════════════════════════════════════════════════ -->
+        <section class="bestsellers-section">
+            <div class="bestsellers-container">
+                <h2 class="section-title">Best Sellers (Limited Stock)</h2>
+
+                <!-- Category buttons -->
+                <div class="category-buttons-wrapper" id="categoryButtonsWrapper">
+                    <button class="category-btn active" data-category="weapons">Weapons</button>
+                    <button class="category-btn" data-category="equipment">Equipment</button>
+                    <button class="category-btn" data-category="services">Services</button>
+                </div>
+
+                <!-- Top 1 Best Seller -->
+                <div class="bestseller-top-one" id="bestsellersTopOne">
+                    <div class="bestseller-top-one-grid">
+                        <!-- Image -->
+                        <div class="bestseller-top-one-image">
+                            <span style="font-size: 120px;">🎯</span>
+                            <div class="bestseller-rank-badge">🥇 #1 Best Seller</div>
+                        </div>
+                        <!-- Info -->
+                        <div class="bestseller-top-one-info">
+                            <h3 id="bestseller1Title">M4A1 Carbine</h3>
+                            <p id="bestseller1Desc">Professional tactical rifle trusted by military and law enforcement
+                                worldwide.</p>
+
+                            <div class="bestseller-stats-grid">
+                                <div class="bestseller-stat-box">
+                                    <div class="bestseller-stat-label">Price</div>
+                                    <div class="bestseller-stat-value" id="bestseller1Price">₱138,750</div>
+                                </div>
+                                <div class="bestseller-stat-box">
+                                    <div class="bestseller-stat-label">Units Sold</div>
+                                    <div class="bestseller-stat-value" id="bestseller1Sold">3,591</div>
+                                </div>
+                            </div>
+
+                            <div class="bestseller-stock-container">
+                                <span class="bestseller-stock-label">Stock Status</span>
+                                <div class="bestseller-stock-bar">
+                                    <div class="bestseller-stock-fill" id="bestseller1StockBar" style="width: 95%;">
+                                    </div>
+                                </div>
+                                <div class="bestseller-stock-info" id="bestseller1StockInfo">95% sold - Limited stock
+                                    remaining</div>
+                            </div>
+
+                            <button class="bestseller-top-one-btn">+ Add to Cart</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2nd & 3rd Bestsellers -->
+                <div class="bestseller-podium" id="bestsellersBottom">
+                    <!-- 2nd place -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-card-image">
+                            <span style="font-size: 80px;">🔫</span>
+                            <div class="bestseller-rank-badge-small">🥈 #2</div>
+                        </div>
+                        <div class="bestseller-card-info">
+                            <h4 class="bestseller-card-title" id="bestseller2Title">Glock 17 Gen5</h4>
+                            <p class="bestseller-card-desc" id="bestseller2Desc">Striker-fired duty pistol with proven
+                                reliability</p>
+
+                            <div class="bestseller-card-stats">
+                                <div class="bestseller-card-price">Price</div>
+                                <div class="bestseller-card-price-value" id="bestseller2Price">₱54,400</div>
+                                <div class="bestseller-card-mini-bar">
+                                    <div class="bestseller-card-mini-bar-fill" id="bestseller2StockBar"
+                                        style="width: 72%;"></div>
+                                </div>
+                                <div class="bestseller-card-sold" id="bestseller2Sold">2,847 sold</div>
+                            </div>
+
+                            <button class="bestseller-card-btn">View Details</button>
+                        </div>
+                    </div>
+
+                    <!-- 3rd place -->
+                    <div class="bestseller-card">
+                        <div class="bestseller-card-image">
+                            <span style="font-size: 80px;">⚔️</span>
+                            <div class="bestseller-rank-badge-small">🥉 #3</div>
+                        </div>
+                        <div class="bestseller-card-info">
+                            <h4 class="bestseller-card-title" id="bestseller3Title">Tactical Knife</h4>
+                            <p class="bestseller-card-desc" id="bestseller3Desc">High-grade stainless steel combat blade
+                            </p>
+
+                            <div class="bestseller-card-stats">
+                                <div class="bestseller-card-price">Price</div>
+                                <div class="bestseller-card-price-value" id="bestseller3Price">₱2,850</div>
+                                <div class="bestseller-card-mini-bar">
+                                    <div class="bestseller-card-mini-bar-fill" id="bestseller3StockBar"
+                                        style="width: 58%;"></div>
+                                </div>
+                                <div class="bestseller-card-sold" id="bestseller3Sold">1,923 sold</div>
+                            </div>
+
+                            <button class="bestseller-card-btn">View Details</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Expandable table -->
+                <div class="bestseller-table-wrapper">
+                    <button class="bestseller-table-toggle" id="tableToggle">
+                        <span>View All Bestsellers</span>
+                        <span style="font-size: 16px;">▼</span>
+                    </button>
+                    <div class="bestseller-table-content" id="tableContent">
+                        <table class="bestseller-table">
+                            <thead>
+                                <tr>
+                                    <th>Rank</th>
+                                    <th>Product</th>
+                                    <th>Price</th>
+                                    <th>Sold</th>
+                                </tr>
+                            </thead>
+                            <tbody id="tableBody">
+                                <tr>
+                                    <td class="bestseller-table-rank">1</td>
+                                    <td>M4A1 Carbine</td>
+                                    <td>₱138,750</td>
+                                    <td>3,591</td>
+                                </tr>
+                                <tr>
+                                    <td class="bestseller-table-rank">2</td>
+                                    <td>Glock 17 Gen5</td>
+                                    <td>₱54,400</td>
+                                    <td>2,847</td>
+                                </tr>
+                                <tr>
+                                    <td class="bestseller-table-rank">3</td>
+                                    <td>Tactical Knife</td>
+                                    <td>₱2,850</td>
+                                    <td>1,923</td>
+                                </tr>
+                                <tr>
+                                    <td class="bestseller-table-rank">4</td>
+                                    <td>SR-25 Marksman</td>
+                                    <td>₱195,500</td>
+                                    <td>1,456</td>
+                                </tr>
+                                <tr>
+                                    <td class="bestseller-table-rank">5</td>
+                                    <td>AK-103 Rifle</td>
+                                    <td>₱115,000</td>
+                                    <td>892</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ═══════════════════════════════════════════════════════════ -->
         <!-- Why Choose Us                                               -->
         <!-- ═══════════════════════════════════════════════════════════ -->
         <section class="why-choose">
@@ -970,7 +1211,7 @@
         </footer>
 
         <script src="../../Design/Functions/Navbarscript.js"></script>
-        <script src="../../Design/Functions/PageFunctions/HomePage/Homepage.js"></script>
+        <script src="../../Design/Functions/PageFunctions/PageFunctions/Homepage.js"></script>
     </main>
 </body>
 
