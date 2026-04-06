@@ -1,10 +1,14 @@
-"""
-ArmsDealer — Flask Backend Entry Point
-Run: python app.py
-"""
-from backend.server import create_app
+from logic.routes import main
+from flask import Flask
+from flask_cors import CORS
+from data.db import init_db
 
-app = create_app()
+app = Flask(__name__, template_folder='../design/templates',
+            static_folder='../design/assets')
+CORS(app)
+
+app.register_blueprint(main.bp)
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    init_db()
+    app.run(debug=True)
