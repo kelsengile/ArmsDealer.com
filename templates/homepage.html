@@ -3,983 +3,898 @@
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/homepagestyles.css') }}">{% endblock %}
 
-{% block body %}
-
-<body>
+{% block main %}
+<main class="container">
 
     <!-- ═══════════════════════════════════════════════════════════ -->
-    <!-- STICKY HEADER WRAPPER                                        -->
+    <!-- HERO CAROUSEL                                               -->
     <!-- ═══════════════════════════════════════════════════════════ -->
-    <header class="site-header">
+    <section class="hero" id="heroCarousel">
 
-        <!-- TOP BAR -->
-        <div class="top-bar">
-            <div class="left">
-                <button aria-label="Menu">☰</button>
-                <div class="top-bar-status">
-                    <div class="top-bar-status-dot"></div>
-                    <span>Secure Connection</span>
-                </div>
-            </div>
-            <div class="right">
-                <select aria-label="Language">
-                    <option>🌐 English</option>
-                    <option>🌐 Filipino</option>
-                    <option>🌐 Japanese</option>
-                    <option>🌐 Spanish</option>
-                </select>
-                <select aria-label="Currency">
-                    <option>PHP (₱)</option>
-                    <option>USD ($)</option>
-                    <option>EUR (€)</option>
-                </select>
-                <a href="About.html">About</a>
-                <a href="Contacts.html">Contacts</a>
-                <a href="Legal.html">Legal</a>
+        <!-- Slide 1 -->
+        <div class="hero-slide active">
+            <div class="hero-slide-bg"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">New Arrivals — 2025</span>
+                <h1 class="hero-title">Precision<br>Built to Last</h1>
+                <p class="hero-subtitle">Explore our latest collection of high-performance rifles engineered for
+                    accuracy under any condition.</p>
+                <a href="Products.html" class="hero-cta">Shop Now</a>
             </div>
         </div>
 
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- NAV BAR                                       -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <nav class="navbar" aria-label="Main navigation">
-            <a href="Homepage.html" class="logo-container" aria-label="ArmsDealer Home">
-                <div class="logoimage" role="img" aria-label="ArmsDealer logo"></div>
-                <div class="logo-text-wrap">
-                    <div class="logo">ArmsDealer</div>
-                    <div class="logo-sub">Tactical Supply Co.</div>
+        <!-- Slide 2 -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Tactical Gear</span>
+                <h1 class="hero-title">Gear Up.<br>Stay Ready.</h1>
+                <p class="hero-subtitle">From holsters to plate carriers — premium tactical accessories trusted by
+                    professionals worldwide.</p>
+                <a href="Products.html" class="hero-cta">Browse Gear</a>
+            </div>
+        </div>
+
+        <!-- Slide 3 -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Exclusive Deal</span>
+                <h1 class="hero-title">Handguns<br>Redefined.</h1>
+                <p class="hero-subtitle">Compact. Reliable. Lethal. Discover our handgun lineup — now with
+                    limited-time pricing on select models.</p>
+                <a href="Products.html" class="hero-cta">View Deals</a>
+            </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Ammunition</span>
+                <h1 class="hero-title">Never Run<br>Dry Again.</h1>
+                <p class="hero-subtitle">Bulk ammo for every caliber, shipped fast and discreetly. Stock up and save
+                    with our tiered pricing.</p>
+                <a href="Products.html" class="hero-cta">Buy Ammo</a>
+            </div>
+        </div>
+
+        <!-- Slide 5 -->
+        <div class="hero-slide">
+            <div class="hero-slide-bg"></div>
+            <div class="hero-slide-overlay"></div>
+            <div class="hero-content">
+                <span class="hero-tag">Services</span>
+                <h1 class="hero-title">Expert Care<br>for Your Arms.</h1>
+                <p class="hero-subtitle">Maintenance, customization, and consultation — our certified gunsmiths keep
+                    your firearms in peak condition.</p>
+                <a href="Services.html" class="hero-cta">Our Services</a>
+            </div>
+        </div>
+
+        <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
+            <svg viewBox="0 0 24 24">
+                <polyline points="15 18 9 12 15 6" />
+            </svg>
+        </button>
+        <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
+            <svg viewBox="0 0 24 24">
+                <polyline points="9 6 15 12 9 18" />
+            </svg>
+        </button>
+
+        <div class="hero-dots" id="heroDots"></div>
+        <div class="hero-counter"><span id="heroCurrentNum">01</span> / 05</div>
+        <div class="hero-bracket" aria-hidden="true"></div>
+
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- FEATURE CAROUSEL                                            -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <section class="fc-root" id="fcRoot">
+        <!-- Time -->
+        <div class="fc-timer"> Valid until: July 29, 2026</div>
+
+        <div class="fc-header">
+            <div class="fc-header-tag">Products & Services</div>
+            <h2>Featured Selection</h2>
+        </div>
+
+        <div class="fc-stage">
+
+            <!-- PAGE 1: Rifles -->
+            <div class="fc-page active" data-label="Rifles">
+                <div class="fc-collage">
+                    <div class="fc-collage-inner fc-grid-hero">
+
+                        <div class="fc-card span2r"
+                            data-popup='{"name":"M4A1 Carbine — Tactical Edition","desc":"Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.","tags":["5.56mm","Semi-Auto","M-LOK"],"old":"₱185,000","new":"₱138,750"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/m14carbine.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name large">M4A1 Carbine</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–25%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱185,000</span><span
+                                            class="fc-new large">₱138,750</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"SR-25 Precision Rifle","desc":"7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.","tags":["7.62mm","DMR","Precision"],"old":"₱230,000","new":"₱195,500"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/sr25marksman.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">SR-25 Marksman</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–15%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱230,000</span><span
+                                            class="fc-new">₱195,500</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"AK-103 Assault Rifle","desc":"7.62x39mm battle-proven platform. Side-folding stock, chrome-lined barrel, enhanced pistol grip. Legendary reliability in adverse conditions.","tags":["7.62x39","AK Platform","Folding Stock"],"old":"₱145,000","new":"₱115,000"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/ak103.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">AK-103</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–21%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱145,000</span><span
+                                            class="fc-new">₱115,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 2: Handguns -->
+            <div class="fc-page" data-label="Handguns">
+                <div class="fc-collage">
+                    <div class="fc-collage-inner fc-grid-3col">
+
+                        <div class="fc-card span2r"
+                            data-popup='{"name":"Glock 17 Gen5 — Service Pistol","desc":"9mm striker-fired duty pistol. Marksman barrel, flared mag well, ambidextrous slide stop. Standard issue across 50+ law enforcement agencies.","tags":["9mm","Gen5","LE Standard"],"old":"₱68,000","new":"₱54,400"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/glock17gen5.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name large">Glock 17 Gen5</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱68,000</span><span
+                                            class="fc-new large">₱54,400</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"1911 Custom Operator","desc":".45 ACP single-action platform. Match barrel bushing, extended beavertail, G10 grips. Classic reliability, modern upgrades.","tags":[".45 ACP","1911","Single-Action"],"old":"₱95,000","new":"₱76,000"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/1911operator.jpg                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">1911 Operator</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱95,000</span><span
+                                            class="fc-new">₱76,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"SIG P320 Compact","desc":"9mm modular pistol system. Serialized fire control unit, interchangeable grip modules. US Army M17 basis.","tags":["9mm","Modular","Compact"],"old":"₱82,000","new":"₱72,000"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/sigp320.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">SIG P320</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–12%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱82,000</span><span
+                                            class="fc-new">₱72,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"Beretta M9A3","desc":"9mm DA/SA pistol. Vertec grip, decocker/safety, extended tang. Time-tested military sidearm with modern enhancements.","tags":["9mm","DA/SA","Military"],"old":"₱74,500","new":"₱59,600"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/berettam9a3.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">Beretta M9A3</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱74,500</span><span
+                                            class="fc-new">₱59,600</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"CZ P-10F Full Size","desc":"9mm striker-fired pistol. Interchangeable back straps, suppressor-ready, Omega trigger. Czech precision engineering.","tags":["9mm","Striker","Full-Size"],"old":"₱71,000","new":"₱56,800"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/czp10f.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">CZ P-10F</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱71,000</span><span
+                                            class="fc-new">₱56,800</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 3: Tactical Gear -->
+            <div class="fc-page" data-label="Blades">
+                <div class="fc-collage">
+                    <div class="fc-collage-inner fc-grid-2col">
+
+                        <div class="fc-card span2r"
+                            data-popup='{"name":"Plate Carrier — Level IV MOLLE","desc":"Certified Level IV ballistic protection. MOLLE webbing, cummerbund, quick-release system. Accepts up to 10x12 hard plates.","tags":["Level IV","MOLLE","Quick-Release"],"old":"₱42,000","new":"₱33,600"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/katana.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name large">Miyamoto Katana - Damascus</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱42,000</span><span
+                                            class="fc-new large">₱33,600</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"Tactical Helmet — MICH 2000","desc":"High-cut ballistic helmet. Dial-fit retention, NVG shroud mount, rails for accessories. NIJ Level IIIA rated.","tags":["IIIA Rated","NVG Mount","High-Cut"],"old":"₱28,000","new":"₱22,400"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/balisong.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">Balisong</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱28,000</span><span
+                                            class="fc-new">₱22,400</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"Chest Rig — Modular 500D","desc":"500D Cordura chest rig. 6 magazine pouches, admin pouch, hydration compatible. Low-profile combat use.","tags":["500D Cordura","Low-Profile","Modular"],"old":"₱8,500","new":"₱6,800"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/stiletto.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">Italian Stiletto</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱8,500</span><span
+                                            class="fc-new">₱6,800</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 4: Ammunition -->
+            <div class="fc-page" data-label="Ammo">
+                <div class="fc-collage">
+                    <div class="fc-collage-inner fc-grid-quad">
+
+                        <div class="fc-card span2c"
+                            data-popup='{"name":"5.56mm NATO — 1,000 Round Case","desc":"M855 62gr green-tip penetrator. Lake City production, mil-spec brass, boxer-primed. Optimized for AR-platform rifles.","tags":["M855","62gr","1000 Rounds"],"old":"₱18,500","new":"₱13,875"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/5.56.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name large">5.56mm NATO — Case of 1,000</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–25%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱18,500</span><span
+                                            class="fc-new large">₱13,875</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"9mm FMJ — 500 Round Box","desc":"124gr full metal jacket 9mm. Reloadable brass, consistent velocity, clean-burning powder. Ideal for training.","tags":["124gr FMJ","9mm","Training"],"old":"₱6,200","new":"₱5,270"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/9mmfmj.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">9mm FMJ ×500</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–15%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱6,200</span><span
+                                            class="fc-new">₱5,270</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"7.62x39mm — 500 Round Pack","desc":"122gr FMJ steel-core 7.62x39. Corrosion-resistant, lacquered steel case. Optimized for AK-platform rifles.","tags":["122gr","Steel Case","AK Platform"],"old":"₱9,500","new":"₱7,600"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/7.62x39.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">7.62×39 ×500</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱9,500</span><span
+                                            class="fc-new">₱7,600</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":".45 ACP HP — 200 Round Box","desc":"230gr jacketed hollow point. Controlled expansion, bonded core, nickel-plated brass. Duty and self-defense rated.","tags":["JHP","230gr","Duty Round"],"old":"₱7,800","new":"₱6,630"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/45acp.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">.45 ACP HP ×200</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–15%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱7,800</span><span
+                                            class="fc-new">₱6,630</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":".308 Win Match — 100 Round Box","desc":"168gr BTHP match grade .308 Winchester. Sierra MatchKing projectile, consistent OAL, sub-MOA accuracy guaranteed.","tags":["168gr BTHP","Match Grade","Sub-MOA"],"old":"₱8,900","new":"₱7,120"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/308winmatch.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">.308 Win Match ×100</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱8,900</span><span
+                                            class="fc-new">₱7,120</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGE 5: Services -->
+            <div class="fc-page" data-label="Services">
+                <div class="fc-collage">
+                    <div class="fc-collage-inner fc-grid-asym">
+
+                        <div class="fc-card span2r"
+                            data-popup='{"name":"Full Gunsmith Overhaul Package","desc":"Complete weapon inspection, deep clean, barrel crown recutting, trigger job, parts replacement, test fire report. 72-hour turnaround.","tags":["Full Service","72hr Turnaround","Certified"],"old":"₱12,000","new":"₱9,600"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/hitman.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name large">Hitman</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱12,000,000</span><span
+                                            class="fc-new large">₱9,600,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"Custom Cerakote Refinish","desc":"Mil-spec Cerakote application in any color or camo pattern. Surface prep, bead blast, cure. Rated to 1,200°F. UV, chemical, and corrosion resistant.","tags":["Cerakote","Custom Color","Mil-Spec"],"old":"₱8,000","new":"₱6,400"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/cleanup.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">Clean Up</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–20%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱150,000</span><span
+                                            class="fc-new">₱125,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+                        <div class="fc-card"
+                            data-popup='{"name":"Optics Mounting & Zero Service","desc":"Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.","tags":["Mounting","Zeroing","Range Included"],"old":"₱4,500","new":"₱3,375"}'>
+                            <div class="fc-card-bg"
+                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/delivery.jpg');">
+                                <div class="fc-overlay"></div>
+                            </div>
+                            <div class="fc-content">
+                                <div class="fc-name">Delivery</div>
+                                <div class="fc-pricing">
+                                    <div class="fc-discount">–25%</div>
+                                    <div class="fc-prices"><span class="fc-old">₱75,000</span><span
+                                            class="fc-new">₱60,000</span></div>
+                                </div>
+                            </div>
+                            <div class="fc-popup">
+                                <div class="fc-popup-name"></div>
+                                <div class="fc-popup-desc"></div>
+                                <div class="fc-popup-tags"></div>
+                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
+                                        class="fc-popup-btn primary">+ Cart</button></div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- NAV -->
+            <div class="fc-nav">
+                <button class="fc-nav-arrow" id="fcPrev">&#8249;</button>
+                <div class="fc-dots-wrap" id="fcDots"></div>
+                <button class="fc-nav-arrow" id="fcNext">&#8250;</button>
+            </div>
+            <div class="fc-page-label" id="fcPageLabel">Rifles</div>
+        </div>
+
+        <!-- Time -->
+        <div class="fc-timer"> Valid until: July 29, 2026</div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- ADVERTISEMENT SPACE                                         -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <section class="ad-space">
+        <div class="ad-content">
+            <a href="https://www.youtube.com">
+                <div class="ad-img">
                 </div>
             </a>
-
-            <!-- Desktop nav links -->
-            <div class="nav-links">
-                <a href="Products.html">Products</a>
-                <a href="Services.html">Services</a>
-                <button class="nav-btn-search" aria-label="Search"></button>
-                <button class="nav-btn-cart" aria-label="Cart">
-                    <!-- <span class="cart-badge" aria-hidden="true"></span> --></button>
-                <button class="nav-btn-account" aria-label="Account"></button>
-            </div>
-
-            <!-- Coordinate readout (decorative) -->
-            <div class="nav-coord" aria-hidden="true">
-                <div><span>LAT</span> 14.5995° N</div>
-                <div><span>LNG</span> 120.9842° E</div>
-            </div>
-
-            <!-- Mobile hamburger -->
-            <button class="nav-hamburger" id="navHamburger" aria-controls="navDrawer" aria-expanded="false"
-                aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </nav>
-
-        <!-- Mobile drawer -->
-        <div class="nav-drawer" id="navDrawer" role="menu">
-            <a href="Products.html" role="menuitem"><span class="nav-drawer-icon">◈</span>Products</a>
-            <a href="Services.html" role="menuitem"><span class="nav-drawer-icon">◈</span>Services</a>
-            <button class="nav-btn-search" role="menuitem"><span class="nav-drawer-icon"></span>Search</button>
-            <button class="nav-btn-cart" role="menuitem">
-                <span class="nav-drawer-icon"></span>Cart<span class="cart-badge" aria-hidden="true"></span></button>
-            <button class="nav-btn-account" role="menuitem"><span class="nav-drawer-icon"></span>Account</button>
         </div>
+    </section>
 
-    </header>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- PRODUCTS & SERVICES CATEGORIES                              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
 
-    <main class="container">
+    <section class="pands-categories">
+        <div class="category-title">
+            <h1>Explore Our Categories:</h1>
+        </div>
+        <div class=" pands-carousel">
+            <!-- Category Toggle Buttons -->
+            <div class="category-buttons"></div>
+            <!-- Current Category Label -->
+            <div class="category-label" id="currentCategoryLabel"></div>
+            <!-- Single Carousel -->
+            <div class="carousel-wrapper">
+                <div class="carousel-track"></div>
+            </div>
+        </div>
+    </section>
 
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- HERO CAROUSEL                                               -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <section class="hero" id="heroCarousel">
 
-            <!-- Slide 1 -->
-            <div class="hero-slide active">
-                <div class="hero-slide-bg"></div>
-                <div class="hero-slide-overlay"></div>
-                <div class="hero-content">
-                    <span class="hero-tag">New Arrivals — 2025</span>
-                    <h1 class="hero-title">Precision<br>Built to Last</h1>
-                    <p class="hero-subtitle">Explore our latest collection of high-performance rifles engineered for
-                        accuracy under any condition.</p>
-                    <a href="Products.html" class="hero-cta">Shop Now</a>
-                </div>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- BUNDLES                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- BEST SELLERS SECTION                                        -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- NEWS & UPDATES                                              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- WHY CHOOSE US                                               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="why-choose">
+        <div class="why-choose-content">
+            <div class="section-header">
+                <h2>Why Choose Armsdealer</h2>
+                <p>Trusted by collectors, shooters, and professionals worldwide</p>
             </div>
 
-            <!-- Slide 2 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg"></div>
-                <div class="hero-slide-overlay"></div>
-                <div class="hero-content">
-                    <span class="hero-tag">Tactical Gear</span>
-                    <h1 class="hero-title">Gear Up.<br>Stay Ready.</h1>
-                    <p class="hero-subtitle">From holsters to plate carriers — premium tactical accessories trusted by
-                        professionals worldwide.</p>
-                    <a href="Products.html" class="hero-cta">Browse Gear</a>
-                </div>
-            </div>
-
-            <!-- Slide 3 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg"></div>
-                <div class="hero-slide-overlay"></div>
-                <div class="hero-content">
-                    <span class="hero-tag">Exclusive Deal</span>
-                    <h1 class="hero-title">Handguns<br>Redefined.</h1>
-                    <p class="hero-subtitle">Compact. Reliable. Lethal. Discover our handgun lineup — now with
-                        limited-time pricing on select models.</p>
-                    <a href="Products.html" class="hero-cta">View Deals</a>
-                </div>
-            </div>
-
-            <!-- Slide 4 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg"></div>
-                <div class="hero-slide-overlay"></div>
-                <div class="hero-content">
-                    <span class="hero-tag">Ammunition</span>
-                    <h1 class="hero-title">Never Run<br>Dry Again.</h1>
-                    <p class="hero-subtitle">Bulk ammo for every caliber, shipped fast and discreetly. Stock up and save
-                        with our tiered pricing.</p>
-                    <a href="Products.html" class="hero-cta">Buy Ammo</a>
-                </div>
-            </div>
-
-            <!-- Slide 5 -->
-            <div class="hero-slide">
-                <div class="hero-slide-bg"></div>
-                <div class="hero-slide-overlay"></div>
-                <div class="hero-content">
-                    <span class="hero-tag">Services</span>
-                    <h1 class="hero-title">Expert Care<br>for Your Arms.</h1>
-                    <p class="hero-subtitle">Maintenance, customization, and consultation — our certified gunsmiths keep
-                        your firearms in peak condition.</p>
-                    <a href="Services.html" class="hero-cta">Our Services</a>
-                </div>
-            </div>
-
-            <button class="hero-arrow hero-arrow-prev" id="heroPrev" aria-label="Previous slide">
-                <svg viewBox="0 0 24 24">
-                    <polyline points="15 18 9 12 15 6" />
-                </svg>
-            </button>
-            <button class="hero-arrow hero-arrow-next" id="heroNext" aria-label="Next slide">
-                <svg viewBox="0 0 24 24">
-                    <polyline points="9 6 15 12 9 18" />
-                </svg>
-            </button>
-
-            <div class="hero-dots" id="heroDots"></div>
-            <div class="hero-counter"><span id="heroCurrentNum">01</span> / 05</div>
-            <div class="hero-bracket" aria-hidden="true"></div>
-
-        </section>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- FEATURE CAROUSEL                                            -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-        <section class="fc-root" id="fcRoot">
-            <!-- Time -->
-            <div class="fc-timer"> Valid until: July 29, 2026</div>
-
-            <div class="fc-header">
-                <div class="fc-header-tag">Products & Services</div>
-                <h2>Featured Selection</h2>
-            </div>
-
-            <div class="fc-stage">
-
-                <!-- PAGE 1: Rifles -->
-                <div class="fc-page active" data-label="Rifles">
-                    <div class="fc-collage">
-                        <div class="fc-collage-inner fc-grid-hero">
-
-                            <div class="fc-card span2r"
-                                data-popup='{"name":"M4A1 Carbine — Tactical Edition","desc":"Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.","tags":["5.56mm","Semi-Auto","M-LOK"],"old":"₱185,000","new":"₱138,750"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/m14carbine.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name large">M4A1 Carbine</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–25%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱185,000</span><span
-                                                class="fc-new large">₱138,750</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"SR-25 Precision Rifle","desc":"7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.","tags":["7.62mm","DMR","Precision"],"old":"₱230,000","new":"₱195,500"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/sr25marksman.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">SR-25 Marksman</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–15%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱230,000</span><span
-                                                class="fc-new">₱195,500</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"AK-103 Assault Rifle","desc":"7.62x39mm battle-proven platform. Side-folding stock, chrome-lined barrel, enhanced pistol grip. Legendary reliability in adverse conditions.","tags":["7.62x39","AK Platform","Folding Stock"],"old":"₱145,000","new":"₱115,000"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/ak103.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">AK-103</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–21%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱145,000</span><span
-                                                class="fc-new">₱115,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+            <div class="why-choose-grid">
+                <!-- Trust Card 1: Licensed & Secure -->
+                <div class="trust-card">
+                    <div class="trust-card-icon">🔒</div>
+                    <h3 class="trust-card-title">Licensed & Secure</h3>
+                    <p class="trust-card-desc">
+                        Fully compliant with federal regulations. All transactions verified and secured with
+                        industry-standard encryption. Your safety is our priority.
+                    </p>
                 </div>
 
-                <!-- PAGE 2: Handguns -->
-                <div class="fc-page" data-label="Handguns">
-                    <div class="fc-collage">
-                        <div class="fc-collage-inner fc-grid-3col">
-
-                            <div class="fc-card span2r"
-                                data-popup='{"name":"Glock 17 Gen5 — Service Pistol","desc":"9mm striker-fired duty pistol. Marksman barrel, flared mag well, ambidextrous slide stop. Standard issue across 50+ law enforcement agencies.","tags":["9mm","Gen5","LE Standard"],"old":"₱68,000","new":"₱54,400"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/glock17gen5.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name large">Glock 17 Gen5</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱68,000</span><span
-                                                class="fc-new large">₱54,400</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"1911 Custom Operator","desc":".45 ACP single-action platform. Match barrel bushing, extended beavertail, G10 grips. Classic reliability, modern upgrades.","tags":[".45 ACP","1911","Single-Action"],"old":"₱95,000","new":"₱76,000"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/1911operator.jpg                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 ');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">1911 Operator</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱95,000</span><span
-                                                class="fc-new">₱76,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"SIG P320 Compact","desc":"9mm modular pistol system. Serialized fire control unit, interchangeable grip modules. US Army M17 basis.","tags":["9mm","Modular","Compact"],"old":"₱82,000","new":"₱72,000"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/sigp320.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">SIG P320</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–12%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱82,000</span><span
-                                                class="fc-new">₱72,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"Beretta M9A3","desc":"9mm DA/SA pistol. Vertec grip, decocker/safety, extended tang. Time-tested military sidearm with modern enhancements.","tags":["9mm","DA/SA","Military"],"old":"₱74,500","new":"₱59,600"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/berettam9a3.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">Beretta M9A3</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱74,500</span><span
-                                                class="fc-new">₱59,600</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"CZ P-10F Full Size","desc":"9mm striker-fired pistol. Interchangeable back straps, suppressor-ready, Omega trigger. Czech precision engineering.","tags":["9mm","Striker","Full-Size"],"old":"₱71,000","new":"₱56,800"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/czp10f.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">CZ P-10F</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱71,000</span><span
-                                                class="fc-new">₱56,800</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
+                <!-- Trust Card 2: Wide Selection -->
+                <div class="trust-card">
+                    <div class="trust-card-icon">📦</div>
+                    <h3 class="trust-card-title">Wide Selection</h3>
+                    <p class="trust-card-desc">
+                        Curated inventory spanning firearms, ammunition, tactical gear, and rare collectibles from
+                        trusted manufacturers worldwide.
+                    </p>
                 </div>
 
-                <!-- PAGE 3: Tactical Gear -->
-                <div class="fc-page" data-label="Blades">
-                    <div class="fc-collage">
-                        <div class="fc-collage-inner fc-grid-2col">
-
-                            <div class="fc-card span2r"
-                                data-popup='{"name":"Plate Carrier — Level IV MOLLE","desc":"Certified Level IV ballistic protection. MOLLE webbing, cummerbund, quick-release system. Accepts up to 10x12 hard plates.","tags":["Level IV","MOLLE","Quick-Release"],"old":"₱42,000","new":"₱33,600"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/katana.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name large">Miyamoto Katana - Damascus</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱42,000</span><span
-                                                class="fc-new large">₱33,600</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"Tactical Helmet — MICH 2000","desc":"High-cut ballistic helmet. Dial-fit retention, NVG shroud mount, rails for accessories. NIJ Level IIIA rated.","tags":["IIIA Rated","NVG Mount","High-Cut"],"old":"₱28,000","new":"₱22,400"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/balisong.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">Balisong</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱28,000</span><span
-                                                class="fc-new">₱22,400</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"Chest Rig — Modular 500D","desc":"500D Cordura chest rig. 6 magazine pouches, admin pouch, hydration compatible. Low-profile combat use.","tags":["500D Cordura","Low-Profile","Modular"],"old":"₱8,500","new":"₱6,800"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/stiletto.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">Italian Stiletto</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱8,500</span><span
-                                                class="fc-new">₱6,800</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PAGE 4: Ammunition -->
-                <div class="fc-page" data-label="Ammo">
-                    <div class="fc-collage">
-                        <div class="fc-collage-inner fc-grid-quad">
-
-                            <div class="fc-card span2c"
-                                data-popup='{"name":"5.56mm NATO — 1,000 Round Case","desc":"M855 62gr green-tip penetrator. Lake City production, mil-spec brass, boxer-primed. Optimized for AR-platform rifles.","tags":["M855","62gr","1000 Rounds"],"old":"₱18,500","new":"₱13,875"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/5.56.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name large">5.56mm NATO — Case of 1,000</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–25%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱18,500</span><span
-                                                class="fc-new large">₱13,875</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"9mm FMJ — 500 Round Box","desc":"124gr full metal jacket 9mm. Reloadable brass, consistent velocity, clean-burning powder. Ideal for training.","tags":["124gr FMJ","9mm","Training"],"old":"₱6,200","new":"₱5,270"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/9mmfmj.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">9mm FMJ ×500</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–15%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱6,200</span><span
-                                                class="fc-new">₱5,270</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"7.62x39mm — 500 Round Pack","desc":"122gr FMJ steel-core 7.62x39. Corrosion-resistant, lacquered steel case. Optimized for AK-platform rifles.","tags":["122gr","Steel Case","AK Platform"],"old":"₱9,500","new":"₱7,600"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/7.62x39.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">7.62×39 ×500</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱9,500</span><span
-                                                class="fc-new">₱7,600</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":".45 ACP HP — 200 Round Box","desc":"230gr jacketed hollow point. Controlled expansion, bonded core, nickel-plated brass. Duty and self-defense rated.","tags":["JHP","230gr","Duty Round"],"old":"₱7,800","new":"₱6,630"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/45acp.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">.45 ACP HP ×200</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–15%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱7,800</span><span
-                                                class="fc-new">₱6,630</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":".308 Win Match — 100 Round Box","desc":"168gr BTHP match grade .308 Winchester. Sierra MatchKing projectile, consistent OAL, sub-MOA accuracy guaranteed.","tags":["168gr BTHP","Match Grade","Sub-MOA"],"old":"₱8,900","new":"₱7,120"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/308winmatch.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">.308 Win Match ×100</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱8,900</span><span
-                                                class="fc-new">₱7,120</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- PAGE 5: Services -->
-                <div class="fc-page" data-label="Services">
-                    <div class="fc-collage">
-                        <div class="fc-collage-inner fc-grid-asym">
-
-                            <div class="fc-card span2r"
-                                data-popup='{"name":"Full Gunsmith Overhaul Package","desc":"Complete weapon inspection, deep clean, barrel crown recutting, trigger job, parts replacement, test fire report. 72-hour turnaround.","tags":["Full Service","72hr Turnaround","Certified"],"old":"₱12,000","new":"₱9,600"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/hitman.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name large">Hitman</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱12,000,000</span><span
-                                                class="fc-new large">₱9,600,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"Custom Cerakote Refinish","desc":"Mil-spec Cerakote application in any color or camo pattern. Surface prep, bead blast, cure. Rated to 1,200°F. UV, chemical, and corrosion resistant.","tags":["Cerakote","Custom Color","Mil-Spec"],"old":"₱8,000","new":"₱6,400"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/cleanup.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">Clean Up</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–20%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱150,000</span><span
-                                                class="fc-new">₱125,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-                            <div class="fc-card"
-                                data-popup='{"name":"Optics Mounting & Zero Service","desc":"Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.","tags":["Mounting","Zeroing","Range Included"],"old":"₱4,500","new":"₱3,375"}'>
-                                <div class="fc-card-bg"
-                                    style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/delivery.jpg');">
-                                    <div class="fc-overlay"></div>
-                                </div>
-                                <div class="fc-content">
-                                    <div class="fc-name">Delivery</div>
-                                    <div class="fc-pricing">
-                                        <div class="fc-discount">–25%</div>
-                                        <div class="fc-prices"><span class="fc-old">₱75,000</span><span
-                                                class="fc-new">₱60,000</span></div>
-                                    </div>
-                                </div>
-                                <div class="fc-popup">
-                                    <div class="fc-popup-name"></div>
-                                    <div class="fc-popup-desc"></div>
-                                    <div class="fc-popup-tags"></div>
-                                    <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                            class="fc-popup-btn primary">+ Cart</button></div>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-                <!-- NAV -->
-                <div class="fc-nav">
-                    <button class="fc-nav-arrow" id="fcPrev">&#8249;</button>
-                    <div class="fc-dots-wrap" id="fcDots"></div>
-                    <button class="fc-nav-arrow" id="fcNext">&#8250;</button>
-                </div>
-                <div class="fc-page-label" id="fcPageLabel">Rifles</div>
-            </div>
-
-            <!-- Time -->
-            <div class="fc-timer"> Valid until: July 29, 2026</div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- ADVERTISEMENT SPACE                                         -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-        <section class="ad-space">
-            <div class="ad-content">
-                <a href="https://www.youtube.com">
-                    <div class="ad-img">
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- PRODUCTS & SERVICES CATEGORIES                              -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-        <section class="pands-categories">
-            <div class="category-title">
-                <h1>Explore Our Categories:</h1>
-            </div>
-            <div class=" pands-carousel">
-                <!-- Category Toggle Buttons -->
-                <div class="category-buttons"></div>
-                <!-- Current Category Label -->
-                <div class="category-label" id="currentCategoryLabel"></div>
-                <!-- Single Carousel -->
-                <div class="carousel-wrapper">
-                    <div class="carousel-track"></div>
-                </div>
-            </div>
-        </section>
-
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- BUNDLES                                                     -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- BEST SELLERS SECTION                                        -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- NEWS & UPDATES                                              -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- WHY CHOOSE US                                               -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <section class="why-choose">
-            <div class="why-choose-content">
-                <div class="section-header">
-                    <h2>Why Choose Armsdealer</h2>
-                    <p>Trusted by collectors, shooters, and professionals worldwide</p>
-                </div>
-
-                <div class="why-choose-grid">
-                    <!-- Trust Card 1: Licensed & Secure -->
-                    <div class="trust-card">
-                        <div class="trust-card-icon">🔒</div>
-                        <h3 class="trust-card-title">Licensed & Secure</h3>
-                        <p class="trust-card-desc">
-                            Fully compliant with federal regulations. All transactions verified and secured with
-                            industry-standard encryption. Your safety is our priority.
-                        </p>
-                    </div>
-
-                    <!-- Trust Card 2: Wide Selection -->
-                    <div class="trust-card">
-                        <div class="trust-card-icon">📦</div>
-                        <h3 class="trust-card-title">Wide Selection</h3>
-                        <p class="trust-card-desc">
-                            Curated inventory spanning firearms, ammunition, tactical gear, and rare collectibles from
-                            trusted manufacturers worldwide.
-                        </p>
-                    </div>
-
-                    <!-- Trust Card 3: Expert Support -->
-                    <div class="trust-card">
-                        <div class="trust-card-icon">👨‍💼</div>
-                        <h3 class="trust-card-title">Expert Support</h3>
-                        <p class="trust-card-desc">
-                            Dedicated team available for consultation, verification assistance, and compliance guidance
-                            throughout your purchase journey.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- PURCHASE PROCESS                                            -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <section class="purchase-process">
-            <div class="purchase-process-content">
-                <div class="section-header">
-                    <h2>Purchase Process</h2>
-                    <p>Simple, secure, and fully compliant</p>
-                </div>
-
-                <div class="process-flow">
-                    <!-- Step 1 -->
-                    <div class="process-step">
-                        <div class="process-step-number">1</div>
-                        <h4 class="process-step-title">Browse</h4>
-                        <p class="process-step-label">Products</p>
-                    </div>
-
-                    <div class="process-arrow">→</div>
-
-                    <!-- Step 2 -->
-                    <div class="process-step">
-                        <div class="process-step-number">2</div>
-                        <h4 class="process-step-title">Submit</h4>
-                        <p class="process-step-label">Inquiry / Order</p>
-                    </div>
-
-                    <div class="process-arrow">→</div>
-
-                    <!-- Step 3 -->
-                    <div class="process-step">
-                        <div class="process-step-number">3</div>
-                        <h4 class="process-step-title">Verify</h4>
-                        <p class="process-step-label">Compliance</p>
-                    </div>
-
-                    <div class="process-arrow">→</div>
-
-                    <!-- Step 4 -->
-                    <div class="process-step">
-                        <div class="process-step-number">4</div>
-                        <h4 class="process-step-title">Payment</h4>
-                        <p class="process-step-label">Secure</p>
-                    </div>
-
-                    <div class="process-arrow">→</div>
-
-                    <!-- Step 5 -->
-                    <div class="process-step">
-                        <div class="process-step-number">5</div>
-                        <h4 class="process-step-title">Delivery</h4>
-                        <p class="process-step-label">Secure Shipping</p>
-                    </div>
-                </div>
-
-                <div class="process-info">
-                    <p>
-                        <strong>Trust is our priority.</strong> Every transaction undergoes federal compliance
-                        verification. Our streamlined five-step process ensures both legal compliance and customer
-                        satisfaction. From browsing to delivery, we maintain the highest standards of security and
-                        transparency.
+                <!-- Trust Card 3: Expert Support -->
+                <div class="trust-card">
+                    <div class="trust-card-icon">👨‍💼</div>
+                    <h3 class="trust-card-title">Expert Support</h3>
+                    <p class="trust-card-desc">
+                        Dedicated team available for consultation, verification assistance, and compliance guidance
+                        throughout your purchase journey.
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- CALL TO ACTION                                              -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <section class="cta-section">
-            <div class="cta-bracket-tl"></div>
-            <div class="cta-bracket-br"></div>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- PURCHASE PROCESS                                            -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="purchase-process">
+        <div class="purchase-process-content">
+            <div class="section-header">
+                <h2>Purchase Process</h2>
+                <p>Simple, secure, and fully compliant</p>
+            </div>
 
-            <div class="cta-content">
-                <h2 class="cta-heading">Ready to Get Started?</h2>
-                <p class="cta-subheading">
-                    Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist
-                    today.
+            <div class="process-flow">
+                <!-- Step 1 -->
+                <div class="process-step">
+                    <div class="process-step-number">1</div>
+                    <h4 class="process-step-title">Browse</h4>
+                    <p class="process-step-label">Products</p>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <!-- Step 2 -->
+                <div class="process-step">
+                    <div class="process-step-number">2</div>
+                    <h4 class="process-step-title">Submit</h4>
+                    <p class="process-step-label">Inquiry / Order</p>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <!-- Step 3 -->
+                <div class="process-step">
+                    <div class="process-step-number">3</div>
+                    <h4 class="process-step-title">Verify</h4>
+                    <p class="process-step-label">Compliance</p>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <!-- Step 4 -->
+                <div class="process-step">
+                    <div class="process-step-number">4</div>
+                    <h4 class="process-step-title">Payment</h4>
+                    <p class="process-step-label">Secure</p>
+                </div>
+
+                <div class="process-arrow">→</div>
+
+                <!-- Step 5 -->
+                <div class="process-step">
+                    <div class="process-step-number">5</div>
+                    <h4 class="process-step-title">Delivery</h4>
+                    <p class="process-step-label">Secure Shipping</p>
+                </div>
+            </div>
+
+            <div class="process-info">
+                <p>
+                    <strong>Trust is our priority.</strong> Every transaction undergoes federal compliance
+                    verification. Our streamlined five-step process ensures both legal compliance and customer
+                    satisfaction. From browsing to delivery, we maintain the highest standards of security and
+                    transparency.
                 </p>
+            </div>
+        </div>
+    </section>
 
-                <div class="cta-buttons">
-                    <a href="#shop" class="cta-btn cta-btn-primary" onclick="handleCTA('Create Account')">Create
-                        Account</a>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- CALL TO ACTION                                              -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <section class="cta-section">
+        <div class="cta-bracket-tl"></div>
+        <div class="cta-bracket-br"></div>
+
+        <div class="cta-content">
+            <h2 class="cta-heading">Ready to Get Started?</h2>
+            <p class="cta-subheading">
+                Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist
+                today.
+            </p>
+
+            <div class="cta-buttons">
+                <a href="#shop" class="cta-btn cta-btn-primary" onclick="handleCTA('Create Account')">Create
+                    Account</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- TRUSTED BRANDS IN INSTOCK                                   -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- FOOTER                                                      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-grid">
+                <!-- Column 1: Quick Links -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Quick Links</h4>
+                    <ul class="footer-links">
+                        <li><a href="#home">Homepage</a></li>
+                        <li><a href="#shop">Products</a></li>
+                        <li><a href="#new">Services</a></li>
+                        <li><a href="#featured">Contacts</a></li>
+                        <li><a href="#promo">About Us</a></li>
+                        <li><a href="#community">Community</a></li>
+                        <li><a href="#legal">Legal</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 2: Customer Service -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Customer Service</h4>
+                    <ul class="footer-links">
+                        <li><a href="#contact">Contact Us</a></li>
+                        <li><a href="#faq">FAQ</a></li>
+                        <li><a href="#shipping">Shipping Information</a></li>
+                        <li><a href="#returns">Returns & Exchanges</a></li>
+                        <li><a href="#warranty">Warranty Information</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 3: About -->
+                <div class="footer-column">
+                    <h4 class="footer-title">About</h4>
+                    <ul class="footer-links">
+                        <li><a href="#about">About Us</a></li>
+                        <li><a href="#story">Our Story</a></li>
+                        <li><a href="#blog">Blog & Resources</a></li>
+                        <li><a href="#careers">Careers</a></li>
+                        <li><a href="#partners">Partnerships</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Legal & Compliance -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Legal</h4>
+                    <ul class="footer-links">
+                        <li><a href="#terms">Terms of Service</a></li>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#compliance">Compliance Info</a></li>
+                        <li><a href="#disclaimer">Disclaimer</a></li>
+                        <li><a href="#cookies">Cookie Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 5: Contact & Social -->
+                <div class="footer-column">
+                    <h4 class="footer-title">Contact Info</h4>
+                    <div class="footer-contact">
+                        <div class="footer-contact-item">
+                            <span>📞</span>
+                            <a href="tel:+15551234567" style="color: #b0bdb0; text-decoration: none;">+1 (555)
+                                123-4567</a>
+                        </div>
+                        <div class="footer-contact-item">
+                            <span>📧</span>
+                            <a href="mailto:support@armsdealer.com"
+                                style="color: #b0bdb0; text-decoration: none;">support@armsdealer.com</a>
+                        </div>
+                        <div class="footer-contact-item">
+                            <span>📍</span>
+                            <span style="color: #b0bdb0;">123 Commerce St, Your City, ST 12345</span>
+                        </div>
+                    </div>
+                    <div class="footer-socials">
+                        <a href="https://facebook.com/armsdealer" class="footer-social-link" title="Facebook"
+                            target="_blank">f</a>
+                        <a href="https://twitter.com/armsdealer" class="footer-social-link" title="X/Twitter"
+                            target="_blank">𝕏</a>
+                        <a href="https://instagram.com/armsdealer" class="footer-social-link" title="Instagram"
+                            target="_blank">📷</a>
+                        <a href="https://linkedin.com/company/armsdealer" class="footer-social-link" title="LinkedIn"
+                            target="_blank">in</a>
+                    </div>
                 </div>
             </div>
-        </section>
 
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- TRUSTED BRANDS IN INSTOCK                                   -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <!-- FOOTER                                                      -->
-        <!-- ═══════════════════════════════════════════════════════════ -->
-        <footer>
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <!-- Column 1: Quick Links -->
-                    <div class="footer-column">
-                        <h4 class="footer-title">Quick Links</h4>
-                        <ul class="footer-links">
-                            <li><a href="#home">Homepage</a></li>
-                            <li><a href="#shop">Products</a></li>
-                            <li><a href="#new">Services</a></li>
-                            <li><a href="#featured">Contacts</a></li>
-                            <li><a href="#promo">About Us</a></li>
-                            <li><a href="#community">Community</a></li>
-                            <li><a href="#legal">Legal</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 2: Customer Service -->
-                    <div class="footer-column">
-                        <h4 class="footer-title">Customer Service</h4>
-                        <ul class="footer-links">
-                            <li><a href="#contact">Contact Us</a></li>
-                            <li><a href="#faq">FAQ</a></li>
-                            <li><a href="#shipping">Shipping Information</a></li>
-                            <li><a href="#returns">Returns & Exchanges</a></li>
-                            <li><a href="#warranty">Warranty Information</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 3: About -->
-                    <div class="footer-column">
-                        <h4 class="footer-title">About</h4>
-                        <ul class="footer-links">
-                            <li><a href="#about">About Us</a></li>
-                            <li><a href="#story">Our Story</a></li>
-                            <li><a href="#blog">Blog & Resources</a></li>
-                            <li><a href="#careers">Careers</a></li>
-                            <li><a href="#partners">Partnerships</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 4: Legal & Compliance -->
-                    <div class="footer-column">
-                        <h4 class="footer-title">Legal</h4>
-                        <ul class="footer-links">
-                            <li><a href="#terms">Terms of Service</a></li>
-                            <li><a href="#privacy">Privacy Policy</a></li>
-                            <li><a href="#compliance">Compliance Info</a></li>
-                            <li><a href="#disclaimer">Disclaimer</a></li>
-                            <li><a href="#cookies">Cookie Policy</a></li>
-                        </ul>
-                    </div>
-
-                    <!-- Column 5: Contact & Social -->
-                    <div class="footer-column">
-                        <h4 class="footer-title">Contact Info</h4>
-                        <div class="footer-contact">
-                            <div class="footer-contact-item">
-                                <span>📞</span>
-                                <a href="tel:+15551234567" style="color: #b0bdb0; text-decoration: none;">+1 (555)
-                                    123-4567</a>
-                            </div>
-                            <div class="footer-contact-item">
-                                <span>📧</span>
-                                <a href="mailto:support@armsdealer.com"
-                                    style="color: #b0bdb0; text-decoration: none;">support@armsdealer.com</a>
-                            </div>
-                            <div class="footer-contact-item">
-                                <span>📍</span>
-                                <span style="color: #b0bdb0;">123 Commerce St, Your City, ST 12345</span>
-                            </div>
-                        </div>
-                        <div class="footer-socials">
-                            <a href="https://facebook.com/armsdealer" class="footer-social-link" title="Facebook"
-                                target="_blank">f</a>
-                            <a href="https://twitter.com/armsdealer" class="footer-social-link" title="X/Twitter"
-                                target="_blank">𝕏</a>
-                            <a href="https://instagram.com/armsdealer" class="footer-social-link" title="Instagram"
-                                target="_blank">📷</a>
-                            <a href="https://linkedin.com/company/armsdealer" class="footer-social-link"
-                                title="LinkedIn" target="_blank">in</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer-divider">
-                    <p class="footer-copyright">
-                        © 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL
-                        Dealer License: 12-AB-12345
-                    </p>
-                </div>
+            <div class="footer-divider">
+                <p class="footer-copyright">
+                    © 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL
+                    Dealer License: 12-AB-12345
+                </p>
             </div>
-        </footer>
+        </div>
+    </footer>
 
-        <script src="../js/navbarfunctions.js"></script>
-        <script src="../js/pagefunctions/homepagefuntions.js"></script>
-    </main>
-</body>
+    <script src="../static/js/navbarfunctions.js"></script>
+    <script src="../static/js/pagefunctions/homepagefuntions.js"></script>
+</main>
 {% endblock %}
 
 </html>
