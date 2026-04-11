@@ -50,7 +50,7 @@ CREATE TABLE IF NOT EXISTS services (
     category_id   INTEGER NOT NULL REFERENCES categories(id),
     description   TEXT,
     price         REAL    NOT NULL,
-    sale_price    REAL,
+    discount      REAL    DEFAULT 0,
     image_file    TEXT,                                 -- filename inside serviceimages/
     tags          TEXT,
     is_featured   INTEGER NOT NULL DEFAULT 0,
