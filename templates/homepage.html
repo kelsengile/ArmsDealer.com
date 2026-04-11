@@ -113,28 +113,46 @@
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-hero">
 
-                        <div class="fc-card span2r"
-                            data-popup='{"name":"M4A1 Carbine — Tactical Edition","desc":"Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.","tags":["5.56mm","Semi-Auto","M-LOK"],"old":"₱185,000","new":"₱138,750"}'>
-                            <div class="fc-card-bg"
-                                style="background-image: url('../../Assets/Images/PageImages/HomePageImages/HomepageFeatureimage/m14carbine.jpg');">
+                        <!-- 🔹 PRODUCT ID = 1 -->
+                        {% set p = products.get(1) %}
+                        {% if p %}
+                        <div class="fc-card span2r" data-popup='{
+                                "name":"{{ p.name }}",
+                                "desc":"{{ p.description }}",
+                                "tags": {{ p.tags or "[]" }},
+                                "old":"₱{{ "%.0f"|format(p.price) }}",
+                                "new":"₱{{ "%.0f"|format(p.price - (p.price * (p.discount / 100))) }}"
+                            }'>
+
+                            <div class="fc-card-bg" style="background-image: url(p.image_path);">
                                 <div class="fc-overlay"></div>
                             </div>
+
                             <div class="fc-content">
-                                <div class="fc-name large">M4A1 Carbine</div>
+                                <div class="fc-name large">{{ p.name }}</div>
+
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–25%</div>
-                                    <div class="fc-prices"><span class="fc-old">₱185,000</span><span
-                                            class="fc-new large">₱138,750</span></div>
+                                    <div class="fc-discount">–{{ p.discount }}%</div>
+                                    <div class="fc-prices">
+                                        <span class="fc-old">₱{{ "%.0f"|format(p.price) }}</span>
+                                        <span class="fc-new large">
+                                            ₱{{ "%.0f"|format(p.price - (p.price * (p.discount / 100))) }}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="fc-popup">
                                 <div class="fc-popup-name"></div>
                                 <div class="fc-popup-desc"></div>
                                 <div class="fc-popup-tags"></div>
-                                <div class="fc-popup-btns"><button class="fc-popup-btn">Know More</button><button
-                                        class="fc-popup-btn primary">+ Cart</button></div>
+                                <div class="fc-popup-btns">
+                                    <button class="fc-popup-btn">Know More</button>
+                                    <button class="fc-popup-btn primary">+ Cart</button>
+                                </div>
                             </div>
                         </div>
+                        {% endif %}
 
                         <div class="fc-card"
                             data-popup='{"name":"SR-25 Precision Rifle","desc":"7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.","tags":["7.62mm","DMR","Precision"],"old":"₱230,000","new":"₱195,500"}'>

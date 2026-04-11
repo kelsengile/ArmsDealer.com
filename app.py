@@ -36,7 +36,15 @@ def close_db(error):
 @app.route('/')
 @app.route('/home')
 def homepage():
-    return render_template('homepage.html')
+    db = get_db()
+
+    rows = db.execute(
+        "SELECT * FROM products WHERE id IN (1,2,3)"
+    ).fetchall()
+
+    products = {row["id"]: row for row in rows}
+
+    return render_template('homepage.html', products=products)
 
 
 @app.route('/products')
