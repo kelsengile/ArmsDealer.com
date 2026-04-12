@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS services (
     description   TEXT,
     price         REAL    NOT NULL,
     discount      REAL    DEFAULT 0,
-    image_file    TEXT,                                 -- filename inside serviceimages/
+    image_path    TEXT,                                 -- filename inside serviceimages/
     tags          TEXT,
     is_featured   INTEGER NOT NULL DEFAULT 0,
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),

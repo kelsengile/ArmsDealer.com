@@ -38,13 +38,17 @@ def close_db(error):
 def homepage():
     db = get_db()
 
-    rows = db.execute(
+    product_rows = db.execute(
         "SELECT * FROM products WHERE id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16) ORDER BY id"
     ).fetchall()
+    products = {row["id"]: row for row in product_rows}
 
-    products = {row["id"]: row for row in rows}
+    service_rows = db.execute(
+        "SELECT * FROM services WHERE id IN (1,2,3) ORDER BY id"
+    ).fetchall()
+    services = {row["id"]: row for row in service_rows}
 
-    return render_template('homepage.html', products=products)
+    return render_template('homepage.html', products=products, services=services)
 
 
 @app.route('/products')
