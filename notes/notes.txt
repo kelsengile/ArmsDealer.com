@@ -2,6 +2,13 @@ Project Structure:
 
 [ ]Global:
     [ ]TopBar:
+        [ ]Preferences:
+            [ ]Apperance:
+            [ ]Notification:
+            [ ]Privacy & Security:
+            [ ]Help & Support:
+            [ ]System Actions:
+
         [/]Blinker: SecureConnection
         [ ]LanguageChange:
         [ ]CurencyChange:
@@ -13,10 +20,15 @@ Project Structure:
         [/]Products:
         [/]Services: 
         [ ]PopUps:
-            [ ]LeftSideBurger:
             [ ]SearchBar:
             [ ]Cart:
             [ ]Account:
+                [ ]ProfilePicture:
+                [ ]UserName:
+                [ ]UserRole:
+                [ ]Cart:
+                [ ]Billing:
+                [ ]Register | Login | LogOut:
         [/]Coordinates:
 
 
