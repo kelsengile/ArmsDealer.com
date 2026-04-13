@@ -18,6 +18,71 @@
 
 <body>
 
+    <div class="settings-overlay" id="settingsOverlay"></div>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- SETTINGS SIDEBAR                                            -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <aside class="settings-sidebar" id="settingsSidebar" aria-label="Settings">
+
+        <div class="set-header">
+            <span class="set-header-title">Settings</span>
+            <button class="set-close" id="settingsClose" aria-label="Close settings">✕</button>
+        </div>
+
+        <nav class="set-nav">
+            <div class="set-section-label">Preferences</div>
+
+            <button class="set-item active" data-page="account">
+                <span class="set-icon">◉</span>
+                Account
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <button class="set-item" data-page="appearance">
+                <span class="set-icon">◈</span>
+                Appearance
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <button class="set-item" data-page="notifications">
+                <span class="set-icon">◎</span>
+                Notifications
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <button class="set-item" data-page="privacy">
+                <span class="set-icon">⊕</span>
+                Privacy &amp; Security
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <div class="set-divider"></div>
+            <div class="set-section-label">General</div>
+
+            <button class="set-item" data-page="language">
+                <span class="set-icon">⊞</span>
+                Language &amp; Region
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <button class="set-item" data-page="help">
+                <span class="set-icon">⊘</span>
+                Help &amp; Support
+                <span class="set-arrow">▶</span>
+            </button>
+
+            <div class="set-divider"></div>
+            <div class="set-section-label">Advanced</div>
+
+            <button class="set-item" data-page="system">
+                <span class="set-icon">⊟</span>
+                System Actions
+                <span class="set-arrow">▶</span>
+            </button>
+        </nav>
+
+    </aside>
+
     <!-- ═══════════════════════════════════════════════════════════ -->
     <!-- STICKY HEADER WRAPPER                                        -->
     <!-- ═══════════════════════════════════════════════════════════ -->
@@ -26,7 +91,7 @@
         <!-- TOP BAR -->
         <div class="top-bar">
             <div class="left">
-                <button aria-label="Menu">☰</button>
+                <button id="settingsOpenBtn" aria-label="Open Settings">☰</button>
                 <div class="top-bar-status">
                     <div class="top-bar-status-dot"></div>
                     <span>Secure Connection</span>
