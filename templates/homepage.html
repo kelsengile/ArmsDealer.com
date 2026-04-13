@@ -16,11 +16,17 @@
             <div class="hero-slide-bg"></div>
             <div class="hero-slide-overlay"></div>
             <div class="hero-content">
-                <span class="hero-tag">New Arrivals — 2025</span>
-                <h1 class="hero-title" data-translate="slide1heropagetitle"><br>Built to Last</h1>
-                <p class="hero-subtitle">Explore our latest collection of high-performance rifles engineered for
-                    accuracy under any condition.</p>
-                <a href="Products.html" class="hero-cta">Shop Now</a>
+                <span class="hero-tag" data-translate="homepageslide1heropageherotag"></span>
+                <h1 class="hero-title">
+                    <span data-translate="homepageslide1heropagetitle"></span>
+                    <br>
+                    <span data-translate="homepageslide1heropagetitlebr"></span>
+                </h1>
+
+                <p class="hero-subtitle" data-translate="homepageslide1heropageherosubtitle"></p>
+                <a href="{{ url_for('products') }}"
+                    class="hero-cta {% if request.endpoint == 'products' %}nav-active{% endif %}"
+                    data-translate="homepageslide1heropageherocta"></a>
             </div>
         </div>
 
@@ -29,11 +35,17 @@
             <div class="hero-slide-bg"></div>
             <div class="hero-slide-overlay"></div>
             <div class="hero-content">
-                <span class="hero-tag">Tactical Gear</span>
-                <h1 class="hero-title">Gear Up.<br>Stay Ready.</h1>
-                <p class="hero-subtitle">From holsters to plate carriers — premium tactical accessories trusted by
-                    professionals worldwide.</p>
-                <a href="Products.html" class="hero-cta">Browse Gear</a>
+                <span class="hero-tag" data-translate="homepageslide2heropageherotag"></span>
+                <h1 class="hero-title">
+                    <span data-translate="homepageslide2heropagetitle"></span>
+                    <br>
+                    <span data-translate="homepageslide2heropagetitlebr"></span>
+                </h1>
+
+                <p class="hero-subtitle" data-translate="homepageslide2heropageherosubtitle"></p>
+                <a href="{{ url_for('products') }}"
+                    class="hero-cta {% if request.endpoint == 'products' %}nav-active{% endif %}"
+                    data-translate="homepageslide2heropageherocta"></a>
             </div>
         </div>
 
@@ -42,11 +54,16 @@
             <div class="hero-slide-bg"></div>
             <div class="hero-slide-overlay"></div>
             <div class="hero-content">
-                <span class="hero-tag">Exclusive Deal</span>
-                <h1 class="hero-title">Handguns<br>Redefined.</h1>
-                <p class="hero-subtitle">Compact. Reliable. Lethal. Discover our handgun lineup — now with
-                    limited-time pricing on select models.</p>
-                <a href="Products.html" class="hero-cta">View Deals</a>
+                <span class="hero-tag" data-translate="homepageslide3heropageherotag"></span>
+                <h1 class="hero-title">
+                    <span data-translate="homepageslide3heropagetitle"></span>
+                    <br>
+                    <span data-translate="homepageslide2heropagetitlebr"></span>
+                </h1>
+                <p class="hero-subtitle" data-translate="homepageslide3heropageherosubtitle"></p>
+                <a href="{{ url_for('products') }}"
+                    class="hero-cta {% if request.endpoint == 'products' %}nav-active{% endif %}"
+                    data-translate="homepageslide3heropageherocta"></a>
             </div>
         </div>
 
@@ -55,11 +72,16 @@
             <div class="hero-slide-bg"></div>
             <div class="hero-slide-overlay"></div>
             <div class="hero-content">
-                <span class="hero-tag">Ammunition</span>
-                <h1 class="hero-title">Never Run<br>Dry Again.</h1>
-                <p class="hero-subtitle">Bulk ammo for every caliber, shipped fast and discreetly. Stock up and save
-                    with our tiered pricing.</p>
-                <a href="Products.html" class="hero-cta">Buy Ammo</a>
+                <span class="hero-tag" data-translate="homepageslide4heropageherotag"></span>
+                <h1 class="hero-title">
+                    <span data-translate="homepageslide4heropagetitle"></span>
+                    <br>
+                    <span data-translate="homepageslide4heropagetitlebr"></span>
+                </h1>
+                <p class="hero-subtitle" data-translate="homepageslide4heropageherosubtitle"></p>
+                <a href="{{ url_for('products') }}"
+                    class="hero-cta {% if request.endpoint == 'products' %}nav-active{% endif %}"
+                    data-translate="homepageslide4heropageherocta"></a>
             </div>
         </div>
 
@@ -68,11 +90,16 @@
             <div class="hero-slide-bg"></div>
             <div class="hero-slide-overlay"></div>
             <div class="hero-content">
-                <span class="hero-tag">Services</span>
-                <h1 class="hero-title">Expert Care<br>for Your Arms.</h1>
-                <p class="hero-subtitle">Maintenance, customization, and consultation — our certified gunsmiths keep
-                    your firearms in peak condition.</p>
-                <a href="Services.html" class="hero-cta">Our Services</a>
+                <span class="hero-tag" data-translate="homepageslide5heropageherotag"></span>
+                <h1 class="hero-title">
+                    <span data-translate="homepageslide5heropagetitle"></span>
+                    <br>
+                    <span data-translate="homepageslide5heropagetitlebr"></span>
+                </h1>
+                <p class="hero-subtitle" data-translate="homepageslide5heropageherosubtitle"></p>
+                <a href="{{ url_for('services') }}"
+                    class="hero-cta {% if request.endpoint == 'services' %}nav-active{% endif %}"
+                    data-translate="homepageslide5heropageherocta"></a>
             </div>
         </div>
 
@@ -99,17 +126,17 @@
 
     <section class="fc-root" id="fcRoot">
         <!-- Time -->
-        <div class="fc-timer"> Valid until: July 29, 2026</div>
+        <div class="fc-timer" data-translate="homepagefeaturetimer"></div>
 
         <div class="fc-header">
-            <div class="fc-header-tag">Products & Services</div>
-            <h2>Featured Selection</h2>
+            <div class="fc-header-tag" data-translate="homepagefeatureheadertag"></div>
+            <h2 data-translate="homepagefeatureheadertwo"></h2>
         </div>
 
         <div class="fc-stage">
 
             <!-- PAGE 1: Rifles -->
-            <div class="fc-page active" data-label="Rifles">
+            <div class="fc-page active" data-label="Rifles" data-translate="homepagefeaturepage1">
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-hero">
 
@@ -241,7 +268,7 @@
             </div>
 
             <!-- PAGE 2: Handguns -->
-            <div class="fc-page" data-label="Handguns">
+            <div class="fc-page" data-label="Handguns" data-translate="homepagefeaturepage2">
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-3col">
 
@@ -459,7 +486,7 @@
             </div>
 
             <!-- PAGE 3: Tactical Gear -->
-            <div class="fc-page" data-label="Blades">
+            <div class="fc-page" data-label="Blades" data-translate="homepagefeaturepage3">
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-2col">
 
@@ -591,7 +618,7 @@
             </div>
 
             <!-- PAGE 4: Ammunition -->
-            <div class="fc-page" data-label="Ammo">
+            <div class="fc-page" data-label="Ammo" data-translate="homepagefeaturepage4">
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-quad">
 
@@ -806,7 +833,7 @@
             </div>
 
             <!-- PAGE 5: Services -->
-            <div class="fc-page" data-label="Services">
+            <div class="fc-page" data-label="Services" data-translate="homepagefeaturepage5">
                 <div class="fc-collage">
                     <div class="fc-collage-inner fc-grid-asym">
 
@@ -953,11 +980,11 @@
                 <div class="fc-dots-wrap" id="fcDots"></div>
                 <button class="fc-nav-arrow" id="fcNext">&#8250;</button>
             </div>
-            <div class="fc-page-label" id="fcPageLabel">Rifles</div>
+            <div class="fc-page-label" id="fcPageLabel" data-translate="homepagefeaturepage1"></div>
         </div>
 
         <!-- Time -->
-        <div class="fc-timer"> Valid until: July 29, 2026</div>
+        <div class="fc-timer" data-translate="homepagefeaturetimer"></div>
     </section>
 
     <!-- ═══════════════════════════════════════════════════════════ -->
