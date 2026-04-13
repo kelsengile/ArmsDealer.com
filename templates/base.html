@@ -101,7 +101,7 @@
                 <button id="settingsOpenBtn" aria-label="Open Settings">☰</button>
                 <div class="top-bar-status">
                     <div class="top-bar-status-dot"></div>
-                    <span>Secure Connection</span>
+                    <span data-translate="secure_connection"></span>
                 </div>
             </div>
             <div class="right">
@@ -117,12 +117,12 @@
                     <option>USD ($)</option>
                     <option>EUR (€)</option>
                 </select>
-                <a href="{{ url_for('about') }}"
-                    class="{% if request.endpoint == 'about' %}nav-active{% endif %}">About</a>
-                <a href="{{ url_for('contacts') }}"
-                    class="{% if request.endpoint == 'contacts' %}nav-active{% endif %}">Contacts</a>
-                <a href="{{ url_for('legal') }}"
-                    class="{% if request.endpoint == 'legal' %}nav-active{% endif %}">Legal</a>
+                <a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}nav-active{% endif %}"
+                    data-translate="about"></a>
+                <a href="{{ url_for('contacts') }}" class="{% if request.endpoint == 'contacts' %}nav-active{% endif %}"
+                    data-translate="contacts"></a>
+                <a href="{{ url_for('legal') }}" class="{% if request.endpoint == 'legal' %}nav-active{% endif %}"
+                    data-translate="legal"></a>
             </div>
         </div>
 
@@ -133,17 +133,17 @@
             <a href="{{ url_for('homepage') }}" class="logo-container" aria-label="ArmsDealer Home">
                 <div class="logoimage" role="img" aria-label="ArmsDealer logo"></div>
                 <div class="logo-text-wrap">
-                    <div class="logo">ArmsDealer</div>
-                    <div class="logo-sub">Tactical Supply Co.</div>
+                    <div class="logo" data-translate="companyname"></div>
+                    <div class="logo-sub" data-translate="class"></div>
                 </div>
             </a>
 
             <!-- Desktop nav links -->
             <div class="nav-links">
-                <a href="{{ url_for('products') }}"
-                    class="{% if request.endpoint == 'products' %}nav-active{% endif %}">Products</a>
-                <a href="{{ url_for('services') }}"
-                    class="{% if request.endpoint == 'services' %}nav-active{% endif %}">Services</a>
+                <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
+                    data-translate="products"></a>
+                <a href="{{ url_for('services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
+                    data-translate="services"></a>
                 <button class="nav-btn-search" aria-label="Search"></button>
                 <button class="nav-btn-cart" aria-label="Cart">
                     <!-- <span class="cart-badge" aria-hidden="true"></span> --></button>
@@ -168,16 +168,22 @@
         <!-- Mobile drawer -->
         <div class="nav-drawer" id="navDrawer" role="menu">
             <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
-                role="menuitem"><span class="nav-drawer-icon">◈</span>Products</a>
+                role="menuitem"><span class="nav-drawer-icon">◈</span><span data-translate="products"></span></a>
             <a href="{{ url_for('services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
-                role="menuitem"><span class="nav-drawer-icon">◈</span>Services</a>
-            <button class="nav-btn-search" role="menuitem"><span class="nav-drawer-icon"></span>Search</button>
+                role="menuitem"><span class="nav-drawer-icon">◈</span><span data-translate="services"></span></a>
+            <button class="nav-btn-search" role="menuitem"><span class="nav-drawer-icon"></span><span
+                    data-translate="search"></span></button>
             <button class="nav-btn-cart" role="menuitem">
-                <span class="nav-drawer-icon"></span>Cart<span class="cart-badge" aria-hidden="true"></span></button>
-            <button class="nav-btn-account" role="menuitem"><span class="nav-drawer-icon"></span>Account</button>
+                <span class="nav-drawer-icon"></span><span data-translate="cart"></span><span class="cart-badge"
+                    aria-hidden="true"></span></button>
+            <button class="nav-btn-account" role="menuitem"><span class="nav-drawer-icon"></span><span
+                    data-translate="account"></span></button>
         </div>
 
     </header>
 
-    {% block main %} {% endblock%}
+    {% block main %}
+    {% endblock%}
+    <script src="{{ url_for('static', filename='js/navbarfunctions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
 </body>
