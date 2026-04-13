@@ -35,7 +35,7 @@ CREATE TABLE IF NOT EXISTS products (
     price         REAL    NOT NULL,
     discount      REAL    DEFAULT 0,
     stock         INTEGER NOT NULL DEFAULT 0,
-    image_path    TEXT,                                 -- filename inside productsimages/
+    image_file    TEXT,                                 -- filename inside productsimages/
     tags          TEXT,                                 -- JSON array string
     is_featured   INTEGER NOT NULL DEFAULT 0,           -- 0 | 1
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),
@@ -51,7 +51,7 @@ CREATE TABLE IF NOT EXISTS services (
     description   TEXT,
     price         REAL    NOT NULL,
     discount      REAL    DEFAULT 0,
-    image_path    TEXT,                                 -- filename inside serviceimages/
+    image_file    TEXT,                                 -- filename inside serviceimages/
     tags          TEXT,
     is_featured   INTEGER NOT NULL DEFAULT 0,
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),
