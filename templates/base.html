@@ -32,53 +32,60 @@
         <nav class="set-nav">
             <div class="set-section-label">Preferences</div>
 
-            <button class="set-item active" data-page="account">
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
                 <span class="set-icon">◉</span>
                 Account
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
-            <button class="set-item" data-page="appearance">
-                <span class="set-icon">◈</span>
-                Appearance
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
+                Apperance
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
-            <button class="set-item" data-page="notifications">
-                <span class="set-icon">◎</span>
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
                 Notifications
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
-            <button class="set-item" data-page="privacy">
-                <span class="set-icon">⊕</span>
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
                 Privacy &amp; Security
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
             <div class="set-divider"></div>
             <div class="set-section-label">General</div>
 
-            <button class="set-item" data-page="language">
-                <span class="set-icon">⊞</span>
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
                 Language &amp; Region
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
-            <button class="set-item" data-page="help">
-                <span class="set-icon">⊘</span>
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
                 Help &amp; Support
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
 
             <div class="set-divider"></div>
             <div class="set-section-label">Advanced</div>
 
-            <button class="set-item" data-page="system">
-                <span class="set-icon">⊟</span>
+            <a href="{{ url_for('settings') }}"
+                class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+                <span class="set-icon">◉</span>
                 System Actions
                 <span class="set-arrow">▶</span>
-            </button>
+            </a>
         </nav>
 
     </aside>

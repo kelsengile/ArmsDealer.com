@@ -821,6 +821,15 @@
     color: var(--set-bright);
 }
 
+.set-item {
+    text-decoration: none;
+    color: var(--set-muted);
+}
+
+.set-item:hover {
+    color: var(--set-bright);
+}
+
 .set-item:hover .set-arrow {
     opacity: 1;
 }
