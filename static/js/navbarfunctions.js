@@ -1,12 +1,12 @@
 /**
  * NavbarScript.js — ArmsDealer
- * Handles:
- *  1. Scroll-hide / scroll-reveal on the .site-header
- *  2. Active nav link highlighting based on body[data-page]
- *  3. Mobile hamburger toggle + drawer
- */
+**/
 
 (function () {
+
+    /* ──────────────────────────────────────────────────────────────────────────
+    //     SEETINGS PANEL
+    // ───────────────────────────────────────────────────────────────────────────── */
 
     /* ── Element refs ───────────────────────────────────────────── */
     const overlay = document.getElementById('settingsOverlay');
@@ -42,10 +42,9 @@
 
     // 'use strict';
 
-    // /* ── 1. SCROLL-HIDE BEHAVIOUR ───────────────────────────────────
-    //    - Hides header when scrolling DOWN past 80px
-    //    - Reveals header when scrolling UP by any amount
-    // ─────────────────────────────────────────────────────────────── */
+    // /* ──────────────────────────────────────────────────────────────────────────
+    //     SCROLL-HIDE BEHAVIOUR
+    // ───────────────────────────────────────────────────────────────────────────── */
     // const header = document.querySelector('.site-header');
     // if (header) {
     //     let lastScrollY = window.scrollY;
@@ -90,15 +89,9 @@
     //     }, { passive: true });
     // }
 
-    /* ── 2. ACTIVE PAGE HIGHLIGHT ───────────────────────────────────
-       Reads body[data-page] and adds .nav-active to the matching
-       anchor in both .nav-links and .nav-drawer.
-       Homepage gets NO highlight (per requirements).
-
-       Usage: <body data-page="products"> on Products.html, etc.
-       Valid values: products | services | contacts | about
-       Leave attribute absent (or set to "home") for Homepage.
-    ─────────────────────────────────────────────────────────────── */
+    /* /* ──────────────────────────────────────────────────────────────────────────
+    //     ACTIVE PAGE HIGHLIGHT 
+    // ───────────────────────────────────────────────────────────────────────────── */
     const currentPage = (document.body.dataset.page || 'home').toLowerCase();
 
     if (currentPage !== 'home') {
@@ -114,10 +107,9 @@
         });
     }
 
-    /* ── 3. HAMBURGER MENU ──────────────────────────────────────────
-       Toggles .open on both the button and the drawer.
-       Closes when clicking outside or pressing Escape.
-    ─────────────────────────────────────────────────────────────── */
+    /* /* ──────────────────────────────────────────────────────────────────────────
+    //     HAMBURER MENU
+    // ───────────────────────────────────────────────────────────────────────────── */
     const hamburger = document.getElementById('navHamburger');
     const drawer = document.getElementById('navDrawer');
 
