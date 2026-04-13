@@ -25,7 +25,7 @@
     <aside class="settings-sidebar" id="settingsSidebar" aria-label="Settings">
 
         <div class="set-header">
-            <span class="set-header-title">Settings</span>
+            <span class="set-header-title" data-translate="settings"></span>
             <button class="set-close" id="settingsClose" aria-label="Close settings">✕</button>
         </div>
 
@@ -105,11 +105,12 @@
                 </div>
             </div>
             <div class="right">
-                <select aria-label="Language">
-                    <option>🌐 English</option>
-                    <option>🌐 Filipino</option>
-                    <option>🌐 Japanese</option>
-                    <option>🌐 Spanish</option>
+                <select id="languageSelect" onchange="setLanguage(this.value)">
+                    <option value="english">English</option>
+                    <option value="filipino">Filipino</option>
+                    <option value="japanese">Japanese</option>
+                    <option value="spanish">Spanish</option>
+                    <option value="mandarin">Mandarin</option>
                 </select>
                 <select aria-label="Currency">
                     <option>PHP (₱)</option>

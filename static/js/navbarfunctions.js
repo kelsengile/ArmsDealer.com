@@ -5,6 +5,58 @@
 (function () {
 
     /* ──────────────────────────────────────────────────────────────────────────
+    //     TRANSLATIONS
+    // ───────────────────────────────────────────────────────────────────────────── */
+
+
+
+    const translations = {
+        english: {
+            settings: "Settings",
+        },
+        filipino: {
+            settings: "Mga Setting",
+        },
+        japanese: {
+            settings: "設定"
+        },
+        spanish: {
+            settings: "Configuración"
+        },
+        mandarin: {
+            settings: "设置"
+        }
+    };
+
+    function setLanguage(lang) {
+        const elements = document.querySelectorAll("[data-translate]");
+
+        elements.forEach(el => {
+            const key = el.getAttribute("data-translate");
+
+            el.textContent =
+                translations[lang]?.[key] ||
+                translations["english"][key] ||
+                key;
+        });
+
+        localStorage.setItem("lang", lang);
+    }
+
+
+    window.setLanguage = setLanguage;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedLang = localStorage.getItem("lang") || "english";
+
+        setLanguage(savedLang);
+
+        const select = document.getElementById("languageSelect");
+        if (select) select.value = savedLang;
+    });
+
+
+    /* ──────────────────────────────────────────────────────────────────────────
     //     SEETINGS PANEL
     // ───────────────────────────────────────────────────────────────────────────── */
 
@@ -163,5 +215,7 @@
             link.addEventListener('click', closeDrawer);
         });
     }
+
+
 
 })();
