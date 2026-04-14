@@ -177,9 +177,11 @@ const carouselData = {
     ]
 };
 
+
+
 const categoryPageMap = {
     // WEAPONS CATEGORIES
-    'Firearms': '/pages/products/firearms.html',
+    firearms: '/pages/products/firearms.html',
     'Blades': '/pages/products/blades.html',
     'Blunts': '/pages/products/blunts.html',
     'Projectile': '/pages/products/projectile.html',
@@ -218,6 +220,8 @@ const categoryPageMap = {
     'Surveillance': '/pages/services/surveillance.html',
     'Contracting': '/pages/services/contracting.html'
 };
+
+
 
 
 // ===========================================

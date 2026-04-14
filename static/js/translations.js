@@ -54,7 +54,6 @@ const translations = {
         homepageslide5heropagetitlebr: "for Your Arms.",
         homepageslide5heropageherosubtitle: "Maintenance, customization, and consultation — our certified gunsmiths keep your firearms in peak condition.",
         homepageslide5heropageherocta: "Our Services",
-
         homepagefeaturetimer: "Valid until: July 29, 2026",
         homepagefeatureheadertag: "Products & Services",
         homepagefeatureheadertwo: "Featured Selection",
@@ -62,7 +61,9 @@ const translations = {
         homepagefeaturepage2: "Handguns",
         homepagefeaturepage3: "Blades",
         homepagefeaturepage4: "Ammo",
-        homepagefeaturepage5: "Services"
+        homepagefeaturepage5: "Services",
+
+        homepagecategorytitle: "Explore Our Categories:"
     },
 
     filipino: {
@@ -124,7 +125,9 @@ const translations = {
         homepagefeaturepage2: "Pistola",
         homepagefeaturepage3: "Blades",
         homepagefeaturepage4: "Ammunisyon",
-        homepagefeaturepage5: "Mga Serbisyo"
+        homepagefeaturepage5: "Mga Serbisyo",
+
+        homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:"
     },
 
     japanese: {
@@ -186,7 +189,9 @@ const translations = {
         homepagefeaturepage2: "ハンドガン",
         homepagefeaturepage3: "ブレード",
         homepagefeaturepage4: "弾薬",
-        homepagefeaturepage5: "サービス"
+        homepagefeaturepage5: "サービス",
+
+        homepagecategorytitle: "カテゴリーを探る："
     },
 
     spanish: {
@@ -248,7 +253,10 @@ const translations = {
         homepagefeaturepage2: "Pistolas",
         homepagefeaturepage3: "Cuchillas",
         homepagefeaturepage4: "Munición",
-        homepagefeaturepage5: "Servicios"
+        homepagefeaturepage5: "Servicios",
+
+        homepagecategorytitle: "Explora nuestras categorías:",
+        homepagecategoriesfirearms: "Armas de fuego",
     },
 
     mandarin: {
@@ -310,7 +318,9 @@ const translations = {
         homepagefeaturepage2: "手枪",
         homepagefeaturepage3: "刀具",
         homepagefeaturepage4: "弹药",
-        homepagefeaturepage5: "服务"
+        homepagefeaturepage5: "服务",
+
+        homepagecategorytitle: "探索我们的类别："
 
 
     }
