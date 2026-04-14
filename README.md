@@ -15,7 +15,7 @@ ArmsDealer.com is a e-commerce platform for arms and related services, offering 
 
 - **Backend:** Flask (Python)  
 - **Database:** SQLite  
-- **Frontend:** HTML5, CSS3, JavaScript
+- **Frontend:** HTML5, CSS, JavaScript
 
 ---
 
