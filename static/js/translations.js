@@ -144,6 +144,39 @@ const translations = {
         homepagecalltoactionsubheading: "Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist today.",
         homepagecalltoactionbutton: "Shop Now",
 
+        //Footer Section
+        homepagefootertitle1: "Quick Links",
+        homepagefooterlinkshome: "Home",
+        homepagefooterlinksproducts: "Products",
+        homepagefooterlinksservices: "Services",
+        homepagefooterlinksaccount: "Account",
+        homepagefooterlinkssettings: "Settings",
+
+        homepagefootertitle2: "Customer Service",
+        homepagefooterlinkscontactus: "Contact Us",
+        homepagefooterlinksfaq: "FAQ",
+        homepagefooterlinksshipping: "Shipping Information",
+        homepagefooterlinksreturns: "Returns & Exchanges",
+        homepagefooterlinkswarranty: "Warranty Information",
+
+
+        homepagefootertitle3: "About",
+        homepagefooterlinksaboutus: "About Us",
+        homepagefooterlinksourstory: "Our Story",
+        homepagefooterlinksblog: "Blog & Resources",
+        homepagefooterlinkscarreer: "Careers",
+        homepagefooterlinkspartnership: "Partnerships",
+
+        homepagefootertitle4: "Legal",
+        homepagefooterlinksterms: "Terms of Service",
+        homepagefooterlinkspolicy: "Privacy Policy",
+        homepagefooterlinkscompliance: "Compliance Info",
+        homepagefooterlinksdisclaimer: "Disclaimer",
+        homepagefooterlinkscookies: "Cookie Policy",
+
+        homepagefootertitle5: "Contact Info",
+        homepagefootercopywright: "© 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL Dealer License: 12-AB-12345",
+
     },
 
     filipino: {
@@ -286,6 +319,40 @@ const translations = {
         homepagecalltoactionheading: "Handa ka na bang magsimula?",
         homepagecalltoactionsubheading: "Sumali sa libo-libong nasisiyahang customer. Tuklasin ang aming malawak na pagpipilian o makipag-usap sa isang espesyalista ngayon.",
         homepagecalltoactionbutton: "Mamili Ngayon",
+
+        // Footer Section
+        homepagefootertitle1: "Mabilis na Link",
+        homepagefooterlinkshome: "Home",
+        homepagefooterlinksproducts: "Mga Produkto",
+        homepagefooterlinksservices: "Mga Serbisyo",
+        homepagefooterlinksaccount: "Account",
+        homepagefooterlinkssettings: "Mga Setting",
+
+        homepagefootertitle2: "Serbisyo sa Customer",
+        homepagefooterlinkscontactus: "Makipag-ugnayan sa Amin",
+        homepagefooterlinksfaq: "FAQ",
+        homepagefooterlinksshipping: "Impormasyon sa Pagpapadala",
+        homepagefooterlinksreturns: "Pagbabalik at Palitan",
+        homepagefooterlinkswarranty: "Impormasyon sa Warranty",
+
+        homepagefootertitle3: "Tungkol",
+        homepagefooterlinksaboutus: "Tungkol sa Amin",
+        homepagefooterlinksourstory: "Aming Kwento",
+        homepagefooterlinksblog: "Blog at Mga Mapagkukunan",
+        homepagefooterlinkscarreer: "Mga Karera",
+        homepagefooterlinkspartnership: "Mga Pakikipagtulungan",
+
+        homepagefootertitle4: "Legal",
+        homepagefooterlinksterms: "Mga Tuntunin ng Serbisyo",
+        homepagefooterlinkspolicy: "Patakaran sa Privacy",
+        homepagefooterlinkscompliance: "Impormasyon sa Pagsunod",
+        homepagefooterlinksdisclaimer: "Paunawa",
+        homepagefooterlinkscookies: "Patakaran sa Cookie",
+
+        homepagefootertitle5: "Impormasyon sa Pakikipag-ugnayan",
+        homepagefootercopywright: "© 2025 Armsdealer. Lahat ng karapatan ay nakalaan. Lisensyado at kinokontrol ng mga pederal na awtoridad. | Lisensya ng FFL Dealer: 12-AB-12345",
+
+
     },
 
     japanese: {
@@ -429,6 +496,39 @@ const translations = {
         homepagecalltoactionsubheading: "何千もの満足した顧客に加わりましょう。幅広い商品ラインナップをご覧いただくか、今すぐ専門スタッフにご相談ください。",
         homepagecalltoactionbutton: "今すぐ購入",
 
+        // Footer Section
+        homepagefootertitle1: "クイックリンク",
+        homepagefooterlinkshome: "ホーム",
+        homepagefooterlinksproducts: "商品",
+        homepagefooterlinksservices: "サービス",
+        homepagefooterlinksaccount: "アカウント",
+        homepagefooterlinkssettings: "設定",
+
+        homepagefootertitle2: "カスタマーサービス",
+        homepagefooterlinkscontactus: "お問い合わせ",
+        homepagefooterlinksfaq: "よくある質問",
+        homepagefooterlinksshipping: "配送情報",
+        homepagefooterlinksreturns: "返品・交換",
+        homepagefooterlinkswarranty: "保証情報",
+
+        homepagefootertitle3: "会社情報",
+        homepagefooterlinksaboutus: "会社概要",
+        homepagefooterlinksourstory: "私たちのストーリー",
+        homepagefooterlinksblog: "ブログとリソース",
+        homepagefooterlinkscarreer: "採用情報",
+        homepagefooterlinkspartnership: "パートナーシップ",
+
+        homepagefootertitle4: "法的情報",
+        homepagefooterlinksterms: "利用規約",
+        homepagefooterlinkspolicy: "プライバシーポリシー",
+        homepagefooterlinkscompliance: "コンプライアンス情報",
+        homepagefooterlinksdisclaimer: "免責事項",
+        homepagefooterlinkscookies: "クッキーポリシー",
+
+        homepagefootertitle5: "連絡先情報",
+        homepagefootercopywright: "© 2025 Armsdealer. 無断転載を禁じます。連邦当局により認可・規制されています。 | FFLディーラーライセンス: 12-AB-12345",
+
+
     },
 
     spanish: {
@@ -571,6 +671,39 @@ const translations = {
         homepagecalltoactionheading: "¿Listo para comenzar?",
         homepagecalltoactionsubheading: "Únase a miles de clientes satisfechos. Explore nuestra amplia selección o hable con un especialista hoy mismo.",
         homepagecalltoactionbutton: "Comprar Ahora",
+
+        // Footer Section
+        homepagefootertitle1: "Enlaces Rápidos",
+        homepagefooterlinkshome: "Inicio",
+        homepagefooterlinksproducts: "Productos",
+        homepagefooterlinksservices: "Servicios",
+        homepagefooterlinksaccount: "Cuenta",
+        homepagefooterlinkssettings: "Configuración",
+
+        homepagefootertitle2: "Atención al Cliente",
+        homepagefooterlinkscontactus: "Contáctenos",
+        homepagefooterlinksfaq: "Preguntas Frecuentes",
+        homepagefooterlinksshipping: "Información de Envío",
+        homepagefooterlinksreturns: "Devoluciones y Cambios",
+        homepagefooterlinkswarranty: "Información de Garantía",
+
+        homepagefootertitle3: "Acerca de",
+        homepagefooterlinksaboutus: "Sobre Nosotros",
+        homepagefooterlinksourstory: "Nuestra Historia",
+        homepagefooterlinksblog: "Blog y Recursos",
+        homepagefooterlinkscarreer: "Carreras",
+        homepagefooterlinkspartnership: "Alianzas",
+
+        homepagefootertitle4: "Legal",
+        homepagefooterlinksterms: "Términos de Servicio",
+        homepagefooterlinkspolicy: "Política de Privacidad",
+        homepagefooterlinkscompliance: "Información de Cumplimiento",
+        homepagefooterlinksdisclaimer: "Descargo de Responsabilidad",
+        homepagefooterlinkscookies: "Política de Cookies",
+
+        homepagefootertitle5: "Información de Contacto",
+        homepagefootercopywright: "© 2025 Armsdealer. Todos los derechos reservados. Licenciado y regulado por autoridades federales. | Licencia FFL del distribuidor: 12-AB-12345",
+
     },
 
     mandarin: {
@@ -713,6 +846,38 @@ const translations = {
         homepagecalltoactionheading: "准备开始了吗？",
         homepagecalltoactionsubheading: "加入成千上万满意的客户。浏览我们丰富的产品选择，或立即与专家联系。",
         homepagecalltoactionbutton: "立即购买",
+
+        // Footer Section
+        homepagefootertitle1: "快速链接",
+        homepagefooterlinkshome: "首页",
+        homepagefooterlinksproducts: "产品",
+        homepagefooterlinksservices: "服务",
+        homepagefooterlinksaccount: "账户",
+        homepagefooterlinkssettings: "设置",
+
+        homepagefootertitle2: "客户服务",
+        homepagefooterlinkscontactus: "联系我们",
+        homepagefooterlinksfaq: "常见问题",
+        homepagefooterlinksshipping: "运输信息",
+        homepagefooterlinksreturns: "退货与换货",
+        homepagefooterlinkswarranty: "保修信息",
+
+        homepagefootertitle3: "关于",
+        homepagefooterlinksaboutus: "关于我们",
+        homepagefooterlinksourstory: "我们的故事",
+        homepagefooterlinksblog: "博客与资源",
+        homepagefooterlinkscarreer: "招聘",
+        homepagefooterlinkspartnership: "合作伙伴",
+
+        homepagefootertitle4: "法律",
+        homepagefooterlinksterms: "服务条款",
+        homepagefooterlinkspolicy: "隐私政策",
+        homepagefooterlinkscompliance: "合规信息",
+        homepagefooterlinksdisclaimer: "免责声明",
+        homepagefooterlinkscookies: "Cookie政策",
+
+        homepagefootertitle5: "联系信息",
+        homepagefootercopywright: "© 2025 Armsdealer。保留所有权利。由联邦机构许可并监管。 | FFL经销商许可证：12-AB-12345",
     }
 };
 
