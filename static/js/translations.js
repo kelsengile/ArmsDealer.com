@@ -70,10 +70,12 @@ const translations = {
         homepagefeaturepage3: "Blades",
         homepagefeaturepage4: "Ammo",
         homepagefeaturepage5: "Services",
-        homepagecategorytitle: "Explore Our Categories:",
+        homepagefeatureknowmore: "Know More",
+        homepagefeaturecart: "+ Cart",
 
 
         // Category Section
+        homepagecategorytitle: "Explore Our Categories:",
         homepagecategoryBtnWeapons: "Weapons",
         homepagecategoryBtnEquipment: "Equipment",
         homepagecategoryBtnServices: "Services",
@@ -247,9 +249,12 @@ const translations = {
         homepagefeaturepage3: "Blades",
         homepagefeaturepage4: "Ammunisyon",
         homepagefeaturepage5: "Mga Serbisyo",
-        homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:",
+        homepagefeatureknowmore: "Know More",
+        homepagefeaturecart: "+ Cart",
+
 
         // Category Section
+        homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:",
         homepagecategoryBtnWeapons: "Mga Sandata",
         homepagecategoryBtnEquipment: "Kagamitan",
         homepagecategoryBtnServices: "Mga Serbisyo",
@@ -423,9 +428,11 @@ const translations = {
         homepagefeaturepage3: "ブレード",
         homepagefeaturepage4: "弾薬",
         homepagefeaturepage5: "サービス",
-        homepagecategorytitle: "カテゴリーを探る：",
+        homepagefeatureknowmore: "もっと知る",
+        homepagefeaturecart: "+ カート",
 
         // Category Section
+        homepagecategorytitle: "カテゴリーを探る：",
         homepagecategoryBtnWeapons: "武器",
         homepagecategoryBtnEquipment: "装備",
         homepagecategoryBtnServices: "サービス",
@@ -599,9 +606,11 @@ const translations = {
         homepagefeaturepage3: "Cuchillas",
         homepagefeaturepage4: "Munición",
         homepagefeaturepage5: "Servicios",
-        homepagecategorytitle: "Explora nuestras categorías:",
+        homepagefeatureknowmore: "Saber más",
+        homepagefeaturecart: "+ Añadir al carrito",
 
         // Category Section
+        homepagecategorytitle: "Explora nuestras categorías:",
         homepagecategoryBtnWeapons: "Armas",
         homepagecategoryBtnEquipment: "Equipamiento",
         homepagecategoryBtnServices: "Servicios",
@@ -774,9 +783,12 @@ const translations = {
         homepagefeaturepage3: "刀具",
         homepagefeaturepage4: "弹药",
         homepagefeaturepage5: "服务",
-        homepagecategorytitle: "探索我们的类别：",
+        homepagefeatureknowmore: "了解更多",
+        homepagefeaturecart: "+ 加入购物车",
+
 
         // Category Section
+        homepagecategorytitle: "探索我们的类别：",
         homepagecategoryBtnWeapons: "武器",
         homepagecategoryBtnEquipment: "装备",
         homepagecategoryBtnServices: "服务",
