@@ -1,7 +1,7 @@
 # ArmsDealer.com  
 **Flask + SQLite E-commerce Web Application**
 
-ArmsDealer.com is a modern e-commerce platform for arms and related services, offering browsing, purchasing, and order management for firearms, accessories, and other related products. With a focus on usability, security, and compliance, the platform provides a seamless shopping experience for users and robust management tools for administrators.
+ArmsDealer.com is a e-commerce platform for arms and related services, offering browsing, purchasing, and order management for firearms, accessories, and other related products. With a focus on usability, security, and compliance, the platform provides a seamless shopping experience for users and robust management tools for administrators.
 
 ---
 
