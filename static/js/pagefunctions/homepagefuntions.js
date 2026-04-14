@@ -136,44 +136,44 @@
 // ===========================================
 const carouselData = {
     weapons: [
-        { name: 'Firearms', translationKey: 'categoryFirearms', image: '../../../static/assets/icons/categoriesicons/firearms.png' },
-        { name: 'Blades', translationKey: 'categoryBlades', image: '../../../static/assets/icons/categoriesicons/blade.png' },
-        { name: 'Blunts', translationKey: 'categoryBlunts', image: '../../../static/assets/icons/categoriesicons/blunt.png' },
-        { name: 'Projectile', translationKey: 'categoryProjectile', image: '../../../static/assets/icons/categoriesicons/projectile.png' },
-        { name: 'Explosives', translationKey: 'categoryExplosives', image: '../../../static/assets/icons/categoriesicons/explosives.png' },
-        { name: 'Electronic', translationKey: 'categoryElectronic', image: '../../../static/assets/icons/categoriesicons/electronic.png' },
-        { name: 'Chemical', translationKey: 'categoryChemical', image: '../../../static/assets/icons/categoriesicons/chemical.png' },
-        { name: 'Biological', translationKey: 'categoryBiological', image: '../../../static/assets/icons/categoriesicons/biological.png' },
-        { name: 'Vehicle', translationKey: 'categoryVehicle', image: '../../../static/assets/icons/categoriesicons/vehicle.png' },
-        { name: 'Cyber', translationKey: 'categoryCyber', image: '../../../static/assets/icons/categoriesicons/cyber.png' },
-        { name: 'Security', translationKey: 'categorySecurity', image: '../../../static/assets/icons/categoriesicons/security.png' }
+        { name: 'Firearms', translationKey: 'homepagecategoryFirearms', image: '../../../static/assets/icons/categoriesicons/firearms.png' },
+        { name: 'Blades', translationKey: 'homepagecategoryBlades', image: '../../../static/assets/icons/categoriesicons/blade.png' },
+        { name: 'Blunts', translationKey: 'homepagecategoryBlunts', image: '../../../static/assets/icons/categoriesicons/blunt.png' },
+        { name: 'Projectile', translationKey: 'homepagecategoryProjectile', image: '../../../static/assets/icons/categoriesicons/projectile.png' },
+        { name: 'Explosives', translationKey: 'homepagecategoryExplosives', image: '../../../static/assets/icons/categoriesicons/explosives.png' },
+        { name: 'Electronic', translationKey: 'homepagecategoryElectronic', image: '../../../static/assets/icons/categoriesicons/electronic.png' },
+        { name: 'Chemical', translationKey: 'homepagecategoryChemical', image: '../../../static/assets/icons/categoriesicons/chemical.png' },
+        { name: 'Biological', translationKey: 'homepagecategoryBiological', image: '../../../static/assets/icons/categoriesicons/biological.png' },
+        { name: 'Vehicle', translationKey: 'homepagecategoryVehicle', image: '../../../static/assets/icons/categoriesicons/vehicle.png' },
+        { name: 'Cyber', translationKey: 'homepagecategoryCyber', image: '../../../static/assets/icons/categoriesicons/cyber.png' },
+        { name: 'Security', translationKey: 'homepagecategorySecurity', image: '../../../static/assets/icons/categoriesicons/security.png' }
     ],
     equipment: [
-        { name: 'Ammunition', translationKey: 'categoryAmmunition', image: '../../../static/assets/icons/categoriesicons/ammunition.png' },
-        { name: 'Protective', translationKey: 'categoryProtective', image: '../../../static/assets/icons/categoriesicons/protective.png' },
-        { name: 'Tactical', translationKey: 'categoryTactical', image: '../../../static/assets/icons/categoriesicons/tactical.png' },
-        { name: 'Attachments', translationKey: 'categoryAttachments', image: '../../../static/assets/icons/categoriesicons/attachments.png' },
-        { name: 'Maintenance', translationKey: 'categoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
-        { name: 'Storage', translationKey: 'categoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
-        { name: 'Cases', translationKey: 'categoryCases', image: '../../../static/assets/icons/categoriesicons/cases.png' },
-        { name: 'Communication', translationKey: 'categoryCommunication', image: '../../../static/assets/icons/categoriesicons/communication.png' },
-        { name: 'Survival', translationKey: 'categorySurvival', image: '../../../static/assets/icons/categoriesicons/survival.png' },
-        { name: 'Training', translationKey: 'categoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' }
+        { name: 'Ammunition', translationKey: 'homepagecategoryAmmunition', image: '../../../static/assets/icons/categoriesicons/ammunition.png' },
+        { name: 'Protective', translationKey: 'homepagecategoryProtective', image: '../../../static/assets/icons/categoriesicons/protective.png' },
+        { name: 'Tactical', translationKey: 'homepagecategoryTactical', image: '../../../static/assets/icons/categoriesicons/tactical.png' },
+        { name: 'Attachments', translationKey: 'homepagecategoryAttachments', image: '../../../static/assets/icons/categoriesicons/attachments.png' },
+        { name: 'Maintenance', translationKey: 'homepagecategoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
+        { name: 'Storage', translationKey: 'homepagecategoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
+        { name: 'Cases', translationKey: 'homepagecategoryCases', image: '../../../static/assets/icons/categoriesicons/cases.png' },
+        { name: 'Communication', translationKey: 'homepagecategoryCommunication', image: '../../../static/assets/icons/categoriesicons/communication.png' },
+        { name: 'Survival', translationKey: 'homepagecategorySurvival', image: '../../../static/assets/icons/categoriesicons/survival.png' },
+        { name: 'Training', translationKey: 'homepagecategoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' }
     ],
     services: [
-        { name: 'Manufacturing', translationKey: 'categoryManufacturing', image: '../../../static/assets/icons/categoriesicons/manufacturing.png' },
-        { name: 'Customization', translationKey: 'categoryCustomization', image: '../../../static/assets/icons/categoriesicons/customization.png' },
-        { name: 'Maintenance', translationKey: 'categoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
-        { name: 'Transport', translationKey: 'categoryTransport', image: '../../../static/assets/icons/categoriesicons/transport.png' },
-        { name: 'Storage', translationKey: 'categoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
-        { name: 'Training', translationKey: 'categoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' },
-        { name: 'Protection', translationKey: 'categoryProtection', image: '../../../static/assets/icons/categoriesicons/protection.png' },
-        { name: 'Consulting', translationKey: 'categoryConsulting', image: '../../../static/assets/icons/categoriesicons/consulting.png' },
-        { name: 'Research', translationKey: 'categoryResearch', image: '../../../static/assets/icons/categoriesicons/reasearch.png' },
-        { name: 'Testing', translationKey: 'categoryTesting', image: '../../../static/assets/icons/categoriesicons/testing.png' },
-        { name: 'Disposal', translationKey: 'categoryDisposal', image: '../../../static/assets/icons/categoriesicons/disposal.png' },
-        { name: 'Surveillance', translationKey: 'categorySurveillance', image: '../../../static/assets/icons/categoriesicons/surveilance.png' },
-        { name: 'Contracting', translationKey: 'categoryContracting', image: '../../../static/assets/icons/categoriesicons/contracting.png' }
+        { name: 'Manufacturing', translationKey: 'homepagecategoryManufacturing', image: '../../../static/assets/icons/categoriesicons/manufacturing.png' },
+        { name: 'Customization', translationKey: 'homepagecategoryCustomization', image: '../../../static/assets/icons/categoriesicons/customization.png' },
+        { name: 'Maintenance', translationKey: 'homepagecategoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
+        { name: 'Transport', translationKey: 'homepagecategoryTransport', image: '../../../static/assets/icons/categoriesicons/transport.png' },
+        { name: 'Storage', translationKey: 'homepagecategoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
+        { name: 'Training', translationKey: 'homepagecategoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' },
+        { name: 'Protection', translationKey: 'homepagecategoryProtection', image: '../../../static/assets/icons/categoriesicons/protection.png' },
+        { name: 'Consulting', translationKey: 'homepagecategoryConsulting', image: '../../../static/assets/icons/categoriesicons/consulting.png' },
+        { name: 'Research', translationKey: 'homepagecategoryResearch', image: '../../../static/assets/icons/categoriesicons/reasearch.png' },
+        { name: 'Testing', translationKey: 'homepagecategoryTesting', image: '../../../static/assets/icons/categoriesicons/testing.png' },
+        { name: 'Disposal', translationKey: 'homepagecategoryDisposal', image: '../../../static/assets/icons/categoriesicons/disposal.png' },
+        { name: 'Surveillance', translationKey: 'homepagecategorySurveillance', image: '../../../static/assets/icons/categoriesicons/surveilance.png' },
+        { name: 'Contracting', translationKey: 'homepagecategoryContracting', image: '../../../static/assets/icons/categoriesicons/contracting.png' }
     ]
 };
 
@@ -358,9 +358,9 @@ function setupCategoryButtons() {
 
     // Each entry: { label shown in English, translationKey, data-category value }
     const buttonDefs = [
-        { englishLabel: 'Weapons', translationKey: 'categoryBtnWeapons', category: 'weapons' },
-        { englishLabel: 'Equipment', translationKey: 'categoryBtnEquipment', category: 'equipment' },
-        { englishLabel: 'Services', translationKey: 'categoryBtnServices', category: 'services' }
+        { englishLabel: 'Weapons', translationKey: 'homepagecategoryBtnWeapons', category: 'weapons' },
+        { englishLabel: 'Equipment', translationKey: 'homepagecategoryBtnEquipment', category: 'equipment' },
+        { englishLabel: 'Services', translationKey: 'homepagecategoryBtnServices', category: 'services' }
     ];
 
     buttonDefs.forEach(({ translationKey, category }) => {

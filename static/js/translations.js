@@ -5,7 +5,9 @@
 const translations = {
     english: {
 
-        // NavBar Translations
+        // ──────────────────────────────────── //
+        //     NAVBAR TRANSLATIONS
+        // ──────────────────────────────────── //
         navbarsettings: "Settings",
         navbarpreferences: "Preferences",
         navbaraccount: "Account",
@@ -28,7 +30,11 @@ const translations = {
         navbarsearch: "Search",
         navbarcart: "Cart",
 
-        // Homepage Translations
+        // ──────────────────────────────────── //
+        //     HOMEPAGE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        // Hero Section
         homepageslide1heropageherotag: "New Arrivals — 2026",
         homepageslide1heropagetitle: "Precision,",
         homepageslide1heropagetitlebr: "Built to Last",
@@ -54,6 +60,8 @@ const translations = {
         homepageslide5heropagetitlebr: "for Your Arms.",
         homepageslide5heropageherosubtitle: "Maintenance, customization, and consultation — our certified gunsmiths keep your firearms in peak condition.",
         homepageslide5heropageherocta: "Our Services",
+
+        // Feature Section
         homepagefeaturetimer: "Valid until: July 29, 2026",
         homepagefeatureheadertag: "Products & Services",
         homepagefeatureheadertwo: "Featured Selection",
@@ -64,52 +72,60 @@ const translations = {
         homepagefeaturepage5: "Services",
         homepagecategorytitle: "Explore Our Categories:",
 
-        // Category Buttons
-        categoryBtnWeapons: "Weapons",
-        categoryBtnEquipment: "Equipment",
-        categoryBtnServices: "Services",
+        // Category Section
+        homepagecategoryBtnWeapons: "Weapons",
+        homepagecategoryBtnEquipment: "Equipment",
+        homepagecategoryBtnServices: "Services",
+        homepagecategoryFirearms: "Firearms",
+        homepagecategoryBlades: "Blades",
+        homepagecategoryBlunts: "Blunts",
+        homepagecategoryProjectile: "Projectile",
+        homepagecategoryExplosives: "Explosives",
+        homepagecategoryElectronic: "Electronic",
+        homepagecategoryChemical: "Chemical",
+        homepagecategoryBiological: "Biological",
+        homepagecategoryVehicle: "Vehicle",
+        homepagecategoryCyber: "Cyber",
+        homepagecategorySecurity: "Security",
+        homepagecategoryAmmunition: "Ammunition",
+        homepagecategoryProtective: "Protective",
+        homepagecategoryTactical: "Tactical",
+        homepagecategoryAttachments: "Attachments",
+        homepagecategoryMaintenance: "Maintenance",
+        homepagecategoryStorage: "Storage",
+        homepagecategoryCases: "Cases",
+        homepagecategoryCommunication: "Communication",
+        homepagecategorySurvival: "Survival",
+        homepagecategoryTraining: "Training",
+        homepagecategoryManufacturing: "Manufacturing",
+        homepagecategoryCustomization: "Customization",
+        homepagecategoryTransport: "Transport",
+        homepagecategoryProtection: "Protection",
+        homepagecategoryConsulting: "Consulting",
+        homepagecategoryResearch: "Research",
+        homepagecategoryTesting: "Testing",
+        homepagecategoryDisposal: "Disposal",
+        homepagecategorySurveillance: "Surveillance",
+        homepagecategoryContracting: "Contracting",
 
-        // Weapons Category Items
-        categoryFirearms: "Firearms",
-        categoryBlades: "Blades",
-        categoryBlunts: "Blunts",
-        categoryProjectile: "Projectile",
-        categoryExplosives: "Explosives",
-        categoryElectronic: "Electronic",
-        categoryChemical: "Chemical",
-        categoryBiological: "Biological",
-        categoryVehicle: "Vehicle",
-        categoryCyber: "Cyber",
-        categorySecurity: "Security",
+        // Why Choose Us Section
+        homepagewhychooseusheader: "Why Choose ArmsDealer?",
+        homepagewhychooseusheaderp: "Trusted by collectors, shooters, and professionals worldwide",
+        homepagewhychooseustittle1: "Licensed & Secure",
+        homepagewhychooseusdesc1: "Fully compliant with federal regulations. All transactions verified and secured with industry-standard encryption. Your safety is our priority.",
+        homepagewhychooseustittle2: "Wide Selection",
+        homepagewhychooseusdesc2: "Curated inventory spanning firearms, ammunition, tactical gear, and rare collectibles from trusted manufacturers worldwide.",
+        homepagewhychooseustittle3: "Expert Support",
+        homepagewhychooseusdesc3: "Dedicated team available for consultation, verification assistance, and compliance guidance throughout your purchase journey.",
 
-        // Equipment Category Items
-        categoryAmmunition: "Ammunition",
-        categoryProtective: "Protective",
-        categoryTactical: "Tactical",
-        categoryAttachments: "Attachments",
-        categoryMaintenance: "Maintenance",
-        categoryStorage: "Storage",
-        categoryCases: "Cases",
-        categoryCommunication: "Communication",
-        categorySurvival: "Survival",
-        categoryTraining: "Training",
 
-        // Services Category Items
-        categoryManufacturing: "Manufacturing",
-        categoryCustomization: "Customization",
-        categoryTransport: "Transport",
-        categoryProtection: "Protection",
-        categoryConsulting: "Consulting",
-        categoryResearch: "Research",
-        categoryTesting: "Testing",
-        categoryDisposal: "Disposal",
-        categorySurveillance: "Surveillance",
-        categoryContracting: "Contracting",
     },
 
     filipino: {
 
-        // NavBar Translations
+        // ──────────────────────────────────── //
+        //     NAVBAR TRANSLATIONS
+        // ──────────────────────────────────── //
         navbarsettings: "Mga Setting",
         navbarpreferences: "Mga Kagustuhan",
         navbaraccount: "Account",
@@ -132,7 +148,11 @@ const translations = {
         navbarsearch: "Maghanap",
         navbarcart: "Kariton",
 
-        // Homepage Translations
+        // ──────────────────────────────────── //
+        //     HOMEPAGE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        // Hero Section
         homepageslide1heropageherotag: "Mga Bagong Dating — 2026",
         homepageslide1heropagetitle: "Katumpakan,",
         homepageslide1heropagetitlebr: "Ginawa upang Tumagal",
@@ -158,6 +178,8 @@ const translations = {
         homepageslide5heropagetitlebr: "para sa Iyong Armas.",
         homepageslide5heropageherosubtitle: "Maintenance, customization, at consultation — pinapanatili ng aming certified gunsmiths ang iyong armas sa pinakamahusay na kondisyon.",
         homepageslide5heropageherocta: "Aming Serbisyo",
+
+        // Feature Section
         homepagefeaturetimer: "May bisa hanggang: Hulyo 29, 2026",
         homepagefeatureheadertag: "Mga Produkto at Serbisyo",
         homepagefeatureheadertwo: "Tampok na Seleksyon",
@@ -168,52 +190,58 @@ const translations = {
         homepagefeaturepage5: "Mga Serbisyo",
         homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:",
 
-        // Category Buttons
-        categoryBtnWeapons: "Mga Sandata",
-        categoryBtnEquipment: "Kagamitan",
-        categoryBtnServices: "Mga Serbisyo",
+        // Category Section
+        homepagecategoryBtnWeapons: "Mga Sandata",
+        homepagecategoryBtnEquipment: "Kagamitan",
+        homepagecategoryBtnServices: "Mga Serbisyo",
+        homepagecategoryFirearms: "Mga Baril",
+        homepagecategoryBlades: "Mga Talim",
+        homepagecategoryBlunts: "Mga Pamalo",
+        homepagecategoryProjectile: "Proyektil",
+        homepagecategoryExplosives: "Mga Pampasabog",
+        homepagecategoryElectronic: "Elektroniko",
+        homepagecategoryChemical: "Kemikal",
+        homepagecategoryBiological: "Biyolohikal",
+        homepagecategoryVehicle: "Sasakyan",
+        homepagecategoryCyber: "Cyber",
+        homepagecategorySecurity: "Seguridad",
+        homepagecategoryAmmunition: "Ammunisyon",
+        homepagecategoryProtective: "Pang-protekta",
+        homepagecategoryTactical: "Taktikal",
+        homepagecategoryAttachments: "Mga Kabit",
+        homepagecategoryMaintenance: "Pagpapanatili",
+        homepagecategoryStorage: "Imbakan",
+        homepagecategoryCases: "Mga Kahon",
+        homepagecategoryCommunication: "Komunikasyon",
+        homepagecategorySurvival: "Kaligtasan",
+        homepagecategoryTraining: "Pagsasanay",
+        homepagecategoryManufacturing: "Pagmamanupaktura",
+        homepagecategoryCustomization: "Pagpapasadya",
+        homepagecategoryTransport: "Transportasyon",
+        homepagecategoryProtection: "Proteksyon",
+        homepagecategoryConsulting: "Pagpapayo",
+        homepagecategoryResearch: "Pananaliksik",
+        homepagecategoryTesting: "Pagsubok",
+        homepagecategoryDisposal: "Pagtatapon",
+        homepagecategorySurveillance: "Pagmamatyag",
+        homepagecategoryContracting: "Kontrata",
 
-        // Weapons Category Items
-        categoryFirearms: "Mga Baril",
-        categoryBlades: "Mga Talim",
-        categoryBlunts: "Mga Pamalo",
-        categoryProjectile: "Proyektil",
-        categoryExplosives: "Mga Pampasabog",
-        categoryElectronic: "Elektroniko",
-        categoryChemical: "Kemikal",
-        categoryBiological: "Biyolohikal",
-        categoryVehicle: "Sasakyan",
-        categoryCyber: "Cyber",
-        categorySecurity: "Seguridad",
-
-        // Equipment Category Items
-        categoryAmmunition: "Ammunisyon",
-        categoryProtective: "Pang-protekta",
-        categoryTactical: "Taktikal",
-        categoryAttachments: "Mga Kabit",
-        categoryMaintenance: "Pagpapanatili",
-        categoryStorage: "Imbakan",
-        categoryCases: "Mga Kahon",
-        categoryCommunication: "Komunikasyon",
-        categorySurvival: "Kaligtasan",
-        categoryTraining: "Pagsasanay",
-
-        // Services Category Items
-        categoryManufacturing: "Pagmamanupaktura",
-        categoryCustomization: "Pagpapasadya",
-        categoryTransport: "Transportasyon",
-        categoryProtection: "Proteksyon",
-        categoryConsulting: "Pagpapayo",
-        categoryResearch: "Pananaliksik",
-        categoryTesting: "Pagsubok",
-        categoryDisposal: "Pagtatapon",
-        categorySurveillance: "Pagmamatyag",
-        categoryContracting: "Kontrata",
+        // Why Choose Us Section
+        homepagewhychooseusheader: "Bakit Piliin ang ArmsDealer?",
+        homepagewhychooseusheaderp: "Pinagkakatiwalaan ng mga kolektor, tagabaril, at mga propesyonal sa buong mundo",
+        homepagewhychooseustittle1: "Lisensyado at Ligtas",
+        homepagewhychooseusdesc1: "Ganap na sumusunod sa mga pederal na regulasyon. Lahat ng transaksyon ay beripikado at protektado gamit ang pamantayang encryption ng industriya. Ang inyong kaligtasan ang aming prayoridad.",
+        homepagewhychooseustittle2: "Malawak na Pagpipilian",
+        homepagewhychooseusdesc2: "Piniling imbentaryo na kinabibilangan ng mga baril, bala, taktikal na kagamitan, at bihirang koleksyon mula sa mga pinagkakatiwalaang tagagawa sa buong mundo.",
+        homepagewhychooseustittle3: "Suporta ng Eksperto",
+        homepagewhychooseusdesc3: "Nakatalagang koponan na handang tumulong sa konsultasyon, beripikasyon, at gabay sa pagsunod sa regulasyon sa buong proseso ng inyong pagbili.",
     },
 
     japanese: {
 
-        // NavBar Translations
+        // ──────────────────────────────────── //
+        //     NAVBAR TRANSLATIONS
+        // ──────────────────────────────────── //
         navbarsettings: "設定",
         navbarpreferences: "設定項目",
         navbaraccount: "アカウント",
@@ -236,7 +264,11 @@ const translations = {
         navbarsearch: "検索",
         navbarcart: "カート",
 
-        // Homepage Translations
+        // ──────────────────────────────────── //
+        //     HOMEPAGE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        // Hero Section
         homepageslide1heropageherotag: "新着商品 — 2026",
         homepageslide1heropagetitle: "精密さ、",
         homepageslide1heropagetitlebr: "長く使える品質",
@@ -262,6 +294,8 @@ const translations = {
         homepageslide5heropagetitlebr: "あなたの武器に。",
         homepageslide5heropageherosubtitle: "メンテナンス、カスタマイズ、相談サービス。認定ガンスミスが最高の状態を維持します。",
         homepageslide5heropageherocta: "サービスを見る",
+
+        // Feature Section
         homepagefeaturetimer: "有効期限: 2026年7月29日",
         homepagefeatureheadertag: "製品とサービス",
         homepagefeatureheadertwo: "注目セレクション",
@@ -272,52 +306,58 @@ const translations = {
         homepagefeaturepage5: "サービス",
         homepagecategorytitle: "カテゴリーを探る：",
 
-        // Category Buttons
-        categoryBtnWeapons: "武器",
-        categoryBtnEquipment: "装備",
-        categoryBtnServices: "サービス",
+        // Category Section
+        homepagecategoryBtnWeapons: "武器",
+        homepagecategoryBtnEquipment: "装備",
+        homepagecategoryBtnServices: "サービス",
+        homepagecategoryFirearms: "銃器",
+        homepagecategoryBlades: "刃物",
+        homepagecategoryBlunts: "鈍器",
+        homepagecategoryProjectile: "飛射体",
+        homepagecategoryExplosives: "爆発物",
+        homepagecategoryElectronic: "電子機器",
+        homepagecategoryChemical: "化学兵器",
+        homepagecategoryBiological: "生物兵器",
+        homepagecategoryVehicle: "車両",
+        homepagecategoryCyber: "サイバー",
+        homepagecategorySecurity: "セキュリティ",
+        homepagecategoryAmmunition: "弾薬",
+        homepagecategoryProtective: "防護具",
+        homepagecategoryTactical: "戦術装備",
+        homepagecategoryAttachments: "アタッチメント",
+        homepagecategoryMaintenance: "メンテナンス",
+        homepagecategoryStorage: "保管",
+        homepagecategoryCases: "ケース",
+        homepagecategoryCommunication: "通信機器",
+        homepagecategorySurvival: "サバイバル",
+        homepagecategoryTraining: "訓練",
+        homepagecategoryManufacturing: "製造",
+        homepagecategoryCustomization: "カスタマイズ",
+        homepagecategoryTransport: "輸送",
+        homepagecategoryProtection: "保護",
+        homepagecategoryConsulting: "コンサルティング",
+        homepagecategoryResearch: "研究",
+        homepagecategoryTesting: "テスト",
+        homepagecategoryDisposal: "廃棄",
+        homepagecategorySurveillance: "監視",
+        homepagecategoryContracting: "請負",
 
-        // Weapons Category Items
-        categoryFirearms: "銃器",
-        categoryBlades: "刃物",
-        categoryBlunts: "鈍器",
-        categoryProjectile: "飛射体",
-        categoryExplosives: "爆発物",
-        categoryElectronic: "電子機器",
-        categoryChemical: "化学兵器",
-        categoryBiological: "生物兵器",
-        categoryVehicle: "車両",
-        categoryCyber: "サイバー",
-        categorySecurity: "セキュリティ",
-
-        // Equipment Category Items
-        categoryAmmunition: "弾薬",
-        categoryProtective: "防護具",
-        categoryTactical: "戦術装備",
-        categoryAttachments: "アタッチメント",
-        categoryMaintenance: "メンテナンス",
-        categoryStorage: "保管",
-        categoryCases: "ケース",
-        categoryCommunication: "通信機器",
-        categorySurvival: "サバイバル",
-        categoryTraining: "訓練",
-
-        // Services Category Items
-        categoryManufacturing: "製造",
-        categoryCustomization: "カスタマイズ",
-        categoryTransport: "輸送",
-        categoryProtection: "保護",
-        categoryConsulting: "コンサルティング",
-        categoryResearch: "研究",
-        categoryTesting: "テスト",
-        categoryDisposal: "廃棄",
-        categorySurveillance: "監視",
-        categoryContracting: "請負",
+        // Why Choose Us Section
+        homepagewhychooseusheader: "なぜArmsDealerを選ぶのか？",
+        homepagewhychooseusheaderp: "世界中のコレクター、射手、プロフェッショナルから信頼されています",
+        homepagewhychooseustittle1: "認可済み＆安全",
+        homepagewhychooseusdesc1: "連邦規制に完全準拠。すべての取引は検証され、業界標準の暗号化で保護されています。お客様の安全が最優先です。",
+        homepagewhychooseustittle2: "豊富な品揃え",
+        homepagewhychooseusdesc2: "銃器、弾薬、戦術装備、希少なコレクターアイテムなど、世界中の信頼できるメーカーから厳選された在庫を提供しています。",
+        homepagewhychooseustittle3: "専門サポート",
+        homepagewhychooseusdesc3: "専任チームが相談、確認支援、規制遵守のガイダンスを購入プロセス全体を通じて提供します。",
     },
 
     spanish: {
 
-        // NavBar Translations
+        // ──────────────────────────────────── //
+        //     NAVBAR TRANSLATIONS
+        // ──────────────────────────────────── //
         navbarsettings: "Configuración",
         navbarpreferences: "Preferencias",
         navbaraccount: "Cuenta",
@@ -340,7 +380,11 @@ const translations = {
         navbarsearch: "Buscar",
         navbarcart: "Carrito",
 
-        // Homepage Translations
+        // ──────────────────────────────────── //
+        //     HOMEPAGE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        // Hero Section
         homepageslide1heropageherotag: "Nuevos productos — 2026",
         homepageslide1heropagetitle: "Precisión,",
         homepageslide1heropagetitlebr: "Hecho para durar",
@@ -366,6 +410,8 @@ const translations = {
         homepageslide5heropagetitlebr: "para tus armas.",
         homepageslide5heropageherosubtitle: "Mantenimiento, personalización y asesoría — nuestros armeros certificados mantienen tus armas en óptimas condiciones.",
         homepageslide5heropageherocta: "Nuestros servicios",
+
+        // Feature Section
         homepagefeaturetimer: "Válido hasta: 29 de julio de 2026",
         homepagefeatureheadertag: "Productos y Servicios",
         homepagefeatureheadertwo: "Selección destacada",
@@ -376,52 +422,58 @@ const translations = {
         homepagefeaturepage5: "Servicios",
         homepagecategorytitle: "Explora nuestras categorías:",
 
-        // Category Buttons
-        categoryBtnWeapons: "Armas",
-        categoryBtnEquipment: "Equipamiento",
-        categoryBtnServices: "Servicios",
+        // Category Section
+        homepagecategoryBtnWeapons: "Armas",
+        homepagecategoryBtnEquipment: "Equipamiento",
+        homepagecategoryBtnServices: "Servicios",
+        homepagecategoryFirearms: "Armas de fuego",
+        homepagecategoryBlades: "Cuchillas",
+        homepagecategoryBlunts: "Contundentes",
+        homepagecategoryProjectile: "Proyectil",
+        homepagecategoryExplosives: "Explosivos",
+        homepagecategoryElectronic: "Electrónico",
+        homepagecategoryChemical: "Químico",
+        homepagecategoryBiological: "Biológico",
+        homepagecategoryVehicle: "Vehículo",
+        homepagecategoryCyber: "Cibernético",
+        homepagecategorySecurity: "Seguridad",
+        homepagecategoryAmmunition: "Munición",
+        homepagecategoryProtective: "Protección",
+        homepagecategoryTactical: "Táctico",
+        homepagecategoryAttachments: "Accesorios",
+        homepagecategoryMaintenance: "Mantenimiento",
+        homepagecategoryStorage: "Almacenamiento",
+        homepagecategoryCases: "Estuches",
+        homepagecategoryCommunication: "Comunicación",
+        homepagecategorySurvival: "Supervivencia",
+        homepagecategoryTraining: "Entrenamiento",
+        homepagecategoryManufacturing: "Fabricación",
+        homepagecategoryCustomization: "Personalización",
+        homepagecategoryTransport: "Transporte",
+        homepagecategoryProtection: "Protección",
+        homepagecategoryConsulting: "Consultoría",
+        homepagecategoryResearch: "Investigación",
+        homepagecategoryTesting: "Pruebas",
+        homepagecategoryDisposal: "Eliminación",
+        homepagecategorySurveillance: "Vigilancia",
+        homepagecategoryContracting: "Contratación",
 
-        // Weapons Category Items
-        categoryFirearms: "Armas de fuego",
-        categoryBlades: "Cuchillas",
-        categoryBlunts: "Contundentes",
-        categoryProjectile: "Proyectil",
-        categoryExplosives: "Explosivos",
-        categoryElectronic: "Electrónico",
-        categoryChemical: "Químico",
-        categoryBiological: "Biológico",
-        categoryVehicle: "Vehículo",
-        categoryCyber: "Cibernético",
-        categorySecurity: "Seguridad",
-
-        // Equipment Category Items
-        categoryAmmunition: "Munición",
-        categoryProtective: "Protección",
-        categoryTactical: "Táctico",
-        categoryAttachments: "Accesorios",
-        categoryMaintenance: "Mantenimiento",
-        categoryStorage: "Almacenamiento",
-        categoryCases: "Estuches",
-        categoryCommunication: "Comunicación",
-        categorySurvival: "Supervivencia",
-        categoryTraining: "Entrenamiento",
-
-        // Services Category Items
-        categoryManufacturing: "Fabricación",
-        categoryCustomization: "Personalización",
-        categoryTransport: "Transporte",
-        categoryProtection: "Protección",
-        categoryConsulting: "Consultoría",
-        categoryResearch: "Investigación",
-        categoryTesting: "Pruebas",
-        categoryDisposal: "Eliminación",
-        categorySurveillance: "Vigilancia",
-        categoryContracting: "Contratación",
+        // Why Choose Us Section
+        homepagewhychooseusheader: "¿Por qué elegir ArmsDealer?",
+        homepagewhychooseusheaderp: "Confiado por coleccionistas, tiradores y profesionales en todo el mundo",
+        homepagewhychooseustittle1: "Licenciado y Seguro",
+        homepagewhychooseusdesc1: "Totalmente conforme con las regulaciones federales. Todas las transacciones están verificadas y protegidas con encriptación estándar de la industria. Su seguridad es nuestra prioridad.",
+        homepagewhychooseustittle2: "Amplia Selección",
+        homepagewhychooseusdesc2: "Inventario seleccionado que incluye armas de fuego, municiones, equipo táctico y coleccionables raros de fabricantes confiables de todo el mundo.",
+        homepagewhychooseustittle3: "Soporte Experto",
+        homepagewhychooseusdesc3: "Equipo dedicado disponible para consultas, asistencia en verificación y orientación de cumplimiento durante todo su proceso de compra.",
     },
 
     mandarin: {
 
-        // NavBar Translations
+        // ──────────────────────────────────── //
+        //     NAVBAR TRANSLATIONS
+        // ──────────────────────────────────── //
         navbarsettings: "设置",
         navbarpreferences: "偏好",
         navbaraccount: "账户",
@@ -444,7 +496,11 @@ const translations = {
         navbarsearch: "搜索",
         navbarcart: "购物车",
 
-        // Homepage Translations
+        // ──────────────────────────────────── //
+        //     HOMEPAGE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        // Hero Section
         homepageslide1heropageherotag: "新品上市 — 2026",
         homepageslide1heropagetitle: "精准，",
         homepageslide1heropagetitlebr: "经久耐用",
@@ -470,6 +526,8 @@ const translations = {
         homepageslide5heropagetitlebr: "守护你的武器。",
         homepageslide5heropageherosubtitle: "维护、定制与咨询服务——认证枪械师确保您的装备始终处于最佳状态。",
         homepageslide5heropageherocta: "查看服务",
+
+        // Feature Section
         homepagefeaturetimer: "有效期至：2026年7月29日",
         homepagefeatureheadertag: "产品与服务",
         homepagefeatureheadertwo: "精选系列",
@@ -480,47 +538,51 @@ const translations = {
         homepagefeaturepage5: "服务",
         homepagecategorytitle: "探索我们的类别：",
 
-        // Category Buttons
-        categoryBtnWeapons: "武器",
-        categoryBtnEquipment: "装备",
-        categoryBtnServices: "服务",
+        // Category Section
+        homepagecategoryBtnWeapons: "武器",
+        homepagecategoryBtnEquipment: "装备",
+        homepagecategoryBtnServices: "服务",
+        homepagecategoryFirearms: "枪支",
+        homepagecategoryBlades: "刀刃",
+        homepagecategoryBlunts: "钝器",
+        homepagecategoryProjectile: "弹射物",
+        homepagecategoryExplosives: "爆炸物",
+        homepagecategoryElectronic: "电子武器",
+        homepagecategoryChemical: "化学武器",
+        homepagecategoryBiological: "生物武器",
+        homepagecategoryVehicle: "车辆",
+        homepagecategoryCyber: "网络战",
+        homepagecategorySecurity: "安全",
+        homepagecategoryAmmunition: "弹药",
+        homepagecategoryProtective: "防护装备",
+        homepagecategoryTactical: "战术装备",
+        homepagecategoryAttachments: "配件",
+        homepagecategoryMaintenance: "维护",
+        homepagecategoryStorage: "储存",
+        homepagecategoryCases: "箱包",
+        homepagecategoryCommunication: "通信设备",
+        homepagecategorySurvival: "生存装备",
+        homepagecategoryTraining: "训练",
+        homepagecategoryManufacturing: "制造",
+        homepagecategoryCustomization: "定制",
+        homepagecategoryTransport: "运输",
+        homepagecategoryProtection: "保护",
+        homepagecategoryConsulting: "咨询",
+        homepagecategoryResearch: "研究",
+        homepagecategoryTesting: "测试",
+        homepagecategoryDisposal: "处置",
+        homepagecategorySurveillance: "监控",
+        homepagecategoryContracting: "承包",
 
-        // Weapons Category Items
-        categoryFirearms: "枪支",
-        categoryBlades: "刀刃",
-        categoryBlunts: "钝器",
-        categoryProjectile: "弹射物",
-        categoryExplosives: "爆炸物",
-        categoryElectronic: "电子武器",
-        categoryChemical: "化学武器",
-        categoryBiological: "生物武器",
-        categoryVehicle: "车辆",
-        categoryCyber: "网络战",
-        categorySecurity: "安全",
-
-        // Equipment Category Items
-        categoryAmmunition: "弹药",
-        categoryProtective: "防护装备",
-        categoryTactical: "战术装备",
-        categoryAttachments: "配件",
-        categoryMaintenance: "维护",
-        categoryStorage: "储存",
-        categoryCases: "箱包",
-        categoryCommunication: "通信设备",
-        categorySurvival: "生存装备",
-        categoryTraining: "训练",
-
-        // Services Category Items
-        categoryManufacturing: "制造",
-        categoryCustomization: "定制",
-        categoryTransport: "运输",
-        categoryProtection: "保护",
-        categoryConsulting: "咨询",
-        categoryResearch: "研究",
-        categoryTesting: "测试",
-        categoryDisposal: "处置",
-        categorySurveillance: "监控",
-        categoryContracting: "承包",
+        // Why Choose Us Section
+        homepagewhychooseusheader: "为什么选择ArmsDealer？",
+        homepagewhychooseusheaderp: "受到全球收藏家、射击者和专业人士的信赖",
+        homepagewhychooseustittle1: "持证与安全",
+        homepagewhychooseusdesc1: "完全符合联邦法规。所有交易均经过验证，并采用行业标准加密保护。您的安全是我们的首要任务。",
+        homepagewhychooseustittle2: "丰富的选择",
+        homepagewhychooseusdesc2: "精选库存涵盖枪械、弹药、战术装备以及来自全球可信制造商的稀有收藏品。",
+        homepagewhychooseustittle3: "专家支持",
+        homepagewhychooseusdesc3: "专业团队在整个购买过程中提供咨询、验证协助以及合规指导服务。",
     }
 };
 
