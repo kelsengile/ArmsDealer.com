@@ -304,7 +304,9 @@ INSERT INTO "category_translations" ("id","category_id","lang_code","name","desc
  (136,34,'mandarin','承包','基于合同的作战');
 INSERT INTO "currencies" ("code","symbol","label","rate_to_php","is_active","updated_at") VALUES ('PHP','â‚±','PHP (â‚±)',1.0,1,'2026-04-14 06:17:03'),
  ('USD','$','USD ($)',0.0175,1,'2026-04-14 06:17:03'),
- ('EUR','â‚¬','EUR (â‚¬)',0.0162,1,'2026-04-14 06:17:03');
+ ('EUR','â‚¬','EUR (â‚¬)',0.0162,1,'2026-04-14 06:17:03'),
+ ('JPY','¥','JPY (JP¥)',2.627,1,'2026-04-14 06:58:41'),
+ ('CNY','¥','CNY (CN¥)',0.127,1,'2026-04-14 06:58:41');
 INSERT INTO "languages" ("code","label","locale","is_active","sort_order") VALUES ('english','English','en',1,1),
  ('filipino','Filipino','fil',1,2),
  ('japanese','Japanese','ja',1,3),
