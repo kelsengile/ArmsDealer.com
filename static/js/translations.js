@@ -118,6 +118,26 @@ const translations = {
         homepagewhychooseustittle3: "Expert Support",
         homepagewhychooseusdesc3: "Dedicated team available for consultation, verification assistance, and compliance guidance throughout your purchase journey.",
 
+        // Purchase Process Section
+        homepagepurchaseprocessheader: "Purchase Process",
+        homepagepurchaseprocessdesc: "Simple, secure, and fully compliant",
+        homepagepurchaseprocessstepnumber1: "1",
+        homepagepurchaseprocessstepnumber2: "2",
+        homepagepurchaseprocessstepnumber3: "3",
+        homepagepurchaseprocessstepnumber4: "4",
+        homepagepurchaseprocessstepnumber5: "5",
+        homepagepurchaseprocesssteptitle1: "Browse",
+        homepagepurchaseprocesssteptitle2: "Submit",
+        homepagepurchaseprocesssteptitle3: "Verify",
+        homepagepurchaseprocesssteptitle4: "Payment",
+        homepagepurchaseprocesssteptitle5: "Delivery",
+        homepagepurchaseprocesssteplabel1: "Products",
+        homepagepurchaseprocesssteplabel2: "Inquiry / Order",
+        homepagepurchaseprocesssteplabel3: "Compliance",
+        homepagepurchaseprocesssteplabel4: "Secure",
+        homepagepurchaseprocesssteplabel5: "Secure Shipping",
+        homepagepurchaseprocessprocessinfostrong: "Trust is our priority.",
+        homepagepurchaseprocessprocessinfop: "Every transaction undergoes federal compliance verification. Our streamlined five-step process ensures both legal compliance and customer satisfaction. From browsing to delivery, we maintain the highest standards of security and transparency."
 
     },
 
@@ -235,6 +255,28 @@ const translations = {
         homepagewhychooseusdesc2: "Piniling imbentaryo na kinabibilangan ng mga baril, bala, taktikal na kagamitan, at bihirang koleksyon mula sa mga pinagkakatiwalaang tagagawa sa buong mundo.",
         homepagewhychooseustittle3: "Suporta ng Eksperto",
         homepagewhychooseusdesc3: "Nakatalagang koponan na handang tumulong sa konsultasyon, beripikasyon, at gabay sa pagsunod sa regulasyon sa buong proseso ng inyong pagbili.",
+
+        // Purchase Process Section
+        homepagepurchaseprocessheader: "Proseso ng Pagbili",
+        homepagepurchaseprocessdesc: "Simple, ligtas, at ganap na sumusunod sa regulasyon",
+        homepagepurchaseprocessstepnumber1: "1",
+        homepagepurchaseprocessstepnumber2: "2",
+        homepagepurchaseprocessstepnumber3: "3",
+        homepagepurchaseprocessstepnumber4: "4",
+        homepagepurchaseprocessstepnumber5: "5",
+        homepagepurchaseprocesssteptitle1: "Mag-browse",
+        homepagepurchaseprocesssteptitle2: "Magsumite",
+        homepagepurchaseprocesssteptitle3: "Beripikahin",
+        homepagepurchaseprocesssteptitle4: "Bayad",
+        homepagepurchaseprocesssteptitle5: "Delivery",
+        homepagepurchaseprocesssteplabel1: "Mga Produkto",
+        homepagepurchaseprocesssteplabel2: "Inquiry / Order",
+        homepagepurchaseprocesssteplabel3: "Pagsunod sa Regulasyon",
+        homepagepurchaseprocesssteplabel4: "Ligtas",
+        homepagepurchaseprocesssteplabel5: "Ligtas na Pagpapadala",
+        homepagepurchaseprocessprocessinfostrong: "Ang tiwala ang aming prayoridad.",
+        homepagepurchaseprocessprocessinfop: "Ang bawat transaksyon ay dumadaan sa beripikasyon ng pederal na pagsunod. Ang aming pinasimpleng limang-hakbang na proseso ay tinitiyak ang legal na pagsunod at kasiyahan ng customer. Mula sa pag-browse hanggang delivery, pinananatili namin ang pinakamataas na antas ng seguridad at transparency.",
+
     },
 
     japanese: {
@@ -351,6 +393,28 @@ const translations = {
         homepagewhychooseusdesc2: "銃器、弾薬、戦術装備、希少なコレクターアイテムなど、世界中の信頼できるメーカーから厳選された在庫を提供しています。",
         homepagewhychooseustittle3: "専門サポート",
         homepagewhychooseusdesc3: "専任チームが相談、確認支援、規制遵守のガイダンスを購入プロセス全体を通じて提供します。",
+
+        // Purchase Process Section
+        homepagepurchaseprocessheader: "購入プロセス",
+        homepagepurchaseprocessdesc: "シンプルで安全、完全に規制に準拠",
+        homepagepurchaseprocessstepnumber1: "1",
+        homepagepurchaseprocessstepnumber2: "2",
+        homepagepurchaseprocessstepnumber3: "3",
+        homepagepurchaseprocessstepnumber4: "4",
+        homepagepurchaseprocessstepnumber5: "5",
+        homepagepurchaseprocesssteptitle1: "閲覧",
+        homepagepurchaseprocesssteptitle2: "提出",
+        homepagepurchaseprocesssteptitle3: "確認",
+        homepagepurchaseprocesssteptitle4: "支払い",
+        homepagepurchaseprocesssteptitle5: "配送",
+        homepagepurchaseprocesssteplabel1: "商品",
+        homepagepurchaseprocesssteplabel2: "問い合わせ / 注文",
+        homepagepurchaseprocesssteplabel3: "コンプライアンス",
+        homepagepurchaseprocesssteplabel4: "安全",
+        homepagepurchaseprocesssteplabel5: "安全な配送",
+        homepagepurchaseprocessprocessinfostrong: "信頼が最優先です。",
+        homepagepurchaseprocessprocessinfop: "すべての取引は連邦規制の確認を受けます。当社のシンプルな5ステップのプロセスは、法令遵守と顧客満足の両方を保証します。閲覧から配送まで、最高水準のセキュリティと透明性を維持します。",
+
     },
 
     spanish: {
@@ -467,6 +531,28 @@ const translations = {
         homepagewhychooseusdesc2: "Inventario seleccionado que incluye armas de fuego, municiones, equipo táctico y coleccionables raros de fabricantes confiables de todo el mundo.",
         homepagewhychooseustittle3: "Soporte Experto",
         homepagewhychooseusdesc3: "Equipo dedicado disponible para consultas, asistencia en verificación y orientación de cumplimiento durante todo su proceso de compra.",
+
+        // Purchase Process Section
+        homepagepurchaseprocessheader: "Proceso de Compra",
+        homepagepurchaseprocessdesc: "Simple, seguro y totalmente conforme",
+        homepagepurchaseprocessstepnumber1: "1",
+        homepagepurchaseprocessstepnumber2: "2",
+        homepagepurchaseprocessstepnumber3: "3",
+        homepagepurchaseprocessstepnumber4: "4",
+        homepagepurchaseprocessstepnumber5: "5",
+        homepagepurchaseprocesssteptitle1: "Explorar",
+        homepagepurchaseprocesssteptitle2: "Enviar",
+        homepagepurchaseprocesssteptitle3: "Verificar",
+        homepagepurchaseprocesssteptitle4: "Pago",
+        homepagepurchaseprocesssteptitle5: "Entrega",
+        homepagepurchaseprocesssteplabel1: "Productos",
+        homepagepurchaseprocesssteplabel2: "Consulta / Pedido",
+        homepagepurchaseprocesssteplabel3: "Cumplimiento",
+        homepagepurchaseprocesssteplabel4: "Seguro",
+        homepagepurchaseprocesssteplabel5: "Envío Seguro",
+        homepagepurchaseprocessprocessinfostrong: "La confianza es nuestra prioridad.",
+        homepagepurchaseprocessprocessinfop: "Cada transacción pasa por una verificación de cumplimiento federal. Nuestro proceso simplificado de cinco pasos garantiza tanto el cumplimiento legal como la satisfacción del cliente. Desde la exploración hasta la entrega, mantenemos los más altos estándares de seguridad y transparencia.",
+
     },
 
     mandarin: {
@@ -583,6 +669,27 @@ const translations = {
         homepagewhychooseusdesc2: "精选库存涵盖枪械、弹药、战术装备以及来自全球可信制造商的稀有收藏品。",
         homepagewhychooseustittle3: "专家支持",
         homepagewhychooseusdesc3: "专业团队在整个购买过程中提供咨询、验证协助以及合规指导服务。",
+
+        // Purchase Process Section
+        homepagepurchaseprocessheader: "购买流程",
+        homepagepurchaseprocessdesc: "简单、安全且完全合规",
+        homepagepurchaseprocessstepnumber1: "1",
+        homepagepurchaseprocessstepnumber2: "2",
+        homepagepurchaseprocessstepnumber3: "3",
+        homepagepurchaseprocessstepnumber4: "4",
+        homepagepurchaseprocessstepnumber5: "5",
+        homepagepurchaseprocesssteptitle1: "浏览",
+        homepagepurchaseprocesssteptitle2: "提交",
+        homepagepurchaseprocesssteptitle3: "验证",
+        homepagepurchaseprocesssteptitle4: "付款",
+        homepagepurchaseprocesssteptitle5: "交付",
+        homepagepurchaseprocesssteplabel1: "产品",
+        homepagepurchaseprocesssteplabel2: "咨询 / 订单",
+        homepagepurchaseprocesssteplabel3: "合规",
+        homepagepurchaseprocesssteplabel4: "安全",
+        homepagepurchaseprocesssteplabel5: "安全运输",
+        homepagepurchaseprocessprocessinfostrong: "信任是我们的首要任务。",
+        homepagepurchaseprocessprocessinfop: "每笔交易都经过联邦合规验证。我们简化的五步流程确保法律合规和客户满意。从浏览到交付，我们始终保持最高水平的安全性和透明度。"
     }
 };
 
