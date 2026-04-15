@@ -73,18 +73,21 @@
         });
     }
 
-    /* /* ──────────────────────────────────────────────────────────────────────────
-    //     HAMBURER MENU
-    // ───────────────────────────────────────────────────────────────────────────── */
+    /* ────────────────────────────────────────────────────────────────────────── 
+// HAMBURGER MENU 
+// ───────────────────────────────────────────────────────────────────────── */
     const hamburger = document.getElementById('navHamburger');
     const drawer = document.getElementById('navDrawer');
+    let lastScrollY = window.scrollY;
+    const SCROLL_THRESHOLD = 100;
+    const DRAWER_BREAKPOINT = 980; // ← change this to your desired breakpoint
 
     function openDrawer() {
         if (!hamburger || !drawer) return;
         hamburger.classList.add('open');
         hamburger.setAttribute('aria-expanded', 'true');
         drawer.classList.add('open');
-        document.body.style.overflow = ''; // don't lock scroll on mobile
+        document.body.style.overflow = '';
     }
 
     function closeDrawer() {
@@ -102,6 +105,23 @@
         }
     }
 
+    // ── Close drawer when viewport exceeds breakpoint ──────────────────────────
+    function handleBreakpoint() {
+        if (window.innerWidth > DRAWER_BREAKPOINT) {
+            closeDrawer();
+        }
+    }
+
+    // ResizeObserver watches the <body> width (fires less often than scroll)
+    if (typeof ResizeObserver !== 'undefined') {
+        const resizeObserver = new ResizeObserver(() => handleBreakpoint());
+        resizeObserver.observe(document.body);
+    } else {
+        // Fallback for older browsers
+        window.addEventListener('resize', handleBreakpoint);
+    }
+    // ──────────────────────────────────────────────────────────────────────────
+
     if (hamburger) {
         hamburger.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -109,12 +129,28 @@
         });
     }
 
+    // Close on scroll after threshold
+    window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+        if (
+            drawer &&
+            drawer.classList.contains('open') &&
+            Math.abs(currentScrollY - lastScrollY) > SCROLL_THRESHOLD
+        ) {
+            closeDrawer();
+        }
+        lastScrollY = currentScrollY;
+    });
+
     // Close on outside click
     document.addEventListener('click', (e) => {
-        if (drawer && drawer.classList.contains('open')) {
-            if (!header.contains(e.target)) {
-                closeDrawer();
-            }
+        if (
+            drawer &&
+            drawer.classList.contains('open') &&
+            !drawer.contains(e.target) &&
+            !hamburger.contains(e.target)
+        ) {
+            closeDrawer();
         }
     });
 
@@ -123,7 +159,7 @@
         if (e.key === 'Escape') closeDrawer();
     });
 
-    // Close drawer when a drawer link is clicked (navigation)
+    // Close drawer when a drawer link is clicked
     if (drawer) {
         drawer.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', closeDrawer);
