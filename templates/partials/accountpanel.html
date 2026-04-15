@@ -84,7 +84,7 @@
             <span class="acct-btn-icon">◉</span> Edit Profile
             <span class="acct-btn-arrow">▶</span>
         </a>
-        <a href="#" class="acct-action-btn">
+        <a href="{{ url_for('auth.forgot_password') }}" class="acct-action-btn">
             <span class="acct-btn-icon">⊕</span> Change Password
             <span class="acct-btn-arrow">▶</span>
         </a>
@@ -111,7 +111,7 @@
         {% else %}
         {# ── LOGGED OUT STATE ────────────────────────────────────────── #}
 
-        <div class="acct-auth-block">
+        <div class="acct-auth-block" id="authBlock">
             <div class="acct-auth-message">
                 Access restricted.<br>
                 Authenticate to proceed.
@@ -128,6 +128,15 @@
             <a href="{{ url_for('auth.register') }}" class="acct-register-btn">
                 ◈ &nbsp;Register
             </a>
+
+            <div class="acct-auth-separator">
+                <span class="acct-auth-sep-text">or</span>
+            </div>
+
+            <button type="button" class="acct-forgot-btn" id="forgotPasswordBtn"
+                data-target="{{ url_for('auth.forgot_password') }}">
+                ⊠ &nbsp;Forgot Password
+            </button>
         </div>
 
         {% endif %}

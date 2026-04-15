@@ -499,3 +499,129 @@
     background: var(--mil-muted);
     box-shadow: none;
 }
+
+/* ── Forgot Password Block ──────────────────────────────────────── */
+.acct-forgot-block {
+    padding: 28px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.acct-forgot-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 11px 20px;
+    font-family: var(--font-stencil);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--mil-border);
+    background: transparent;
+    color: var(--mil-muted);
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.acct-forgot-btn:hover {
+    border-color: var(--mil-muted);
+    color: var(--mil-text);
+}
+
+.acct-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 12px;
+}
+
+.acct-form-group label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    color: var(--mil-muted);
+    text-transform: uppercase;
+}
+
+.acct-form-group input {
+    padding: 8px 12px;
+    background: rgba(46, 58, 46, 0.3);
+    border: 1px solid var(--mil-border);
+    color: var(--mil-text);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    transition: border-color 0.2s;
+}
+
+.acct-form-group input:focus {
+    outline: none;
+    border-color: var(--mil-olive);
+}
+
+.acct-forgot-submit,
+.acct-forgot-resend {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 20px;
+    font-family: var(--font-stencil);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s;
+    width: 100%;
+    margin-bottom: 8px;
+}
+
+.acct-forgot-submit {
+    background: rgba(138, 170, 106, 0.12);
+    border: 1px solid var(--mil-olive);
+    color: var(--mil-bright);
+}
+
+.acct-forgot-submit:hover {
+    background: rgba(138, 170, 106, 0.22);
+}
+
+.acct-forgot-resend {
+    background: transparent;
+    border: 1px solid var(--mil-border);
+    color: var(--mil-muted);
+}
+
+.acct-forgot-resend:hover {
+    border-color: var(--mil-muted);
+    color: var(--mil-text);
+}
+
+.acct-back-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 8px 20px;
+    font-family: var(--font-stencil);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border: 1px solid var(--mil-border);
+    background: transparent;
+    color: var(--mil-muted);
+    transition: all 0.2s;
+    width: 100%;
+}
+
+.acct-back-btn:hover {
+    border-color: var(--mil-muted);
+    color: var(--mil-text);
+}

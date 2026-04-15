@@ -1,7 +1,10 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 import sqlite3
 import os
+from dotenv import load_dotenv
 from auth_routes import auth_bp
+
+load_dotenv()
 
 
 app = Flask(__name__)

@@ -49,4 +49,13 @@
         if (e.key === 'Escape') closeAccount();
     });
 
+    /* ── Forgot Password Toggle ───────────────────────────────────── */
+    const forgotBtn = document.getElementById('forgotPasswordBtn');
+
+    if (forgotBtn) {
+        forgotBtn.addEventListener('click', () => {
+            const target = forgotBtn.dataset.target || '/forgot-password';
+            window.location.href = target;
+        });
+    }
 })();

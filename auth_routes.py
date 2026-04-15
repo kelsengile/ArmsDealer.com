@@ -13,7 +13,7 @@ from email.message import EmailMessage
 from functools import wraps
 from flask import (
     Blueprint, render_template, request,
-    redirect, url_for, session, flash, g
+    redirect, url_for, session, flash, g, jsonify
 )
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -144,7 +144,44 @@ def login():
 # ─── FORGOT PASSWORD ──────────────────────────────────────────────
 @auth_bp.route('/forgot-password', methods=['GET', 'POST'])
 def forgot_password():
-    if session.get('user_id'):
+    change_password = bool(session.get('user_id'))
+
+    if request.method == 'POST' and change_password:
+        # Handle change password for logged-in users
+        current_password = request.form.get('current_password', '')
+        new_password = request.form.get('new_password', '')
+        confirm_password = request.form.get('confirm_password', '')
+
+        errors = []
+        if not current_password or not new_password or not confirm_password:
+            errors.append('All fields are required.')
+        if new_password != confirm_password:
+            errors.append('Passwords do not match.')
+        if len(new_password) < 8:
+            errors.append('Password must be at least 8 characters.')
+
+        db = get_db()
+        user = db.execute(
+            'SELECT * FROM users WHERE id = ?', (session['user_id'],)).fetchone()
+        if not check_password_hash(user['password_hash'], current_password):
+            errors.append('Current password is incorrect.')
+
+        if errors:
+            for e in errors:
+                flash(e, 'danger')
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': '; '.join(errors)})
+            return render_template('auth/changepassword.html', change_password=True)
+
+        db.execute(
+            'UPDATE users SET password_hash = ? WHERE id = ?',
+            (generate_password_hash(new_password), session['user_id'])
+        )
+        db.commit()
+
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({'success': 'Password changed successfully.'})
+        flash('Password changed successfully.', 'success')
         return redirect(url_for('homepage'))
 
     pending = session.get('password_reset_pending')
@@ -161,7 +198,9 @@ def forgot_password():
             else:
                 flash(f'Password reset code (development): {otp}', 'warning')
 
-            return render_template('auth/forgot_password.html', otp_sent=True, pending_email=pending['email'])
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'otp_sent': True, 'pending_email': pending['email']})
+            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
 
         reset_code = request.form.get('reset_code', '').strip()
         new_password = request.form.get('new_password', '')
@@ -182,8 +221,10 @@ def forgot_password():
 
         if datetime.datetime.utcnow() > sent_at + datetime.timedelta(minutes=10):
             session.pop('password_reset_pending', None)
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': 'Reset code expired. Submit your email again.'})
             flash('Reset code expired. Submit your email again.', 'danger')
-            return render_template('auth/forgot_password.html')
+            return render_template('auth/changepassword.html')
 
         if reset_code != pending['otp']:
             errors.append('Invalid reset code.')
@@ -191,7 +232,9 @@ def forgot_password():
         if errors:
             for e in errors:
                 flash(e, 'danger')
-            return render_template('auth/forgot_password.html', otp_sent=True, pending_email=pending['email'])
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': '; '.join(errors)})
+            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
 
         db = get_db()
         db.execute(
@@ -201,21 +244,27 @@ def forgot_password():
         db.commit()
 
         session.pop('password_reset_pending', None)
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({'success': 'Password updated successfully. Please log in.'})
         flash('Password updated successfully. Please log in.', 'success')
         return redirect(url_for('auth.login'))
 
     if request.method == 'POST':
         email = request.form.get('email', '').strip().lower()
         if not email:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': 'Please enter your email address.'})
             flash('Please enter your email address.', 'danger')
-            return render_template('auth/forgot_password.html')
+            return render_template('auth/changepassword.html')
 
         db = get_db()
         user = db.execute(
             'SELECT * FROM users WHERE email = ?', (email,)).fetchone()
         if user is None:
+            if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+                return jsonify({'error': 'No account found for that email.'})
             flash('No account found for that email.', 'danger')
-            return render_template('auth/forgot_password.html')
+            return render_template('auth/changepassword.html')
 
         otp = f'{secrets.randbelow(1000000):06d}'
         session['password_reset_pending'] = {
@@ -230,12 +279,14 @@ def forgot_password():
         else:
             flash(f'Password reset code (development): {otp}', 'warning')
 
-        return render_template('auth/forgot_password.html', otp_sent=True, pending_email=email)
+        if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
+            return jsonify({'otp_sent': True, 'pending_email': email})
+        return render_template('auth/changepassword.html', otp_sent=True, pending_email=email)
 
     if pending:
-        return render_template('auth/forgot_password.html', otp_sent=True, pending_email=pending['email'])
+        return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
 
-    return render_template('auth/forgot_password.html')
+    return render_template('auth/changepassword.html', change_password=change_password)
 
 
 # ─── REGISTER ─────────────────────────────────────────────────────
