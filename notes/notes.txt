@@ -24,13 +24,7 @@ Project Structure:
         [ ]PopUps:
             [ ]SearchBar:
             [ ]Cart:
-            [ ]Account:
-                [ ]ProfilePicture:
-                [ ]UserName:
-                [ ]UserRole:
-                [ ]Cart:
-                [ ]Billing:
-                [ ]Register | Login | LogOut:
+            [/]Account:
         [/]Coordinates:
 
 
