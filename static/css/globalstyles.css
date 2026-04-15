@@ -70,6 +70,37 @@
     --container-max-width: 1700px;
     --navbar-height: 50px;
     --topbar-height: 40px;
+
+    --mil-black: #0d0f0d;
+    --mil-dark: #131713;
+    --mil-panel: #1c211c;
+    --mil-border: #2e3a2e;
+    --mil-muted: #4a5e4a;
+    --mil-olive: #6b7c4e;
+    --mil-green: #8aaa6a;
+    --mil-bright: #a8c47a;
+    --mil-text: #c8d4b8;
+    --mil-light: #e2ead4;
+    --mil-redbright: #c0392b;
+    --font-stencil: 'Oswald', 'Impact', sans-serif;
+    --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+
+    /* Settings sidebar */
+    --set-width: 280px;
+    --set-bg: #131713;
+    --set-panel: #1a1f1a;
+    --set-border: #2e3a2e;
+    --set-text: #c8d4b8;
+    --set-muted: #4a5e4a;
+    --set-olive: #6b7c4e;
+    --set-green: #8aaa6a;
+    --set-bright: #a8c47a;
+    --set-active-bg: rgba(138, 170, 106, 0.10);
+
+    --topbar-h: 32px;
+    --navbar-h: 66px;
+    --header-h: 98px;
+    /* topbar + navbar combined */
 }
 
 /* ============================================================================
