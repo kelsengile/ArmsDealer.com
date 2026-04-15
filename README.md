@@ -39,8 +39,11 @@ pip install -r requirements.txt
 # 4. Initialize the database (creates instance/armsdealer.db)
 python init_db.py
 
-# 5. Run the development server
+# 5. Run SQL excecution on SQL Browser
+armsdealer.db.sql
+
+# 6. Run the development server
 python app.py
 
-# 6. Open your browser and go to:
+# 7. Open your browser and go to:
 http://127.0.0.1:5000
