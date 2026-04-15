@@ -1,0 +1,149 @@
+{# ═══════════════════════════════════════════════════════════════ #}
+{# ACCOUNT PANEL OVERLAY + SIDEBAR #}
+{# Include this partial inside base.html, just after settings aside #}
+{# ═══════════════════════════════════════════════════════════════ #}
+
+<div class="account-overlay" id="accountOverlay"></div>
+
+<aside class="account-sidebar" id="accountSidebar" aria-label="Account Panel">
+
+    <div class="acct-header">
+        <span class="acct-header-title">Operator</span>
+        <button class="acct-close" id="accountClose" aria-label="Close account panel">✕</button>
+    </div>
+
+    <div class="acct-body" id="accountBody">
+
+        {% if session.get('user_id') %}
+        {# ── LOGGED IN STATE ─────────────────────────────────────────── #}
+
+        {% set initials = (session.get('username', 'U')[:1] + session.get('username', 'U')[1:2]).upper() %}
+
+        <div class="acct-avatar-block">
+            <div class="acct-avatar">
+                <span class="acct-avatar-initials">{{ initials }}</span>
+                <div class="acct-avatar-online"></div>
+            </div>
+            <div class="acct-avatar-info">
+                <div class="acct-username">{{ session.get('username') }}</div>
+                <span class="acct-role-badge {% if session.get('role') == 'admin' %}admin{% endif %}">
+                    {% if session.get('role') == 'admin' %}◈ Admin{% else %}◉ Customer{% endif %}
+                </span>
+            </div>
+        </div>
+
+        <div class="acct-section-label">Identification</div>
+
+        <div class="acct-info-row">
+            <span class="acct-info-label">User ID</span>
+            <span class="acct-info-value bright">USR-{{ '%05d' % session.get('user_id') }}</span>
+        </div>
+        <div class="acct-info-row">
+            <span class="acct-info-label">Email</span>
+            <span class="acct-info-value">{{ session.get('email', '—') }}</span>
+        </div>
+        <div class="acct-info-row">
+            <span class="acct-info-label">Role</span>
+            <span class="acct-info-value">{{ session.get('role', 'customer') | capitalize }}</span>
+        </div>
+        <div class="acct-info-row">
+            <span class="acct-info-label">Joined</span>
+            <span class="acct-info-value">{{ session.get('created_at', '—')[:10] }}</span>
+        </div>
+
+        <div class="acct-divider"></div>
+        <div class="acct-section-label">Orders & Cart</div>
+
+        <a href="{{ url_for('cart') if 'cart' in dir() else '#' }}" class="acct-cart-row">
+            <div class="acct-cart-left">
+                <span class="acct-cart-icon">⊡</span> Cart
+            </div>
+            <div class="acct-cart-right">
+                {% if session.get('cart_count', 0) > 0 %}
+                <span class="acct-cart-count">{{ session.get('cart_count', 0) }}</span>
+                {% else %}
+                <span class="acct-cart-empty">EMPTY</span>
+                {% endif %}
+                <span class="acct-cart-arrow">▶</span>
+            </div>
+        </a>
+
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">☰</span> Order History
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">◎</span> Track Shipment
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+
+        <div class="acct-divider"></div>
+        <div class="acct-section-label">Account</div>
+
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">◉</span> Edit Profile
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">⊕</span> Change Password
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+
+        {% if session.get('role') == 'admin' %}
+        <div class="acct-divider"></div>
+        <div class="acct-section-label">Admin</div>
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">⌕</span> Admin Dashboard
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+        <a href="#" class="acct-action-btn">
+            <span class="acct-btn-icon">☰</span> Manage Users
+            <span class="acct-btn-arrow">▶</span>
+        </a>
+        {% endif %}
+
+        <div class="acct-divider"></div>
+
+        <a href="{{ url_for('logout') }}" class="acct-action-btn danger">
+            <span class="acct-btn-icon">⊗</span> Logout
+        </a>
+
+        {% else %}
+        {# ── LOGGED OUT STATE ────────────────────────────────────────── #}
+
+        <div class="acct-auth-block">
+            <div class="acct-auth-message">
+                Access restricted.<br>
+                Authenticate to proceed.
+            </div>
+
+            <a href="{{ url_for('login') }}" class="acct-login-btn">
+                ◉ &nbsp;Login
+            </a>
+
+            <div class="acct-auth-separator">
+                <span class="acct-auth-sep-text">or</span>
+            </div>
+
+            <a href="{{ url_for('register') }}" class="acct-register-btn">
+                ◈ &nbsp;Register
+            </a>
+        </div>
+
+        {% endif %}
+
+    </div>
+
+    <div class="acct-footer">
+        <div class="acct-session-info">
+            {% if session.get('user_id') %}
+            <span class="acct-session-dot"></span>
+            Session active &nbsp;·&nbsp; {{ session.get('role', 'customer') | upper }} CLEARANCE
+            {% else %}
+            <span class="acct-session-dot offline"></span>
+            No active session
+            {% endif %}
+        </div>
+    </div>
+
+</aside>

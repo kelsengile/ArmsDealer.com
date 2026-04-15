@@ -1,8 +1,11 @@
 from flask import Flask, render_template, redirect, url_for, request, session, flash, g
 import sqlite3
 import os
+from auth_routes import auth_bp
+
 
 app = Flask(__name__)
+app.register_blueprint(auth_bp)
 app.secret_key = os.environ.get(
     'SECRET_KEY', 'dev-secret-change-in-production')
 
