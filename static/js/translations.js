@@ -6,6 +6,23 @@ const translations = {
     english: {
 
         // ──────────────────────────────────── //
+        //     PAGE TITLE TRANSLATIONS
+        // ──────────────────────────────────── //
+
+        homepage: "ArmsDealer--Home",
+        products: "ArmsDealer--Products",
+        services: "ArmsDealer--Services",
+        about: "ArmsDealer--About",
+        contacts: "ArmsDealer--Contacts",
+        legal: "ArmsDealer--Legal",
+        settings: "ArmsDealer--Settings",
+        checkout: "ArmsDealer--Checkout",
+        cart: "ArmsDealer--Cart",
+        login: "ArmsDealer--LogIn",
+        register: "ArmsDealer--Register",
+
+
+        // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
         navbarsettings: "Settings",
