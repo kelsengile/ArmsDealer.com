@@ -145,8 +145,11 @@ def login():
 @auth_bp.route('/password', methods=['GET', 'POST'])
 def forgot_password():
     change_password = bool(session.get('user_id'))
+    show_forgot_password = request.args.get('mode') == 'forgot'
+    forgot_password_action = request.form.get(
+        'auth_action') == 'forgot_password'
 
-    if request.method == 'POST' and change_password:
+    if request.method == 'POST' and change_password and not forgot_password_action:
         # Handle change password for logged-in users
         current_password = request.form.get('current_password', '')
         new_password = request.form.get('new_password', '')
@@ -200,7 +203,7 @@ def forgot_password():
 
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return jsonify({'otp_sent': True, 'pending_email': pending['email']})
-            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
+            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'], show_forgot_password=True)
 
         reset_code = request.form.get('reset_code', '').strip()
         new_password = request.form.get('new_password', '')
@@ -234,7 +237,7 @@ def forgot_password():
                 flash(e, 'danger')
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return jsonify({'error': '; '.join(errors)})
-            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
+            return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'], show_forgot_password=True)
 
         db = get_db()
         db.execute(
@@ -264,7 +267,7 @@ def forgot_password():
             if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
                 return jsonify({'error': 'No account found for that email.'})
             flash('No account found for that email.', 'danger')
-            return render_template('auth/changepassword.html')
+            return render_template('auth/changepassword.html', show_forgot_password=True)
 
         otp = f'{secrets.randbelow(1000000):06d}'
         session['password_reset_pending'] = {
@@ -281,12 +284,12 @@ def forgot_password():
 
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'otp_sent': True, 'pending_email': email})
-        return render_template('auth/changepassword.html', otp_sent=True, pending_email=email)
+        return render_template('auth/changepassword.html', otp_sent=True, pending_email=email, show_forgot_password=True)
 
     if pending:
-        return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'])
+        return render_template('auth/changepassword.html', otp_sent=True, pending_email=pending['email'], show_forgot_password=True)
 
-    return render_template('auth/changepassword.html', change_password=change_password)
+    return render_template('auth/changepassword.html', change_password=change_password, show_forgot_password=show_forgot_password)
 
 
 # ─── REGISTER ─────────────────────────────────────────────────────
