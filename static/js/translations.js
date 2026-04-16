@@ -228,7 +228,6 @@ const translations = {
         authloginhere: "Login here",
         authrememberedpassword: "Remembered your password?",
         authgobackhome: "Go back to",
-        authhome: "home",
         authotpsent: "An OTP was sent to",
         authenterotp: "Enter the 6-digit verification code below to complete registration.",
         authotpcode: "OTP Code:",
@@ -236,6 +235,7 @@ const translations = {
         authenterresetcode: "Enter the code and your new password below.",
         authresetcode: "Reset Code:",
         authclickhere: "Click Here",
+        authhome: "Home",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
@@ -499,6 +499,8 @@ const translations = {
         authresetcodesent: "Isang reset code ang ipinadala sa",
         authenterresetcode: "Ilagay ang code at ang iyong bagong password sa ibaba.",
         authresetcode: "Reset Code:",
+        authclickhere: "I-click dito",
+        authhome: "Tahanan",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
@@ -761,6 +763,8 @@ const translations = {
         authresetcodesent: "リセットコードが送信されました",
         authenterresetcode: "以下のコードと新しいパスワードを入力してください。",
         authresetcode: "リセットコード:",
+        authclickhere: "ここをクリック",
+        authhome: "ホーム",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
@@ -1025,6 +1029,8 @@ const translations = {
         authresetcodesent: "Se envió un código de restablecimiento a",
         authenterresetcode: "Ingresa el código y tu nueva contraseña a continuación.",
         authresetcode: "Código de Restablecimiento:",
+        authclickhere: "Haz clic aquí",
+        authhome: "Inicio",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
@@ -1289,6 +1295,8 @@ const translations = {
         authresetcodesent: "重置代码已发送到",
         authenterresetcode: "在下面输入代码和新密码。",
         authresetcode: "重置代码:",
+        authclickhere: "点击这里",
+        authhome: "首页",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
