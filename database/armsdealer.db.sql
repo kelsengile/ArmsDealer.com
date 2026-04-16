@@ -155,7 +155,7 @@ INSERT INTO "categories" ("id","name","slug","type","icon_file","description") V
  (21,'Training','training-equipment','product',NULL,'Training tools and aids'),
  (22,'Manufacturing','manufacturing','service',NULL,'Production of equipment and tools'),
  (23,'Customization','customization','service',NULL,'Custom modifications and builds'),
- (24,'Maintenance Services','maintenance-service','service',NULL,'Repair and upkeep services'),
+ (24,'Maintenance ','maintenance-service','service',NULL,'Repair and upkeep services'),
  (25,'Transport','transport','service',NULL,'Logistics and transport services'),
  (26,'Storage Services','storage-service','service',NULL,'Secure storage services'),
  (27,'Training Services','training-service','service',NULL,'Skill and operational training'),
@@ -409,6 +409,6 @@ INSERT INTO "services" ("id","name","slug","category_id","description","price","
  (3,'Delivery','delivery',25,'Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.',85000.0,25.0,'delivery.jpg','["Mounting","Zeroing","Range Included"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10');
 INSERT INTO "users" ("id","username","email","password_hash","role","created_at","updated_at") VALUES (1,'spongebob','spongebob@bikini.bottom','scrypt:32768:8:1$SbTwSrAmCehypPz8$1fd49b243228a73c60f77f4fd51cf7f46d77f044b2576a24fe7de1800ca3dabe891e693f64f2276ef392437527659822711cb089f651944ef50073f5188a0c42','customer','2026-04-15 05:03:32','2026-04-15 05:03:32'),
  (2,'mrcrabs','eugene.crabs@thekrustykrab.com','scrypt:32768:8:1$83oDsOSmvXx89UZx$c0e15772d19273f1df094dffa5fb9846afa2be3bfa47bb50a89d3ec80c57032db06799f09fb4b4d51be28dfb33de4148c29c7b97396f1dbbaba90920d6b78dc3','admin','2026-04-15 05:03:32','2026-04-15 05:03:32'),
- (5,'KelsenGile','kelsengilesarmientoconel@gmail.com','scrypt:32768:8:1$bZZartFsVyLCglyC$718cd9af9f84c59d899f6aab55b1ced8820c5e52be0300ed2304c9f4068cf0bb7566aa2e2241bda0263cb082849c794d4af98609e18e711563d87e790ce65912','customer','2026-04-15 07:00:44','2026-04-15 07:00:44');
+ (5,'KelsenGile','kelsengilesarmientoconel@gmail.com','scrypt:32768:8:1$XrzCLf0eixrrKiHF$94eee8816393d6c3fde4901ccd40f36f33d5fed9031cf15212b3a3acc91d25a7b11b7f9295ade278f201088b7c0e87f1242b859b5fc2008aaba577a9d9babdd2','customer','2026-04-15 07:00:44','2026-04-15 07:00:44');
 CREATE INDEX idx_ui_strings_lang ON ui_strings (lang_code);
 COMMIT;
