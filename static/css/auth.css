@@ -309,6 +309,10 @@ main.authcontainer::before {
 }
 
 .auth-form a {
+    font-family: var(--font-mono, 'Share Tech Mono', monospace);
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
     color: var(--mil-olive, #6b7c4e);
     text-decoration: none;
     transition: color 0.2s;

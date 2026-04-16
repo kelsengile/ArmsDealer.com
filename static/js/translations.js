@@ -227,13 +227,15 @@ const translations = {
         authhaveaccount: "Already have an account?",
         authloginhere: "Login here",
         authrememberedpassword: "Remembered your password?",
-        authgobackhome: "Go back to home",
+        authgobackhome: "Go back to",
+        authhome: "home",
         authotpsent: "An OTP was sent to",
         authenterotp: "Enter the 6-digit verification code below to complete registration.",
         authotpcode: "OTP Code:",
         authresetcodesent: "A reset code was sent to",
         authenterresetcode: "Enter the code and your new password below.",
         authresetcode: "Reset Code:",
+        authclickhere: "Click Here",
 
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
@@ -490,7 +492,7 @@ const translations = {
         authhaveaccount: "Mayroon ka nang account?",
         authloginhere: "Mag-login dito",
         authrememberedpassword: "Naalala mo na ang password?",
-        authgobackhome: "Bumalik sa home",
+        authgobackhome: "Bumalik sa",
         authotpsent: "Isang OTP ang ipinadala sa",
         authenterotp: "Ilagay ang 6-digit na verification code sa ibaba upang makumpleto ang registration.",
         authotpcode: "OTP Code:",

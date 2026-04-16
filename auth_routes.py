@@ -141,8 +141,8 @@ def login():
     return render_template('auth/login.html')
 
 
-# ─── FORGOT PASSWORD ──────────────────────────────────────────────
-@auth_bp.route('/forgot-password', methods=['GET', 'POST'])
+# ─── PASSWORD ──────────────────────────────────────────────
+@auth_bp.route('/password', methods=['GET', 'POST'])
 def forgot_password():
     change_password = bool(session.get('user_id'))
 
