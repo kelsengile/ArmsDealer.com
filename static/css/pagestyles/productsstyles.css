@@ -1,0 +1,10 @@
+/*---------------------------------------------------
+/* Product Styles
+/*--------------------------------------------------- */
+
+.producthero {
+    width: 95%;
+    height: 250px;
+    margin: auto;
+    background-color: var(--mil-panel);
+}
