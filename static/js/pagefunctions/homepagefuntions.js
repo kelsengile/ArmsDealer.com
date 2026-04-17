@@ -155,7 +155,6 @@ const carouselData = {
         { name: 'Attachments', translationKey: 'homepagecategoryAttachments', image: '../../../static/assets/icons/categoriesicons/attachments.png' },
         { name: 'Maintenance', translationKey: 'homepagecategoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
         { name: 'Storage', translationKey: 'homepagecategoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
-        { name: 'Cases', translationKey: 'homepagecategoryCases', image: '../../../static/assets/icons/categoriesicons/cases.png' },
         { name: 'Communication', translationKey: 'homepagecategoryCommunication', image: '../../../static/assets/icons/categoriesicons/communication.png' },
         { name: 'Survival', translationKey: 'homepagecategorySurvival', image: '../../../static/assets/icons/categoriesicons/survival.png' },
         { name: 'Training', translationKey: 'homepagecategoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' }
@@ -200,7 +199,6 @@ const categoryPageMap = {
     'Attachments': '/pages/products/attachments.html',
     'Maintenance': '/pages/products/maintenance.html',
     'Storage': '/pages/products/storage.html',
-    'Cases': '/pages/products/cases.html',
     'Communication': '/pages/products/communication.html',
     'Survival': '/pages/products/survival.html',
     'Training': '/pages/products/training.html',

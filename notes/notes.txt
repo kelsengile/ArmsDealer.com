@@ -68,6 +68,55 @@ Project Structure:
         [ ]Admin:
 
 
+Database Categories:
+
+    Products Categories:
+        
+        Weapons Categories: 
+            - Firearms:
+            - Blades: 
+            - Blunts:
+            - Projectiles:
+            - Explosive:
+            - Electronic:
+            - Chemical:
+            - Biological:
+            - Behicle:
+            - Cyber:
+            - Security:
+
+        Equipment Categories:
+            - Ammunition:
+            - Protective: 
+            - Tactical:
+            - Attachments:
+            - Maintenance:
+            - Storage:
+            - Communication:
+            - Survival:
+            - Training:
+
+    Services Categories:
+        - Manufacturing:
+        - Cuztomization:
+        - Maintenance: 
+        - Transport:
+        - Storage:
+        - Training:
+        - Protection:
+        - Consulting:
+        - Research:
+        - Testing:
+        - Disposal:
+        - Surveillance:
+        - Contracting: 
+
+    
+    
+    Services Categories:
+
+
+
 
 users:
 {
