@@ -74,51 +74,158 @@ Database Categories:
         
         Weapons Categories: 
             - Firearms:
+                - Handguns
+                - Rifles
+                - Shotguns
+                - Submachine Guns
+                - Machine Guns
             - Blades: 
+                - Knives
+                - Swords
+                - Daggers
+                - Machetes
+                - Bayonets
             - Blunts:
+                - Batons
+                - Clubs
+                - Maces
+                - Hammers
             - Projectiles:
+                - Bows
+                - Crossbows
+                - Slingshots
+                - Spear Launchers
             - Explosive:
+                - Grenades
+                - Bombs
+                - Mines
+                - Demolition Charges
             - Electronic:
+                - Tasers
+                - EMP Devices
+                - Jamming Devices
             - Chemical:
+                - Tear Gas
+                - Smoke Agents
+                - Incendiary Compounds
             - Biological:
+                - Delivery Systems
+                - Containment Units
             - Behicle:
+                - Armed Vehicles
+                - Drones
+                - Naval Weapon Systems
             - Cyber:
+                - Malware Tools
+                - Exploit Kits
+                - Hacking Devices
             - Security:
+                - Access Control Weapons
+                - Crowd Control Devices
+                - Non-lethal Weapons
 
         Equipment Categories:
             - Ammunition:
+                - Bullets
+                - Shells
+                - Cartridges
+                - Energy Cells
             - Protective: 
+                - Helmets
+                - Body Armor
+                - Shields
+                - Protective Suits
             - Tactical:
+                - Load-bearing Gear
+                - Holsters
+                - Utility Belts
+                - Field Kits
             - Attachments:
+                - Scopes
+                - Suppressors
+                - Grips
+                - Laser Sights
             - Maintenance:
+                - Cleaning Kits
+                - Repair Tools
+                - Lubricants
             - Storage:
+                - Safes
+                - Cases
+                - Lockers
             - Communication:
+                - Radios
+                - Signal Devices
+                - Encryption Units
             - Survival:
+                - First Aid Kits
+                - Rations
+                - Water Purification
+                - Navigation Tools
             - Training:
+                - Simulators
+                - Dummy Equipment
+                - Targets
+                - Training Manuals
 
     Services Categories:
         - Manufacturing:
+            - Mass Production
+            - Custom Fabrication
+            - Prototyping
         - Cuztomization:
+            - Weapon Modding
+            - Gear Personalization
+            - Engraving
         - Maintenance: 
+            - Repair Services
+            - Inspection
+            - Refurbishment
         - Transport:
+            - Secure Logistics
+            - International Shipping
+            - Escort Services
         - Storage:
+            - Secure Warehousing
+            - Vault Services
+            - Inventory Management
         - Training:
+            - Tactical Training
+            - Safety Training
+            - Technical Training
         - Protection:
+            - Personal Security
+            - Facility Security
+            - Escort Protection
         - Consulting:
+            - Risk Assessment
+            - Security Planning
+            - Compliance Advisory
         - Research:
+            - Product Development
+            - Field Research
+            - Technology Innovation
         - Testing:
+            - Performance Testing
+            - Safety Testing
+            - Certification
         - Disposal:
+            - Decommissioning
+            - Hazardous Disposal
+            - Recycling
         - Surveillance:
+            - Monitoring Services
+            - Reconnaissance
+            - Intelligence Gathering
         - Contracting: 
-
-    
-    
-    Services Categories:
-
+            - Private Contracts
+            - Government Contracts
+            - Defense Contracts
 
 
 
-users:
+
+Sample User Account:
 {
         'username': 'spongebob',
         'email':    'spongebob@bikini.bottom',
