@@ -4,6 +4,44 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/productsstyles.css') }}">{% endblock %}
 
 {% block main %}
-<main>
+<main class="products-page">
+    <section class="products-hero">
+        <div class="hero-copy">
+            <div class="hero-label">PRODUCTS</div>
+            <p class="hero-subtitle">Choose a category and browse the tactical selection.</p>
+        </div>
+        <div class="hero-sign">
+            <div class="hero-sign-top">CURRENT</div>
+            <div class="hero-sign-title" data-active-type="weapons">WEAPONS</div>
+            <div class="hero-sign-toggle">
+                <button class="toggle-btn active" data-type="weapons">WEAPONS</button>
+                <button class="toggle-btn" data-type="equipment">EQUIPMENT</button>
+            </div>
+        </div>
+    </section>
+
+    <div class="products-layout">
+        <aside class="products-sidebar">
+            <div class="sidebar-panel">
+                <button class="filter-btn active" data-filter="promotions">Promotions</button>
+                <button class="filter-btn" data-filter="categories">Categories</button>
+                <button class="filter-btn" data-filter="brands">Brands</button>
+            </div>
+        </aside>
+
+        <section class="products-content">
+            <div class="content-panel">
+                <div class="content-header">
+                    <div class="content-tag">SELECTION</div>
+                    <h2 class="content-title" id="selection-title">Weapons · Promotions</h2>
+                </div>
+                <div class="selection-content" id="selection-content">
+                    <p>Please select a filter to view products.</p>
+                </div>
+            </div>
+        </section>
+    </div>
 </main>
+
+<script src="{{ url_for('static', filename='js/pagefunctions/productsfunctions.js') }}"></script>
 {% endblock %}
