@@ -3,7 +3,7 @@
 /*--------------------------------------------------- */
 
 .products-page {
-    width: min(100%, 1320px);
+    width: min(100%, 1750px);
     margin: 0 auto;
     padding: 20px 16px 40px;
 }
@@ -30,12 +30,14 @@
 
 .hero-label {
     color: var(--mil-light);
-    font-family: var(--font-stencil);
+    font-family: var(--font-times);
     font-size: clamp(3rem, 4.5vw, 4.4rem);
-    letter-spacing: 0.18em;
+    letter-spacing: 0.01em;
+    font-weight: bold;
     line-height: 0.95;
-    text-transform: uppercase;
     margin-bottom: 10px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 .hero-subtitle {
@@ -44,6 +46,7 @@
     font-size: 1.15rem;
     line-height: 1.7;
     max-width: 620px;
+    margin-left: 10px;
 }
 
 .hero-sign {
@@ -57,6 +60,8 @@
     gap: 14px;
     align-items: start;
 }
+
+
 
 .hero-sign-top {
     color: var(--mil-olive);
@@ -132,6 +137,10 @@
     padding: 18px;
     display: grid;
     gap: 12px;
+}
+
+.productsidebartitle {
+    font-size: 20px;
 }
 
 .filter-btn {
@@ -211,8 +220,13 @@
 
 @media (max-width: 1080px) {
     .products-hero {
+        display: flex;
         flex-direction: column;
-        align-items: stretch;
+        align-items: flex-start; /* pushes children to the left */
+    }
+
+    .hero-sign {
+        align-self: flex-end; /* ensures this specific box goes left */
     }
 
     .products-layout {
