@@ -39,7 +39,7 @@ main.products-page::before {
     display: flex;
     align-items: stretch;
     justify-content: space-between;
-    min-height: 200px;
+    min-height: 250px;
     overflow: hidden;
     margin: 24px 32px 0;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(168, 196, 122, 0.06);
@@ -83,6 +83,12 @@ main.products-page::before {
     flex: 1;
     border-right: 1px solid var(--mil-border, #2e3a2e);
     gap: 12px;
+    background: 
+        linear-gradient(rgba(0, 0, 0, 0.672), rgba(2, 15, 4, 0.516)),
+        url('../../assets/images/pageimages/productpageimages/producthero.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
 }
 
 .hero-label {
@@ -107,7 +113,7 @@ main.products-page::before {
     font-weight: 400;
     letter-spacing: 0.14em;
     text-transform: uppercase;
-    color: var(--mil-muted, #4a5e4a);
+    color: var(--mil-text, #aebeae);
     line-height: 1.5;
     display: flex;
     align-items: center;
