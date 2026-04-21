@@ -297,7 +297,7 @@ main.products-page::before {
   content: "▸";
   position: absolute;
   right: 16px;
-  font-size: 9px;
+  font-size: 17px;
   color: var(--mil-muted, #4a5e4a);
   opacity: 0;
   transform: translateX(-4px);
@@ -323,8 +323,11 @@ main.products-page::before {
 }
 
 .filter-btn.active::after {
+  margin-left: auto;
+  font-size: 20px;
   opacity: 1;
-  transform: translateX(0);
+  color: var(--set-bright);
+  transform: translateX(1);
   color: var(--mil-bright, #a8c47a);
 }
 
@@ -399,7 +402,7 @@ main.products-page::before {
 
 .content-tag {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
-  font-size: 1px;
+  font-size: 10px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
   color: var(--mil-black, #0d0f0d);
@@ -414,7 +417,7 @@ main.products-page::before {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--mil-light, #e2ead4);
+  color: var(--mil-olive, #e2ead4);
 }
 
 /* ── Selection Content ────────────────────────────────────────── */
