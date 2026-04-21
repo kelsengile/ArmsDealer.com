@@ -65,7 +65,7 @@ def homepage():
            COALESCE(pt.name, p.name)               AS name,
            COALESCE(pt.description, p.description) AS description
     FROM products p
-    LEFT JOIN product_translations pt
+    LEFT JOIN products_translations pt
            ON pt.product_id = p.id AND pt.lang_code = ?
     WHERE p.id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
     ORDER BY p.id
@@ -78,7 +78,7 @@ def homepage():
            COALESCE(st.name, s.name)               AS name,
            COALESCE(st.description, s.description) AS description
     FROM services s
-    LEFT JOIN service_translations st
+    LEFT JOIN services_translations st
            ON st.service_id = s.id AND st.lang_code = ?
     WHERE s.id IN (1,2,3)
     ORDER BY s.id
