@@ -1,11 +1,8 @@
 /**
  * NavbarScript.js — ArmsDealer
-**/
+ **/
 
 (function () {
-
-
-
     // 'use strict';
 
     // /* ──────────────────────────────────────────────────────────────────────────
@@ -56,49 +53,51 @@
     // }
 
     /* /* ──────────────────────────────────────────────────────────────────────────
-    //     ACTIVE PAGE HIGHLIGHT 
-    // ───────────────────────────────────────────────────────────────────────────── */
-    const currentPage = (document.body.dataset.page || 'home').toLowerCase();
+      //     ACTIVE PAGE HIGHLIGHT 
+      // ───────────────────────────────────────────────────────────────────────────── */
+    const currentPage = (document.body.dataset.page || "home").toLowerCase();
 
-    if (currentPage !== 'home') {
+    if (currentPage !== "home") {
         // Match anchors whose href contains the page keyword
-        const allNavLinks = document.querySelectorAll('.nav-links a, .nav-drawer a');
-        allNavLinks.forEach(link => {
-            const href = link.getAttribute('href') || '';
-            const pageName = href.replace(/.*\/|\.html.*/g, '').toLowerCase();
+        const allNavLinks = document.querySelectorAll(
+            ".nav-links a, .nav-drawer a",
+        );
+        allNavLinks.forEach((link) => {
+            const href = link.getAttribute("href") || "";
+            const pageName = href.replace(/.*\/|\.html.*/g, "").toLowerCase();
             if (pageName === currentPage) {
-                link.classList.add('nav-active');
-                link.setAttribute('aria-current', 'page');
+                link.classList.add("nav-active");
+                link.setAttribute("aria-current", "page");
             }
         });
     }
 
     /* ────────────────────────────────────────────────────────────────────────── 
-// HAMBURGER MENU 
-// ───────────────────────────────────────────────────────────────────────── */
-    const hamburger = document.getElementById('navHamburger');
-    const drawer = document.getElementById('navDrawer');
+  // HAMBURGER MENU 
+  // ───────────────────────────────────────────────────────────────────────── */
+    const hamburger = document.getElementById("navHamburger");
+    const drawer = document.getElementById("navDrawer");
     let lastScrollY = window.scrollY;
     const SCROLL_THRESHOLD = 100;
     const DRAWER_BREAKPOINT = 980; // ← change this to your desired breakpoint
 
     function openDrawer() {
         if (!hamburger || !drawer) return;
-        hamburger.classList.add('open');
-        hamburger.setAttribute('aria-expanded', 'true');
-        drawer.classList.add('open');
-        document.body.style.overflow = '';
+        hamburger.classList.add("open");
+        hamburger.setAttribute("aria-expanded", "true");
+        drawer.classList.add("open");
+        document.body.style.overflow = "";
     }
 
     function closeDrawer() {
         if (!hamburger || !drawer) return;
-        hamburger.classList.remove('open');
-        hamburger.setAttribute('aria-expanded', 'false');
-        drawer.classList.remove('open');
+        hamburger.classList.remove("open");
+        hamburger.setAttribute("aria-expanded", "false");
+        drawer.classList.remove("open");
     }
 
     function toggleDrawer() {
-        if (drawer && drawer.classList.contains('open')) {
+        if (drawer && drawer.classList.contains("open")) {
             closeDrawer();
         } else {
             openDrawer();
@@ -113,28 +112,28 @@
     }
 
     // ResizeObserver watches the <body> width (fires less often than scroll)
-    if (typeof ResizeObserver !== 'undefined') {
+    if (typeof ResizeObserver !== "undefined") {
         const resizeObserver = new ResizeObserver(() => handleBreakpoint());
         resizeObserver.observe(document.body);
     } else {
         // Fallback for older browsers
-        window.addEventListener('resize', handleBreakpoint);
+        window.addEventListener("resize", handleBreakpoint);
     }
     // ──────────────────────────────────────────────────────────────────────────
 
     if (hamburger) {
-        hamburger.addEventListener('click', (e) => {
+        hamburger.addEventListener("click", (e) => {
             e.stopPropagation();
             toggleDrawer();
         });
     }
 
     // Close on scroll after threshold
-    window.addEventListener('scroll', () => {
+    window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
         if (
             drawer &&
-            drawer.classList.contains('open') &&
+            drawer.classList.contains("open") &&
             Math.abs(currentScrollY - lastScrollY) > SCROLL_THRESHOLD
         ) {
             closeDrawer();
@@ -143,10 +142,10 @@
     });
 
     // Close on outside click
-    document.addEventListener('click', (e) => {
+    document.addEventListener("click", (e) => {
         if (
             drawer &&
-            drawer.classList.contains('open') &&
+            drawer.classList.contains("open") &&
             !drawer.contains(e.target) &&
             !hamburger.contains(e.target)
         ) {
@@ -155,17 +154,14 @@
     });
 
     // Close on Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') closeDrawer();
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeDrawer();
     });
 
     // Close drawer when a drawer link is clicked
     if (drawer) {
-        drawer.querySelectorAll('a').forEach(link => {
-            link.addEventListener('click', closeDrawer);
+        drawer.querySelectorAll("a").forEach((link) => {
+            link.addEventListener("click", closeDrawer);
         });
     }
-
-
-
 })();

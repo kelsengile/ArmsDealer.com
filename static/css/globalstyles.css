@@ -7,101 +7,101 @@
    ============================================================================ */
 
 :root {
-    /* Color Palette */
-    --color-primary: #3e4a3f;
-    /* Dark olive-green primary */
-    --color-primary-light: #6c7a6b;
-    /* Lighter olive-green */
-    --color-primary-dark: #2a3129;
-    /* Darker olive-green */
-    --color-accent: #8b0000;
-    /* Dark red accent */
-    --color-accent-light: #c41e3a;
-    /* Lighter red */
-    --color-neutral-dark: #303030;
-    /* Dark charcoal */
-    --color-neutral-light: #f5f5f5;
-    /* Off-white */
-    --color-text-primary: #000;
-    /* Black text */
-    --color-text-secondary: #2b2b2b;
-    /* Dark gray text */
-    --color-border: #556155;
-    /* Border color */
-    --color-hover: #556155;
-    /* Hover state */
+  /* Color Palette */
+  --color-primary: #3e4a3f;
+  /* Dark olive-green primary */
+  --color-primary-light: #6c7a6b;
+  /* Lighter olive-green */
+  --color-primary-dark: #2a3129;
+  /* Darker olive-green */
+  --color-accent: #8b0000;
+  /* Dark red accent */
+  --color-accent-light: #c41e3a;
+  /* Lighter red */
+  --color-neutral-dark: #303030;
+  /* Dark charcoal */
+  --color-neutral-light: #f5f5f5;
+  /* Off-white */
+  --color-text-primary: #000;
+  /* Black text */
+  --color-text-secondary: #2b2b2b;
+  /* Dark gray text */
+  --color-border: #556155;
+  /* Border color */
+  --color-hover: #556155;
+  /* Hover state */
 
-    /* Typography */
-    --font-family-base: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    --font-family-heading: 'Arial', sans-serif;
-    --font-size-base: 14px;
-    --font-size-small: 12px;
-    --font-size-large: 16px;
-    --font-size-xl: 30px;
-    --font-size-2xl: 36px;
-    --line-height-base: 1.5;
+  /* Typography */
+  --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  --font-family-heading: "Arial", sans-serif;
+  --font-size-base: 14px;
+  --font-size-small: 12px;
+  --font-size-large: 16px;
+  --font-size-xl: 30px;
+  --font-size-2xl: 36px;
+  --line-height-base: 1.5;
 
-    /* Spacing */
-    --spacing-xs: 4px;
-    --spacing-sm: 8px;
-    --spacing-md: 12px;
-    --spacing-lg: 15px;
-    --spacing-xl: 20px;
-    --spacing-2xl: 30px;
-    --spacing-3xl: 40px;
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 12px;
+  --spacing-lg: 15px;
+  --spacing-xl: 20px;
+  --spacing-2xl: 30px;
+  --spacing-3xl: 40px;
 
-    /* Shadows & Effects */
-    --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
-    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
-    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
-    --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+  /* Shadows & Effects */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
+  --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 
-    /* Border Radius */
-    --radius-sm: 2px;
-    --radius-md: 4px;
-    --radius-lg: 8px;
+  /* Border Radius */
+  --radius-sm: 2px;
+  --radius-md: 4px;
+  --radius-lg: 8px;
 
-    /* Transitions */
-    --transition-fast: 150ms ease-in-out;
-    --transition-base: 300ms ease-in-out;
-    --transition-slow: 500ms ease-in-out;
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 300ms ease-in-out;
+  --transition-slow: 500ms ease-in-out;
 
-    /* Dimensions */
-    --container-max-width: 1700px;
-    --navbar-height: 50px;
-    --topbar-height: 40px;
+  /* Dimensions */
+  --container-max-width: 1700px;
+  --navbar-height: 50px;
+  --topbar-height: 40px;
 
-    --mil-black: #0d0f0d;
-    --mil-dark: #131713;
-    --mil-panel: #1c211c;
-    --mil-border: #2e3a2e;
-    --mil-muted: #4a5e4a;
-    --mil-olive: #6b7c4e;
-    --mil-green: #8aaa6a;
-    --mil-bright: #a8c47a;
-    --mil-text: #c8d4b8;
-    --mil-light: #e2ead4;
-    --mil-redbright: #c0392b;
-    --font-stencil: 'Oswald', 'Impact', sans-serif;
-    --font-times: 'Times New Roman', 'monospace';
-    --font-mono: 'Share Tech Mono', 'Courier New', monospace;
+  --mil-black: #0d0f0d;
+  --mil-dark: #131713;
+  --mil-panel: #1c211c;
+  --mil-border: #2e3a2e;
+  --mil-muted: #4a5e4a;
+  --mil-olive: #6b7c4e;
+  --mil-green: #8aaa6a;
+  --mil-bright: #a8c47a;
+  --mil-text: #c8d4b8;
+  --mil-light: #e2ead4;
+  --mil-redbright: #c0392b;
+  --font-stencil: "Oswald", "Impact", sans-serif;
+  --font-times: "Times New Roman", "monospace";
+  --font-mono: "Share Tech Mono", "Courier New", monospace;
 
-    /* Settings sidebar */
-    --set-width: 280px;
-    --set-bg: #131713;
-    --set-panel: #1a1f1a;
-    --set-border: #2e3a2e;
-    --set-text: #c8d4b8;
-    --set-muted: #4a5e4a;
-    --set-olive: #6b7c4e;
-    --set-green: #8aaa6a;
-    --set-bright: #a8c47a;
-    --set-active-bg: rgba(138, 170, 106, 0.10);
+  /* Settings sidebar */
+  --set-width: 280px;
+  --set-bg: #131713;
+  --set-panel: #1a1f1a;
+  --set-border: #2e3a2e;
+  --set-text: #c8d4b8;
+  --set-muted: #4a5e4a;
+  --set-olive: #6b7c4e;
+  --set-green: #8aaa6a;
+  --set-bright: #a8c47a;
+  --set-active-bg: rgba(138, 170, 106, 0.1);
 
-    --topbar-h: 32px;
-    --navbar-h: 66px;
-    --header-h: 98px;
-    /* topbar + navbar combined */
+  --topbar-h: 32px;
+  --navbar-h: 66px;
+  --header-h: 98px;
+  /* topbar + navbar combined */
 }
 
 /* ============================================================================
@@ -109,61 +109,59 @@
    ============================================================================ */
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
 *::before,
 *::after {
-    box-sizing: inherit;
+  box-sizing: inherit;
 }
 
 html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 body {
-    font-family: var(--font-mono);
-    font-size: 10px;
-    line-height: var(--line-height-base);
-    color: var(--mil-muted);
-    background: linear-gradient(rgba(0, 0, 0, 0.38), rgba(2, 15, 4, 0.516)), url("../assets/images/pageimages/globalmages/camobackground.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: repeat;
-    background-attachment: fixed;
-    min-height: 100vh;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  line-height: var(--line-height-base);
+  color: var(--mil-muted);
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.38), rgba(2, 15, 4, 0.516)),
+    url("../assets/images/pageimages/globalmages/camobackground.png");
+  background-size: cover;
+  background-position: center;
+  background-repeat: repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
 }
-
-
 
 /* ============================================================================================================================
     UTILITY CLASSES
    ============================================================================================================================ */
-
-
 
 /* ============================================================================
    SCROLLBAR STYLING
    ============================================================================ */
 
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+  width: 10px;
+  height: 10px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--color-primary);
+  background: var(--color-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--color-primary-light);
-    border-radius: var(--radius-md);
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background: var(--color-hover);
+  background: var(--color-hover);
 }

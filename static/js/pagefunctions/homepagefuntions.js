@@ -9,216 +9,365 @@
 // SECTION 1: HERO CAROUSEL
 // ===========================================
 (function () {
-    const carousel = document.getElementById('heroCarousel');
-    const slides = carousel.querySelectorAll('.hero-slide');
-    const dotsWrap = document.getElementById('heroDots');
-    const counter = document.getElementById('heroCurrentNum');
-    const prevBtn = document.getElementById('heroPrev');
-    const nextBtn = document.getElementById('heroNext');
+  const carousel = document.getElementById("heroCarousel");
+  const slides = carousel.querySelectorAll(".hero-slide");
+  const dotsWrap = document.getElementById("heroDots");
+  const counter = document.getElementById("heroCurrentNum");
+  const prevBtn = document.getElementById("heroPrev");
+  const nextBtn = document.getElementById("heroNext");
 
-    let current = 0;
-    let animating = false;
-    let autoTimer = null;
-    const TOTAL = slides.length;
-    const DELAY = 10000; // ms between auto-advances
+  let current = 0;
+  let animating = false;
+  let autoTimer = null;
+  const TOTAL = slides.length;
+  const DELAY = 10000; // ms between auto-advances
 
-    /* ── Build dot indicators ─────────────────────────────── */
-    slides.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
-        dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
-        dot.addEventListener('click', () => goTo(i, i > current ? 'right' : 'left'));
-        dotsWrap.appendChild(dot);
+  /* ── Build dot indicators ─────────────────────────────── */
+  slides.forEach((_, i) => {
+    const dot = document.createElement("button");
+    dot.className = "hero-dot" + (i === 0 ? " active" : "");
+    dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+    dot.addEventListener("click", () =>
+      goTo(i, i > current ? "right" : "left"),
+    );
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = dotsWrap.querySelectorAll(".hero-dot");
+
+  /* ── Text elements selector ───────────────────────────── */
+  const TEXT_SELECTORS = ".hero-tag, .hero-title, .hero-subtitle, .hero-cta";
+
+  /* Hard-reset text children so CSS transitions re-fire every time */
+  function resetTextChildren(slide) {
+    slide.querySelectorAll(TEXT_SELECTORS).forEach((el) => {
+      el.style.transition = "none";
+      el.style.opacity = "0";
+      el.style.transform = "translateY(14px)";
     });
+    /* Force reflow so the reset is painted before restoring transitions */
+    void slide.offsetHeight;
+    slide.querySelectorAll(TEXT_SELECTORS).forEach((el) => {
+      el.style.transition = "";
+      el.style.opacity = "";
+      el.style.transform = "";
+    });
+  }
 
-    const dots = dotsWrap.querySelectorAll('.hero-dot');
+  /* ── Core transition ──────────────────────────────────── */
+  function goTo(next, direction) {
+    if (animating || next === current) return;
+    animating = true;
 
-    /* ── Text elements selector ───────────────────────────── */
-    const TEXT_SELECTORS = '.hero-tag, .hero-title, .hero-subtitle, .hero-cta';
+    const outSlide = slides[current];
+    const inSlide = slides[next];
 
-    /* Hard-reset text children so CSS transitions re-fire every time */
-    function resetTextChildren(slide) {
-        slide.querySelectorAll(TEXT_SELECTORS).forEach(el => {
-            el.style.transition = 'none';
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(14px)';
-        });
-        /* Force reflow so the reset is painted before restoring transitions */
-        void slide.offsetHeight;
-        slide.querySelectorAll(TEXT_SELECTORS).forEach(el => {
-            el.style.transition = '';
-            el.style.opacity = '';
-            el.style.transform = '';
-        });
-    }
+    /* 1. Remove active from outgoing slide */
+    outSlide.classList.remove("active");
 
-    /* ── Core transition ──────────────────────────────────── */
-    function goTo(next, direction) {
-        if (animating || next === current) return;
-        animating = true;
-
-        const outSlide = slides[current];
-        const inSlide = slides[next];
-
-        /* 1. Remove active from outgoing slide */
-        outSlide.classList.remove('active');
-
-        /* 2. Force-reset text children on the incoming slide BEFORE
+    /* 2. Force-reset text children on the incoming slide BEFORE
               adding .active, so CSS transitions see a real 0→1 change */
-        resetTextChildren(inSlide);
+    resetTextChildren(inSlide);
 
-        /* 3. Position incoming slide off-screen with no transition */
-        inSlide.style.transition = 'none';
-        inSlide.style.opacity = '0';
-        inSlide.style.transform = direction === 'right'
-            ? 'translateX(60px) scale(1.04)'
-            : 'translateX(-60px) scale(1.04)';
+    /* 3. Position incoming slide off-screen with no transition */
+    inSlide.style.transition = "none";
+    inSlide.style.opacity = "0";
+    inSlide.style.transform =
+      direction === "right"
+        ? "translateX(60px) scale(1.04)"
+        : "translateX(-60px) scale(1.04)";
 
-        /* 4. Force reflow */
-        void inSlide.offsetHeight;
+    /* 4. Force reflow */
+    void inSlide.offsetHeight;
 
-        /* 5. Restore transition and activate */
-        inSlide.style.transition = '';
-        inSlide.style.opacity = '';
-        inSlide.style.transform = '';
-        inSlide.classList.add('active');
+    /* 5. Restore transition and activate */
+    inSlide.style.transition = "";
+    inSlide.style.opacity = "";
+    inSlide.style.transform = "";
+    inSlide.classList.add("active");
 
-        /* Update dots & counter */
-        dots[current].classList.remove('active');
-        dots[next].classList.add('active');
-        counter.textContent = String(next + 1).padStart(2, '0');
+    /* Update dots & counter */
+    dots[current].classList.remove("active");
+    dots[next].classList.add("active");
+    counter.textContent = String(next + 1).padStart(2, "0");
 
-        current = next;
+    current = next;
 
-        /* Unlock after transition completes */
-        setTimeout(() => { animating = false; }, 850);
+    /* Unlock after transition completes */
+    setTimeout(() => {
+      animating = false;
+    }, 850);
 
-        resetAuto();
-    }
+    resetAuto();
+  }
 
-    function goPrev() { goTo((current - 1 + TOTAL) % TOTAL, 'left'); }
-    function goNext() { goTo((current + 1) % TOTAL, 'right'); }
+  function goPrev() {
+    goTo((current - 1 + TOTAL) % TOTAL, "left");
+  }
+  function goNext() {
+    goTo((current + 1) % TOTAL, "right");
+  }
 
-    prevBtn.addEventListener('click', goPrev);
-    nextBtn.addEventListener('click', goNext);
+  prevBtn.addEventListener("click", goPrev);
+  nextBtn.addEventListener("click", goNext);
 
-    /* ── Auto-advance ─────────────────────────────────────── */
-    function startAuto() { autoTimer = setInterval(goNext, DELAY); }
-    function resetAuto() { clearInterval(autoTimer); startAuto(); }
-
+  /* ── Auto-advance ─────────────────────────────────────── */
+  function startAuto() {
+    autoTimer = setInterval(goNext, DELAY);
+  }
+  function resetAuto() {
+    clearInterval(autoTimer);
     startAuto();
+  }
 
-    /* ── Pause on hover ───────────────────────────────────── */
-    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
-    carousel.addEventListener('mouseleave', startAuto);
+  startAuto();
 
-    /* ── Keyboard support ─────────────────────────────────── */
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'ArrowLeft') goPrev();
-        if (e.key === 'ArrowRight') goNext();
-    });
+  /* ── Pause on hover ───────────────────────────────────── */
+  carousel.addEventListener("mouseenter", () => clearInterval(autoTimer));
+  carousel.addEventListener("mouseleave", startAuto);
 
-    /* ── Touch / swipe support ────────────────────────────── */
-    let touchStartX = 0;
-    carousel.addEventListener('touchstart', (e) => {
-        touchStartX = e.changedTouches[0].clientX;
-    }, { passive: true });
-    carousel.addEventListener('touchend', (e) => {
-        const dx = e.changedTouches[0].clientX - touchStartX;
-        if (Math.abs(dx) > 40) dx < 0 ? goNext() : goPrev();
-    }, { passive: true });
+  /* ── Keyboard support ─────────────────────────────────── */
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") goPrev();
+    if (e.key === "ArrowRight") goNext();
+  });
 
+  /* ── Touch / swipe support ────────────────────────────── */
+  let touchStartX = 0;
+  carousel.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].clientX;
+    },
+    { passive: true },
+  );
+  carousel.addEventListener(
+    "touchend",
+    (e) => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 40) dx < 0 ? goNext() : goPrev();
+    },
+    { passive: true },
+  );
 })();
-
 
 // ===========================================
 // SECTION 2: CAROUSEL DATA & CATEGORY MAP
 // ===========================================
 const carouselData = {
-    weapons: [
-        { name: 'Firearms', translationKey: 'homepagecategoryFirearms', image: '../../../static/assets/icons/categoriesicons/firearms.png' },
-        { name: 'Blades', translationKey: 'homepagecategoryBlades', image: '../../../static/assets/icons/categoriesicons/blade.png' },
-        { name: 'Blunts', translationKey: 'homepagecategoryBlunts', image: '../../../static/assets/icons/categoriesicons/blunt.png' },
-        { name: 'Projectile', translationKey: 'homepagecategoryProjectile', image: '../../../static/assets/icons/categoriesicons/projectile.png' },
-        { name: 'Explosives', translationKey: 'homepagecategoryExplosives', image: '../../../static/assets/icons/categoriesicons/explosives.png' },
-        { name: 'Electronic', translationKey: 'homepagecategoryElectronic', image: '../../../static/assets/icons/categoriesicons/electronic.png' },
-        { name: 'Chemical', translationKey: 'homepagecategoryChemical', image: '../../../static/assets/icons/categoriesicons/chemical.png' },
-        { name: 'Biological', translationKey: 'homepagecategoryBiological', image: '../../../static/assets/icons/categoriesicons/biological.png' },
-        { name: 'Vehicle', translationKey: 'homepagecategoryVehicle', image: '../../../static/assets/icons/categoriesicons/vehicle.png' },
-        { name: 'Cyber', translationKey: 'homepagecategoryCyber', image: '../../../static/assets/icons/categoriesicons/cyber.png' },
-        { name: 'Security', translationKey: 'homepagecategorySecurity', image: '../../../static/assets/icons/categoriesicons/security.png' }
-    ],
-    equipment: [
-        { name: 'Ammunition', translationKey: 'homepagecategoryAmmunition', image: '../../../static/assets/icons/categoriesicons/ammunition.png' },
-        { name: 'Protective', translationKey: 'homepagecategoryProtective', image: '../../../static/assets/icons/categoriesicons/protective.png' },
-        { name: 'Tactical', translationKey: 'homepagecategoryTactical', image: '../../../static/assets/icons/categoriesicons/tactical.png' },
-        { name: 'Attachments', translationKey: 'homepagecategoryAttachments', image: '../../../static/assets/icons/categoriesicons/attachments.png' },
-        { name: 'Maintenance', translationKey: 'homepagecategoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
-        { name: 'Storage', translationKey: 'homepagecategoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
-        { name: 'Communication', translationKey: 'homepagecategoryCommunication', image: '../../../static/assets/icons/categoriesicons/communication.png' },
-        { name: 'Survival', translationKey: 'homepagecategorySurvival', image: '../../../static/assets/icons/categoriesicons/survival.png' },
-        { name: 'Training', translationKey: 'homepagecategoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' }
-    ],
-    services: [
-        { name: 'Manufacturing', translationKey: 'homepagecategoryManufacturing', image: '../../../static/assets/icons/categoriesicons/manufacturing.png' },
-        { name: 'Customization', translationKey: 'homepagecategoryCustomization', image: '../../../static/assets/icons/categoriesicons/customization.png' },
-        { name: 'Maintenance', translationKey: 'homepagecategoryMaintenance', image: '../../../static/assets/icons/categoriesicons/maintenance.png' },
-        { name: 'Transport', translationKey: 'homepagecategoryTransport', image: '../../../static/assets/icons/categoriesicons/transport.png' },
-        { name: 'Storage', translationKey: 'homepagecategoryStorage', image: '../../../static/assets/icons/categoriesicons/storage.png' },
-        { name: 'Training', translationKey: 'homepagecategoryTraining', image: '../../../static/assets/icons/categoriesicons/training.png' },
-        { name: 'Protection', translationKey: 'homepagecategoryProtection', image: '../../../static/assets/icons/categoriesicons/protection.png' },
-        { name: 'Consulting', translationKey: 'homepagecategoryConsulting', image: '../../../static/assets/icons/categoriesicons/consulting.png' },
-        { name: 'Research', translationKey: 'homepagecategoryResearch', image: '../../../static/assets/icons/categoriesicons/reasearch.png' },
-        { name: 'Testing', translationKey: 'homepagecategoryTesting', image: '../../../static/assets/icons/categoriesicons/testing.png' },
-        { name: 'Disposal', translationKey: 'homepagecategoryDisposal', image: '../../../static/assets/icons/categoriesicons/disposal.png' },
-        { name: 'Surveillance', translationKey: 'homepagecategorySurveillance', image: '../../../static/assets/icons/categoriesicons/surveilance.png' },
-        { name: 'Contracting', translationKey: 'homepagecategoryContracting', image: '../../../static/assets/icons/categoriesicons/contracting.png' }
-    ]
+  weapons: [
+    {
+      name: "Firearms",
+      translationKey: "homepagecategoryFirearms",
+      image: "../../../static/assets/icons/categoriesicons/firearms.png",
+    },
+    {
+      name: "Blades",
+      translationKey: "homepagecategoryBlades",
+      image: "../../../static/assets/icons/categoriesicons/blade.png",
+    },
+    {
+      name: "Blunts",
+      translationKey: "homepagecategoryBlunts",
+      image: "../../../static/assets/icons/categoriesicons/blunt.png",
+    },
+    {
+      name: "Projectile",
+      translationKey: "homepagecategoryProjectile",
+      image: "../../../static/assets/icons/categoriesicons/projectile.png",
+    },
+    {
+      name: "Explosives",
+      translationKey: "homepagecategoryExplosives",
+      image: "../../../static/assets/icons/categoriesicons/explosives.png",
+    },
+    {
+      name: "Electronic",
+      translationKey: "homepagecategoryElectronic",
+      image: "../../../static/assets/icons/categoriesicons/electronic.png",
+    },
+    {
+      name: "Chemical",
+      translationKey: "homepagecategoryChemical",
+      image: "../../../static/assets/icons/categoriesicons/chemical.png",
+    },
+    {
+      name: "Biological",
+      translationKey: "homepagecategoryBiological",
+      image: "../../../static/assets/icons/categoriesicons/biological.png",
+    },
+    {
+      name: "Vehicle",
+      translationKey: "homepagecategoryVehicle",
+      image: "../../../static/assets/icons/categoriesicons/vehicle.png",
+    },
+    {
+      name: "Cyber",
+      translationKey: "homepagecategoryCyber",
+      image: "../../../static/assets/icons/categoriesicons/cyber.png",
+    },
+    {
+      name: "Security",
+      translationKey: "homepagecategorySecurity",
+      image: "../../../static/assets/icons/categoriesicons/security.png",
+    },
+  ],
+  equipment: [
+    {
+      name: "Ammunition",
+      translationKey: "homepagecategoryAmmunition",
+      image: "../../../static/assets/icons/categoriesicons/ammunition.png",
+    },
+    {
+      name: "Protective",
+      translationKey: "homepagecategoryProtective",
+      image: "../../../static/assets/icons/categoriesicons/protective.png",
+    },
+    {
+      name: "Tactical",
+      translationKey: "homepagecategoryTactical",
+      image: "../../../static/assets/icons/categoriesicons/tactical.png",
+    },
+    {
+      name: "Attachments",
+      translationKey: "homepagecategoryAttachments",
+      image: "../../../static/assets/icons/categoriesicons/attachments.png",
+    },
+    {
+      name: "Maintenance",
+      translationKey: "homepagecategoryMaintenance",
+      image: "../../../static/assets/icons/categoriesicons/maintenance.png",
+    },
+    {
+      name: "Storage",
+      translationKey: "homepagecategoryStorage",
+      image: "../../../static/assets/icons/categoriesicons/storage.png",
+    },
+    {
+      name: "Communication",
+      translationKey: "homepagecategoryCommunication",
+      image: "../../../static/assets/icons/categoriesicons/communication.png",
+    },
+    {
+      name: "Survival",
+      translationKey: "homepagecategorySurvival",
+      image: "../../../static/assets/icons/categoriesicons/survival.png",
+    },
+    {
+      name: "Training",
+      translationKey: "homepagecategoryTraining",
+      image: "../../../static/assets/icons/categoriesicons/training.png",
+    },
+  ],
+  services: [
+    {
+      name: "Manufacturing",
+      translationKey: "homepagecategoryManufacturing",
+      image: "../../../static/assets/icons/categoriesicons/manufacturing.png",
+    },
+    {
+      name: "Customization",
+      translationKey: "homepagecategoryCustomization",
+      image: "../../../static/assets/icons/categoriesicons/customization.png",
+    },
+    {
+      name: "Maintenance",
+      translationKey: "homepagecategoryMaintenance",
+      image: "../../../static/assets/icons/categoriesicons/maintenance.png",
+    },
+    {
+      name: "Transport",
+      translationKey: "homepagecategoryTransport",
+      image: "../../../static/assets/icons/categoriesicons/transport.png",
+    },
+    {
+      name: "Storage",
+      translationKey: "homepagecategoryStorage",
+      image: "../../../static/assets/icons/categoriesicons/storage.png",
+    },
+    {
+      name: "Training",
+      translationKey: "homepagecategoryTraining",
+      image: "../../../static/assets/icons/categoriesicons/training.png",
+    },
+    {
+      name: "Protection",
+      translationKey: "homepagecategoryProtection",
+      image: "../../../static/assets/icons/categoriesicons/protection.png",
+    },
+    {
+      name: "Consulting",
+      translationKey: "homepagecategoryConsulting",
+      image: "../../../static/assets/icons/categoriesicons/consulting.png",
+    },
+    {
+      name: "Research",
+      translationKey: "homepagecategoryResearch",
+      image: "../../../static/assets/icons/categoriesicons/reasearch.png",
+    },
+    {
+      name: "Testing",
+      translationKey: "homepagecategoryTesting",
+      image: "../../../static/assets/icons/categoriesicons/testing.png",
+    },
+    {
+      name: "Disposal",
+      translationKey: "homepagecategoryDisposal",
+      image: "../../../static/assets/icons/categoriesicons/disposal.png",
+    },
+    {
+      name: "Surveillance",
+      translationKey: "homepagecategorySurveillance",
+      image: "../../../static/assets/icons/categoriesicons/surveilance.png",
+    },
+    {
+      name: "Contracting",
+      translationKey: "homepagecategoryContracting",
+      image: "../../../static/assets/icons/categoriesicons/contracting.png",
+    },
+  ],
 };
-
-
 
 const categoryPageMap = {
-    // WEAPONS CATEGORIES
-    'Firearms': '/pages/products/firearms.html',
-    'Blades': '/pages/products/blades.html',
-    'Blunts': '/pages/products/blunts.html',
-    'Projectile': '/pages/products/projectile.html',
-    'Explosives': '/pages/products/explosives.html',
-    'Electronic': '/pages/products/electronic.html',
-    'Chemical': '/pages/products/chemical.html',
-    'Biological': '/pages/products/biological.html',
-    'Vehicle': '/pages/products/vehicle.html',
-    'Cyber': '/pages/products/cyber.html',
-    'Security': '/pages/products/security.html',
+  // WEAPONS CATEGORIES
+  Firearms: "/pages/products/firearms.html",
+  Blades: "/pages/products/blades.html",
+  Blunts: "/pages/products/blunts.html",
+  Projectile: "/pages/products/projectile.html",
+  Explosives: "/pages/products/explosives.html",
+  Electronic: "/pages/products/electronic.html",
+  Chemical: "/pages/products/chemical.html",
+  Biological: "/pages/products/biological.html",
+  Vehicle: "/pages/products/vehicle.html",
+  Cyber: "/pages/products/cyber.html",
+  Security: "/pages/products/security.html",
 
-    // EQUIPMENT CATEGORIES
-    'Ammunition': '/pages/products/ammunition.html',
-    'Protective': '/pages/products/protective.html',
-    'Tactical': '/pages/products/tactical.html',
-    'Attachments': '/pages/products/attachments.html',
-    'Maintenance': '/pages/products/maintenance.html',
-    'Storage': '/pages/products/storage.html',
-    'Communication': '/pages/products/communication.html',
-    'Survival': '/pages/products/survival.html',
-    'Training': '/pages/products/training.html',
+  // EQUIPMENT CATEGORIES
+  Ammunition: "/pages/products/ammunition.html",
+  Protective: "/pages/products/protective.html",
+  Tactical: "/pages/products/tactical.html",
+  Attachments: "/pages/products/attachments.html",
+  Maintenance: "/pages/products/maintenance.html",
+  Storage: "/pages/products/storage.html",
+  Communication: "/pages/products/communication.html",
+  Survival: "/pages/products/survival.html",
+  Training: "/pages/products/training.html",
 
-    // SERVICES CATEGORIES
-    'Manufacturing': '/pages/services/manufacturing.html',
-    'Customization': '/pages/services/customization.html',
-    'Maintenance': '/pages/services/maintenance.html',
-    'Transport': '/pages/services/transport.html',
-    'Storage': '/pages/services/storage.html',
-    'Training': '/pages/services/training.html',
-    'Protection': '/pages/services/protection.html',
-    'Consulting': '/pages/services/consulting.html',
-    'Research': '/pages/services/research.html',
-    'Testing': '/pages/services/testing.html',
-    'Disposal': '/pages/services/disposal.html',
-    'Surveillance': '/pages/services/surveillance.html',
-    'Contracting': '/pages/services/contracting.html'
+  // SERVICES CATEGORIES
+  Manufacturing: "/pages/services/manufacturing.html",
+  Customization: "/pages/services/customization.html",
+  Maintenance: "/pages/services/maintenance.html",
+  Transport: "/pages/services/transport.html",
+  Storage: "/pages/services/storage.html",
+  Training: "/pages/services/training.html",
+  Protection: "/pages/services/protection.html",
+  Consulting: "/pages/services/consulting.html",
+  Research: "/pages/services/research.html",
+  Testing: "/pages/services/testing.html",
+  Disposal: "/pages/services/disposal.html",
+  Surveillance: "/pages/services/surveillance.html",
+  Contracting: "/pages/services/contracting.html",
 };
-
 
 // ===========================================
 // SECTION 2.5: TRANSLATION HELPER
@@ -231,196 +380,210 @@ const categoryPageMap = {
  * @returns {string} - The translated string
  */
 function getTranslatedString(key) {
-    const lang = localStorage.getItem("lang") || "english";
-    return (
-        translations?.[lang]?.[key] ||
-        translations?.["english"]?.[key] ||
-        key
-    );
+  const lang = localStorage.getItem("lang") || "english";
+  return translations?.[lang]?.[key] || translations?.["english"]?.[key] || key;
 }
-
 
 // ===========================================
 // SECTION 2.6: CATEGORY CAROUSEL FUNCTIONS
 // ===========================================
-let currentCategory = 'weapons';
+let currentCategory = "weapons";
 let autoScrollId = null;
 let resetTimeoutId = null;
 let isScrolling = false;
 let direction = 1; // 1 = right, -1 = left
 
 function getWrapperEl() {
-    return document.querySelector('.carousel-wrapper');
+  return document.querySelector(".carousel-wrapper");
 }
 
 function getTrackEl() {
-    return document.querySelector('.carousel-track');
+  return document.querySelector(".carousel-track");
 }
 
 function getMaxScroll() {
-    const wrapperEl = getWrapperEl();
-    const trackEl = getTrackEl();
-    return trackEl.scrollWidth - wrapperEl.clientWidth;
+  const wrapperEl = getWrapperEl();
+  const trackEl = getTrackEl();
+  return trackEl.scrollWidth - wrapperEl.clientWidth;
 }
 
 function startAutoScroll() {
-    clearInterval(autoScrollId);
-    clearTimeout(resetTimeoutId);
+  clearInterval(autoScrollId);
+  clearTimeout(resetTimeoutId);
 
-    let scrollSpeed = 1.5;
-    const wrapperEl = getWrapperEl();
+  let scrollSpeed = 1.5;
+  const wrapperEl = getWrapperEl();
 
-    autoScrollId = setInterval(() => {
-        const currentScroll = wrapperEl.scrollLeft;
-        const maxScroll = getMaxScroll();
+  autoScrollId = setInterval(() => {
+    const currentScroll = wrapperEl.scrollLeft;
+    const maxScroll = getMaxScroll();
 
-        let newScroll = currentScroll + scrollSpeed * direction;
+    let newScroll = currentScroll + scrollSpeed * direction;
 
-        if (newScroll >= maxScroll) {
-            newScroll = maxScroll;
-            direction = -1;
-        } else if (newScroll <= 0) {
-            newScroll = 0;
-            direction = 1;
-        }
+    if (newScroll >= maxScroll) {
+      newScroll = maxScroll;
+      direction = -1;
+    } else if (newScroll <= 0) {
+      newScroll = 0;
+      direction = 1;
+    }
 
-        wrapperEl.scrollLeft = newScroll;
-    }, 30);
+    wrapperEl.scrollLeft = newScroll;
+  }, 30);
 }
 
 function stopAutoScroll() {
-    clearInterval(autoScrollId);
-    clearTimeout(resetTimeoutId);
+  clearInterval(autoScrollId);
+  clearTimeout(resetTimeoutId);
 }
 
 function renderCategory(categoryName) {
-    const wrapperEl = getWrapperEl();
-    const trackEl = getTrackEl();
-    const data = carouselData[categoryName];
+  const wrapperEl = getWrapperEl();
+  const trackEl = getTrackEl();
+  const data = carouselData[categoryName];
 
-    // Clear existing cards
-    trackEl.innerHTML = '';
+  // Clear existing cards
+  trackEl.innerHTML = "";
 
-    // Create new cards for the selected category
-    data.forEach((item, index) => {
-        const card = document.createElement('div');
-        card.className = 'category-rect';
-        card.dataset.index = index;
-        card.dataset.name = item.name; // keep English name for routing
+  // Create new cards for the selected category
+  data.forEach((item, index) => {
+    const card = document.createElement("div");
+    card.className = "category-rect";
+    card.dataset.index = index;
+    card.dataset.name = item.name; // keep English name for routing
 
-        const imageDiv = document.createElement('div');
-        imageDiv.className = 'category-image';
+    const imageDiv = document.createElement("div");
+    imageDiv.className = "category-image";
 
-        const img = document.createElement('img');
-        img.src = item.image;
-        img.alt = item.name;
-        imageDiv.appendChild(img);
+    const img = document.createElement("img");
+    img.src = item.image;
+    img.alt = item.name;
+    imageDiv.appendChild(img);
 
-        const label = document.createElement('div');
-        label.className = 'category-label';
-        // Use translated string for display; store the key for live re-renders
-        label.dataset.translate = item.translationKey;
-        label.textContent = getTranslatedString(item.translationKey);
+    const label = document.createElement("div");
+    label.className = "category-label";
+    // Use translated string for display; store the key for live re-renders
+    label.dataset.translate = item.translationKey;
+    label.textContent = getTranslatedString(item.translationKey);
 
-        card.appendChild(imageDiv);
-        card.appendChild(label);
-        trackEl.appendChild(card);
+    card.appendChild(imageDiv);
+    card.appendChild(label);
+    trackEl.appendChild(card);
 
-        // Add click handler — always route using the English name key
-        card.addEventListener('click', () => {
-            const targetPage = categoryPageMap[item.name];
+    // Add click handler — always route using the English name key
+    card.addEventListener("click", () => {
+      const targetPage = categoryPageMap[item.name];
 
-            trackEl.querySelectorAll('.category-rect').forEach(c => c.classList.remove('active'));
-            card.classList.add('active');
+      trackEl
+        .querySelectorAll(".category-rect")
+        .forEach((c) => c.classList.remove("active"));
+      card.classList.add("active");
 
-            if (targetPage) {
-                window.location.href = targetPage;
-            } else {
-                console.warn(`No page mapping found for: ${item.name}`);
-            }
-        });
+      if (targetPage) {
+        window.location.href = targetPage;
+      } else {
+        console.warn(`No page mapping found for: ${item.name}`);
+      }
     });
+  });
 
-    // Reset scroll position
-    wrapperEl.scrollLeft = 0;
-    direction = 1;
-    isScrolling = false;
+  // Reset scroll position
+  wrapperEl.scrollLeft = 0;
+  direction = 1;
+  isScrolling = false;
 
-    // Restart auto scroll
-    startAutoScroll();
+  // Restart auto scroll
+  startAutoScroll();
 }
 
 function setupCategoryButtons() {
-    const buttonContainer = document.querySelector('.category-buttons');
-    if (!buttonContainer) return;
+  const buttonContainer = document.querySelector(".category-buttons");
+  if (!buttonContainer) return;
 
-    // Each entry: { label shown in English, translationKey, data-category value }
-    const buttonDefs = [
-        { englishLabel: 'Weapons', translationKey: 'homepagecategoryBtnWeapons', category: 'weapons' },
-        { englishLabel: 'Equipment', translationKey: 'homepagecategoryBtnEquipment', category: 'equipment' },
-        { englishLabel: 'Services', translationKey: 'homepagecategoryBtnServices', category: 'services' }
-    ];
+  // Each entry: { label shown in English, translationKey, data-category value }
+  const buttonDefs = [
+    {
+      englishLabel: "Weapons",
+      translationKey: "homepagecategoryBtnWeapons",
+      category: "weapons",
+    },
+    {
+      englishLabel: "Equipment",
+      translationKey: "homepagecategoryBtnEquipment",
+      category: "equipment",
+    },
+    {
+      englishLabel: "Services",
+      translationKey: "homepagecategoryBtnServices",
+      category: "services",
+    },
+  ];
 
-    buttonDefs.forEach(({ translationKey, category }) => {
-        const button = document.createElement('button');
-        button.className = 'category-btn';
-        button.dataset.category = category;
-        button.dataset.translate = translationKey;  // for setLanguage() to pick up
-        button.textContent = getTranslatedString(translationKey);
+  buttonDefs.forEach(({ translationKey, category }) => {
+    const button = document.createElement("button");
+    button.className = "category-btn";
+    button.dataset.category = category;
+    button.dataset.translate = translationKey; // for setLanguage() to pick up
+    button.textContent = getTranslatedString(translationKey);
 
-        if (category === currentCategory) {
-            button.classList.add('active');
-        }
+    if (category === currentCategory) {
+      button.classList.add("active");
+    }
 
-        button.addEventListener('click', () => {
-            document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
+    button.addEventListener("click", () => {
+      document
+        .querySelectorAll(".category-btn")
+        .forEach((btn) => btn.classList.remove("active"));
+      button.classList.add("active");
 
-            currentCategory = category;
-            renderCategory(category);
-        });
-
-        buttonContainer.appendChild(button);
+      currentCategory = category;
+      renderCategory(category);
     });
+
+    buttonContainer.appendChild(button);
+  });
 }
 
 function setupScrollListeners() {
-    const wrapperEl = getWrapperEl();
+  const wrapperEl = getWrapperEl();
 
-    wrapperEl.addEventListener('mousedown', () => {
-        isScrolling = true;
-        stopAutoScroll();
-    });
+  wrapperEl.addEventListener("mousedown", () => {
+    isScrolling = true;
+    stopAutoScroll();
+  });
 
-    wrapperEl.addEventListener('wheel', () => {
-        isScrolling = true;
-        stopAutoScroll();
-    }, { passive: true });
+  wrapperEl.addEventListener(
+    "wheel",
+    () => {
+      isScrolling = true;
+      stopAutoScroll();
+    },
+    { passive: true },
+  );
 
-    wrapperEl.addEventListener('scroll', () => {
-        if (isScrolling) {
-            clearTimeout(resetTimeoutId);
-            resetTimeoutId = setTimeout(() => {
-                isScrolling = false;
-                startAutoScroll();
-            }, 3000);
-        }
-    });
-
-    wrapperEl.addEventListener('mouseup', () => {
+  wrapperEl.addEventListener("scroll", () => {
+    if (isScrolling) {
+      clearTimeout(resetTimeoutId);
+      resetTimeoutId = setTimeout(() => {
         isScrolling = false;
-    });
+        startAutoScroll();
+      }, 3000);
+    }
+  });
 
-    wrapperEl.addEventListener('mouseleave', () => {
-        if (isScrolling) {
-            isScrolling = false;
-            resetTimeoutId = setTimeout(() => {
-                startAutoScroll();
-            }, 3000);
-        }
-    });
+  wrapperEl.addEventListener("mouseup", () => {
+    isScrolling = false;
+  });
+
+  wrapperEl.addEventListener("mouseleave", () => {
+    if (isScrolling) {
+      isScrolling = false;
+      resetTimeoutId = setTimeout(() => {
+        startAutoScroll();
+      }, 3000);
+    }
+  });
 }
-
 
 // ===========================================
 // SECTION 4: SMOOTH SCROLL & CTA HANDLERS
@@ -428,29 +591,28 @@ function setupScrollListeners() {
 /**
  * Smooth scroll behavior for anchor links
  */
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({ behavior: 'smooth' });
-        } else {
-            console.log('Navigate to: ' + this.getAttribute('href'));
-        }
-    });
+document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+  anchor.addEventListener("click", function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" });
+    } else {
+      console.log("Navigate to: " + this.getAttribute("href"));
+    }
+  });
 });
 
 /**
  * CTA Button Handler
  */
 function handleCTA(action) {
-    console.log('User clicked: ' + action);
-    // Replace with your actual navigation logic
-    if (action === 'create account') {
-        alert('Redirecting to product catalog...');
-    }
+  console.log("User clicked: " + action);
+  // Replace with your actual navigation logic
+  if (action === "create account") {
+    alert("Redirecting to product catalog...");
+  }
 }
-
 
 // ===========================================
 // SECTION 5: INTERSECTION OBSERVER (SCROLL ANIMATION)
@@ -459,25 +621,24 @@ function handleCTA(action) {
  * Add subtle animation to trust cards on scroll
  */
 const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
+  threshold: 0.1,
+  rootMargin: "0px 0px -50px 0px",
 };
 
 const observer = new IntersectionObserver(function (entries) {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.opacity = '1';
-            observer.unobserve(entry.target);
-        }
-    });
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.style.opacity = "1";
+      observer.unobserve(entry.target);
+    }
+  });
 }, observerOptions);
 
 // Observe elements for lazy animation
-document.querySelectorAll('.trust-card, .process-step').forEach(el => {
-    el.style.opacity = '0.95'; // Ensure visibility
-    observer.observe(el);
+document.querySelectorAll(".trust-card, .process-step").forEach((el) => {
+  el.style.opacity = "0.95"; // Ensure visibility
+  observer.observe(el);
 });
-
 
 // ===========================================
 // SECTION 6: HOVER EFFECTS & Z-INDEX
@@ -485,88 +646,99 @@ document.querySelectorAll('.trust-card, .process-step').forEach(el => {
 /**
  * Add hover effects to interactive elements
  */
-document.querySelectorAll('.cta-btn, .trust-card, .process-step').forEach(element => {
-    element.addEventListener('mouseenter', function () {
-        // Optional: Add subtle feedback here
-        this.style.zIndex = '100';
+document
+  .querySelectorAll(".cta-btn, .trust-card, .process-step")
+  .forEach((element) => {
+    element.addEventListener("mouseenter", function () {
+      // Optional: Add subtle feedback here
+      this.style.zIndex = "100";
     });
-    element.addEventListener('mouseleave', function () {
-        this.style.zIndex = '1';
+    element.addEventListener("mouseleave", function () {
+      this.style.zIndex = "1";
     });
-});
-
+  });
 
 // ===========================================
 // SECTION 7: FEATURED CAROUSEL (FC)
 // ===========================================
 
 (function () {
-    const pages = Array.from(document.querySelectorAll('.fc-page'));
-    const dotsWrap = document.getElementById('fcDots');
-    const pageLabel = document.getElementById('fcPageLabel');
-    let cur = 0;
+  const pages = Array.from(document.querySelectorAll(".fc-page"));
+  const dotsWrap = document.getElementById("fcDots");
+  const pageLabel = document.getElementById("fcPageLabel");
+  let cur = 0;
 
-    pages.forEach((p, i) => {
-        const dot = document.createElement('div');
-        dot.className = 'fc-dot' + (i === 0 ? ' active' : '');
-        const label = document.createElement('div');
-        label.className = 'fc-dot-label';
-        label.textContent = p.dataset.label || ('Page ' + (i + 1));
-        dot.appendChild(label);
-        dot.addEventListener('click', () => fcGo(i));
-        dotsWrap.appendChild(dot);
+  pages.forEach((p, i) => {
+    const dot = document.createElement("div");
+    dot.className = "fc-dot" + (i === 0 ? " active" : "");
+    const label = document.createElement("div");
+    label.className = "fc-dot-label";
+    label.textContent = p.dataset.label || "Page " + (i + 1);
+    dot.appendChild(label);
+    dot.addEventListener("click", () => fcGo(i));
+    dotsWrap.appendChild(dot);
+  });
+
+  const dots = dotsWrap.querySelectorAll(".fc-dot");
+
+  function fcGo(n) {
+    pages[cur].classList.remove("active");
+    dots[cur].classList.remove("active");
+    cur = (n + pages.length) % pages.length;
+    pages[cur].classList.add("active");
+    dots[cur].classList.add("active");
+    pageLabel.textContent = pages[cur].dataset.label || "Page " + (cur + 1);
+  }
+
+  document
+    .getElementById("fcPrev")
+    .addEventListener("click", () => fcGo(cur - 1));
+  document
+    .getElementById("fcNext")
+    .addEventListener("click", () => fcGo(cur + 1));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") fcGo(cur - 1);
+    if (e.key === "ArrowRight") fcGo(cur + 1);
+  });
+
+  document.querySelectorAll(".fc-card").forEach((card) => {
+    const popup = card.querySelector(".fc-popup");
+    if (!popup) return;
+
+    card.addEventListener("mouseenter", function () {
+      const data = JSON.parse(this.dataset.popup || "{}");
+      if (!data.name) return;
+
+      popup.querySelector(".fc-popup-name").textContent = data.name;
+      popup.querySelector(".fc-popup-desc").textContent = data.desc;
+      const tagsEl = popup.querySelector(".fc-popup-tags");
+      tagsEl.innerHTML = "";
+      (data.tags || []).forEach((t) => {
+        const span = document.createElement("span");
+        span.className = "fc-popup-tag";
+        span.textContent = t;
+        tagsEl.appendChild(span);
+      });
+
+      // Use card's viewport position to decide pop direction
+      const rect = this.getBoundingClientRect();
+      this.classList.toggle(
+        "pop-left",
+        rect.left + rect.width / 2 > window.innerWidth / 2,
+      );
+      this.classList.toggle(
+        "pop-up",
+        rect.top + rect.height / 2 > window.innerHeight / 2,
+      );
+
+      popup.style.display = "block";
     });
 
-    const dots = dotsWrap.querySelectorAll('.fc-dot');
-
-    function fcGo(n) {
-        pages[cur].classList.remove('active');
-        dots[cur].classList.remove('active');
-        cur = (n + pages.length) % pages.length;
-        pages[cur].classList.add('active');
-        dots[cur].classList.add('active');
-        pageLabel.textContent = pages[cur].dataset.label || ('Page ' + (cur + 1));
-    }
-
-    document.getElementById('fcPrev').addEventListener('click', () => fcGo(cur - 1));
-    document.getElementById('fcNext').addEventListener('click', () => fcGo(cur + 1));
-
-    document.addEventListener('keydown', e => {
-        if (e.key === 'ArrowLeft') fcGo(cur - 1);
-        if (e.key === 'ArrowRight') fcGo(cur + 1);
+    card.addEventListener("mouseleave", function () {
+      popup.style.display = "none";
     });
-
-    document.querySelectorAll('.fc-card').forEach(card => {
-        const popup = card.querySelector('.fc-popup');
-        if (!popup) return;
-
-        card.addEventListener('mouseenter', function () {
-            const data = JSON.parse(this.dataset.popup || '{}');
-            if (!data.name) return;
-
-            popup.querySelector('.fc-popup-name').textContent = data.name;
-            popup.querySelector('.fc-popup-desc').textContent = data.desc;
-            const tagsEl = popup.querySelector('.fc-popup-tags');
-            tagsEl.innerHTML = '';
-            (data.tags || []).forEach(t => {
-                const span = document.createElement('span');
-                span.className = 'fc-popup-tag';
-                span.textContent = t;
-                tagsEl.appendChild(span);
-            });
-
-            // Use card's viewport position to decide pop direction
-            const rect = this.getBoundingClientRect();
-            this.classList.toggle('pop-left', rect.left + rect.width / 2 > window.innerWidth / 2);
-            this.classList.toggle('pop-up', rect.top + rect.height / 2 > window.innerHeight / 2);
-
-            popup.style.display = 'block';
-        });
-
-        card.addEventListener('mouseleave', function () {
-            popup.style.display = 'none';
-        });
-    });
+  });
 })();
 
 // ===========================================
@@ -575,12 +747,11 @@ document.querySelectorAll('.cta-btn, .trust-card, .process-step').forEach(elemen
 /**
  * Initialize category carousel on DOM ready
  */
-document.addEventListener('DOMContentLoaded', () => {
-    setupCategoryButtons();
-    setupScrollListeners();
-    renderCategory(currentCategory);
+document.addEventListener("DOMContentLoaded", () => {
+  setupCategoryButtons();
+  setupScrollListeners();
+  renderCategory(currentCategory);
 });
-
 
 // ===========================================
 // SECTION 9: DEVELOPER CONSOLE MESSAGE
@@ -588,11 +759,19 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Console message for developers
  */
-console.log('%c Welcome to Armsdealer Website ', 'background: #a8c49a; color: #1a1f1a; padding: 10px; font-size: 16px; font-weight: bold;');
-console.log('%c Edit content in the HTML sections above ', 'color: #a8c49a; font-size: 12px;');
-console.log('%c All CSS is embedded - no external files needed ', 'color: #a8c49a; font-size: 12px;');
+console.log(
+  "%c Welcome to Armsdealer Website ",
+  "background: #a8c49a; color: #1a1f1a; padding: 10px; font-size: 16px; font-weight: bold;",
+);
+console.log(
+  "%c Edit content in the HTML sections above ",
+  "color: #a8c49a; font-size: 12px;",
+);
+console.log(
+  "%c All CSS is embedded - no external files needed ",
+  "color: #a8c49a; font-size: 12px;",
+);
 
 // ════════════════════════════════════════════════════════════
 // BUNDLES SECTION LOGIC
 // ════════════════════════════════════════════════════════════
-

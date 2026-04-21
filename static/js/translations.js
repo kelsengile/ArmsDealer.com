@@ -4,7 +4,6 @@
 
 const translations = {
     english: {
-
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
@@ -21,7 +20,6 @@ const translations = {
         login: "ArmsDealer--LogIn",
         register: "ArmsDealer--Register",
         password: "ArmsDealer--Password",
-
 
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
@@ -56,27 +54,32 @@ const translations = {
         homepageslide1heropageherotag: "New Arrivals — 2026",
         homepageslide1heropagetitle: "Precision,",
         homepageslide1heropagetitlebr: "Built to Last",
-        homepageslide1heropageherosubtitle: "Explore our latest collection of high-performance rifles engineered for accuracy under any condition",
+        homepageslide1heropageherosubtitle:
+            "Explore our latest collection of high-performance rifles engineered for accuracy under any condition",
         homepageslide1heropageherocta: "Shop Now",
         homepageslide2heropageherotag: "Tactical Gear",
         homepageslide2heropagetitle: "Gear Up.",
         homepageslide2heropagetitlebr: "Stay Ready.",
-        homepageslide2heropageherosubtitle: "From holsters to plate carriers — premium tactical accessories trusted by professionals worldwide.",
+        homepageslide2heropageherosubtitle:
+            "From holsters to plate carriers — premium tactical accessories trusted by professionals worldwide.",
         homepageslide2heropageherocta: "Browse Gear",
         homepageslide3heropageherotag: "Exclusive Deal",
         homepageslide3heropagetitle: "Handguns",
         homepageslide3heropagetitlebr: "Redefined.",
-        homepageslide3heropageherosubtitle: "Compact. Reliable. Lethal. Discover our handgun lineup — now with limited-time pricing on select models.",
+        homepageslide3heropageherosubtitle:
+            "Compact. Reliable. Lethal. Discover our handgun lineup — now with limited-time pricing on select models.",
         homepageslide3heropageherocta: "View Deals",
         homepageslide4heropageherotag: "Ammunition",
         homepageslide4heropagetitle: "Never Run.",
         homepageslide4heropagetitlebr: "Dry Again.",
-        homepageslide4heropageherosubtitle: "Bulk ammo for every caliber, shipped fast and discreetly. Stock up and save with our tiered pricing.",
+        homepageslide4heropageherosubtitle:
+            "Bulk ammo for every caliber, shipped fast and discreetly. Stock up and save with our tiered pricing.",
         homepageslide4heropageherocta: "Buy Ammo",
         homepageslide5heropageherotag: "Services",
         homepageslide5heropagetitle: "Expert Care.",
         homepageslide5heropagetitlebr: "for Your Arms.",
-        homepageslide5heropageherosubtitle: "Maintenance, customization, and consultation — our certified gunsmiths keep your firearms in peak condition.",
+        homepageslide5heropageherosubtitle:
+            "Maintenance, customization, and consultation — our certified gunsmiths keep your firearms in peak condition.",
         homepageslide5heropageherocta: "Our Services",
 
         // Feature Section
@@ -90,7 +93,6 @@ const translations = {
         homepagefeaturepage5: "Services",
         homepagefeatureknowmore: "Know More",
         homepagefeaturecart: "+ Cart",
-
 
         // Category Section
         homepagecategorytitle: "Explore Our Categories:",
@@ -131,13 +133,17 @@ const translations = {
 
         // Why Choose Us Section
         homepagewhychooseusheader: "Why Choose ArmsDealer?",
-        homepagewhychooseusheaderp: "Trusted by collectors, shooters, and professionals worldwide",
+        homepagewhychooseusheaderp:
+            "Trusted by collectors, shooters, and professionals worldwide",
         homepagewhychooseustittle1: "Licensed & Secure",
-        homepagewhychooseusdesc1: "Fully compliant with federal regulations. All transactions verified and secured with industry-standard encryption. Your safety is our priority.",
+        homepagewhychooseusdesc1:
+            "Fully compliant with federal regulations. All transactions verified and secured with industry-standard encryption. Your safety is our priority.",
         homepagewhychooseustittle2: "Wide Selection",
-        homepagewhychooseusdesc2: "Curated inventory spanning firearms, ammunition, tactical gear, and rare collectibles from trusted manufacturers worldwide.",
+        homepagewhychooseusdesc2:
+            "Curated inventory spanning firearms, ammunition, tactical gear, and rare collectibles from trusted manufacturers worldwide.",
         homepagewhychooseustittle3: "Expert Support",
-        homepagewhychooseusdesc3: "Dedicated team available for consultation, verification assistance, and compliance guidance throughout your purchase journey.",
+        homepagewhychooseusdesc3:
+            "Dedicated team available for consultation, verification assistance, and compliance guidance throughout your purchase journey.",
 
         // Purchase Process Section
         homepagepurchaseprocessheader: "Purchase Process",
@@ -158,11 +164,13 @@ const translations = {
         homepagepurchaseprocesssteplabel4: "Secure",
         homepagepurchaseprocesssteplabel5: "Secure Shipping",
         homepagepurchaseprocessprocessinfostrong: "Trust is our priority.",
-        homepagepurchaseprocessprocessinfop: "Every transaction undergoes federal compliance verification. Our streamlined five-step process ensures both legal compliance and customer satisfaction. From browsing to delivery, we maintain the highest standards of security and transparency.",
+        homepagepurchaseprocessprocessinfop:
+            "Every transaction undergoes federal compliance verification. Our streamlined five-step process ensures both legal compliance and customer satisfaction. From browsing to delivery, we maintain the highest standards of security and transparency.",
 
         // Call to Action Section
         homepagecalltoactionheading: "Ready to Get Started?",
-        homepagecalltoactionsubheading: "Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist today.",
+        homepagecalltoactionsubheading:
+            "Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist today.",
         homepagecalltoactionbutton: "Shop Now",
 
         //Footer Section
@@ -180,7 +188,6 @@ const translations = {
         homepagefooterlinksreturns: "Returns & Exchanges",
         homepagefooterlinkswarranty: "Warranty Information",
 
-
         homepagefootertitle3: "About",
         homepagefooterlinksaboutus: "About Us",
         homepagefooterlinksourstory: "Our Story",
@@ -196,7 +203,8 @@ const translations = {
         homepagefooterlinkscookies: "Cookie Policy",
 
         homepagefootertitle5: "Contact Info",
-        homepagefootercopywright: "© 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL Dealer License: 12-AB-12345",
+        homepagefootercopywright:
+            "© 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL Dealer License: 12-AB-12345",
 
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
@@ -229,7 +237,8 @@ const translations = {
         authrememberedpassword: "Remembered your password?",
         authgobackhome: "Go back to",
         authotpsent: "An OTP was sent to",
-        authenterotp: "Enter the 6-digit verification code below to complete registration.",
+        authenterotp:
+            "Enter the 6-digit verification code below to complete registration.",
         authotpcode: "OTP Code:",
         authresetcodesent: "A reset code was sent to",
         authenterresetcode: "Enter the code and your new password below.",
@@ -267,11 +276,9 @@ const translations = {
         accountpanelsessionactive: "Session active",
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "No active session",
-
     },
 
     filipino: {
-
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
@@ -322,27 +329,32 @@ const translations = {
         homepageslide1heropageherotag: "Mga Bagong Dating — 2026",
         homepageslide1heropagetitle: "Katumpakan,",
         homepageslide1heropagetitlebr: "Ginawa upang Tumagal",
-        homepageslide1heropageherosubtitle: "Tuklasin ang aming pinakabagong koleksyon ng high-performance rifles na idinisenyo para sa eksaktong tama sa anumang kondisyon",
+        homepageslide1heropageherosubtitle:
+            "Tuklasin ang aming pinakabagong koleksyon ng high-performance rifles na idinisenyo para sa eksaktong tama sa anumang kondisyon",
         homepageslide1heropageherocta: "Mamili Ngayon",
         homepageslide2heropageherotag: "Tactical na Kagamitan",
         homepageslide2heropagetitle: "Maghanda.",
         homepageslide2heropagetitlebr: "Manatiling Handa.",
-        homepageslide2heropageherosubtitle: "Mula holster hanggang plate carrier — mga premium na tactical accessories na pinagkakatiwalaan ng mga propesyonal sa buong mundo.",
+        homepageslide2heropageherosubtitle:
+            "Mula holster hanggang plate carrier — mga premium na tactical accessories na pinagkakatiwalaan ng mga propesyonal sa buong mundo.",
         homepageslide2heropageherocta: "Tingnan ang Gear",
         homepageslide3heropageherotag: "Eksklusibong Alok",
         homepageslide3heropagetitle: "Handgun",
         homepageslide3heropagetitlebr: "Muling Ipinakilala.",
-        homepageslide3heropageherosubtitle: "Kompakto. Maaasahan. Matibay. Tuklasin ang aming handgun lineup — may limitadong oras na presyong promo.",
+        homepageslide3heropageherosubtitle:
+            "Kompakto. Maaasahan. Matibay. Tuklasin ang aming handgun lineup — may limitadong oras na presyong promo.",
         homepageslide3heropageherocta: "Tingnan ang Deals",
         homepageslide4heropageherotag: "Ammunition",
         homepageslide4heropagetitle: "Hindi Mauubos.",
         homepageslide4heropagetitlebr: "Muli Kang Maubusan.",
-        homepageslide4heropageherosubtitle: "Bulk ammo para sa lahat ng kalibre, mabilis at discreet ang pagpapadala. Mag-stock at mag-save gamit ang tiered pricing.",
+        homepageslide4heropageherosubtitle:
+            "Bulk ammo para sa lahat ng kalibre, mabilis at discreet ang pagpapadala. Mag-stock at mag-save gamit ang tiered pricing.",
         homepageslide4heropageherocta: "Bumili ng Ammo",
         homepageslide5heropageherotag: "Mga Serbisyo",
         homepageslide5heropagetitle: "Ekspertong Pag-aalaga.",
         homepageslide5heropagetitlebr: "para sa Iyong Armas.",
-        homepageslide5heropageherosubtitle: "Maintenance, customization, at consultation — pinapanatili ng aming certified gunsmiths ang iyong armas sa pinakamahusay na kondisyon.",
+        homepageslide5heropageherosubtitle:
+            "Maintenance, customization, at consultation — pinapanatili ng aming certified gunsmiths ang iyong armas sa pinakamahusay na kondisyon.",
         homepageslide5heropageherocta: "Aming Serbisyo",
 
         // Feature Section
@@ -356,7 +368,6 @@ const translations = {
         homepagefeaturepage5: "Mga Serbisyo",
         homepagefeatureknowmore: "Know More",
         homepagefeaturecart: "+ Cart",
-
 
         // Category Section
         homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:",
@@ -397,17 +408,22 @@ const translations = {
 
         // Why Choose Us Section
         homepagewhychooseusheader: "Bakit Piliin ang ArmsDealer?",
-        homepagewhychooseusheaderp: "Pinagkakatiwalaan ng mga kolektor, tagabaril, at mga propesyonal sa buong mundo",
+        homepagewhychooseusheaderp:
+            "Pinagkakatiwalaan ng mga kolektor, tagabaril, at mga propesyonal sa buong mundo",
         homepagewhychooseustittle1: "Lisensyado at Ligtas",
-        homepagewhychooseusdesc1: "Ganap na sumusunod sa mga pederal na regulasyon. Lahat ng transaksyon ay beripikado at protektado gamit ang pamantayang encryption ng industriya. Ang inyong kaligtasan ang aming prayoridad.",
+        homepagewhychooseusdesc1:
+            "Ganap na sumusunod sa mga pederal na regulasyon. Lahat ng transaksyon ay beripikado at protektado gamit ang pamantayang encryption ng industriya. Ang inyong kaligtasan ang aming prayoridad.",
         homepagewhychooseustittle2: "Malawak na Pagpipilian",
-        homepagewhychooseusdesc2: "Piniling imbentaryo na kinabibilangan ng mga baril, bala, taktikal na kagamitan, at bihirang koleksyon mula sa mga pinagkakatiwalaang tagagawa sa buong mundo.",
+        homepagewhychooseusdesc2:
+            "Piniling imbentaryo na kinabibilangan ng mga baril, bala, taktikal na kagamitan, at bihirang koleksyon mula sa mga pinagkakatiwalaang tagagawa sa buong mundo.",
         homepagewhychooseustittle3: "Suporta ng Eksperto",
-        homepagewhychooseusdesc3: "Nakatalagang koponan na handang tumulong sa konsultasyon, beripikasyon, at gabay sa pagsunod sa regulasyon sa buong proseso ng inyong pagbili.",
+        homepagewhychooseusdesc3:
+            "Nakatalagang koponan na handang tumulong sa konsultasyon, beripikasyon, at gabay sa pagsunod sa regulasyon sa buong proseso ng inyong pagbili.",
 
         // Purchase Process Section
         homepagepurchaseprocessheader: "Proseso ng Pagbili",
-        homepagepurchaseprocessdesc: "Simple, ligtas, at ganap na sumusunod sa regulasyon",
+        homepagepurchaseprocessdesc:
+            "Simple, ligtas, at ganap na sumusunod sa regulasyon",
         homepagepurchaseprocessstepnumber1: "1",
         homepagepurchaseprocessstepnumber2: "2",
         homepagepurchaseprocessstepnumber3: "3",
@@ -423,12 +439,15 @@ const translations = {
         homepagepurchaseprocesssteplabel3: "Pagsunod sa Regulasyon",
         homepagepurchaseprocesssteplabel4: "Ligtas",
         homepagepurchaseprocesssteplabel5: "Ligtas na Pagpapadala",
-        homepagepurchaseprocessprocessinfostrong: "Ang tiwala ang aming prayoridad.",
-        homepagepurchaseprocessprocessinfop: "Ang bawat transaksyon ay dumadaan sa beripikasyon ng pederal na pagsunod. Ang aming pinasimpleng limang-hakbang na proseso ay tinitiyak ang legal na pagsunod at kasiyahan ng customer. Mula sa pag-browse hanggang delivery, pinananatili namin ang pinakamataas na antas ng seguridad at transparency.",
+        homepagepurchaseprocessprocessinfostrong:
+            "Ang tiwala ang aming prayoridad.",
+        homepagepurchaseprocessprocessinfop:
+            "Ang bawat transaksyon ay dumadaan sa beripikasyon ng pederal na pagsunod. Ang aming pinasimpleng limang-hakbang na proseso ay tinitiyak ang legal na pagsunod at kasiyahan ng customer. Mula sa pag-browse hanggang delivery, pinananatili namin ang pinakamataas na antas ng seguridad at transparency.",
 
         // Call to Action Section
         homepagecalltoactionheading: "Handa ka na bang magsimula?",
-        homepagecalltoactionsubheading: "Sumali sa libo-libong nasisiyahang customer. Tuklasin ang aming malawak na pagpipilian o makipag-usap sa isang espesyalista ngayon.",
+        homepagecalltoactionsubheading:
+            "Sumali sa libo-libong nasisiyahang customer. Tuklasin ang aming malawak na pagpipilian o makipag-usap sa isang espesyalista ngayon.",
         homepagecalltoactionbutton: "Mamili Ngayon",
 
         // Footer Section
@@ -461,7 +480,8 @@ const translations = {
         homepagefooterlinkscookies: "Patakaran sa Cookie",
 
         homepagefootertitle5: "Impormasyon sa Pakikipag-ugnayan",
-        homepagefootercopywright: "© 2025 Armsdealer. Lahat ng karapatan ay nakalaan. Lisensyado at kinokontrol ng mga pederal na awtoridad. | Lisensya ng FFL Dealer: 12-AB-12345",
+        homepagefootercopywright:
+            "© 2025 Armsdealer. Lahat ng karapatan ay nakalaan. Lisensyado at kinokontrol ng mga pederal na awtoridad. | Lisensya ng FFL Dealer: 12-AB-12345",
 
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
@@ -494,10 +514,12 @@ const translations = {
         authrememberedpassword: "Naalala mo na ang password?",
         authgobackhome: "Bumalik sa",
         authotpsent: "Isang OTP ang ipinadala sa",
-        authenterotp: "Ilagay ang 6-digit na verification code sa ibaba upang makumpleto ang registration.",
+        authenterotp:
+            "Ilagay ang 6-digit na verification code sa ibaba upang makumpleto ang registration.",
         authotpcode: "OTP Code:",
         authresetcodesent: "Isang reset code ang ipinadala sa",
-        authenterresetcode: "Ilagay ang code at ang iyong bagong password sa ibaba.",
+        authenterresetcode:
+            "Ilagay ang code at ang iyong bagong password sa ibaba.",
         authresetcode: "Reset Code:",
         authclickhere: "I-click dito",
         authhome: "Tahanan",
@@ -532,11 +554,9 @@ const translations = {
         accountpanelsessionactive: "Aktibo ang session",
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "Walang aktibong session",
-
     },
 
     japanese: {
-
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
@@ -587,27 +607,32 @@ const translations = {
         homepageslide1heropageherotag: "新着商品 — 2026",
         homepageslide1heropagetitle: "精密さ、",
         homepageslide1heropagetitlebr: "長く使える品質",
-        homepageslide1heropageherosubtitle: "あらゆる環境で精度を発揮する高性能ライフルの最新コレクションをご覧ください",
+        homepageslide1heropageherosubtitle:
+            "あらゆる環境で精度を発揮する高性能ライフルの最新コレクションをご覧ください",
         homepageslide1heropageherocta: "今すぐ購入",
         homepageslide2heropageherotag: "タクティカルギア",
         homepageslide2heropagetitle: "装備せよ。",
         homepageslide2heropagetitlebr: "備えよ。",
-        homepageslide2heropageherosubtitle: "ホルスターからプレートキャリアまで、世界中のプロに信頼される高品質タクティカルアクセサリー。",
+        homepageslide2heropageherosubtitle:
+            "ホルスターからプレートキャリアまで、世界中のプロに信頼される高品質タクティカルアクセサリー。",
         homepageslide2heropageherocta: "ギアを見る",
         homepageslide3heropageherotag: "限定セール",
         homepageslide3heropagetitle: "ハンドガン",
         homepageslide3heropagetitlebr: "再定義。",
-        homepageslide3heropageherosubtitle: "コンパクト。信頼性。パワフル。限定価格のハンドガンラインナップをチェック。",
+        homepageslide3heropageherosubtitle:
+            "コンパクト。信頼性。パワフル。限定価格のハンドガンラインナップをチェック。",
         homepageslide3heropageherocta: "セールを見る",
         homepageslide4heropageherotag: "弾薬",
         homepageslide4heropagetitle: "止まらない。",
         homepageslide4heropagetitlebr: "弾切れしない。",
-        homepageslide4heropageherosubtitle: "あらゆる口径の弾薬を迅速かつ目立たず配送。まとめ買いでお得に。",
+        homepageslide4heropageherosubtitle:
+            "あらゆる口径の弾薬を迅速かつ目立たず配送。まとめ買いでお得に。",
         homepageslide4heropageherocta: "購入する",
         homepageslide5heropageherotag: "サービス",
         homepageslide5heropagetitle: "専門ケア。",
         homepageslide5heropagetitlebr: "あなたの武器に。",
-        homepageslide5heropageherosubtitle: "メンテナンス、カスタマイズ、相談サービス。認定ガンスミスが最高の状態を維持します。",
+        homepageslide5heropageherosubtitle:
+            "メンテナンス、カスタマイズ、相談サービス。認定ガンスミスが最高の状態を維持します。",
         homepageslide5heropageherocta: "サービスを見る",
 
         // Feature Section
@@ -661,13 +686,17 @@ const translations = {
 
         // Why Choose Us Section
         homepagewhychooseusheader: "なぜArmsDealerを選ぶのか？",
-        homepagewhychooseusheaderp: "世界中のコレクター、射手、プロフェッショナルから信頼されています",
+        homepagewhychooseusheaderp:
+            "世界中のコレクター、射手、プロフェッショナルから信頼されています",
         homepagewhychooseustittle1: "認可済み＆安全",
-        homepagewhychooseusdesc1: "連邦規制に完全準拠。すべての取引は検証され、業界標準の暗号化で保護されています。お客様の安全が最優先です。",
+        homepagewhychooseusdesc1:
+            "連邦規制に完全準拠。すべての取引は検証され、業界標準の暗号化で保護されています。お客様の安全が最優先です。",
         homepagewhychooseustittle2: "豊富な品揃え",
-        homepagewhychooseusdesc2: "銃器、弾薬、戦術装備、希少なコレクターアイテムなど、世界中の信頼できるメーカーから厳選された在庫を提供しています。",
+        homepagewhychooseusdesc2:
+            "銃器、弾薬、戦術装備、希少なコレクターアイテムなど、世界中の信頼できるメーカーから厳選された在庫を提供しています。",
         homepagewhychooseustittle3: "専門サポート",
-        homepagewhychooseusdesc3: "専任チームが相談、確認支援、規制遵守のガイダンスを購入プロセス全体を通じて提供します。",
+        homepagewhychooseusdesc3:
+            "専任チームが相談、確認支援、規制遵守のガイダンスを購入プロセス全体を通じて提供します。",
 
         // Purchase Process Section
         homepagepurchaseprocessheader: "購入プロセス",
@@ -688,11 +717,13 @@ const translations = {
         homepagepurchaseprocesssteplabel4: "安全",
         homepagepurchaseprocesssteplabel5: "安全な配送",
         homepagepurchaseprocessprocessinfostrong: "信頼が最優先です。",
-        homepagepurchaseprocessprocessinfop: "すべての取引は連邦規制の確認を受けます。当社のシンプルな5ステップのプロセスは、法令遵守と顧客満足の両方を保証します。閲覧から配送まで、最高水準のセキュリティと透明性を維持します。",
+        homepagepurchaseprocessprocessinfop:
+            "すべての取引は連邦規制の確認を受けます。当社のシンプルな5ステップのプロセスは、法令遵守と顧客満足の両方を保証します。閲覧から配送まで、最高水準のセキュリティと透明性を維持します。",
 
         // Call to Action Section
         homepagecalltoactionheading: "始める準備はできましたか？",
-        homepagecalltoactionsubheading: "何千もの満足した顧客に加わりましょう。幅広い商品ラインナップをご覧いただくか、今すぐ専門スタッフにご相談ください。",
+        homepagecalltoactionsubheading:
+            "何千もの満足した顧客に加わりましょう。幅広い商品ラインナップをご覧いただくか、今すぐ専門スタッフにご相談ください。",
         homepagecalltoactionbutton: "今すぐ購入",
 
         // Footer Section
@@ -725,7 +756,8 @@ const translations = {
         homepagefooterlinkscookies: "クッキーポリシー",
 
         homepagefootertitle5: "連絡先情報",
-        homepagefootercopywright: "© 2025 Armsdealer. 無断転載を禁じます。連邦当局により認可・規制されています。 | FFLディーラーライセンス: 12-AB-12345",
+        homepagefootercopywright:
+            "© 2025 Armsdealer. 無断転載を禁じます。連邦当局により認可・規制されています。 | FFLディーラーライセンス: 12-AB-12345",
 
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
@@ -758,7 +790,8 @@ const translations = {
         authrememberedpassword: "パスワードを思い出しましたか?",
         authgobackhome: "ホームに戻る",
         authotpsent: "OTPが送信されました",
-        authenterotp: "登録を完了するために、以下の6桁の確認コードを入力してください。",
+        authenterotp:
+            "登録を完了するために、以下の6桁の確認コードを入力してください。",
         authotpcode: "OTPコード:",
         authresetcodesent: "リセットコードが送信されました",
         authenterresetcode: "以下のコードと新しいパスワードを入力してください。",
@@ -796,12 +829,9 @@ const translations = {
         accountpanelsessionactive: "セッション有効",
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "アクティブなセッションなし",
-
     },
 
     spanish: {
-
-
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
@@ -818,7 +848,6 @@ const translations = {
         login: "ArmsDealer--Iniciar sesión",
         register: "ArmsDealer--Registrarse",
         password: "ArmsDealer--Contraseña",
-
 
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
@@ -853,27 +882,32 @@ const translations = {
         homepageslide1heropageherotag: "Nuevos productos — 2026",
         homepageslide1heropagetitle: "Precisión,",
         homepageslide1heropagetitlebr: "Hecho para durar",
-        homepageslide1heropageherosubtitle: "Explora nuestra última colección de rifles de alto rendimiento diseñados para máxima precisión en cualquier condición",
+        homepageslide1heropageherosubtitle:
+            "Explora nuestra última colección de rifles de alto rendimiento diseñados para máxima precisión en cualquier condición",
         homepageslide1heropageherocta: "Comprar ahora",
         homepageslide2heropageherotag: "Equipo táctico",
         homepageslide2heropagetitle: "Prepárate.",
         homepageslide2heropagetitlebr: "Mantente listo.",
-        homepageslide2heropageherosubtitle: "Desde fundas hasta chalecos antibalas — accesorios tácticos de primera calidad confiados por profesionales en todo el mundo.",
+        homepageslide2heropageherosubtitle:
+            "Desde fundas hasta chalecos antibalas — accesorios tácticos de primera calidad confiados por profesionales en todo el mundo.",
         homepageslide2heropageherocta: "Ver equipo",
         homepageslide3heropageherotag: "Oferta exclusiva",
         homepageslide3heropagetitle: "Pistolas",
         homepageslide3heropagetitlebr: "Redefinidas.",
-        homepageslide3heropageherosubtitle: "Compactas. Confiables. Potentes. Descubre nuestra línea de pistolas con precios limitados.",
+        homepageslide3heropageherosubtitle:
+            "Compactas. Confiables. Potentes. Descubre nuestra línea de pistolas con precios limitados.",
         homepageslide3heropageherocta: "Ver ofertas",
         homepageslide4heropageherotag: "Munición",
         homepageslide4heropagetitle: "Nunca te quedes",
         homepageslide4heropagetitlebr: "sin balas.",
-        homepageslide4heropageherosubtitle: "Munición al por mayor para todos los calibres, envío rápido y discreto. Ahorra con precios escalonados.",
+        homepageslide4heropageherosubtitle:
+            "Munición al por mayor para todos los calibres, envío rápido y discreto. Ahorra con precios escalonados.",
         homepageslide4heropageherocta: "Comprar munición",
         homepageslide5heropageherotag: "Servicios",
         homepageslide5heropagetitle: "Cuidado experto.",
         homepageslide5heropagetitlebr: "para tus armas.",
-        homepageslide5heropageherosubtitle: "Mantenimiento, personalización y asesoría — nuestros armeros certificados mantienen tus armas en óptimas condiciones.",
+        homepageslide5heropageherosubtitle:
+            "Mantenimiento, personalización y asesoría — nuestros armeros certificados mantienen tus armas en óptimas condiciones.",
         homepageslide5heropageherocta: "Nuestros servicios",
 
         // Feature Section
@@ -927,13 +961,17 @@ const translations = {
 
         // Why Choose Us Section
         homepagewhychooseusheader: "¿Por qué elegir ArmsDealer?",
-        homepagewhychooseusheaderp: "Confiado por coleccionistas, tiradores y profesionales en todo el mundo",
+        homepagewhychooseusheaderp:
+            "Confiado por coleccionistas, tiradores y profesionales en todo el mundo",
         homepagewhychooseustittle1: "Licenciado y Seguro",
-        homepagewhychooseusdesc1: "Totalmente conforme con las regulaciones federales. Todas las transacciones están verificadas y protegidas con encriptación estándar de la industria. Su seguridad es nuestra prioridad.",
+        homepagewhychooseusdesc1:
+            "Totalmente conforme con las regulaciones federales. Todas las transacciones están verificadas y protegidas con encriptación estándar de la industria. Su seguridad es nuestra prioridad.",
         homepagewhychooseustittle2: "Amplia Selección",
-        homepagewhychooseusdesc2: "Inventario seleccionado que incluye armas de fuego, municiones, equipo táctico y coleccionables raros de fabricantes confiables de todo el mundo.",
+        homepagewhychooseusdesc2:
+            "Inventario seleccionado que incluye armas de fuego, municiones, equipo táctico y coleccionables raros de fabricantes confiables de todo el mundo.",
         homepagewhychooseustittle3: "Soporte Experto",
-        homepagewhychooseusdesc3: "Equipo dedicado disponible para consultas, asistencia en verificación y orientación de cumplimiento durante todo su proceso de compra.",
+        homepagewhychooseusdesc3:
+            "Equipo dedicado disponible para consultas, asistencia en verificación y orientación de cumplimiento durante todo su proceso de compra.",
 
         // Purchase Process Section
         homepagepurchaseprocessheader: "Proceso de Compra",
@@ -953,12 +991,15 @@ const translations = {
         homepagepurchaseprocesssteplabel3: "Cumplimiento",
         homepagepurchaseprocesssteplabel4: "Seguro",
         homepagepurchaseprocesssteplabel5: "Envío Seguro",
-        homepagepurchaseprocessprocessinfostrong: "La confianza es nuestra prioridad.",
-        homepagepurchaseprocessprocessinfop: "Cada transacción pasa por una verificación de cumplimiento federal. Nuestro proceso simplificado de cinco pasos garantiza tanto el cumplimiento legal como la satisfacción del cliente. Desde la exploración hasta la entrega, mantenemos los más altos estándares de seguridad y transparencia.",
+        homepagepurchaseprocessprocessinfostrong:
+            "La confianza es nuestra prioridad.",
+        homepagepurchaseprocessprocessinfop:
+            "Cada transacción pasa por una verificación de cumplimiento federal. Nuestro proceso simplificado de cinco pasos garantiza tanto el cumplimiento legal como la satisfacción del cliente. Desde la exploración hasta la entrega, mantenemos los más altos estándares de seguridad y transparencia.",
 
         // Call to Action Section
         homepagecalltoactionheading: "¿Listo para comenzar?",
-        homepagecalltoactionsubheading: "Únase a miles de clientes satisfechos. Explore nuestra amplia selección o hable con un especialista hoy mismo.",
+        homepagecalltoactionsubheading:
+            "Únase a miles de clientes satisfechos. Explore nuestra amplia selección o hable con un especialista hoy mismo.",
         homepagecalltoactionbutton: "Comprar Ahora",
 
         // Footer Section
@@ -991,7 +1032,8 @@ const translations = {
         homepagefooterlinkscookies: "Política de Cookies",
 
         homepagefootertitle5: "Información de Contacto",
-        homepagefootercopywright: "© 2025 Armsdealer. Todos los derechos reservados. Licenciado y regulado por autoridades federales. | Licencia FFL del distribuidor: 12-AB-12345",
+        homepagefootercopywright:
+            "© 2025 Armsdealer. Todos los derechos reservados. Licenciado y regulado por autoridades federales. | Licencia FFL del distribuidor: 12-AB-12345",
 
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
@@ -1024,10 +1066,12 @@ const translations = {
         authrememberedpassword: "¿Recordaste tu contraseña?",
         authgobackhome: "Volver al inicio",
         authotpsent: "Se envió un OTP a",
-        authenterotp: "Ingresa el código de verificación de 6 dígitos a continuación para completar el registro.",
+        authenterotp:
+            "Ingresa el código de verificación de 6 dígitos a continuación para completar el registro.",
         authotpcode: "Código OTP:",
         authresetcodesent: "Se envió un código de restablecimiento a",
-        authenterresetcode: "Ingresa el código y tu nueva contraseña a continuación.",
+        authenterresetcode:
+            "Ingresa el código y tu nueva contraseña a continuación.",
         authresetcode: "Código de Restablecimiento:",
         authclickhere: "Haz clic aquí",
         authhome: "Inicio",
@@ -1062,11 +1106,9 @@ const translations = {
         accountpanelsessionactive: "Sesión activa",
         accountpanelcustomerclearance: "AUTORIZACIÓN DE CLIENTE",
         accountpanelnoactivesession: "Sin sesión activa",
-
     },
 
     mandarin: {
-
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1083,7 +1125,6 @@ const translations = {
         login: "ArmsDealer--登录",
         register: "ArmsDealer--注册",
         password: "ArmsDealer--密码",
-
 
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
@@ -1118,27 +1159,32 @@ const translations = {
         homepageslide1heropageherotag: "新品上市 — 2026",
         homepageslide1heropagetitle: "精准，",
         homepageslide1heropagetitlebr: "经久耐用",
-        homepageslide1heropageherosubtitle: "探索我们最新的高性能步枪系列，在任何环境下都能保持精准射击",
+        homepageslide1heropageherosubtitle:
+            "探索我们最新的高性能步枪系列，在任何环境下都能保持精准射击",
         homepageslide1heropageherocta: "立即购买",
         homepageslide2heropageherotag: "战术装备",
         homepageslide2heropagetitle: "装备起来。",
         homepageslide2heropagetitlebr: "随时待命。",
-        homepageslide2heropageherosubtitle: "从枪套到防弹背心——全球专业人士信赖的高端战术装备。",
+        homepageslide2heropageherosubtitle:
+            "从枪套到防弹背心——全球专业人士信赖的高端战术装备。",
         homepageslide2heropageherocta: "浏览装备",
         homepageslide3heropageherotag: "限时优惠",
         homepageslide3heropagetitle: "手枪",
         homepageslide3heropagetitlebr: "全新定义。",
-        homepageslide3heropageherosubtitle: "紧凑、可靠、强劲。探索我们的手枪系列限时优惠价格。",
+        homepageslide3heropageherosubtitle:
+            "紧凑、可靠、强劲。探索我们的手枪系列限时优惠价格。",
         homepageslide3heropageherocta: "查看优惠",
         homepageslide4heropageherotag: "弹药",
         homepageslide4heropagetitle: "永不缺弹。",
         homepageslide4heropagetitlebr: "再也不用担心。",
-        homepageslide4heropageherosubtitle: "全口径弹药批量供应，快速且隐秘配送。分级价格更省钱。",
+        homepageslide4heropageherosubtitle:
+            "全口径弹药批量供应，快速且隐秘配送。分级价格更省钱。",
         homepageslide4heropageherocta: "购买弹药",
         homepageslide5heropageherotag: "服务",
         homepageslide5heropagetitle: "专业护理。",
         homepageslide5heropagetitlebr: "守护你的武器。",
-        homepageslide5heropageherosubtitle: "维护、定制与咨询服务——认证枪械师确保您的装备始终处于最佳状态。",
+        homepageslide5heropageherosubtitle:
+            "维护、定制与咨询服务——认证枪械师确保您的装备始终处于最佳状态。",
         homepageslide5heropageherocta: "查看服务",
 
         // Feature Section
@@ -1152,7 +1198,6 @@ const translations = {
         homepagefeaturepage5: "服务",
         homepagefeatureknowmore: "了解更多",
         homepagefeaturecart: "+ 加入购物车",
-
 
         // Category Section
         homepagecategorytitle: "探索我们的类别：",
@@ -1195,11 +1240,14 @@ const translations = {
         homepagewhychooseusheader: "为什么选择ArmsDealer？",
         homepagewhychooseusheaderp: "受到全球收藏家、射击者和专业人士的信赖",
         homepagewhychooseustittle1: "持证与安全",
-        homepagewhychooseusdesc1: "完全符合联邦法规。所有交易均经过验证，并采用行业标准加密保护。您的安全是我们的首要任务。",
+        homepagewhychooseusdesc1:
+            "完全符合联邦法规。所有交易均经过验证，并采用行业标准加密保护。您的安全是我们的首要任务。",
         homepagewhychooseustittle2: "丰富的选择",
-        homepagewhychooseusdesc2: "精选库存涵盖枪械、弹药、战术装备以及来自全球可信制造商的稀有收藏品。",
+        homepagewhychooseusdesc2:
+            "精选库存涵盖枪械、弹药、战术装备以及来自全球可信制造商的稀有收藏品。",
         homepagewhychooseustittle3: "专家支持",
-        homepagewhychooseusdesc3: "专业团队在整个购买过程中提供咨询、验证协助以及合规指导服务。",
+        homepagewhychooseusdesc3:
+            "专业团队在整个购买过程中提供咨询、验证协助以及合规指导服务。",
 
         // Purchase Process Section
         homepagepurchaseprocessheader: "购买流程",
@@ -1220,11 +1268,13 @@ const translations = {
         homepagepurchaseprocesssteplabel4: "安全",
         homepagepurchaseprocesssteplabel5: "安全运输",
         homepagepurchaseprocessprocessinfostrong: "信任是我们的首要任务。",
-        homepagepurchaseprocessprocessinfop: "每笔交易都经过联邦合规验证。我们简化的五步流程确保法律合规和客户满意。从浏览到交付，我们始终保持最高水平的安全性和透明度。",
+        homepagepurchaseprocessprocessinfop:
+            "每笔交易都经过联邦合规验证。我们简化的五步流程确保法律合规和客户满意。从浏览到交付，我们始终保持最高水平的安全性和透明度。",
 
         // Call to Action Section
         homepagecalltoactionheading: "准备开始了吗？",
-        homepagecalltoactionsubheading: "加入成千上万满意的客户。浏览我们丰富的产品选择，或立即与专家联系。",
+        homepagecalltoactionsubheading:
+            "加入成千上万满意的客户。浏览我们丰富的产品选择，或立即与专家联系。",
         homepagecalltoactionbutton: "立即购买",
 
         // Footer Section
@@ -1257,7 +1307,8 @@ const translations = {
         homepagefooterlinkscookies: "Cookie政策",
 
         homepagefootertitle5: "联系信息",
-        homepagefootercopywright: "© 2025 Armsdealer。保留所有权利。由联邦机构许可并监管。 | FFL经销商许可证：12-AB-12345",
+        homepagefootercopywright:
+            "© 2025 Armsdealer。保留所有权利。由联邦机构许可并监管。 | FFL经销商许可证：12-AB-12345",
 
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
@@ -1328,20 +1379,17 @@ const translations = {
         accountpanelsessionactive: "会话活跃",
         accountpanelcustomerclearance: "客户权限",
         accountpanelnoactivesession: "无活跃会话",
-
-    }
+    },
 };
 
 // ─── LANGUAGE ─────────────────────────────────────────────────────
 function setLanguage(lang) {
     // UI strings update instantly (navbar, homepage copy, etc.)
     const elements = document.querySelectorAll("[data-translate]");
-    elements.forEach(el => {
+    elements.forEach((el) => {
         const key = el.getAttribute("data-translate");
         const value =
-            translations[lang]?.[key] ||
-            translations["english"][key] ||
-            key;
+            translations[lang]?.[key] || translations["english"][key] || key;
 
         if (el.children.length === 0) {
             el.textContent = value;
@@ -1364,14 +1412,13 @@ function setLanguage(lang) {
 
 window.setLanguage = setLanguage;
 
-
 // ─── CURRENCY ─────────────────────────────────────────────────────
 const currencyRates = {
     PHP: { symbol: "₱", rate: 1.0 },
     USD: { symbol: "$", rate: 0.0175 },
     EUR: { symbol: "€", rate: 0.0162 },
     JPY: { symbol: "JP¥", rate: 2.627 },
-    CNY: { symbol: "CN¥", rate: 0.127 }
+    CNY: { symbol: "CN¥", rate: 0.127 },
 };
 
 function formatPrice(phpAmount, currency) {
@@ -1381,7 +1428,10 @@ function formatPrice(phpAmount, currency) {
     const noDecimals = ["PHP", "JPY"];
     const formatted = noDecimals.includes(currency)
         ? converted.toLocaleString("en-US", { maximumFractionDigits: 0 })
-        : converted.toLocaleString("en-US", { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        : converted.toLocaleString("en-US", {
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2,
+        });
 
     return symbol + formatted;
 }
@@ -1391,17 +1441,18 @@ function setCurrency(currency) {
     document.cookie = `currency=${currency}; path=/`;
 
     // Update every price element that has a data-php-price attribute
-    document.querySelectorAll("[data-php-price]").forEach(el => {
+    document.querySelectorAll("[data-php-price]").forEach((el) => {
         const php = parseFloat(el.getAttribute("data-php-price"));
         el.textContent = formatPrice(php, currency);
     });
 
     // Also update data-popup prices on fc-cards
-    document.querySelectorAll("[data-popup]").forEach(card => {
+    document.querySelectorAll("[data-popup]").forEach((card) => {
         try {
             const popup = JSON.parse(card.getAttribute("data-popup"));
             if (popup.php_price !== undefined) {
-                const discounted = popup.php_price - (popup.php_price * (popup.php_discount / 100));
+                const discounted =
+                    popup.php_price - popup.php_price * (popup.php_discount / 100);
                 popup.old = formatPrice(popup.php_price, currency);
                 popup.new = formatPrice(discounted, currency);
                 card.setAttribute("data-popup", JSON.stringify(popup));
@@ -1411,7 +1462,6 @@ function setCurrency(currency) {
 }
 
 window.setCurrency = setCurrency;
-
 
 // ─── INIT ──────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
