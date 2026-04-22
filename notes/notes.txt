@@ -116,8 +116,6 @@ GLOBAL
     Cyber ............ Malware Tools, Exploit Kits, Hacking Devices
     Security ......... Access Control Weapons, Crowd Control Devices, Non-lethal Weapons
 
-    * "Behicle" in source -- assumed typo, corrected to "Vehicle"
-
   EQUIPMENT
   ---------
     Ammunition ....... Bullets, Shells, Cartridges, Energy Cells
@@ -145,8 +143,6 @@ GLOBAL
     Disposal ......... Decommissioning, Hazardous Disposal, Recycling
     Surveillance ..... Monitoring Services, Reconnaissance, Intelligence Gathering
     Contracting ...... Private Contracts, Government Contracts, Defense Contracts
-
-    * "Cuztomization" in source -- assumed typo, corrected to "Customization"
 
 
 ================================================================================
