@@ -327,14 +327,6 @@
   transform: scaleX(1);
 }
 
-/* Small bracket icon inside active link */
-.nav-links a.nav-active::before {
-  content: "▸";
-  font-size: 9px;
-  margin-right: 6px;
-  color: var(--mil-bright);
-  opacity: 0.85;
-}
 
 /* ── Search & Cart buttons ────────────────────────────────────── */
 .nav-links button {
@@ -526,12 +518,6 @@
   background: rgba(138, 170, 106, 0.1);
   border-left: 3px solid var(--mil-bright);
   padding-left: 25px;
-}
-
-.nav-drawer a.nav-active::before {
-  content: "▸";
-  font-size: 10px;
-  color: var(--mil-bright);
 }
 
 .nav-drawer-icon {
