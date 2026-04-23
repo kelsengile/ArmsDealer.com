@@ -37,11 +37,194 @@
                     <div class="content-tag">SELECTION</div>
                     <h2 class="content-title" id="selection-title"></h2>
                 </div>
-                <div class="selection-content" id="selection-content">
-                </div>
+                <div class="selection-content" id="selection-content"></div>
             </div>
         </section>
     </div>
+
+
+    <!-- ═══════════════════════════════════════════════════════════
+         PANEL CONTENT TEMPLATES
+         Naming convention:  panel-{type}-{filter}
+         These are never rendered directly — JS clones them on demand.
+    ════════════════════════════════════════════════════════════════ -->
+
+    <!-- WEAPONS · PROMOTIONS -->
+    <template id="panel-weapons-promotions">
+        <div class="promo-grid">
+            <div class="promo-card featured">
+                <span class="promo-badge">LIMITED</span>
+                <h3 class="promo-name">Operator Bundle</h3>
+                <p class="promo-desc">Primary rifle + sidearm combo at 20% off. This week only.</p>
+                <span class="promo-price">$1,199 <s>$1,499</s></span>
+            </div>
+            <div class="promo-card">
+                <span class="promo-badge">SALE</span>
+                <h3 class="promo-name">Clearance Rifles</h3>
+                <p class="promo-desc">Last-season bolt-actions and semi-autos. Up to 35% off while stock lasts.</p>
+                <span class="promo-price">From $549</span>
+            </div>
+            <div class="promo-card">
+                <span class="promo-badge">NEW</span>
+                <h3 class="promo-name">Trade-In Credit</h3>
+                <p class="promo-desc">Bring in any used firearm and receive up to $300 store credit.</p>
+                <span class="promo-price">Up to $300 credit</span>
+            </div>
+        </div>
+    </template>
+
+    <!-- WEAPONS · CATEGORIES -->
+    <template id="panel-weapons-categories">
+        <div class="category-list">
+            <div class="category-row">
+                <span class="category-icon">🔫</span>
+                <div class="category-info">
+                    <strong>Pistols &amp; Sidearms</strong>
+                    <span>Compact, semi-auto, and revolver platforms</span>
+                </div>
+                <span class="category-count">42 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">🎯</span>
+                <div class="category-info">
+                    <strong>Rifles</strong>
+                    <span>Bolt-action, semi-auto, and DMR variants</span>
+                </div>
+                <span class="category-count">68 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">💥</span>
+                <div class="category-info">
+                    <strong>Shotguns</strong>
+                    <span>Pump-action, semi-auto, and tactical configs</span>
+                </div>
+                <span class="category-count">19 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">🔧</span>
+                <div class="category-info">
+                    <strong>Parts &amp; Accessories</strong>
+                    <span>Barrels, stocks, triggers, and rail systems</span>
+                </div>
+                <span class="category-count">120+ items</span>
+            </div>
+        </div>
+    </template>
+
+    <!-- WEAPONS · BRANDS -->
+    <template id="panel-weapons-brands">
+        <div class="brand-grid">
+            <div class="brand-card">
+                <div class="brand-logo">GLOCK</div>
+                <p>Industry-standard polymer-frame pistols. Trusted by militaries worldwide.</p>
+                <span class="brand-item-count">23 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">FN</div>
+                <p>Belgian-engineered precision. SCAR series and beyond.</p>
+                <span class="brand-item-count">17 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">SIG</div>
+                <p>P-series and MCX platforms chosen by US Armed Forces.</p>
+                <span class="brand-item-count">31 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">COLT</div>
+                <p>Iconic American craftsmanship since 1836. M4 and 1911 lineage.</p>
+                <span class="brand-item-count">14 products</span>
+            </div>
+        </div>
+    </template>
+
+    <!-- EQUIPMENT · PROMOTIONS -->
+    <template id="panel-equipment-promotions">
+        <div class="promo-grid">
+            <div class="promo-card featured">
+                <span class="promo-badge">BUNDLE</span>
+                <h3 class="promo-name">Full Kit Deal</h3>
+                <p class="promo-desc">Plate carrier + helmet + comms package. Mission-ready out of the box.</p>
+                <span class="promo-price">$899 <s>$1,150</s></span>
+            </div>
+            <div class="promo-card">
+                <span class="promo-badge">FLASH</span>
+                <h3 class="promo-name">Optics Week</h3>
+                <p class="promo-desc">Red dots, LPVOs, and magnifiers — 15% off all optics for 48 hours.</p>
+                <span class="promo-price">15% off</span>
+            </div>
+            <div class="promo-card">
+                <span class="promo-badge">FREE</span>
+                <h3 class="promo-name">Free Shipping</h3>
+                <p class="promo-desc">All gear orders over $250 ship free, domestic and international.</p>
+                <span class="promo-price">Orders $250+</span>
+            </div>
+        </div>
+    </template>
+
+    <!-- EQUIPMENT · CATEGORIES -->
+    <template id="panel-equipment-categories">
+        <div class="category-list">
+            <div class="category-row">
+                <span class="category-icon">🪖</span>
+                <div class="category-info">
+                    <strong>Protective Gear</strong>
+                    <span>Helmets, plate carriers, and body armor</span>
+                </div>
+                <span class="category-count">35 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">🔭</span>
+                <div class="category-info">
+                    <strong>Optics &amp; Sights</strong>
+                    <span>Red dots, scopes, LPVOs, and NV-compatible</span>
+                </div>
+                <span class="category-count">54 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">🎒</span>
+                <div class="category-info">
+                    <strong>Loadout &amp; Carry</strong>
+                    <span>Molle packs, pouches, and holster systems</span>
+                </div>
+                <span class="category-count">78 items</span>
+            </div>
+            <div class="category-row">
+                <span class="category-icon">📡</span>
+                <div class="category-info">
+                    <strong>Communications</strong>
+                    <span>Radios, headsets, and PTT devices</span>
+                </div>
+                <span class="category-count">22 items</span>
+            </div>
+        </div>
+    </template>
+
+    <!-- EQUIPMENT · BRANDS -->
+    <template id="panel-equipment-brands">
+        <div class="brand-grid">
+            <div class="brand-card">
+                <div class="brand-logo">EOTECH</div>
+                <p>Holographic weapon sights trusted in the harshest conditions.</p>
+                <span class="brand-item-count">12 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">CRYE</div>
+                <p>Precision-engineered plate carriers and combat uniforms.</p>
+                <span class="brand-item-count">28 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">PELTOR</div>
+                <p>Advanced hearing protection and tactical communication systems.</p>
+                <span class="brand-item-count">9 products</span>
+            </div>
+            <div class="brand-card">
+                <div class="brand-logo">MYSTERY RANCH</div>
+                <p>Purpose-built load carriage systems for extended operations.</p>
+                <span class="brand-item-count">16 products</span>
+            </div>
+        </div>
+    </template>
+
 </main>
 
 <script src="{{ url_for('static', filename='js/pagefunctions/productsfunctions.js') }}"></script>
