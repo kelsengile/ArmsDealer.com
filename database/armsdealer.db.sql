@@ -1,4 +1,27 @@
 BEGIN TRANSACTION;
+DROP TABLE IF EXISTS "brands";
+CREATE TABLE brands (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        TEXT    NOT NULL UNIQUE,
+    slug        TEXT    NOT NULL UNIQUE,
+    logo_file   TEXT,
+    description TEXT,
+    is_active   INTEGER NOT NULL DEFAULT 1,
+    created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
+    updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
+);
+DROP TABLE IF EXISTS "brands_translations";
+CREATE TABLE "brands_translations" (
+	"id"	INTEGER,
+	"brand_id"	INTEGER NOT NULL,
+	"lang_code"	TEXT NOT NULL,
+	"name"	TEXT NOT NULL,
+	"description"	TEXT,
+	UNIQUE("brand_id","lang_code"),
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("brand_id") REFERENCES "brands"("id") ON DELETE CASCADE,
+	FOREIGN KEY("lang_code") REFERENCES "languages"("code")
+);
 DROP TABLE IF EXISTS "cart_items";
 CREATE TABLE cart_items (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,14 +33,13 @@ CREATE TABLE cart_items (
     UNIQUE(user_id, item_type, item_id)
 );
 DROP TABLE IF EXISTS "categories";
-CREATE TABLE "categories" (
-	"id"	INTEGER,
-	"name"	TEXT NOT NULL UNIQUE,
-	"slug"	TEXT NOT NULL UNIQUE,
-	"type"	TEXT NOT NULL DEFAULT 'product',
-	"icon_file"	TEXT,
-	"description"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT)
+CREATE TABLE categories (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        TEXT    NOT NULL UNIQUE,
+    slug        TEXT    NOT NULL UNIQUE,
+    type        TEXT    NOT NULL DEFAULT 'product',     -- 'product' | 'service'
+    icon_file   TEXT,
+    description TEXT
 );
 DROP TABLE IF EXISTS "category_translations";
 CREATE TABLE category_translations (
@@ -30,10 +52,10 @@ CREATE TABLE category_translations (
 );
 DROP TABLE IF EXISTS "currencies";
 CREATE TABLE currencies (
-    code        TEXT    PRIMARY KEY,               -- 'PHP', 'USD', 'EUR'
-    symbol      TEXT    NOT NULL,                  -- 'â‚±', '$', 'â‚¬'
-    label       TEXT    NOT NULL,                  -- 'PHP (â‚±)', shown in <select>
-    rate_to_php REAL    NOT NULL DEFAULT 1.0,      -- 1 PHP = X of this currency
+    code        TEXT    PRIMARY KEY,
+    symbol      TEXT    NOT NULL,
+    label       TEXT    NOT NULL,
+    rate_to_php REAL    NOT NULL DEFAULT 1.0,
     is_active   INTEGER NOT NULL DEFAULT 1,
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -44,22 +66,23 @@ CREATE TABLE inquiries (
     email       TEXT NOT NULL,
     subject     TEXT,
     message     TEXT NOT NULL,
-    status      TEXT NOT NULL DEFAULT 'new',            -- 'new' | 'read' | 'resolved'
+    status      TEXT NOT NULL DEFAULT 'new',
     created_at  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 DROP TABLE IF EXISTS "languages";
 CREATE TABLE languages (
-    code        TEXT    PRIMARY KEY,               -- 'english', 'filipino', 'japanese', etc.
-    label       TEXT    NOT NULL,                  -- 'English', 'Filipino', displayed in <select>
-    locale      TEXT    NOT NULL,                  -- 'en', 'fil', 'ja' â€” for html lang attr
+    code        TEXT    PRIMARY KEY,
+    label       TEXT    NOT NULL,
+    locale      TEXT    NOT NULL,
     is_active   INTEGER NOT NULL DEFAULT 1,
     sort_order  INTEGER NOT NULL DEFAULT 0
 );
 DROP TABLE IF EXISTS "order_items";
 CREATE TABLE order_items (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    order_id    INTEGER NOT NULL REFERENCES orders(id),
-    item_type   TEXT    NOT NULL DEFAULT 'product',     -- 'product' | 'service'
+    order_id    INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
+    item_type   TEXT    NOT NULL DEFAULT 'product'     -- 'product' | 'service'
+                CHECK (item_type IN ('product', 'service')),
     item_id     INTEGER NOT NULL,
     quantity    INTEGER NOT NULL DEFAULT 1,
     unit_price  REAL    NOT NULL
@@ -75,71 +98,88 @@ CREATE TABLE orders (
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 DROP TABLE IF EXISTS "products";
-CREATE TABLE "products" (
-	"id"	INTEGER,
-	"name"	TEXT NOT NULL,
-	"slug"	TEXT NOT NULL UNIQUE,
-	"category_id"	INTEGER NOT NULL,
-	"description"	TEXT,
-	"price"	REAL NOT NULL,
-	"discount"	REAL DEFAULT 0,
-	"stock"	INTEGER NOT NULL DEFAULT 0,
-	"image_file"	TEXT,
-	"tags"	TEXT,
-	"is_featured"	INTEGER NOT NULL DEFAULT 0,
-	"created_at"	TEXT NOT NULL DEFAULT (datetime('now')),
-	"updated_at"	TEXT NOT NULL DEFAULT (datetime('now')),
-	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("category_id") REFERENCES "categories"("id")
+CREATE TABLE products (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    name            TEXT    NOT NULL,
+    slug            TEXT    NOT NULL UNIQUE,
+    category_id     INTEGER NOT NULL REFERENCES categories(id),
+    subcategory_id  INTEGER REFERENCES subcategories(id),
+    brand_id        INTEGER REFERENCES brands(id),
+    description     TEXT,
+    price           REAL    NOT NULL,
+    discount        REAL    DEFAULT 0,
+    stock           INTEGER NOT NULL DEFAULT 0,
+    rating          REAL    NOT NULL DEFAULT 0 CHECK (rating >= 0 AND rating <= 5),
+    sales_count     INTEGER NOT NULL DEFAULT 0,
+    image_file      TEXT,
+    tags            TEXT,                               -- JSON array string
+    is_featured     INTEGER NOT NULL DEFAULT 0,
+    created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+    updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 DROP TABLE IF EXISTS "products_translations";
-CREATE TABLE "products_translations" (
-	"id"	INTEGER,
-	"product_id"	INTEGER NOT NULL,
-	"lang_code"	TEXT NOT NULL,
-	"name"	TEXT NOT NULL,
-	"description"	TEXT,
-	"tags"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT),
-	UNIQUE("product_id","lang_code"),
-	FOREIGN KEY("lang_code") REFERENCES "languages"("code"),
-	FOREIGN KEY("product_id") REFERENCES "products"("id") ON DELETE CASCADE
+CREATE TABLE products_translations (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    product_id  INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
+    lang_code   TEXT    NOT NULL REFERENCES languages(code),
+    name        TEXT    NOT NULL,
+    description TEXT,
+    tags        TEXT,
+    UNIQUE (product_id, lang_code)
 );
 DROP TABLE IF EXISTS "services";
-CREATE TABLE "services" (
-	"id"	INTEGER,
-	"name"	TEXT NOT NULL,
-	"slug"	TEXT NOT NULL UNIQUE,
-	"category_id"	INTEGER NOT NULL,
-	"description"	TEXT,
-	"price"	REAL NOT NULL,
-	"discount"	REAL DEFAULT 0,
-	"image_file"	TEXT,
-	"tags"	TEXT,
-	"is_featured"	INTEGER NOT NULL DEFAULT 0,
-	"created_at"	TEXT NOT NULL DEFAULT (datetime('now')),
-	"updated_at"	TEXT NOT NULL DEFAULT (datetime('now')),
-	PRIMARY KEY("id" AUTOINCREMENT),
-	FOREIGN KEY("category_id") REFERENCES "categories"("id")
+CREATE TABLE services (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    name            TEXT    NOT NULL,
+    slug            TEXT    NOT NULL UNIQUE,
+    category_id     INTEGER NOT NULL REFERENCES categories(id),
+    subcategory_id  INTEGER REFERENCES subcategories(id),
+    brand_id        INTEGER REFERENCES brands(id),
+    description     TEXT,
+    price           REAL    NOT NULL,
+    discount        REAL    DEFAULT 0,
+    rating          REAL    NOT NULL DEFAULT 0 CHECK (rating >= 0 AND rating <= 5),
+    sales_count     INTEGER NOT NULL DEFAULT 0,
+    image_file      TEXT,
+    tags            TEXT,
+    is_featured     INTEGER NOT NULL DEFAULT 0,
+    created_at      TEXT    NOT NULL DEFAULT (datetime('now')),
+    updated_at      TEXT    NOT NULL DEFAULT (datetime('now'))
 );
 DROP TABLE IF EXISTS "services_translations";
-CREATE TABLE "services_translations" (
-	"id"	INTEGER,
-	"service_id"	INTEGER NOT NULL,
-	"lang_code"	TEXT NOT NULL,
-	"name"	TEXT NOT NULL,
-	"description"	TEXT,
-	"tags"	TEXT,
-	PRIMARY KEY("id" AUTOINCREMENT),
-	UNIQUE("service_id","lang_code"),
-	FOREIGN KEY("lang_code") REFERENCES "languages"("code"),
-	FOREIGN KEY("service_id") REFERENCES "services"("id") ON DELETE CASCADE
+CREATE TABLE services_translations (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    service_id  INTEGER NOT NULL REFERENCES services(id) ON DELETE CASCADE,
+    lang_code   TEXT    NOT NULL REFERENCES languages(code),
+    name        TEXT    NOT NULL,
+    description TEXT,
+    tags        TEXT,
+    UNIQUE (service_id, lang_code)
+);
+DROP TABLE IF EXISTS "subcategories";
+CREATE TABLE subcategories (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
+    name        TEXT    NOT NULL,
+    slug        TEXT    NOT NULL UNIQUE,
+    icon_file   TEXT,
+    description TEXT,
+    UNIQUE(category_id, name)
+);
+DROP TABLE IF EXISTS "subcategory_translations";
+CREATE TABLE subcategory_translations (
+    id              INTEGER PRIMARY KEY AUTOINCREMENT,
+    subcategory_id  INTEGER NOT NULL REFERENCES subcategories(id) ON DELETE CASCADE,
+    lang_code       TEXT    NOT NULL REFERENCES languages(code),
+    name            TEXT    NOT NULL,
+    description     TEXT,
+    UNIQUE (subcategory_id, lang_code)
 );
 DROP TABLE IF EXISTS "ui_strings";
 CREATE TABLE ui_strings (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     lang_code   TEXT    NOT NULL REFERENCES languages(code),
-    key         TEXT    NOT NULL,                  -- matches data-translate values, e.g. 'navbarproducts'
+    key         TEXT    NOT NULL,
     value       TEXT    NOT NULL,
     UNIQUE (lang_code, key)
 );
@@ -153,6 +193,66 @@ CREATE TABLE users (
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
+INSERT INTO "brands" ("id","name","slug","logo_file","description","is_active","created_at","updated_at") VALUES (1,'Colt','colt',NULL,'American firearms manufacturer, makers of the M4 and 1911 platforms.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (2,'Knight''s Armament','knights-armament',NULL,'American defense contractor, designers of the SR-25 marksman rifle.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (3,'Kalashnikov','kalashnikov',NULL,'Russian arms manufacturer, producers of the AK series rifles.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (4,'Glock','glock',NULL,'Austrian pistol manufacturer, standard issue for law enforcement worldwide.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (5,'SIG Sauer','sig-sauer',NULL,'German-Swiss arms manufacturer, producers of the P320 and M17.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (6,'Beretta','beretta',NULL,'Italian arms manufacturer, one of the oldest in the world.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (7,'CZ','cz',NULL,'Czech firearms manufacturer, known for precision engineering.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (8,'Lake City','lake-city',NULL,'US government ammunition plant producing mil-spec 5.56mm and other calibers.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (9,'Sierra Bullets','sierra-bullets',NULL,'American bullet manufacturer, makers of the MatchKing line.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (10,'Custom Forge','custom-forge',NULL,'In-house artisan workshop for hand-forged blades and custom melee weapons.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (11,'Ghost Ops','ghost-ops',NULL,'Specialist services provider for covert operations and surveillance.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14'),
+ (12,'Iron Veil','iron-veil',NULL,'Logistics and secure transport specialist for high-value cargo.',1,'2026-04-24 03:49:14','2026-04-24 03:49:14');
+INSERT INTO "brands_translations" ("id","brand_id","lang_code","name","description") VALUES (1,1,'filipino','Colt','Amerikanong tagagawa ng baril, gumagawa ng M4 at 1911 platforms.'),
+ (2,2,'filipino','Knight''s Armament','Amerikanong kontratista ng depensa, nagdisenyo ng SR-25 marksman rifle.'),
+ (3,3,'filipino','Kalashnikov','Rusyanong tagagawa ng armas, gumagawa ng serye ng AK rifles.'),
+ (4,4,'filipino','Glock','Awstryanong tagagawa ng pistola, pamantayan ng pagpapatupad ng batas.'),
+ (5,5,'filipino','SIG Sauer','Aleman-Suwisong tagagawa ng armas, gumagawa ng P320 at M17.'),
+ (6,6,'filipino','Beretta','Italyanong tagagawa ng armas, isa sa pinakamatanda sa mundo.'),
+ (7,7,'filipino','CZ','Czech na tagagawa ng baril, kilala sa katumpakan ng inhenyeriya.'),
+ (8,8,'filipino','Lake City','Planta ng bala ng gobyerno ng US na gumagawa ng mil-spec 5.56mm.'),
+ (9,9,'filipino','Sierra Bullets','Amerikanong tagagawa ng bala, gumagawa ng linya ng MatchKing.'),
+ (10,10,'filipino','Custom Forge','In-house artisanong workshop para sa hand-forged na mga talim.'),
+ (11,11,'filipino','Ghost Ops','Espesyalistang tagapagbigay ng serbisyo para sa mga lihim na operasyon.'),
+ (12,12,'filipino','Iron Veil','Espesyalista sa logistik at ligtas na transportasyon ng mahahalagang kargamento.'),
+ (13,1,'japanese','コルト','アメリカの銃器メーカー。M4および1911プラットフォームの製造元。'),
+ (14,2,'japanese','ナイツアーマメント','アメリカの防衛企業。SR-25マークスマンライフルの設計者。'),
+ (15,3,'japanese','カラシニコフ','ロシアの兵器メーカー。AKシリーズライフルの製造元。'),
+ (16,4,'japanese','グロック','オーストリアのピストルメーカー。世界中の法執行機関で標準採用。'),
+ (17,5,'japanese','SIGザウアー','ドイツ・スイスの兵器メーカー。P320およびM17の製造元。'),
+ (18,6,'japanese','ベレッタ','イタリアの兵器メーカー。世界最古のメーカーの一つ。'),
+ (19,7,'japanese','CZ','チェコの銃器メーカー。精密工学で知られる。'),
+ (20,8,'japanese','レイクシティ','ミルスペック5.56mm弾などを生産する米国政府の弾薬工場。'),
+ (21,9,'japanese','シエラブレッツ','アメリカの弾頭メーカー。MatchKingラインの製造元。'),
+ (22,10,'japanese','カスタムフォージ','手鍛造刃物とカスタム近接武器の自社職人工房。'),
+ (23,11,'japanese','ゴーストオプス','秘密作戦および監視の専門サービスプロバイダー。'),
+ (24,12,'japanese','アイアンヴェール','高価値貨物の物流・安全輸送専門業者。'),
+ (25,1,'spanish','Colt','Fabricante de armas americano, creador de las plataformas M4 y 1911.'),
+ (26,2,'spanish','Knight''s Armament','Contratista de defensa americano, diseñador del rifle de francotirador SR-25.'),
+ (27,3,'spanish','Kalashnikov','Fabricante de armas ruso, productor de la serie de rifles AK.'),
+ (28,4,'spanish','Glock','Fabricante de pistolas austriaco, estándar para fuerzas del orden en todo el mundo.'),
+ (29,5,'spanish','SIG Sauer','Fabricante de armas alemán-suizo, productor del P320 y el M17.'),
+ (30,6,'spanish','Beretta','Fabricante de armas italiano, uno de los más antiguos del mundo.'),
+ (31,7,'spanish','CZ','Fabricante de armas checo, conocido por su ingeniería de precisión.'),
+ (32,8,'spanish','Lake City','Planta de municiones del gobierno de EE.UU. que produce 5.56mm mil-spec.'),
+ (33,9,'spanish','Sierra Bullets','Fabricante de balas americano, creador de la línea MatchKing.'),
+ (34,10,'spanish','Custom Forge','Taller artesanal interno para cuchillas forjadas a mano y armas cuerpo a cuerpo.'),
+ (35,11,'spanish','Ghost Ops','Proveedor especializado en operaciones encubiertas y vigilancia.'),
+ (36,12,'spanish','Iron Veil','Especialista en logística y transporte seguro de carga de alto valor.'),
+ (37,1,'mandarin','柯尔特','美国枪械制造商，M4和1911平台的制造者。'),
+ (38,2,'mandarin','奈特军备','美国国防承包商，SR-25精确射手步枪的设计者。'),
+ (39,3,'mandarin','卡拉什尼科夫','俄罗斯武器制造商，AK系列步枪的生产者。'),
+ (40,4,'mandarin','格洛克','奥地利手枪制造商，全球执法机构标准配备。'),
+ (41,5,'mandarin','SIG绍尔','德瑞武器制造商，P320和M17的生产者。'),
+ (42,6,'mandarin','伯莱塔','意大利武器制造商，全球最古老的制造商之一。'),
+ (43,7,'mandarin','CZ','捷克枪械制造商，以精密工程著称。'),
+ (44,8,'mandarin','莱克城','美国政府弹药厂，生产军规5.56mm等弹药。'),
+ (45,9,'mandarin','塞拉子弹','美国弹头制造商，MatchKing系列的制造者。'),
+ (46,10,'mandarin','定制锻造','内部工匠工坊，专注手工锻造刀刃和定制近战武器。'),
+ (47,11,'mandarin','幽灵行动','专业隐秘行动和监视服务提供商。'),
+ (48,12,'mandarin','铁幕','高价值货物物流和安全运输专家。');
 INSERT INTO "categories" ("id","name","slug","type","icon_file","description") VALUES (1,'Firearms','firearms','product',NULL,'Guns and ranged weapons'),
  (2,'Blades','blades','product',NULL,'Knives, swords, and edged weapons'),
  (3,'Blunts','blunts','product',NULL,'Impact weapons like bats and clubs'),
@@ -318,9 +418,9 @@ INSERT INTO "category_translations" ("id","category_id","lang_code","name","desc
  (130,31,'mandarin','处置','安全处置服务'),
  (131,32,'mandarin','监控','监测和监视'),
  (132,33,'mandarin','承包','基于合同的运营');
-INSERT INTO "currencies" ("code","symbol","label","rate_to_php","is_active","updated_at") VALUES ('PHP','â‚±','PHP (â‚±)',1.0,1,'2026-04-14 06:17:03'),
- ('USD','$','USD ($)',0.0175,1,'2026-04-14 06:17:03'),
- ('EUR','â‚¬','EUR (â‚¬)',0.0162,1,'2026-04-14 06:17:03'),
+INSERT INTO "currencies" ("code","symbol","label","rate_to_php","is_active","updated_at") VALUES ('PHP','₱','PHP (₱)',1.0,1,'2026-04-24 03:34:57'),
+ ('USD','$','USD ($)',0.0175,1,'2026-04-24 03:34:57'),
+ ('EUR','€','EUR (€)',0.0162,1,'2026-04-24 03:34:57'),
  ('JPY','¥','JPY (JP¥)',2.627,1,'2026-04-14 06:58:41'),
  ('CNY','¥','CNY (CN¥)',0.127,1,'2026-04-14 06:58:41');
 INSERT INTO "languages" ("code","label","locale","is_active","sort_order") VALUES ('english','English','en',1,1),
@@ -328,22 +428,22 @@ INSERT INTO "languages" ("code","label","locale","is_active","sort_order") VALUE
  ('japanese','Japanese','ja',1,3),
  ('spanish','Spanish','es',1,4),
  ('mandarin','Mandarin','zh',1,5);
-INSERT INTO "products" ("id","name","slug","category_id","description","price","discount","stock","image_file","tags","is_featured","created_at","updated_at") VALUES (1,'M4A1 Carbine ','m4a1-carbine-tactical',1,'Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.',185000.0,25.0,10,'m14carbine.jpg','["5.56mm","Semi-Auto","M-LOK"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (2,'SR-25 Rifle','sr-25-precision-rifle',1,'7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.',230000.0,15.0,5,'sr25marksman.jpg','["7.62mm","DMR","Precision"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (3,'AK-103 Assault Rifle','ak-103-assault-rifle',1,'7.62x39mm battle-proven platform. Side-folding stock, chrome-lined barrel, enhanced pistol grip. Legendary reliability in adverse conditions.',145000.0,21.0,8,'ak103.jpg','["7.62x39","AK Platform","Folding Stock"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (4,'Glock 17 Gen5 ','glock-17-gen5',2,'9mm striker-fired duty pistol. Marksman barrel, flared mag well, ambidextrous slide stop. Standard issue across 50+ law enforcement agencies.',68000.0,20.0,20,'glock17gen5.jpg','["9mm","Gen5","LE Standard"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (5,'1911 C.O.','1911-custom-operator',2,'.45 ACP single-action platform. Match barrel bushing, extended beavertail, G10 grips. Classic reliability, modern upgrades.',95000.0,20.0,6,'1911operator.jpg','[".45 ACP","1911","Single-Action"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (6,'SIG P320 Compact','sig-p320-compact',2,'9mm modular pistol system. Serialized fire control unit, interchangeable grip modules. US Army M17 basis.',82000.0,15.0,12,'sigp320.jpg','["9mm","Modular","Compact"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (7,'Beretta M9A3','beretta-m9a3',2,'9mm DA/SA pistol. Vertec grip, decocker/safety, extended tang. Time-tested military sidearm with modern enhancements.',74500.0,20.0,9,'berettam9a3.jpg','["9mm","DA/SA","Military"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (8,'CZ P-10F ','cz-p10f-full-size',2,'9mm striker-fired pistol. Interchangeable back straps, suppressor-ready, Omega trigger. Czech precision engineering.',71000.0,20.0,11,'czp10f.jpg','["9mm","Striker","Full-Size"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (9,'Miyamoto Katana ','miyamoto-katana-damascus',3,'Hand-forged Damascus steel katana. Traditional differential hardening, ray skin handle wrap, lacquered wooden saya.',42000.0,20.0,4,'miyamotokatana.jpg','["Damascus","Katana","Handforged"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (10,'Balisong','balisong',3,'Traditional Filipino butterfly knife. Skeletonized handles, latch mechanism, balanced for flipping. Stainless steel blade.',28000.0,20.0,15,'balisong.jpg','["Balisong","Butterfly Knife","Filipino"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (11,'Italian Stiletto','italian-stiletto',3,'Classic Italian switchblade stiletto. Slim profile, spring-assisted deployment, stainless steel blade with horn handle.',8500.0,20.0,18,'stiletto.jpg','["Stiletto","Switchblade","Italian"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (12,'5.56mm NATO ','5-56mm-nato-1000-rounds',12,'M855 62gr green-tip penetrator. Lake City production, mil-spec brass, boxer-primed. Optimized for AR-platform rifles.',18500.0,25.0,50,'5.56.jpg','["M855","62gr","1000 Rounds"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (13,'9mm FMJ ','9mm-fmj-500-rounds',12,'124gr full metal jacket 9mm. Reloadable brass, consistent velocity, clean-burning powder. Ideal for training.',6200.0,25.0,100,'9mmfmj.jpg','["124gr FMJ","9mm","Training"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (14,'7.62x39mm ','7-62x39mm-500-rounds',12,'122gr FMJ steel-core 7.62x39. Corrosion-resistant, lacquered steel case. Optimized for AK-platform rifles.',9500.0,15.0,75,'7.62x39.jpg','["122gr","Steel Case","AK Platform"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (15,'.45 ACP HP ','45-acp-hp-200-rounds',12,'230gr jacketed hollow point. Controlled expansion, bonded core, nickel-plated brass. Duty and self-defense rated.',7800.0,20.0,60,'45acp.jpg','["JHP","230gr","Duty Round"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
- (16,'.308 Win Match ','308-win-match-100-rounds',12,'168gr BTHP match grade .308 Winchester. Sierra MatchKing projectile, consistent OAL, sub-MOA accuracy guaranteed.',8900.0,20.0,40,'308winmatch.jpg','["168gr BTHP","Match Grade","Sub-MOA"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02');
+INSERT INTO "products" ("id","name","slug","category_id","subcategory_id","brand_id","description","price","discount","stock","rating","sales_count","image_file","tags","is_featured","created_at","updated_at") VALUES (1,'M4A1 Carbine','m4a1-carbine-tactical',1,1,1,'Semi-automatic 5.56mm carbine. Cold-hammer-forged barrel, M-LOK handguard, mil-spec trigger group. Trusted in over 80 military forces worldwide.',185000.0,25.0,10,4.8,142,'m14carbine.jpg','["5.56mm","Semi-Auto","M-LOK"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (2,'SR-25 Rifle','sr-25-precision-rifle',1,6,2,'7.62mm semi-auto marksman rifle. Match-grade stainless barrel, adjustable stock, Picatinny rail system. Effective range: 800m.',230000.0,15.0,5,4.9,87,'sr25marksman.jpg','["7.62mm","DMR","Precision"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (3,'AK-103 Assault Rifle','ak-103-assault-rifle',1,1,3,'7.62x39mm battle-proven platform. Side-folding stock, chrome-lined barrel, enhanced pistol grip. Legendary reliability in adverse conditions.',145000.0,21.0,8,4.7,203,'ak103.jpg','["7.62x39","AK Platform","Folding Stock"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (4,'Glock 17 Gen5','glock-17-gen5',1,2,4,'9mm striker-fired duty pistol. Marksman barrel, flared mag well, ambidextrous slide stop. Standard issue across 50+ law enforcement agencies.',68000.0,20.0,20,4.9,318,'glock17gen5.jpg','["9mm","Gen5","LE Standard"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (5,'1911 C.O.','1911-custom-operator',1,2,1,'.45 ACP single-action platform. Match barrel bushing, extended beavertail, G10 grips. Classic reliability, modern upgrades.',95000.0,20.0,6,4.6,74,'1911operator.jpg','[".45 ACP","1911","Single-Action"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (6,'SIG P320 Compact','sig-p320-compact',1,2,5,'9mm modular pistol system. Serialized fire control unit, interchangeable grip modules. US Army M17 basis.',82000.0,15.0,12,4.8,156,'sigp320.jpg','["9mm","Modular","Compact"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (7,'Beretta M9A3','beretta-m9a3',1,2,6,'9mm DA/SA pistol. Vertec grip, decocker/safety, extended tang. Time-tested military sidearm with modern enhancements.',74500.0,20.0,9,4.5,98,'berettam9a3.jpg','["9mm","DA/SA","Military"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (8,'CZ P-10F','cz-p10f-full-size',1,2,7,'9mm striker-fired pistol. Interchangeable back straps, suppressor-ready, Omega trigger. Czech precision engineering.',71000.0,20.0,11,4.7,112,'czp10f.jpg','["9mm","Striker","Full-Size"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (9,'Miyamoto Katana','miyamoto-katana-damascus',2,7,10,'Hand-forged Damascus steel katana. Traditional differential hardening, ray skin handle wrap, lacquered wooden saya.',42000.0,20.0,4,4.9,39,'miyamotokatana.jpg','["Damascus","Katana","Handforged"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (10,'Balisong','balisong',2,10,10,'Traditional Filipino butterfly knife. Skeletonized handles, latch mechanism, balanced for flipping. Stainless steel blade.',28000.0,20.0,15,4.6,61,'balisong.jpg','["Balisong","Butterfly Knife","Filipino"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (11,'Italian Stiletto','italian-stiletto',2,10,10,'Classic Italian switchblade stiletto. Slim profile, spring-assisted deployment, stainless steel blade with horn handle.',8500.0,20.0,18,4.3,88,'stiletto.jpg','["Stiletto","Switchblade","Italian"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (12,'5.56mm NATO','5-56mm-nato-1000-rounds',12,13,8,'M855 62gr green-tip penetrator. Lake City production, mil-spec brass, boxer-primed. Optimized for AR-platform rifles.',18500.0,25.0,50,4.8,274,'5.56.jpg','["M855","62gr","1000 Rounds"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (13,'9mm FMJ','9mm-fmj-500-rounds',12,14,8,'124gr full metal jacket 9mm. Reloadable brass, consistent velocity, clean-burning powder. Ideal for training.',6200.0,25.0,100,4.7,431,'9mmfmj.jpg','["124gr FMJ","9mm","Training"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (14,'7.62x39mm','7-62x39mm-500-rounds',12,13,3,'122gr FMJ steel-core 7.62x39. Corrosion-resistant, lacquered steel case. Optimized for AK-platform rifles.',9500.0,15.0,75,4.6,198,'7.62x39.jpg','["122gr","Steel Case","AK Platform"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (15,'.45 ACP HP','45-acp-hp-200-rounds',12,14,9,'230gr jacketed hollow point. Controlled expansion, bonded core, nickel-plated brass. Duty and self-defense rated.',7800.0,20.0,60,4.8,167,'45acp.jpg','["JHP","230gr","Duty Round"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02'),
+ (16,'.308 Win Match','308-win-match-100-rounds',12,16,9,'168gr BTHP match grade .308 Winchester. Sierra MatchKing projectile, consistent OAL, sub-MOA accuracy guaranteed.',8900.0,20.0,40,4.9,93,'308winmatch.jpg','["168gr BTHP","Match Grade","Sub-MOA"]',1,'2026-04-10 15:12:02','2026-04-10 15:12:02');
 INSERT INTO "products_translations" ("id","product_id","lang_code","name","description","tags") VALUES (1,1,'filipino','M4A1 Carbine','Semi-otomatikong karbina na 5.56mm. Cold-hammer-forged na tubo, M-LOK handguard, mil-spec trigger group. Pinagkakatiwalaan ng mahigit 80 hukbong militar sa buong mundo.','["5.56mm","Semi-Auto","M-LOK"]'),
  (2,2,'filipino','SR-25 Rifle','7.62mm semi-auto marksman rifle. Match-grade stainless na tubo, naaayos na stock, Picatinny rail system. Epektibong hanay: 800m.','["7.62mm","DMR","Katumpakan"]'),
  (3,3,'filipino','AK-103 Assault Rifle','7.62x39mm battle-proven na plataporma. Side-folding stock, chrome-lined na tubo, pinahusay na pistol grip. Kilalang tibay sa mahirap na kondisyon.','["7.62x39","AK Platform","Nakatiklop na Stock"]'),
@@ -408,9 +508,9 @@ INSERT INTO "products_translations" ("id","product_id","lang_code","name","descr
  (62,14,'mandarin','7.62x39mm弹','122格FMJ钢芯7.62x39。耐腐蚀，漆涂钢壳。针对AK平台步枪优化。','["122gr","钢壳","AK平台"]'),
  (63,15,'mandarin','.45 ACP HP弹','230格被甲空心弹。可控膨胀，粘合弹芯，镀镍黄铜。执勤及自卫评级。','["JHP","230gr","执勤弹"]'),
  (64,16,'mandarin','.308 Win比赛弹','168格BTHP比赛级.308温彻斯特。塞拉比赛王弹头，稳定全弹长，保证亚MOA精度。','["168gr BTHP","比赛级","亚MOA"]');
-INSERT INTO "services" ("id","name","slug","category_id","description","price","discount","image_file","tags","is_featured","created_at","updated_at") VALUES (1,'Assassination','assassination',32,'Complete weapon inspection, deep clean, barrel crown recutting, trigger job, parts replacement, test fire report. 72-hour turnaround.',12000000.0,20.0,'assassination.jpg','["Full Service","72hr Turnaround","Certified"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10'),
- (2,'Clean Up','clean-up',32,'Mil-spec Cerakote application in any color or camo pattern. Surface prep, bead blast, cure. Rated to 1,200°F. UV, chemical, and corrosion resistant.',250000.0,20.0,'cleanup.jpg','["Cerakote","Custom Color","Mil-Spec"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10'),
- (3,'Delivery','delivery',25,'Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.',85000.0,25.0,'delivery.jpg','["Mounting","Zeroing","Range Included"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10');
+INSERT INTO "services" ("id","name","slug","category_id","subcategory_id","brand_id","description","price","discount","rating","sales_count","image_file","tags","is_featured","created_at","updated_at") VALUES (1,'Assassination','assassination',32,17,11,'Complete weapon inspection, deep clean, barrel crown recutting, trigger job, parts replacement, test fire report. 72-hour turnaround.',12000000.0,20.0,4.7,23,'assassination.jpg','["Full Service","72hr Turnaround","Certified"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10'),
+ (2,'Clean Up','clean-up',32,18,11,'Mil-spec Cerakote application in any color or camo pattern. Surface prep, bead blast, cure. Rated to 1,200°F. UV, chemical, and corrosion resistant.',250000.0,20.0,4.5,41,'cleanup.jpg','["Cerakote","Custom Color","Mil-Spec"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10'),
+ (3,'Delivery','delivery',25,19,12,'Professional scope mounting, torque to spec, lapping, and 100m zeroing session on our range. Includes bore-sight and verification target.',85000.0,25.0,4.6,67,'delivery.jpg','["Mounting","Zeroing","Range Included"]',1,'2026-04-12 10:39:10','2026-04-12 10:39:10');
 INSERT INTO "services_translations" ("id","service_id","lang_code","name","description","tags") VALUES (1,1,'filipino','Asasinasyon','Kumpletong inspeksyon ng armas, malalim na paglilinis, muling pagputol ng crown ng tubo, trigger job, kapalit na mga parte, ulat ng pagsubok na pagpapaputok. 72 oras na pagbabalik.','["Buong Serbisyo","72hr Pagbabalik","Sertipikado"]'),
  (2,2,'filipino','Paglilinis','Mil-spec Cerakote na aplikasyon sa anumang kulay o camo pattern. Paghahanda ng ibabaw, bead blast, pagbabago. Rated sa 1,200°F. UV, kemikal, at corrosion resistant.','["Cerakote","Custom na Kulay","Mil-Spec"]'),
  (3,3,'filipino','Paghahatid','Propesyonal na pag-mount ng scope, torque sa spec, lapping, at 100m zeroing session sa aming range. Kasama ang bore-sight at verification target.','["Pag-mount","Zeroing","Range Kasama"]'),
@@ -423,9 +523,201 @@ INSERT INTO "services_translations" ("id","service_id","lang_code","name","descr
  (10,1,'mandarin','暗杀','完整武器检查、深度清洁、枪管冠部重新切削、扳机调整、零件更换、试射报告。72小时交付。','["全套服务","72小时交付","认证"]'),
  (11,2,'mandarin','清理','军规Cerakote涂层，任何颜色或迷彩图案。表面处理、喷砂、固化。耐温1,200°F，抗UV、化学品及腐蚀。','["Cerakote","定制颜色","军规"]'),
  (12,3,'mandarin','配送','专业瞄准镜安装、扭矩规范、研磨，以及在我们靶场进行的100米归零校准。包含激光校准和验证靶标。','["安装","归零","含靶场"]');
+INSERT INTO "subcategories" ("id","category_id","name","slug","icon_file","description") VALUES (1,1,'Rifles','rifles',NULL,'Long-barreled shoulder-fired firearms'),
+ (2,1,'Pistols','pistols',NULL,'Short-barreled sidearms'),
+ (3,1,'Shotguns','shotguns',NULL,'Smoothbore shoulder arms'),
+ (4,1,'Submachine Guns','submachine-guns',NULL,'Compact automatic firearms'),
+ (5,1,'Machine Guns','machine-guns',NULL,'Belt or magazine-fed automatic weapons'),
+ (6,1,'Sniper Rifles','sniper-rifles',NULL,'Long-range precision rifles'),
+ (7,2,'Swords','swords',NULL,'Long bladed weapons for two-handed use'),
+ (8,2,'Knives','knives',NULL,'Short single or double-edged blades'),
+ (9,2,'Daggers','daggers',NULL,'Double-edged stabbing weapons'),
+ (10,2,'Folding Knives','folding-knives',NULL,'Pocket and assisted-open folders'),
+ (11,3,'Batons','batons',NULL,'Police and tactical striking sticks'),
+ (12,3,'Clubs','clubs',NULL,'Heavy impact weapons'),
+ (13,12,'Rifle Ammo','rifle-ammo',NULL,'Centerfire rifle cartridges'),
+ (14,12,'Pistol Ammo','pistol-ammo',NULL,'Handgun cartridges'),
+ (15,12,'Shotgun Shells','shotgun-shells',NULL,'Smoothbore shotgun ammunition'),
+ (16,12,'Specialty Ammo','specialty-ammo',NULL,'Armor-piercing, tracer, and match rounds'),
+ (17,32,'Wet Operations','wet-operations',NULL,'Direct action and elimination contracts'),
+ (18,32,'Site Operations','site-operations',NULL,'Location cleanup and evidence disposal'),
+ (19,25,'Secure Delivery','secure-delivery',NULL,'Covert and secure item transport'),
+ (20,15,'Optics','optics',NULL,'Scopes, red dots, and magnifiers'),
+ (21,15,'Suppressors','suppressors',NULL,'Sound and flash suppressors'),
+ (22,15,'Grips & Stocks','grips-stocks',NULL,'Ergonomic grip and stock options');
+INSERT INTO "subcategory_translations" ("id","subcategory_id","lang_code","name","description") VALUES (1,1,'filipino','Mga Riple','Mga baril na may mahabang tubo para sa balikat'),
+ (2,2,'filipino','Mga Pistola','Mga maikling baril na pantulong'),
+ (3,3,'filipino','Mga Shotgun','Mga baril na walang rayado sa tubo'),
+ (4,4,'filipino','Mga Submachine Gun','Mga kompaktong awtomatikong baril'),
+ (5,5,'filipino','Mga Machine Gun','Mga awtomatikong sandata na may belt o magazine'),
+ (6,6,'filipino','Mga Sniper Rifle','Mga riple para sa malayo at tumpak na pamamaril'),
+ (7,7,'filipino','Mga Espada','Mga mahabang talim para sa dalawang kamay'),
+ (8,8,'filipino','Mga Kutsilyo','Mga maikling talim na may isa o dalawang gilid'),
+ (9,9,'filipino','Mga Daga','Mga talim na may dalawang gilid para sa saksak'),
+ (10,10,'filipino','Mga Folding Knife','Mga nakatiklop na kutsilyo para sa bulsa'),
+ (11,11,'filipino','Mga Baton','Mga pamukpok para sa pulisya at taktikal'),
+ (12,12,'filipino','Mga Pamalo','Mabibigat na mga sandata sa pagpukpok'),
+ (13,13,'filipino','Bala ng Riple','Mga kartutso ng sentriprong riple'),
+ (14,14,'filipino','Bala ng Pistola','Mga kartutso ng baril na pantulong'),
+ (15,15,'filipino','Mga Shell ng Shotgun','Mga bala ng smoothbore shotgun'),
+ (16,16,'filipino','Espesyal na Bala','Mga bala na tumatarak, tracer, at match'),
+ (17,17,'filipino','Basa na Operasyon','Mga direktang aksyon at kontrata ng pagpapaalis'),
+ (18,18,'filipino','Operasyon sa Site','Paglilinis ng lokasyon at pagtatapon ng ebidensya'),
+ (19,19,'filipino','Ligtas na Paghahatid','Patago at ligtas na transportasyon ng item'),
+ (20,20,'filipino','Mga Optiko','Mga scope, red dot, at magnifier'),
+ (21,21,'filipino','Mga Suppressor','Mga panlayo ng tunog at flash'),
+ (22,22,'filipino','Mga Grip at Stock','Mga ergonomikong grip at stock'),
+ (23,1,'japanese','ライフル','肩撃ち用長銃身の銃器'),
+ (24,2,'japanese','ピストル','短銃身のサイドアーム'),
+ (25,3,'japanese','ショットガン','スムースボア肩撃ち銃'),
+ (26,4,'japanese','サブマシンガン','コンパクトな自動小火器'),
+ (27,5,'japanese','マシンガン','ベルトまたはマガジン給弾の自動火器'),
+ (28,6,'japanese','スナイパーライフル','長距離精密射撃用ライフル'),
+ (29,7,'japanese','剣','両手用長刃武器'),
+ (30,8,'japanese','ナイフ','短い片刃または両刃の刃物'),
+ (31,9,'japanese','ダガー','両刃の刺し武器'),
+ (32,10,'japanese','フォールディングナイフ','ポケット・アシスト折りたたみナイフ'),
+ (33,11,'japanese','バトン','警察・戦術打撃棒'),
+ (34,12,'japanese','クラブ','重い打撃武器'),
+ (35,13,'japanese','ライフル弾','センターファイアライフルカートリッジ'),
+ (36,14,'japanese','ピストル弾','ハンドガンカートリッジ'),
+ (37,15,'japanese','ショットガンシェル','スムースボアショットガン弾薬'),
+ (38,16,'japanese','特殊弾薬','徹甲・トレーサー・マッチ弾'),
+ (39,17,'japanese','湿式作戦','直接行動および暗殺契約'),
+ (40,18,'japanese','現場作戦','現場清掃および証拠処理'),
+ (41,19,'japanese','安全配達','隠密かつ安全な物品輸送'),
+ (42,20,'japanese','光学機器','スコープ、レッドドット、マグニファイア'),
+ (43,21,'japanese','サプレッサー','消音・消炎装置'),
+ (44,22,'japanese','グリップ＆ストック','人間工学的グリップとストック'),
+ (45,1,'spanish','Rifles','Armas de fuego de hombro con cañón largo'),
+ (46,2,'spanish','Pistolas','Armas cortas secundarias'),
+ (47,3,'spanish','Escopetas','Armas de hombro de cañón liso'),
+ (48,4,'spanish','Subfusiles','Armas automáticas compactas'),
+ (49,5,'spanish','Ametralladoras','Armas automáticas de cinta o cargador'),
+ (50,6,'spanish','Rifles de Francotirador','Rifles de precisión de largo alcance'),
+ (51,7,'spanish','Espadas','Armas de hoja larga para dos manos'),
+ (52,8,'spanish','Cuchillos','Hojas cortas de uno o dos filos'),
+ (53,9,'spanish','Dagas','Armas de doble filo para apuñalar'),
+ (54,10,'spanish','Navajas','Navajas de bolsillo y asistidas'),
+ (55,11,'spanish','Bastones','Palos de golpe policiales y tácticos'),
+ (56,12,'spanish','Porras','Armas de impacto pesadas'),
+ (57,13,'spanish','Munición para Rifle','Cartuchos de rifle de percusión central'),
+ (58,14,'spanish','Munición para Pistola','Cartuchos para pistola'),
+ (59,15,'spanish','Cartuchos de Escopeta','Munición para escopeta de cañón liso'),
+ (60,16,'spanish','Munición Especial','Balas perforantes, trazadoras y de competición'),
+ (61,17,'spanish','Operaciones Húmedas','Contratos de acción directa y eliminación'),
+ (62,18,'spanish','Operaciones en Sitio','Limpieza de ubicación y eliminación de evidencia'),
+ (63,19,'spanish','Entrega Segura','Transporte encubierto y seguro de artículos'),
+ (64,20,'spanish','Óptica','Miras, puntos rojos y magnificadores'),
+ (65,21,'spanish','Silenciadores','Supresores de sonido y flash'),
+ (66,22,'spanish','Empuñaduras y Culatas','Opciones ergonómicas de empuñadura y culata'),
+ (67,1,'mandarin','步枪','肩扛长管枪械'),
+ (68,2,'mandarin','手枪','短管副武器'),
+ (69,3,'mandarin','霰弹枪','滑膛肩扛枪'),
+ (70,4,'mandarin','冲锋枪','紧凑型自动火器'),
+ (71,5,'mandarin','机枪','弹链或弹匣供弹的自动武器'),
+ (72,6,'mandarin','狙击步枪','远程精准步枪'),
+ (73,7,'mandarin','剑','双手长刃武器'),
+ (74,8,'mandarin','刀','单刃或双刃短刀'),
+ (75,9,'mandarin','匕首','双刃刺击武器'),
+ (76,10,'mandarin','折叠刀','口袋刀和辅助开刀'),
+ (77,11,'mandarin','警棍','警察和战术打击棍'),
+ (78,12,'mandarin','棍棒','重型冲击武器'),
+ (79,13,'mandarin','步枪弹','中心发火步枪弹药'),
+ (80,14,'mandarin','手枪弹','手枪弹药'),
+ (81,15,'mandarin','霰弹枪弹','滑膛霰弹枪弹药'),
+ (82,16,'mandarin','特种弹药','穿甲弹、曳光弹和比赛弹'),
+ (83,17,'mandarin','湿性行动','直接行动和消除合同'),
+ (84,18,'mandarin','现场行动','现场清理和证据处置'),
+ (85,19,'mandarin','安全配送','隐秘和安全的物品运输'),
+ (86,20,'mandarin','光学设备','瞄准镜、红点和放大器'),
+ (87,21,'mandarin','消声器','消音和消焰装置'),
+ (88,22,'mandarin','握把和枪托','人体工学握把和枪托选项');
 INSERT INTO "users" ("id","username","email","password_hash","role","created_at","updated_at") VALUES (1,'spongebob','spongebob@bikini.bottom','scrypt:32768:8:1$SbTwSrAmCehypPz8$1fd49b243228a73c60f77f4fd51cf7f46d77f044b2576a24fe7de1800ca3dabe891e693f64f2276ef392437527659822711cb089f651944ef50073f5188a0c42','customer','2026-04-15 05:03:32','2026-04-15 05:03:32'),
  (2,'mrcrabs','eugene.crabs@thekrustykrab.com','scrypt:32768:8:1$83oDsOSmvXx89UZx$c0e15772d19273f1df094dffa5fb9846afa2be3bfa47bb50a89d3ec80c57032db06799f09fb4b4d51be28dfb33de4148c29c7b97396f1dbbaba90920d6b78dc3','admin','2026-04-15 05:03:32','2026-04-15 05:03:32'),
  (5,'KelsenGile','kelsengilesarmientoconel@gmail.com','scrypt:32768:8:1$XrzCLf0eixrrKiHF$94eee8816393d6c3fde4901ccd40f36f33d5fed9031cf15212b3a3acc91d25a7b11b7f9295ade278f201088b7c0e87f1242b859b5fc2008aaba577a9d9babdd2','customer','2026-04-15 07:00:44','2026-04-15 07:00:44');
+DROP INDEX IF EXISTS "idx_order_items_order";
+CREATE INDEX idx_order_items_order  ON order_items (order_id);
+DROP INDEX IF EXISTS "idx_orders_status";
+CREATE INDEX idx_orders_status      ON orders (status);
+DROP INDEX IF EXISTS "idx_orders_user";
+CREATE INDEX idx_orders_user        ON orders (user_id);
+DROP INDEX IF EXISTS "idx_products_brand";
+CREATE INDEX idx_products_brand     ON products (brand_id);
+DROP INDEX IF EXISTS "idx_products_category";
+CREATE INDEX idx_products_category  ON products (category_id);
+DROP INDEX IF EXISTS "idx_products_subcat";
+CREATE INDEX idx_products_subcat    ON products (subcategory_id);
+DROP INDEX IF EXISTS "idx_services_brand";
+CREATE INDEX idx_services_brand     ON services (brand_id);
+DROP INDEX IF EXISTS "idx_services_category";
+CREATE INDEX idx_services_category  ON services (category_id);
+DROP INDEX IF EXISTS "idx_services_subcat";
+CREATE INDEX idx_services_subcat    ON services (subcategory_id);
+DROP INDEX IF EXISTS "idx_subcats_category";
+CREATE INDEX idx_subcats_category   ON subcategories (category_id);
 DROP INDEX IF EXISTS "idx_ui_strings_lang";
 CREATE INDEX idx_ui_strings_lang ON ui_strings (lang_code);
+DROP TRIGGER IF EXISTS "trg_order_completed";
+CREATE TRIGGER trg_order_completed
+AFTER UPDATE OF status ON orders
+WHEN NEW.status = 'completed' AND OLD.status != 'completed'
+BEGIN
+    UPDATE products
+    SET sales_count = sales_count + (
+        SELECT COALESCE(SUM(oi.quantity), 0)
+        FROM order_items oi
+        WHERE oi.order_id = NEW.id
+          AND oi.item_type = 'product'
+          AND oi.item_id = products.id
+    )
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product'
+    );
+
+    UPDATE services
+    SET sales_count = sales_count + (
+        SELECT COALESCE(SUM(oi.quantity), 0)
+        FROM order_items oi
+        WHERE oi.order_id = NEW.id
+          AND oi.item_type = 'service'
+          AND oi.item_id = services.id
+    )
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service'
+    );
+END;
+DROP TRIGGER IF EXISTS "trg_order_uncompleted";
+CREATE TRIGGER trg_order_uncompleted
+AFTER UPDATE OF status ON orders
+WHEN OLD.status = 'completed' AND NEW.status != 'completed'
+BEGIN
+    UPDATE products
+    SET sales_count = MAX(0, sales_count - (
+        SELECT COALESCE(SUM(oi.quantity), 0)
+        FROM order_items oi
+        WHERE oi.order_id = NEW.id
+          AND oi.item_type = 'product'
+          AND oi.item_id = products.id
+    ))
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product'
+    );
+
+    UPDATE services
+    SET sales_count = MAX(0, sales_count - (
+        SELECT COALESCE(SUM(oi.quantity), 0)
+        FROM order_items oi
+        WHERE oi.order_id = NEW.id
+          AND oi.item_type = 'service'
+          AND oi.item_id = services.id
+    ))
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service'
+    );
+END;
 COMMIT;
