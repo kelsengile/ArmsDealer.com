@@ -99,6 +99,81 @@ GLOBAL
   DATABASE SCHEMA -- CATEGORIES
 ================================================================================
 
+BRANDS
+------
+
+  Glock ................. Austrian manufacturer of polymer-framed pistols
+  Colt .................. Historic American firearms manufacturer
+  Heckler & Koch ........ German defense manufacturer of firearms
+  Sig Sauer ............. Global firearms and optics manufacturer
+  FN Herstal ............ Belgian producer of military firearms
+  Benchmade ............. Premium knife manufacturer
+  KA-BAR ................ Military combat knife producer
+  Cold Steel ............ Knives and edged weapons company
+  ASP ................... Expandable batons and law enforcement tools
+  Barnett Outdoors ...... Crossbows and archery equipment
+  Bear Archery .......... Traditional and compound bows
+  Raytheon .............. Missile systems and defense technologies
+  Lockheed Martin ....... Aerospace and advanced weapons systems
+  Northrop Grumman ...... Defense and aerospace systems
+  Axon .................. Tasers and law enforcement tech
+  Combined Systems ...... Riot control and chemical defense systems
+  Defense Technology .... Less-lethal munitions and chemical agents
+  Thermo Fisher Scientific ... Biological detection and lab systems
+  Mirion Technologies ....... Radiation detection and measurement systems
+  Oshkosh Defense ....... Military vehicles and mobility platforms
+  General Dynamics ...... Armored vehicles and defense systems
+  CrowdStrike ........... Cybersecurity and threat intelligence
+  Palo Alto Networks .... Network and cyber defense solutions
+  Safariland ............ Holsters, restraints, and armor
+  Peerless Handcuff ..... Restraint devices for law enforcement
+  Hornady ............... Ammunition and ballistic products
+  Federal Premium ....... Ammunition manufacturer
+  3M .................... Safety and protective equipment
+  Armor Express ......... Body armor systems
+  5.11 Tactical ......... Tactical apparel and gear
+  Crye Precision ........ Advanced combat gear
+  Trijicon .............. Optical sights manufacturer
+  EOTech ................ Holographic weapon sights
+  Vortex Optics ......... Rifle scopes and optics
+  Magpul ................ Firearm accessories and magazines
+  SureFire .............. Weapon lights and suppressors
+  Otis Technology ....... Firearm cleaning systems
+  Hoppe's ............... Gun cleaning supplies
+  Liberty Safe .......... Gun safes and storage
+  Pelican ............... Protective transport cases
+  Motorola Solutions .... Public safety communication systems
+  Garmin ................ Navigation and communication devices
+  FLIR Systems .......... Thermal imaging and sensors
+  Garrett Metal Detectors ... Metal detection equipment
+  Polaris Defense ....... All-terrain military vehicles
+  Duracell .............. Battery and power systems
+  Goal Zero ............. Portable solar power systems
+  LifeStraw ............. Water purification systems
+  Leatherman ............ Multi-tools and survival gear
+  Bluegun ............... Training replica firearms
+  Action Target ......... Shooting range targets
+  Honeywell ............. Industrial and defense manufacturing
+  ZEV Technologies ...... Firearm customization and upgrades
+  Agency Arms ........... Weapon modification specialists
+  Amentum ............... Maintenance and support services
+  Brink's ............... Secure logistics and armored transport
+  GardaWorld ............ Cash logistics and transport services
+  Iron Mountain ......... Secure storage and records management
+  Academi ............... Private military training services
+  G4S ................... Global security services
+  Allied Universal ...... Security and facility protection
+  Control Risks ......... Risk and security consulting
+  MITRE ................. Defense and systems research
+  UL Solutions .......... Safety testing and certification
+  Veolia ................ Hazardous waste and disposal services
+  Hikvision ............. Video surveillance systems 
+  SGS ................... Inspection, verification, and certification services
+  KBR ................... Defense and government contracting
+
+CATEGORIES
+----------
+
   PRODUCTS
   -------
  
