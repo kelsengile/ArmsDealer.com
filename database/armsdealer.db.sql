@@ -1,5 +1,6 @@
 BEGIN TRANSACTION;
-CREATE TABLE IF NOT EXISTS brands (
+DROP TABLE IF EXISTS "brands";
+CREATE TABLE brands (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT    NOT NULL UNIQUE,
     slug        TEXT    NOT NULL UNIQUE,
@@ -9,17 +10,20 @@ CREATE TABLE IF NOT EXISTS brands (
     created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS brands_translations (
-    id          INTEGER PRIMARY KEY AUTOINCREMENT,
-    brand_id    INTEGER NOT NULL,
-    lang_code   TEXT    NOT NULL,
-    name        TEXT    NOT NULL,
-    description TEXT,
-    UNIQUE (brand_id, lang_code),
-    FOREIGN KEY (brand_id)   REFERENCES brands(id)    ON DELETE CASCADE,
-    FOREIGN KEY (lang_code)  REFERENCES languages(code)
+DROP TABLE IF EXISTS "brands_translations";
+CREATE TABLE "brands_translations" (
+	"id"	INTEGER,
+	"brand_id"	INTEGER NOT NULL,
+	"lang_code"	TEXT NOT NULL,
+	"name"	TEXT NOT NULL,
+	"description"	TEXT,
+	UNIQUE("brand_id","lang_code"),
+	PRIMARY KEY("id" AUTOINCREMENT),
+	FOREIGN KEY("brand_id") REFERENCES "brands"("id") ON DELETE CASCADE,
+	FOREIGN KEY("lang_code") REFERENCES "languages"("code")
 );
-CREATE TABLE IF NOT EXISTS cart_items (
+DROP TABLE IF EXISTS "cart_items";
+CREATE TABLE cart_items (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id     INTEGER NOT NULL REFERENCES users(id),
     item_type   TEXT    NOT NULL DEFAULT 'product',
@@ -28,7 +32,8 @@ CREATE TABLE IF NOT EXISTS cart_items (
     added_at    TEXT    NOT NULL DEFAULT (datetime('now')),
     UNIQUE (user_id, item_type, item_id)
 );
-CREATE TABLE IF NOT EXISTS categories (
+DROP TABLE IF EXISTS "categories";
+CREATE TABLE categories (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT    NOT NULL UNIQUE,
     slug        TEXT    NOT NULL UNIQUE,
@@ -36,7 +41,8 @@ CREATE TABLE IF NOT EXISTS categories (
     icon_file   TEXT,
     description TEXT
 );
-CREATE TABLE IF NOT EXISTS category_translations (
+DROP TABLE IF EXISTS "category_translations";
+CREATE TABLE category_translations (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     lang_code   TEXT    NOT NULL REFERENCES languages(code),
@@ -44,7 +50,8 @@ CREATE TABLE IF NOT EXISTS category_translations (
     description TEXT,
     UNIQUE (category_id, lang_code)
 );
-CREATE TABLE IF NOT EXISTS currencies (
+DROP TABLE IF EXISTS "currencies";
+CREATE TABLE currencies (
     code        TEXT    PRIMARY KEY,
     symbol      TEXT    NOT NULL,
     label       TEXT    NOT NULL,
@@ -52,7 +59,8 @@ CREATE TABLE IF NOT EXISTS currencies (
     is_active   INTEGER NOT NULL DEFAULT 1,
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS inquiries (
+DROP TABLE IF EXISTS "inquiries";
+CREATE TABLE inquiries (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT NOT NULL,
     email       TEXT NOT NULL,
@@ -61,14 +69,16 @@ CREATE TABLE IF NOT EXISTS inquiries (
     status      TEXT NOT NULL DEFAULT 'new',            -- 'new' | 'read' | 'resolved'
     created_at  TEXT NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS languages (
+DROP TABLE IF EXISTS "languages";
+CREATE TABLE languages (
     code        TEXT    PRIMARY KEY,
     label       TEXT    NOT NULL,
     locale      TEXT    NOT NULL,
     is_active   INTEGER NOT NULL DEFAULT 1,
     sort_order  INTEGER NOT NULL DEFAULT 0
 );
-CREATE TABLE IF NOT EXISTS order_items (
+DROP TABLE IF EXISTS "order_items";
+CREATE TABLE order_items (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     order_id    INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
     item_type   TEXT    NOT NULL DEFAULT 'product'
@@ -77,7 +87,8 @@ CREATE TABLE IF NOT EXISTS order_items (
     quantity    INTEGER NOT NULL DEFAULT 1,
     unit_price  REAL    NOT NULL
 );
-CREATE TABLE IF NOT EXISTS orders (
+DROP TABLE IF EXISTS "orders";
+CREATE TABLE orders (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id     INTEGER NOT NULL REFERENCES users(id),
     status      TEXT    NOT NULL DEFAULT 'pending',     -- 'pending' | 'verified' | 'paid' | 'shipped' | 'completed' | 'cancelled'
@@ -86,7 +97,8 @@ CREATE TABLE IF NOT EXISTS orders (
     created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS products (
+DROP TABLE IF EXISTS "products";
+CREATE TABLE products (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     name           TEXT    NOT NULL,
     slug           TEXT    NOT NULL UNIQUE,
@@ -105,7 +117,8 @@ CREATE TABLE IF NOT EXISTS products (
     created_at     TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at     TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS products_translations (
+DROP TABLE IF EXISTS "products_translations";
+CREATE TABLE products_translations (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     product_id  INTEGER NOT NULL REFERENCES products(id) ON DELETE CASCADE,
     lang_code   TEXT    NOT NULL REFERENCES languages(code),
@@ -114,7 +127,8 @@ CREATE TABLE IF NOT EXISTS products_translations (
     tags        TEXT,
     UNIQUE (product_id, lang_code)
 );
-CREATE TABLE IF NOT EXISTS services (
+DROP TABLE IF EXISTS "services";
+CREATE TABLE services (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     name           TEXT    NOT NULL,
     slug           TEXT    NOT NULL UNIQUE,
@@ -132,7 +146,8 @@ CREATE TABLE IF NOT EXISTS services (
     created_at     TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at     TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-CREATE TABLE IF NOT EXISTS services_translations (
+DROP TABLE IF EXISTS "services_translations";
+CREATE TABLE services_translations (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     service_id  INTEGER NOT NULL REFERENCES services(id) ON DELETE CASCADE,
     lang_code   TEXT    NOT NULL REFERENCES languages(code),
@@ -141,7 +156,8 @@ CREATE TABLE IF NOT EXISTS services_translations (
     tags        TEXT,
     UNIQUE (service_id, lang_code)
 );
-CREATE TABLE IF NOT EXISTS subcategories (
+DROP TABLE IF EXISTS "subcategories";
+CREATE TABLE subcategories (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     category_id INTEGER NOT NULL REFERENCES categories(id) ON DELETE CASCADE,
     name        TEXT    NOT NULL,
@@ -150,7 +166,8 @@ CREATE TABLE IF NOT EXISTS subcategories (
     description TEXT,
     UNIQUE (category_id, name)
 );
-CREATE TABLE IF NOT EXISTS subcategory_translations (
+DROP TABLE IF EXISTS "subcategory_translations";
+CREATE TABLE subcategory_translations (
     id             INTEGER PRIMARY KEY AUTOINCREMENT,
     subcategory_id INTEGER NOT NULL REFERENCES subcategories(id) ON DELETE CASCADE,
     lang_code      TEXT    NOT NULL REFERENCES languages(code),
@@ -158,14 +175,16 @@ CREATE TABLE IF NOT EXISTS subcategory_translations (
     description    TEXT,
     UNIQUE (subcategory_id, lang_code)
 );
-CREATE TABLE IF NOT EXISTS ui_strings (
+DROP TABLE IF EXISTS "ui_strings";
+CREATE TABLE ui_strings (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     lang_code   TEXT    NOT NULL REFERENCES languages(code),
     key         TEXT    NOT NULL,
     value       TEXT    NOT NULL,
     UNIQUE (lang_code, key)
 );
-CREATE TABLE IF NOT EXISTS users (
+DROP TABLE IF EXISTS "users";
+CREATE TABLE users (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
     username      TEXT    NOT NULL UNIQUE,
     email         TEXT    NOT NULL UNIQUE,
@@ -211,6 +230,7 @@ INSERT INTO "brands" ("id","name","slug","logo_file","description","is_active","
  (35,'Magpul','magpul','magpul.png','Firearm accessories and magazines.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (36,'SureFire','surefire','surefire.png','Weapon lights and suppressors.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (37,'Otis Technology','otis','otistechnology.png','Firearm cleaning systems.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
+ (38,'Hoppe''s','hoppes','hoppes.png','Gun cleaning supplies.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (39,'Liberty Safe','liberty-safe','libertysafe.png','Gun safes and storage.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (40,'Pelican','pelican','pelican.png','Protective transport cases.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (41,'Motorola Solutions','motorola-solutions','motorolasolutions.png','Public safety communication systems.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
@@ -241,8 +261,283 @@ INSERT INTO "brands" ("id","name","slug","logo_file","description","is_active","
  (66,'Hikvision','hikvision','hikvision.png','Video surveillance systems.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (67,'SGS','sgs','sgs.png','Inspection, verification, and certification services.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (68,'KBR','kbr','kbr.png','Defense and government contracting.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
- (69,'Anonymous','anonymous','anonymous.png','Seller identity not disclosed or verified.',1,'2026-04-24 10:23:23','2026-04-24 10:23:23'),
- (383,'Hoppe''s','hoppes','hoppes.png','Gun cleaning supplies.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11');
+ (69,'Anonymous','anonymous','anonymous.png','Seller identity not disclosed or verified.',1,'2026-04-24 10:23:23','2026-04-24 10:23:23');
+INSERT INTO "brands_translations" ("id","brand_id","lang_code","name","description") VALUES (1,1,'filipino','Glock','Isang Austrian na tagagawa ng mga polymer-framed na pistola'),
+ (2,2,'filipino','Colt','Makabagong Amerikanong tagagawa ng baril na may mahabang kasaysayan'),
+ (3,3,'filipino','Heckler & Koch','Aleman na tagagawa ng sandata at depensa'),
+ (4,4,'filipino','Sig Sauer','Pandaigdigang tagagawa ng baril at optics'),
+ (5,5,'filipino','FN Herstal','Belgian na gumagawa ng mga sandatang militar'),
+ (6,6,'filipino','Benchmade','Premium na tagagawa ng kutsilyo'),
+ (7,7,'filipino','KA-BAR','Tagagawa ng military combat knife'),
+ (8,8,'filipino','Cold Steel','Kumpanya ng kutsilyo at edged weapons'),
+ (9,9,'filipino','ASP','Expandable baton at law enforcement tools'),
+ (10,10,'filipino','Barnett Outdoors','Crossbows at archery equipment'),
+ (11,11,'filipino','Bear Archery','Tradisyonal at compound bows'),
+ (12,12,'filipino','Raytheon','Missile systems at defense technologies'),
+ (13,13,'filipino','Lockheed Martin','Aerospace at advanced weapons systems'),
+ (14,14,'filipino','Northrop Grumman','Defense at aerospace systems'),
+ (15,15,'filipino','Axon','Tasers at teknolohiya para sa law enforcement'),
+ (16,16,'filipino','Combined Systems','Riot control at chemical defense systems'),
+ (17,17,'filipino','Defense Technology','Less-lethal munitions at chemical agents'),
+ (18,18,'filipino','Thermo Fisher Scientific','Biological detection at laboratory systems'),
+ (19,19,'filipino','Mirion Technologies','Radiation detection at measurement systems'),
+ (20,20,'filipino','Oshkosh Defense','Military vehicles at mobility platforms'),
+ (21,21,'filipino','General Dynamics','Armored vehicles at defense systems'),
+ (22,22,'filipino','CrowdStrike','Cybersecurity at threat intelligence'),
+ (23,23,'filipino','Palo Alto Networks','Network at cyber defense solutions'),
+ (24,24,'filipino','Safariland','Holsters, restraints, at armor'),
+ (25,25,'filipino','Peerless Handcuff','Mga restraint device para sa law enforcement'),
+ (26,26,'filipino','Hornady','Ammunition at ballistic products'),
+ (27,27,'filipino','Federal Premium','Tagagawa ng ammunition'),
+ (28,28,'filipino','3M','Safety at protective equipment'),
+ (29,29,'filipino','Armor Express','Body armor systems'),
+ (30,30,'filipino','5.11 Tactical','Tactical apparel at gear'),
+ (31,31,'filipino','Crye Precision','Advanced combat gear'),
+ (32,32,'filipino','Trijicon','Tagagawa ng optical sights'),
+ (33,33,'filipino','EOTech','Holographic weapon sights'),
+ (34,34,'filipino','Vortex Optics','Rifle scopes at optics'),
+ (35,35,'filipino','Magpul','Firearm accessories at magazines'),
+ (36,36,'filipino','SureFire','Weapon lights at suppressors'),
+ (37,37,'filipino','Otis Technology','Firearm cleaning systems'),
+ (38,38,'filipino','Hoppe''s','Gun cleaning supplies'),
+ (39,39,'filipino','Liberty Safe','Gun safes at storage'),
+ (40,40,'filipino','Pelican','Protective transport cases'),
+ (41,41,'filipino','Motorola Solutions','Public safety communication systems'),
+ (42,42,'filipino','Garmin','Navigation at communication devices'),
+ (43,43,'filipino','FLIR Systems','Thermal imaging at sensors'),
+ (44,44,'filipino','Garrett Metal Detectors','Metal detection equipment'),
+ (45,45,'filipino','Polaris Defense','All-terrain military vehicles'),
+ (46,46,'filipino','Duracell','Battery at power systems'),
+ (47,47,'filipino','Goal Zero','Portable solar power systems'),
+ (48,48,'filipino','LifeStraw','Water purification systems'),
+ (49,49,'filipino','Leatherman','Multi-tools at survival gear'),
+ (50,50,'filipino','Bluegun','Training replica firearms'),
+ (51,51,'filipino','Action Target','Shooting range targets'),
+ (52,52,'filipino','Honeywell','Industrial at defense manufacturing'),
+ (53,53,'filipino','ZEV Technologies','Firearm customization at upgrades'),
+ (54,54,'filipino','Agency Arms','Mga espesyalista sa weapon modification'),
+ (55,55,'filipino','Amentum','Maintenance at support services'),
+ (56,56,'filipino','Brink''s','Secure logistics at armored transport'),
+ (57,57,'filipino','GardaWorld','Cash logistics at transport services'),
+ (58,58,'filipino','Iron Mountain','Secure storage at records management'),
+ (59,59,'filipino','Academi','Private military training services'),
+ (60,60,'filipino','G4S','Global security services'),
+ (61,61,'filipino','Allied Universal','Security at facility protection'),
+ (62,62,'filipino','Control Risks','Risk at security consulting'),
+ (63,63,'filipino','MITRE','Defense at systems research'),
+ (64,64,'filipino','UL Solutions','Safety testing at certification'),
+ (65,65,'filipino','Veolia','Hazardous waste at disposal services'),
+ (66,66,'filipino','Hikvision','Video surveillance systems'),
+ (67,67,'filipino','SGS','Inspection, verification, at certification services'),
+ (68,68,'filipino','KBR','Defense at government contracting'),
+ (69,69,'filipino','Anonymous','Hindi isiniwalat o napatunayang pagkakakilanlan ng nagbebenta'),
+ (70,1,'japanese','Glock','ポリマーフレーム拳銃を製造するオーストリア企業'),
+ (71,2,'japanese','Colt','歴史あるアメリカの銃器メーカー'),
+ (72,3,'japanese','Heckler & Koch','ドイツの防衛・銃器メーカー'),
+ (73,4,'japanese','Sig Sauer','銃器および光学機器のグローバルメーカー'),
+ (74,5,'japanese','FN Herstal','ベルギーの軍用銃器メーカー'),
+ (75,6,'japanese','Benchmade','高級ナイフメーカー'),
+ (76,7,'japanese','KA-BAR','軍用コンバットナイフメーカー'),
+ (77,8,'japanese','Cold Steel','刃物および武器メーカー'),
+ (78,9,'japanese','ASP','警察用伸縮バトンメーカー'),
+ (79,10,'japanese','Barnett Outdoors','クロスボウとアーチェリー用品メーカー'),
+ (80,11,'japanese','Bear Archery','伝統弓およびコンパウンドボウメーカー'),
+ (81,12,'japanese','Raytheon','ミサイルおよび防衛技術企業'),
+ (82,13,'japanese','Lockheed Martin','航空宇宙および先進兵器システム企業'),
+ (83,14,'japanese','Northrop Grumman','防衛および航空宇宙システム企業'),
+ (84,15,'japanese','Axon','テーザーおよび警察技術企業'),
+ (85,16,'japanese','Combined Systems','暴動鎮圧および化学防衛機器メーカー'),
+ (86,17,'japanese','Defense Technology','非致死性兵器および化学装備メーカー'),
+ (87,18,'japanese','Thermo Fisher Scientific','生物検出および研究機器企業'),
+ (88,19,'japanese','Mirion Technologies','放射線測定および検出機器企業'),
+ (89,20,'japanese','Oshkosh Defense','軍用車両および機動プラットフォームメーカー'),
+ (90,21,'japanese','General Dynamics','装甲車両および防衛システム企業'),
+ (91,22,'japanese','CrowdStrike','サイバーセキュリティおよび脅威分析企業'),
+ (92,23,'japanese','Palo Alto Networks','ネットワークおよびサイバー防御企業'),
+ (93,24,'japanese','Safariland','ホルスターおよび防護装備メーカー'),
+ (94,25,'japanese','Peerless Handcuff','警察用手錠メーカー'),
+ (95,26,'japanese','Hornady','弾薬および弾道製品メーカー'),
+ (96,27,'japanese','Federal Premium','弾薬メーカー'),
+ (97,28,'japanese','3M','安全および保護装備メーカー'),
+ (98,29,'japanese','Armor Express','ボディアーマーメーカー'),
+ (99,30,'japanese','5.11 Tactical','タクティカル装備および衣類メーカー'),
+ (100,31,'japanese','Crye Precision','先進戦闘装備メーカー'),
+ (101,32,'japanese','Trijicon','光学照準器メーカー'),
+ (102,33,'japanese','EOTech','ホログラフィック照準器メーカー'),
+ (103,34,'japanese','Vortex Optics','ライフルスコープおよび光学機器メーカー'),
+ (104,35,'japanese','Magpul','銃器アクセサリーおよびマガジンメーカー'),
+ (105,36,'japanese','SureFire','武器用ライトおよびサプレッサーメーカー'),
+ (106,37,'japanese','Otis Technology','銃器清掃システムメーカー'),
+ (107,38,'japanese','Hoppe''s','銃器清掃用品メーカー'),
+ (108,39,'japanese','Liberty Safe','銃器用金庫メーカー'),
+ (109,40,'japanese','Pelican','保護ケースおよび輸送ケースメーカー'),
+ (110,41,'japanese','Motorola Solutions','公共安全通信システム企業'),
+ (111,42,'japanese','Garmin','ナビゲーションおよび通信機器メーカー'),
+ (112,43,'japanese','FLIR Systems','熱画像およびセンサー企業'),
+ (113,44,'japanese','Garrett Metal Detectors','金属探知機メーカー'),
+ (114,45,'japanese','Polaris Defense','全地形対応軍用車両メーカー'),
+ (115,46,'japanese','Duracell','電池および電源メーカー'),
+ (116,47,'japanese','Goal Zero','ポータブル太陽光発電メーカー'),
+ (117,48,'japanese','LifeStraw','浄水システムメーカー'),
+ (118,49,'japanese','Leatherman','マルチツールおよびサバイバル用品メーカー'),
+ (119,50,'japanese','Bluegun','訓練用模擬銃メーカー'),
+ (120,51,'japanese','Action Target','射撃訓練用ターゲットメーカー'),
+ (121,52,'japanese','Honeywell','産業および防衛技術企業'),
+ (122,53,'japanese','ZEV Technologies','銃器カスタマイズ企業'),
+ (123,54,'japanese','Agency Arms','銃器改造専門企業'),
+ (124,55,'japanese','Amentum','保守および支援サービス企業'),
+ (125,56,'japanese','Brink''s','現金輸送および警備輸送企業'),
+ (126,57,'japanese','GardaWorld','現金輸送および警備サービス企業'),
+ (127,58,'japanese','Iron Mountain','安全保管および記録管理企業'),
+ (128,59,'japanese','Academi','民間軍事訓練企業'),
+ (129,60,'japanese','G4S','国際警備サービス企業'),
+ (130,61,'japanese','Allied Universal','施設警備および保護サービス企業'),
+ (131,62,'japanese','Control Risks','リスクおよびセキュリティコンサル企業'),
+ (132,63,'japanese','MITRE','防衛およびシステム研究機関'),
+ (133,64,'japanese','UL Solutions','安全試験および認証企業'),
+ (134,65,'japanese','Veolia','廃棄物処理および環境サービス企業'),
+ (135,66,'japanese','Hikvision','監視カメラおよび映像監視企業'),
+ (136,67,'japanese','SGS','検査・認証サービス企業'),
+ (137,68,'japanese','KBR','防衛および政府契約企業'),
+ (138,69,'japanese','匿名','販売者の身元が公開または確認されていません。'),
+ (139,1,'spanish','Glock','Fabricante austriaco de pistolas con armazón de polímero'),
+ (140,2,'spanish','Colt','Histórico fabricante estadounidense de armas de fuego'),
+ (141,3,'spanish','Heckler & Koch','Fabricante alemán de armas y defensa'),
+ (142,4,'spanish','Sig Sauer','Fabricante global de armas de fuego y óptica'),
+ (143,5,'spanish','FN Herstal','Productor belga de armas militares'),
+ (144,6,'spanish','Benchmade','Fabricante premium de cuchillos'),
+ (145,7,'spanish','KA-BAR','Productor de cuchillos de combate militar'),
+ (146,8,'spanish','Cold Steel','Empresa de cuchillos y armas blancas'),
+ (147,9,'spanish','ASP','Fabricante de bastones extensibles y herramientas policiales'),
+ (148,10,'spanish','Barnett Outdoors','Fabricante de ballestas y equipo de arquería'),
+ (149,11,'spanish','Bear Archery','Fabricante de arcos tradicionales y compuestos'),
+ (150,12,'spanish','Raytheon','Empresa de sistemas de misiles y tecnologías de defensa'),
+ (151,13,'spanish','Lockheed Martin','Empresa aeroespacial y de sistemas de armas avanzados'),
+ (152,14,'spanish','Northrop Grumman','Empresa de defensa y sistemas aeroespaciales'),
+ (153,15,'spanish','Axon','Empresa de táseres y tecnología para fuerzas del orden'),
+ (154,16,'spanish','Combined Systems','Fabricante de sistemas de control de disturbios y defensa química'),
+ (155,17,'spanish','Defense Technology','Fabricante de municiones no letales y agentes químicos'),
+ (156,18,'spanish','Thermo Fisher Scientific','Empresa de detección biológica y sistemas de laboratorio'),
+ (157,19,'spanish','Mirion Technologies','Empresa de detección y medición de radiación'),
+ (158,20,'spanish','Oshkosh Defense','Fabricante de vehículos militares y plataformas de movilidad'),
+ (159,21,'spanish','General Dynamics','Empresa de vehículos blindados y sistemas de defensa'),
+ (160,22,'spanish','CrowdStrike','Empresa de ciberseguridad e inteligencia de amenazas'),
+ (161,23,'spanish','Palo Alto Networks','Empresa de soluciones de defensa cibernética y redes'),
+ (162,24,'spanish','Safariland','Fabricante de fundas, dispositivos de sujeción y armaduras'),
+ (163,25,'spanish','Peerless Handcuff','Fabricante de esposas para fuerzas del orden'),
+ (164,26,'spanish','Hornady','Fabricante de municiones y productos balísticos'),
+ (165,27,'spanish','Federal Premium','Fabricante de municiones'),
+ (166,28,'spanish','3M','Empresa de equipos de seguridad y protección'),
+ (167,29,'spanish','Armor Express','Fabricante de sistemas de blindaje corporal'),
+ (168,30,'spanish','5.11 Tactical','Fabricante de ropa y equipo táctico'),
+ (169,31,'spanish','Crye Precision','Fabricante de equipo de combate avanzado'),
+ (170,32,'spanish','Trijicon','Fabricante de miras ópticas'),
+ (171,33,'spanish','EOTech','Fabricante de miras holográficas'),
+ (172,34,'spanish','Vortex Optics','Fabricante de visores y óptica para rifles'),
+ (173,35,'spanish','Magpul','Fabricante de accesorios y cargadores de armas'),
+ (174,36,'spanish','SureFire','Fabricante de linternas tácticas y supresores'),
+ (175,37,'spanish','Otis Technology','Fabricante de sistemas de limpieza de armas'),
+ (176,38,'spanish','Hoppe''s','Fabricante de productos de limpieza para armas'),
+ (177,39,'spanish','Liberty Safe','Fabricante de cajas fuertes para armas'),
+ (178,40,'spanish','Pelican','Fabricante de estuches de transporte protectores'),
+ (179,41,'spanish','Motorola Solutions','Empresa de sistemas de comunicación para seguridad pública'),
+ (180,42,'spanish','Garmin','Fabricante de dispositivos de navegación y comunicación'),
+ (181,43,'spanish','FLIR Systems','Empresa de imágenes térmicas y sensores'),
+ (182,44,'spanish','Garrett Metal Detectors','Fabricante de detectores de metales'),
+ (183,45,'spanish','Polaris Defense','Fabricante de vehículos militares todoterreno'),
+ (184,46,'spanish','Duracell','Fabricante de baterías y sistemas de energía'),
+ (185,47,'spanish','Goal Zero','Fabricante de sistemas portátiles de energía solar'),
+ (186,48,'spanish','LifeStraw','Fabricante de sistemas de purificación de agua'),
+ (187,49,'spanish','Leatherman','Fabricante de multiherramientas y equipo de supervivencia'),
+ (188,50,'spanish','Bluegun','Fabricante de armas de entrenamiento simuladas'),
+ (189,51,'spanish','Action Target','Fabricante de blancos para tiro'),
+ (190,52,'spanish','Honeywell','Empresa de manufactura industrial y defensa'),
+ (191,53,'spanish','ZEV Technologies','Empresa de personalización y mejora de armas'),
+ (192,54,'spanish','Agency Arms','Especialistas en modificación de armas'),
+ (193,55,'spanish','Amentum','Empresa de servicios de mantenimiento y soporte'),
+ (194,56,'spanish','Brink''s','Empresa de transporte blindado y logística segura'),
+ (195,57,'spanish','GardaWorld','Empresa de logística de valores y transporte seguro'),
+ (196,58,'spanish','Iron Mountain','Empresa de almacenamiento seguro y gestión documental'),
+ (197,59,'spanish','Academi','Empresa de entrenamiento militar privado'),
+ (198,60,'spanish','G4S','Empresa global de servicios de seguridad'),
+ (199,61,'spanish','Allied Universal','Empresa de seguridad y protección de instalaciones'),
+ (200,62,'spanish','Control Risks','Empresa de consultoría en riesgos y seguridad'),
+ (201,63,'spanish','MITRE','Organización de investigación en defensa y sistemas'),
+ (202,64,'spanish','UL Solutions','Empresa de pruebas y certificación de seguridad'),
+ (203,65,'spanish','Veolia','Empresa de gestión de residuos y servicios ambientales'),
+ (204,66,'spanish','Hikvision','Empresa de sistemas de videovigilancia'),
+ (205,67,'spanish','SGS','Empresa de inspección, verificación y certificación'),
+ (206,68,'spanish','KBR','Empresa de contratación gubernamental y defensa'),
+ (207,69,'spanish','Anónimo','La identidad del vendedor no ha sido revelada ni verificada.'),
+ (208,1,'mandarin','Glock','奥地利聚合物手枪制造商'),
+ (209,2,'mandarin','Colt','历史悠久的美国枪械制造商'),
+ (210,3,'mandarin','Heckler & Koch','德国武器与防务制造商'),
+ (211,4,'mandarin','Sig Sauer','全球枪械与光学设备制造商'),
+ (212,5,'mandarin','FN Herstal','比利时军用武器制造商'),
+ (213,6,'mandarin','Benchmade','高端刀具制造商'),
+ (214,7,'mandarin','KA-BAR','军用战斗刀制造商'),
+ (215,8,'mandarin','Cold Steel','刀具与冷兵器公司'),
+ (216,9,'mandarin','ASP','警用伸缩警棍及执法装备制造商'),
+ (217,10,'mandarin','Barnett Outdoors','弩和射箭设备制造商'),
+ (218,11,'mandarin','Bear Archery','传统弓与复合弓制造商'),
+ (219,12,'mandarin','Raytheon','导弹系统与防务技术公司'),
+ (220,13,'mandarin','Lockheed Martin','航空航天与先进武器系统公司'),
+ (221,14,'mandarin','Northrop Grumman','防务与航空航天系统公司'),
+ (222,15,'mandarin','Axon','泰瑟枪与执法科技公司'),
+ (223,16,'mandarin','Combined Systems','防暴与化学防护设备制造商'),
+ (224,17,'mandarin','Defense Technology','非致命武器与化学装备制造商'),
+ (225,18,'mandarin','Thermo Fisher Scientific','生物检测与实验室设备公司'),
+ (226,19,'mandarin','Mirion Technologies','辐射检测与测量设备公司'),
+ (227,20,'mandarin','Oshkosh Defense','军用车辆与机动平台制造商'),
+ (228,21,'mandarin','General Dynamics','装甲车辆与防务系统公司'),
+ (229,22,'mandarin','CrowdStrike','网络安全与威胁情报公司'),
+ (230,23,'mandarin','Palo Alto Networks','网络与网络防御解决方案公司'),
+ (231,24,'mandarin','Safariland','枪套、防护与执法装备制造商'),
+ (232,25,'mandarin','Peerless Handcuff','执法用手铐制造商'),
+ (233,26,'mandarin','Hornady','弹药与弹道产品制造商'),
+ (234,27,'mandarin','Federal Premium','弹药制造商'),
+ (235,28,'mandarin','3M','安全与防护设备公司'),
+ (236,29,'mandarin','Armor Express','防弹衣系统制造商'),
+ (237,30,'mandarin','5.11 Tactical','战术服装与装备制造商'),
+ (238,31,'mandarin','Crye Precision','先进作战装备制造商'),
+ (239,32,'mandarin','Trijicon','光学瞄准设备制造商'),
+ (240,33,'mandarin','EOTech','全息瞄准镜制造商'),
+ (241,34,'mandarin','Vortex Optics','步枪瞄准镜与光学设备制造商'),
+ (242,35,'mandarin','Magpul','枪械配件与弹匣制造商'),
+ (243,36,'mandarin','SureFire','战术照明与消音器制造商'),
+ (244,37,'mandarin','Otis Technology','枪械清洁系统制造商'),
+ (245,38,'mandarin','Hoppe''s','枪械清洁用品制造商'),
+ (246,39,'mandarin','Liberty Safe','枪械保险柜制造商'),
+ (247,40,'mandarin','Pelican','防护运输箱制造商'),
+ (248,41,'mandarin','Motorola Solutions','公共安全通信系统公司'),
+ (249,42,'mandarin','Garmin','导航与通信设备制造商'),
+ (250,43,'mandarin','FLIR Systems','热成像与传感器公司'),
+ (251,44,'mandarin','Garrett Metal Detectors','金属探测器制造商'),
+ (252,45,'mandarin','Polaris Defense','全地形军用车辆制造商'),
+ (253,46,'mandarin','Duracell','电池与电源系统制造商'),
+ (254,47,'mandarin','Goal Zero','便携式太阳能电源制造商'),
+ (255,48,'mandarin','LifeStraw','水净化系统制造商'),
+ (256,49,'mandarin','Leatherman','多功能工具与生存装备制造商'),
+ (257,50,'mandarin','Bluegun','训练用仿真枪制造商'),
+ (258,51,'mandarin','Action Target','射击训练靶标制造商'),
+ (259,52,'mandarin','Honeywell','工业与防务技术公司'),
+ (260,53,'mandarin','ZEV Technologies','枪械定制与升级公司'),
+ (261,54,'mandarin','Agency Arms','枪械改装专业公司'),
+ (262,55,'mandarin','Amentum','维护与支持服务公司'),
+ (263,56,'mandarin','Brink''s','武装押运与安全物流公司'),
+ (264,57,'mandarin','GardaWorld','安保运输与现金物流公司'),
+ (265,58,'mandarin','Iron Mountain','安全存储与信息管理公司'),
+ (266,59,'mandarin','Academi','私人军事训练公司'),
+ (267,60,'mandarin','G4S','全球安保服务公司'),
+ (268,61,'mandarin','Allied Universal','安保与设施保护服务公司'),
+ (269,62,'mandarin','Control Risks','风险与安全咨询公司'),
+ (270,63,'mandarin','MITRE','防务与系统研究机构'),
+ (271,64,'mandarin','UL Solutions','安全测试与认证公司'),
+ (272,65,'mandarin','Veolia','废物处理与环境服务公司'),
+ (273,66,'mandarin','Hikvision','视频监控系统公司'),
+ (274,67,'mandarin','SGS','检验、验证与认证公司'),
+ (275,68,'mandarin','KBR','防务与政府合同公司'),
+ (276,69,'mandarin','匿名','卖家的身份未被披露或验证。');
 INSERT INTO "categories" ("id","name","slug","type","icon_file","description") VALUES (1,'Firearms','firearms','product',NULL,'Guns and ranged weapons'),
  (2,'Blades','blades','product',NULL,'Knives, swords, and edged weapons'),
  (3,'Blunts','blunts','product',NULL,'Impact weapons like bats and clubs'),
@@ -1531,17 +1826,29 @@ INSERT INTO "subcategory_translations" ("id","subcategory_id","lang_code","name"
 INSERT INTO "users" ("id","username","email","password_hash","role","created_at","updated_at") VALUES (1,'spongebob','spongebob@bikini.bottom','scrypt:32768:8:1$SbTwSrAmCehypPz8$1fd49b243228a73c60f77f4fd51cf7f46d77f044b2576a24fe7de1800ca3dabe891e693f64f2276ef392437527659822711cb089f651944ef50073f5188a0c42','customer','2026-04-15 05:03:32','2026-04-15 05:03:32'),
  (2,'mrcrabs','eugene.crabs@thekrustykrab.com','scrypt:32768:8:1$83oDsOSmvXx89UZx$c0e15772d19273f1df094dffa5fb9846afa2be3bfa47bb50a89d3ec80c57032db06799f09fb4b4d51be28dfb33de4148c29c7b97396f1dbbaba90920d6b78dc3','admin','2026-04-15 05:03:32','2026-04-15 05:03:32'),
  (3,'KelsenGile','kelsengilesarmientoconel@gmail.com','scrypt:32768:8:1$XrzCLf0eixrrKiHF$94eee8816393d6c3fde4901ccd40f36f33d5fed9031cf15212b3a3acc91d25a7b11b7f9295ade278f201088b7c0e87f1242b859b5fc2008aaba577a9d9babdd2','customer','2026-04-15 07:00:44','2026-04-15 07:00:44');
+DROP INDEX IF EXISTS "idx_order_items_order";
 CREATE INDEX idx_order_items_order  ON order_items   (order_id);
+DROP INDEX IF EXISTS "idx_orders_status";
 CREATE INDEX idx_orders_status      ON orders        (status);
+DROP INDEX IF EXISTS "idx_orders_user";
 CREATE INDEX idx_orders_user        ON orders        (user_id);
+DROP INDEX IF EXISTS "idx_products_brand";
 CREATE INDEX idx_products_brand     ON products      (brand_id);
+DROP INDEX IF EXISTS "idx_products_category";
 CREATE INDEX idx_products_category  ON products      (category_id);
+DROP INDEX IF EXISTS "idx_products_subcat";
 CREATE INDEX idx_products_subcat    ON products      (subcategory_id);
+DROP INDEX IF EXISTS "idx_services_brand";
 CREATE INDEX idx_services_brand     ON services      (brand_id);
+DROP INDEX IF EXISTS "idx_services_category";
 CREATE INDEX idx_services_category  ON services      (category_id);
+DROP INDEX IF EXISTS "idx_services_subcat";
 CREATE INDEX idx_services_subcat    ON services      (subcategory_id);
+DROP INDEX IF EXISTS "idx_subcats_category";
 CREATE INDEX idx_subcats_category   ON subcategories (category_id);
+DROP INDEX IF EXISTS "idx_ui_strings_lang";
 CREATE INDEX idx_ui_strings_lang    ON ui_strings    (lang_code);
+DROP TRIGGER IF EXISTS "trg_order_completed";
 CREATE TRIGGER trg_order_completed
 AFTER UPDATE OF status ON orders
 WHEN NEW.status = 'completed' AND OLD.status != 'completed'
@@ -1572,6 +1879,7 @@ BEGIN
         WHERE order_id = NEW.id AND item_type = 'service'
     );
 END;
+DROP TRIGGER IF EXISTS "trg_order_uncompleted";
 CREATE TRIGGER trg_order_uncompleted
 AFTER UPDATE OF status ON orders
 WHEN OLD.status = 'completed' AND NEW.status != 'completed'
