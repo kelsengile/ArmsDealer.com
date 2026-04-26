@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block title %} {% endblock %}
+    <link rel="icon" type="image/png"
+        href="{{ url_for('static', filename='../../static/assets/images/pageimages/globalmages/armsdealerlogo.png') }}">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
+    {% block styles %} {% endblock %}
+</head>
+<body>
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- AUTH HEADER — minimal strip with logo + exit               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <header class="auth-header">
+
+        <!-- Exit button (right) -->
+        <button class="auth-header__exit" id="authExitBtn" aria-label="Go back">
+            <span class="auth-header__exit-label">EXIT</span>
+        </button>
+    </header>
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- PAGE CONTENT                                               -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    {% block main %}
+    {% endblock %}
+
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <!-- AUTH HEADER STYLES (scoped, no extra CSS file needed)      -->
+    <!-- ═══════════════════════════════════════════════════════════ -->
+    <style>
+        /* ── Auth Header Strip ──────────────────────────────────── */
+        .auth-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            height: var(--header-h, 60px);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 20px;
+            background: rgba(19, 23, 19, 0.6);
+            border-bottom: 1px solid var(--mil-border, #2e3a2e);
+            box-shadow: 0 2px 16px rgba(0, 0, 0, 0.5);
+            border-top: 2px solid var(--mil-olive, #6b7c4e);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }   
+
+/* ── Exit Button (right) ────────────────────────────────── */
+.auth-header__exit {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #c03a2bb1;
+    width: 70px;
+    height: 50px;
+    background: transparent;
+    border: 1px solid var(--mil-border, #3a312e);
+    border-radius: 0;
+    padding: 5px;
+    cursor: pointer;
+    transition:
+        background 0.2s,
+        border-color 0.2s,
+        box-shadow 0.2s;
+    flex-shrink: 0;
+    margin-left: auto;
+}
+
+.auth-header__exit-label{
+    padding: 5px;
+}
+
+.auth-header__exit:hover {
+    background: rgba(192, 58, 43, 0.429);
+    border-color: var(--mil-redbright, #c0392b);
+    box-shadow: 0 0 10px rgba(192, 58, 43, 0.508);
+}
+
+.auth-header__exit:active {
+    transform: translateY(1px);
+}
+
+.auth-header__exit-icon {
+    font-size: 16px;
+    color: var(--mil-redbright, #c0392b);
+    line-height: 1;
+    transition: color 0.2s;
+}
+
+/* ── Responsive ─────────────────────────────────────────── */
+@media (max-width: 480px) {
+    .auth-header__exit {
+        width: 38px;
+        height: 38px;
+    }
+}
+    </style>
+
+    <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
+    <script>
+        // Exit button — go back in history, or fall back to homepage
+        document.getElementById('authExitBtn').addEventListener('click', function () {
+            if (window.history.length > 1) {
+                window.history.back();
+            } else {
+                window.location.href = "{{ url_for('homepage') }}";
+            }
+        });
+    </script>
+</body>
+</html>
