@@ -3,10 +3,8 @@ init_db.py
 Run this once to initialize the ArmsDealer database.
 Usage: python init_db.py
 """
-
 import sqlite3
 import os
-
 DATABASE = os.path.join(os.path.dirname(__file__), 'database', 'armsdealer.db')
 SCHEMA = os.path.join(os.path.dirname(__file__), 'database', 'schema.sql')
 

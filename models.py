@@ -3,15 +3,13 @@ models.py
 Data-access helpers for ArmsDealer.
 Each class wraps the raw sqlite3 calls so routes stay clean.
 """
-
 import sqlite3
 import os
 from app import get_db
-
-
 # ─────────────────────────────────────────
 # USER
 # ─────────────────────────────────────────
+
 
 class User:
     @staticmethod
@@ -37,11 +35,10 @@ class User:
             (username, email, password_hash, role)
         )
         db.commit()
-
-
 # ─────────────────────────────────────────
 # CATEGORY
 # ─────────────────────────────────────────
+
 
 class Category:
     @staticmethod
@@ -55,11 +52,10 @@ class Category:
     def get_by_slug(slug: str):
         db = get_db()
         return db.execute('SELECT * FROM categories WHERE slug = ?', (slug,)).fetchone()
-
-
 # ─────────────────────────────────────────
 # PRODUCT
 # ─────────────────────────────────────────
+
 
 class Product:
     @staticmethod
@@ -87,11 +83,10 @@ class Product:
     @staticmethod
     def get_featured():
         return Product.get_all(featured_only=True)
-
-
 # ─────────────────────────────────────────
 # SERVICE
 # ─────────────────────────────────────────
+
 
 class Service:
     @staticmethod
@@ -114,11 +109,10 @@ class Service:
     @staticmethod
     def get_featured():
         return Service.get_all(featured_only=True)
-
-
 # ─────────────────────────────────────────
 # ORDER
 # ─────────────────────────────────────────
+
 
 class Order:
     @staticmethod
@@ -146,11 +140,10 @@ class Order:
             (status, order_id)
         )
         db.commit()
-
-
 # ─────────────────────────────────────────
 # CART
 # ─────────────────────────────────────────
+
 
 class Cart:
     @staticmethod
@@ -186,11 +179,10 @@ class Cart:
         db = get_db()
         db.execute('DELETE FROM cart_items WHERE user_id = ?', (user_id,))
         db.commit()
-
-
 # ─────────────────────────────────────────
 # INQUIRY
 # ─────────────────────────────────────────
+
 
 class Inquiry:
     @staticmethod

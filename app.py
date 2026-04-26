@@ -3,21 +3,16 @@ import sqlite3
 import os
 from dotenv import load_dotenv
 from auth_routes import auth_bp
-
 load_dotenv()
-
-
 app = Flask(__name__)
 app.register_blueprint(auth_bp)
 app.secret_key = os.environ.get(
     'SECRET_KEY', 'dev-secret-change-in-production')
-
 DATABASE = os.path.join(os.path.dirname(__file__), 'database', 'armsdealer.db')
-
-
 # ─────────────────────────────────────────
 # DATABASE HELPERS
 # ─────────────────────────────────────────
+
 
 def get_db():
     """Open a database connection if none exists for the current request."""
@@ -47,7 +42,6 @@ def get_currency(db):
     return currency or db.execute(
         "SELECT * FROM currencies WHERE code = 'PHP'"
     ).fetchone()
-
 # ─────────────────────────────────────────
 # MAIN ROUTES
 # ─────────────────────────────────────────
@@ -59,7 +53,6 @@ def homepage():
     db = get_db()
     lang = get_locale()
     currency = get_currency(db)
-
     product_rows = db.execute("""
     SELECT p.id, p.price, p.discount, p.image_file, p.tags,
            COALESCE(pt.name, p.name)               AS name,
@@ -70,9 +63,7 @@ def homepage():
     WHERE p.id IN (1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16)
     ORDER BY p.id
 """, (lang,)).fetchall()
-
     products = {row["id"]: row for row in product_rows}
-
     service_rows = db.execute("""
     SELECT s.id, s.price, s.discount, s.image_file, s.tags,
            COALESCE(st.name, s.name)               AS name,
@@ -84,7 +75,6 @@ def homepage():
     ORDER BY s.id
 """, (lang,)).fetchall()
     services = {row["id"]: row for row in service_rows}
-
     return render_template('homepage.html', products=products, services=services, currency=currency)
 
 
@@ -116,11 +106,10 @@ def legal():
 @app.route('/settings')
 def settings():
     return render_template('settings.html')
-
-
 # ─────────────────────────────────────────
 # CART & CHECKOUT ROUTES
 # ─────────────────────────────────────────
+
 
 @app.route('/cart')
 def cart():
@@ -135,6 +124,5 @@ def checkout():
 # ─────────────────────────────────────────
 # RUN
 # ─────────────────────────────────────────
-
 if __name__ == '__main__':
     app.run(debug=True)
