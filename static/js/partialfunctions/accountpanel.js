@@ -1,8 +1,6 @@
-/**
- * accountpanel.js — ArmsDealer
- * Handles open / close of the account side panel.
- * The nav-btn-account button (desktop + mobile drawer) triggers the panel.
- */
+// ───────────────────────────────────────────────────────────────────────────── //
+//     ACCOUNTS PANEL FUNCTIONS
+// ───────────────────────────────────────────────────────────────────────────── //
 (function () {
     "use strict";
     const overlay = document.getElementById("accountOverlay");

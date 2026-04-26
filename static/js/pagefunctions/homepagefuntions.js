@@ -1,12 +1,9 @@
-/**
- * ========================================
- * COMBINED JAVASCRIPT - COMPLETE
- * ========================================
- * All sections organized with variable names tracked
- */
-// ===========================================
-// SECTION 1: HERO CAROUSEL
-// ===========================================
+// ───────────────────────────────────────────────────────────────────────────── //
+//     HOMEPAGE FUNCTIONS
+// ───────────────────────────────────────────────────────────────────────────── //
+// ───────────────────────────────────────────//
+//     HERO SECTION
+// ───────────────────────────────────────────//
 (function () {
   const carousel = document.getElementById("heroCarousel");
   const slides = carousel.querySelectorAll(".hero-slide");
@@ -126,9 +123,9 @@
     { passive: true },
   );
 })();
-// ===========================================
-// SECTION 2: CAROUSEL DATA & CATEGORY MAP
-// ===========================================
+// ───────────────────────────────────────────//
+//     CATEGORIES CAROUSEL
+// ───────────────────────────────────────────//
 const carouselData = {
   weapons: [
     {
@@ -340,9 +337,7 @@ const categoryPageMap = {
   Surveillance: "/pages/services/surveillance.html",
   Contracting: "/pages/services/contracting.html",
 };
-// ===========================================
-// SECTION 2.5: TRANSLATION HELPER
-// ===========================================
+// ────────── TRANSITION HELPERS ──────────────//
 /**
  * Gets a translated string for the current language.
  * Falls back to English, then to the raw key if not found.
@@ -353,9 +348,7 @@ function getTranslatedString(key) {
   const lang = localStorage.getItem("lang") || "english";
   return translations?.[lang]?.[key] || translations?.["english"]?.[key] || key;
 }
-// ===========================================
-// SECTION 2.6: CATEGORY CAROUSEL FUNCTIONS
-// ===========================================
+// ────────── CATEGORY CAROUSEL FUNCTIONS ──────────────//
 let currentCategory = "weapons";
 let autoScrollId = null;
 let resetTimeoutId = null;
@@ -518,9 +511,9 @@ function setupScrollListeners() {
     }
   });
 }
-// ===========================================
-// SECTION 4: SMOOTH SCROLL & CTA HANDLERS
-// ===========================================
+// ───────────────────────────────────────────//
+//  SMOOTH SCROLL & CTA HANDLERS
+// ───────────────────────────────────────────//
 /**
  * Smooth scroll behavior for anchor links
  */
@@ -545,9 +538,9 @@ function handleCTA(action) {
     alert("Redirecting to product catalog...");
   }
 }
-// ===========================================
-// SECTION 5: INTERSECTION OBSERVER (SCROLL ANIMATION)
-// ===========================================
+// ───────────────────────────────────────────//
+//  INTERSECTION OBSERVER (SCROLL ANIMATION)
+// ───────────────────────────────────────────//
 /**
  * Add subtle animation to trust cards on scroll
  */
@@ -568,9 +561,9 @@ document.querySelectorAll(".trust-card, .process-step").forEach((el) => {
   el.style.opacity = "0.95"; // Ensure visibility
   observer.observe(el);
 });
-// ===========================================
-// SECTION 6: HOVER EFFECTS & Z-INDEX
-// ===========================================
+// ───────────────────────────────────────────//
+//  HOVER EFFECTS & Z-INDEX
+// ───────────────────────────────────────────//
 /**
  * Add hover effects to interactive elements
  */
@@ -585,9 +578,9 @@ document
       this.style.zIndex = "1";
     });
   });
-// ===========================================
-// SECTION 7: FEATURED CAROUSEL (FC)
-// ===========================================
+// ───────────────────────────────────────────//
+// FEATURED CAROUSEL (FC)
+// ───────────────────────────────────────────//
 (function () {
   const pages = Array.from(document.querySelectorAll(".fc-page"));
   const dotsWrap = document.getElementById("fcDots");
@@ -623,9 +616,9 @@ document
     if (e.key === "ArrowRight") fcGo(cur + 1);
   });
 })();
-// ===========================================
-// SECTION 8: INITIALIZATION
-// ===========================================
+// ───────────────────────────────────────────//
+// INITIALIZATION
+// ───────────────────────────────────────────//
 /**
  * Initialize category carousel on DOM ready
  */
@@ -634,9 +627,9 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollListeners();
   renderCategory(currentCategory);
 });
-// ===========================================
-// SECTION 9: DEVELOPER CONSOLE MESSAGE
-// ===========================================
+// ───────────────────────────────────────────//
+// DEVELOPER CONSOLE MESSAGE
+// ───────────────────────────────────────────//
 /**
  * Console message for developers
  */
@@ -652,6 +645,4 @@ console.log(
   "%c All CSS is embedded - no external files needed ",
   "color: #a8c49a; font-size: 12px;",
 );
-// ════════════════════════════════════════════════════════════
-// BUNDLES SECTION LOGIC
-// ════════════════════════════════════════════════════════════
+

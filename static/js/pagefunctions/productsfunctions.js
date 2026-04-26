@@ -1,3 +1,6 @@
+// ───────────────────────────────────────────────────────────────────────────── //
+//     PRODUCT PAGE FUNCTION
+// ───────────────────────────────────────────────────────────────────────────── //
 document.addEventListener("DOMContentLoaded", function () {
     initializeProductsPage();
 });
