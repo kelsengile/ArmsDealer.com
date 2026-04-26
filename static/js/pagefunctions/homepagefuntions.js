@@ -4,7 +4,6 @@
  * ========================================
  * All sections organized with variable names tracked
  */
-
 // ===========================================
 // SECTION 1: HERO CAROUSEL
 // ===========================================
@@ -15,13 +14,11 @@
   const counter = document.getElementById("heroCurrentNum");
   const prevBtn = document.getElementById("heroPrev");
   const nextBtn = document.getElementById("heroNext");
-
   let current = 0;
   let animating = false;
   let autoTimer = null;
   const TOTAL = slides.length;
   const DELAY = 10000; // ms between auto-advances
-
   /* ── Build dot indicators ─────────────────────────────── */
   slides.forEach((_, i) => {
     const dot = document.createElement("button");
@@ -32,12 +29,9 @@
     );
     dotsWrap.appendChild(dot);
   });
-
   const dots = dotsWrap.querySelectorAll(".hero-dot");
-
   /* ── Text elements selector ───────────────────────────── */
   const TEXT_SELECTORS = ".hero-tag, .hero-title, .hero-subtitle, .hero-cta";
-
   /* Hard-reset text children so CSS transitions re-fire every time */
   function resetTextChildren(slide) {
     slide.querySelectorAll(TEXT_SELECTORS).forEach((el) => {
@@ -53,22 +47,17 @@
       el.style.transform = "";
     });
   }
-
   /* ── Core transition ──────────────────────────────────── */
   function goTo(next, direction) {
     if (animating || next === current) return;
     animating = true;
-
     const outSlide = slides[current];
     const inSlide = slides[next];
-
     /* 1. Remove active from outgoing slide */
     outSlide.classList.remove("active");
-
     /* 2. Force-reset text children on the incoming slide BEFORE
               adding .active, so CSS transitions see a real 0→1 change */
     resetTextChildren(inSlide);
-
     /* 3. Position incoming slide off-screen with no transition */
     inSlide.style.transition = "none";
     inSlide.style.opacity = "0";
@@ -76,41 +65,32 @@
       direction === "right"
         ? "translateX(60px) scale(1.04)"
         : "translateX(-60px) scale(1.04)";
-
     /* 4. Force reflow */
     void inSlide.offsetHeight;
-
     /* 5. Restore transition and activate */
     inSlide.style.transition = "";
     inSlide.style.opacity = "";
     inSlide.style.transform = "";
     inSlide.classList.add("active");
-
     /* Update dots & counter */
     dots[current].classList.remove("active");
     dots[next].classList.add("active");
     counter.textContent = String(next + 1).padStart(2, "0");
-
     current = next;
-
     /* Unlock after transition completes */
     setTimeout(() => {
       animating = false;
     }, 850);
-
     resetAuto();
   }
-
   function goPrev() {
     goTo((current - 1 + TOTAL) % TOTAL, "left");
   }
   function goNext() {
     goTo((current + 1) % TOTAL, "right");
   }
-
   prevBtn.addEventListener("click", goPrev);
   nextBtn.addEventListener("click", goNext);
-
   /* ── Auto-advance ─────────────────────────────────────── */
   function startAuto() {
     autoTimer = setInterval(goNext, DELAY);
@@ -119,19 +99,15 @@
     clearInterval(autoTimer);
     startAuto();
   }
-
   startAuto();
-
   /* ── Pause on hover ───────────────────────────────────── */
   carousel.addEventListener("mouseenter", () => clearInterval(autoTimer));
   carousel.addEventListener("mouseleave", startAuto);
-
   /* ── Keyboard support ─────────────────────────────────── */
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") goPrev();
     if (e.key === "ArrowRight") goNext();
   });
-
   /* ── Touch / swipe support ────────────────────────────── */
   let touchStartX = 0;
   carousel.addEventListener(
@@ -150,7 +126,6 @@
     { passive: true },
   );
 })();
-
 // ===========================================
 // SECTION 2: CAROUSEL DATA & CATEGORY MAP
 // ===========================================
@@ -327,7 +302,6 @@ const carouselData = {
     },
   ],
 };
-
 const categoryPageMap = {
   // WEAPONS CATEGORIES
   Firearms: "/pages/products/firearms.html",
@@ -341,7 +315,6 @@ const categoryPageMap = {
   Vehicle: "/pages/products/vehicle.html",
   Cyber: "/pages/products/cyber.html",
   Security: "/pages/products/security.html",
-
   // EQUIPMENT CATEGORIES
   Ammunition: "/pages/products/ammunition.html",
   Protective: "/pages/products/protective.html",
@@ -352,7 +325,6 @@ const categoryPageMap = {
   Communication: "/pages/products/communication.html",
   Survival: "/pages/products/survival.html",
   Training: "/pages/products/training.html",
-
   // SERVICES CATEGORIES
   Manufacturing: "/pages/services/manufacturing.html",
   Customization: "/pages/services/customization.html",
@@ -368,11 +340,9 @@ const categoryPageMap = {
   Surveillance: "/pages/services/surveillance.html",
   Contracting: "/pages/services/contracting.html",
 };
-
 // ===========================================
 // SECTION 2.5: TRANSLATION HELPER
 // ===========================================
-
 /**
  * Gets a translated string for the current language.
  * Falls back to English, then to the raw key if not found.
@@ -383,7 +353,6 @@ function getTranslatedString(key) {
   const lang = localStorage.getItem("lang") || "english";
   return translations?.[lang]?.[key] || translations?.["english"]?.[key] || key;
 }
-
 // ===========================================
 // SECTION 2.6: CATEGORY CAROUSEL FUNCTIONS
 // ===========================================
@@ -392,34 +361,26 @@ let autoScrollId = null;
 let resetTimeoutId = null;
 let isScrolling = false;
 let direction = 1; // 1 = right, -1 = left
-
 function getWrapperEl() {
   return document.querySelector(".carousel-wrapper");
 }
-
 function getTrackEl() {
   return document.querySelector(".carousel-track");
 }
-
 function getMaxScroll() {
   const wrapperEl = getWrapperEl();
   const trackEl = getTrackEl();
   return trackEl.scrollWidth - wrapperEl.clientWidth;
 }
-
 function startAutoScroll() {
   clearInterval(autoScrollId);
   clearTimeout(resetTimeoutId);
-
   let scrollSpeed = 1.5;
   const wrapperEl = getWrapperEl();
-
   autoScrollId = setInterval(() => {
     const currentScroll = wrapperEl.scrollLeft;
     const maxScroll = getMaxScroll();
-
     let newScroll = currentScroll + scrollSpeed * direction;
-
     if (newScroll >= maxScroll) {
       newScroll = maxScroll;
       direction = -1;
@@ -427,58 +388,46 @@ function startAutoScroll() {
       newScroll = 0;
       direction = 1;
     }
-
     wrapperEl.scrollLeft = newScroll;
   }, 30);
 }
-
 function stopAutoScroll() {
   clearInterval(autoScrollId);
   clearTimeout(resetTimeoutId);
 }
-
 function renderCategory(categoryName) {
   const wrapperEl = getWrapperEl();
   const trackEl = getTrackEl();
   const data = carouselData[categoryName];
-
   // Clear existing cards
   trackEl.innerHTML = "";
-
   // Create new cards for the selected category
   data.forEach((item, index) => {
     const card = document.createElement("div");
     card.className = "category-rect";
     card.dataset.index = index;
     card.dataset.name = item.name; // keep English name for routing
-
     const imageDiv = document.createElement("div");
     imageDiv.className = "category-image";
-
     const img = document.createElement("img");
     img.src = item.image;
     img.alt = item.name;
     imageDiv.appendChild(img);
-
     const label = document.createElement("div");
     label.className = "category-label";
     // Use translated string for display; store the key for live re-renders
     label.dataset.translate = item.translationKey;
     label.textContent = getTranslatedString(item.translationKey);
-
     card.appendChild(imageDiv);
     card.appendChild(label);
     trackEl.appendChild(card);
-
     // Add click handler — always route using the English name key
     card.addEventListener("click", () => {
       const targetPage = categoryPageMap[item.name];
-
       trackEl
         .querySelectorAll(".category-rect")
         .forEach((c) => c.classList.remove("active"));
       card.classList.add("active");
-
       if (targetPage) {
         window.location.href = targetPage;
       } else {
@@ -486,20 +435,16 @@ function renderCategory(categoryName) {
       }
     });
   });
-
   // Reset scroll position
   wrapperEl.scrollLeft = 0;
   direction = 1;
   isScrolling = false;
-
   // Restart auto scroll
   startAutoScroll();
 }
-
 function setupCategoryButtons() {
   const buttonContainer = document.querySelector(".category-buttons");
   if (!buttonContainer) return;
-
   // Each entry: { label shown in English, translationKey, data-category value }
   const buttonDefs = [
     {
@@ -518,40 +463,32 @@ function setupCategoryButtons() {
       category: "services",
     },
   ];
-
   buttonDefs.forEach(({ translationKey, category }) => {
     const button = document.createElement("button");
     button.className = "category-btn";
     button.dataset.category = category;
     button.dataset.translate = translationKey; // for setLanguage() to pick up
     button.textContent = getTranslatedString(translationKey);
-
     if (category === currentCategory) {
       button.classList.add("active");
     }
-
     button.addEventListener("click", () => {
       document
         .querySelectorAll(".category-btn")
         .forEach((btn) => btn.classList.remove("active"));
       button.classList.add("active");
-
       currentCategory = category;
       renderCategory(category);
     });
-
     buttonContainer.appendChild(button);
   });
 }
-
 function setupScrollListeners() {
   const wrapperEl = getWrapperEl();
-
   wrapperEl.addEventListener("mousedown", () => {
     isScrolling = true;
     stopAutoScroll();
   });
-
   wrapperEl.addEventListener(
     "wheel",
     () => {
@@ -560,7 +497,6 @@ function setupScrollListeners() {
     },
     { passive: true },
   );
-
   wrapperEl.addEventListener("scroll", () => {
     if (isScrolling) {
       clearTimeout(resetTimeoutId);
@@ -570,11 +506,9 @@ function setupScrollListeners() {
       }, 3000);
     }
   });
-
   wrapperEl.addEventListener("mouseup", () => {
     isScrolling = false;
   });
-
   wrapperEl.addEventListener("mouseleave", () => {
     if (isScrolling) {
       isScrolling = false;
@@ -584,7 +518,6 @@ function setupScrollListeners() {
     }
   });
 }
-
 // ===========================================
 // SECTION 4: SMOOTH SCROLL & CTA HANDLERS
 // ===========================================
@@ -602,7 +535,6 @@ document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
     }
   });
 });
-
 /**
  * CTA Button Handler
  */
@@ -613,7 +545,6 @@ function handleCTA(action) {
     alert("Redirecting to product catalog...");
   }
 }
-
 // ===========================================
 // SECTION 5: INTERSECTION OBSERVER (SCROLL ANIMATION)
 // ===========================================
@@ -624,7 +555,6 @@ const observerOptions = {
   threshold: 0.1,
   rootMargin: "0px 0px -50px 0px",
 };
-
 const observer = new IntersectionObserver(function (entries) {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
@@ -633,13 +563,11 @@ const observer = new IntersectionObserver(function (entries) {
     }
   });
 }, observerOptions);
-
 // Observe elements for lazy animation
 document.querySelectorAll(".trust-card, .process-step").forEach((el) => {
   el.style.opacity = "0.95"; // Ensure visibility
   observer.observe(el);
 });
-
 // ===========================================
 // SECTION 6: HOVER EFFECTS & Z-INDEX
 // ===========================================
@@ -657,17 +585,14 @@ document
       this.style.zIndex = "1";
     });
   });
-
 // ===========================================
 // SECTION 7: FEATURED CAROUSEL (FC)
 // ===========================================
-
 (function () {
   const pages = Array.from(document.querySelectorAll(".fc-page"));
   const dotsWrap = document.getElementById("fcDots");
   const pageLabel = document.getElementById("fcPageLabel");
   let cur = 0;
-
   pages.forEach((p, i) => {
     const dot = document.createElement("div");
     dot.className = "fc-dot" + (i === 0 ? " active" : "");
@@ -678,9 +603,7 @@ document
     dot.addEventListener("click", () => fcGo(i));
     dotsWrap.appendChild(dot);
   });
-
   const dots = dotsWrap.querySelectorAll(".fc-dot");
-
   function fcGo(n) {
     pages[cur].classList.remove("active");
     dots[cur].classList.remove("active");
@@ -689,20 +612,17 @@ document
     dots[cur].classList.add("active");
     pageLabel.textContent = pages[cur].dataset.label || "Page " + (cur + 1);
   }
-
   document
     .getElementById("fcPrev")
     .addEventListener("click", () => fcGo(cur - 1));
   document
     .getElementById("fcNext")
     .addEventListener("click", () => fcGo(cur + 1));
-
   document.addEventListener("keydown", (e) => {
     if (e.key === "ArrowLeft") fcGo(cur - 1);
     if (e.key === "ArrowRight") fcGo(cur + 1);
   });
 })();
-
 // ===========================================
 // SECTION 8: INITIALIZATION
 // ===========================================
@@ -714,7 +634,6 @@ document.addEventListener("DOMContentLoaded", () => {
   setupScrollListeners();
   renderCategory(currentCategory);
 });
-
 // ===========================================
 // SECTION 9: DEVELOPER CONSOLE MESSAGE
 // ===========================================
@@ -733,7 +652,6 @@ console.log(
   "%c All CSS is embedded - no external files needed ",
   "color: #a8c49a; font-size: 12px;",
 );
-
 // ════════════════════════════════════════════════════════════
 // BUNDLES SECTION LOGIC
 // ════════════════════════════════════════════════════════════
