@@ -701,44 +701,6 @@ document
     if (e.key === "ArrowLeft") fcGo(cur - 1);
     if (e.key === "ArrowRight") fcGo(cur + 1);
   });
-
-  document.querySelectorAll(".fc-card").forEach((card) => {
-    const popup = card.querySelector(".fc-popup");
-    if (!popup) return;
-
-    card.addEventListener("mouseenter", function () {
-      const data = JSON.parse(this.dataset.popup || "{}");
-      if (!data.name) return;
-
-      popup.querySelector(".fc-popup-name").textContent = data.name;
-      popup.querySelector(".fc-popup-desc").textContent = data.desc;
-      const tagsEl = popup.querySelector(".fc-popup-tags");
-      tagsEl.innerHTML = "";
-      (data.tags || []).forEach((t) => {
-        const span = document.createElement("span");
-        span.className = "fc-popup-tag";
-        span.textContent = t;
-        tagsEl.appendChild(span);
-      });
-
-      // Use card's viewport position to decide pop direction
-      const rect = this.getBoundingClientRect();
-      this.classList.toggle(
-        "pop-left",
-        rect.left + rect.width / 2 > window.innerWidth / 2,
-      );
-      this.classList.toggle(
-        "pop-up",
-        rect.top + rect.height / 2 > window.innerHeight / 2,
-      );
-
-      popup.style.display = "block";
-    });
-
-    card.addEventListener("mouseleave", function () {
-      popup.style.display = "none";
-    });
-  });
 })();
 
 // ===========================================
