@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,25 +10,18 @@
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/globalstyles.css') }}">
-
     <link rel="stylesheet" href="{{ url_for('static', filename='css/navbarstyles.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partialstyles/accountpanel.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/partialstyles/settingspanel.css') }}">
     {% block styles %} {% endblock %}
 </head>
-
-
 <body>
-
     {% include 'partials/settingspanel.html' %}
-
     {% include 'partials/accountpanel.html' %}
-
     <!-- ═══════════════════════════════════════════════════════════ -->
     <!-- STICKY HEADER WRAPPER                                        -->
     <!-- ═══════════════════════════════════════════════════════════ -->
     <header class="site-header">
-
         <!-- TOP BAR -->
         <div class="top-bar">
             <div class="left">
@@ -47,7 +39,6 @@
                     <option value="spanish">🌐 Spanish</option>
                     <option value="mandarin">🌐 Mandarin</option>
                 </select>
-
                 <select id="currencySelect" onchange="setCurrency(this.value)">
                     <option value="PHP">PHP (₱)</option>
                     <option value="USD">USD ($)</option>
@@ -63,7 +54,6 @@
                     data-translate="navbarlegal"></a>
             </div>
         </div>
-
         <!-- ═══════════════════════════════════════════════════════════ -->
         <!-- NAV BAR                                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
@@ -75,7 +65,6 @@
                     <div class="logo-sub" data-translate="navbarclass"></div>
                 </div>
             </a>
-
             <!-- Desktop nav links -->
             <div class="nav-links">
                 <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
@@ -87,13 +76,11 @@
                     <!-- <span class="cart-badge" aria-hidden="true"></span> --></button>
                 <button class="nav-btn-account" aria-label="Account"></button>
             </div>
-
             <!-- Coordinate readout (decorative) -->
             <div class="nav-coord" aria-hidden="true">
                 <div><span>LAT</span> 14.5995° N</div>
                 <div><span>LNG</span> 120.9842° E</div>
             </div>
-
             <!-- Mobile hamburger -->
             <button class="nav-hamburger" id="navHamburger" aria-controls="navDrawer" aria-expanded="false"
                 aria-label="Toggle menu">
@@ -102,7 +89,6 @@
                 <span></span>
             </button>
         </nav>
-
         <!-- Mobile drawer -->
         <div class="nav-drawer" id="navDrawer" role="menu">
             <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
@@ -117,14 +103,11 @@
             <button class="nav-btn-account" role="menuitem"><span class="nav-drawer-icon"></span><span
                     data-translate="navbaraccount"></span></button>
         </div>
-
     </header>
-
     {% block main %}
     {% endblock%}
     <script src="{{ url_for('static', filename='js/translations.js') }}"></script>
     <script src="{{ url_for('static', filename='js/navbarfunctions.js') }}"></script>
     <script src="{{ url_for('static', filename='js/partialfunctions/accountpanel.js') }}"></script>
     <script src="{{ url_for('static', filename='js/partialfunctions/settingspanel.js') }}"></script>
-
 </body>

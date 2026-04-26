@@ -1,7 +1,6 @@
 /* ══════════════════════════════════════════════════════════════════
        SETTINGS SIDEBAR
     ══════════════════════════════════════════════════════════════════ */
-
 /* Overlay */
 .settings-overlay {
   position: fixed;
@@ -12,12 +11,10 @@
   transition: opacity 0.28s ease;
   z-index: 1100;
 }
-
 .settings-overlay.active {
   opacity: 1;
   pointer-events: all;
 }
-
 /* Sidebar panel */
 .settings-sidebar {
   position: fixed;
@@ -34,7 +31,6 @@
   z-index: 1200;
   overflow: hidden;
 }
-
 /* Scanline texture */
 .settings-sidebar::after {
   content: "";
@@ -47,7 +43,6 @@
       rgba(0, 0, 0, 0.06) 4px);
   pointer-events: none;
 }
-
 /* Left accent bar */
 .settings-sidebar::before {
   content: "";
@@ -62,11 +57,9 @@
       transparent);
   z-index: 1;
 }
-
 .settings-sidebar.open {
   transform: translateX(0);
 }
-
 /* Header */
 .set-header {
   display: flex;
@@ -79,7 +72,6 @@
   position: relative;
   z-index: 2;
 }
-
 .set-header-title {
   font-family: var(--font-stencil);
   font-size: 14px;
@@ -88,13 +80,11 @@
   text-transform: uppercase;
   color: var(--mil-bright);
 }
-
 .set-header-title::before {
   content: "⚙ ";
   opacity: 0.7;
   font-size: 11px;
 }
-
 .set-close {
   background: none;
   border: 1px solid var(--set-border);
@@ -111,13 +101,11 @@
     border-color 0.2s,
     background 0.2s;
 }
-
 .set-close:hover {
   color: var(--set-bright);
   border-color: var(--set-olive);
   background: rgba(138, 170, 106, 0.08);
 }
-
 /* Nav */
 .set-nav {
   flex: 1;
@@ -128,19 +116,15 @@
   scrollbar-width: thin;
   scrollbar-color: var(--set-border) transparent;
 }
-
 .set-nav::-webkit-scrollbar {
   width: 4px;
 }
-
 .set-nav::-webkit-scrollbar-track {
   background: transparent;
 }
-
 .set-nav::-webkit-scrollbar-thumb {
   background: var(--set-border);
 }
-
 .set-section-label {
   padding: 12px 20px 4px;
   font-family: var(--font-mono);
@@ -149,7 +133,6 @@
   text-transform: uppercase;
   color: var(--set-muted);
 }
-
 .set-item {
   width: 100%;
   background: none;
@@ -173,12 +156,10 @@
     border-color 0.15s;
   position: relative;
 }
-
 .set-item:hover {
   background: rgba(169, 185, 154, 0.06);
   color: var(--set-text);
 }
-
 .set-item .set-icon {
   font-size: 13px;
   width: 16px;
@@ -186,11 +167,9 @@
   opacity: 0.75;
   flex-shrink: 0;
 }
-
 .set-item.active .set-icon {
   opacity: 1;
 }
-
 .set-item .set-arrow {
   margin-left: auto;
   font-size: 9px;
@@ -198,27 +177,22 @@
   transition: opacity 0.15s;
   color: var(--set-bright);
 }
-
 .set-item {
   text-decoration: none;
   color: var(--set-muted);
 }
-
 .set-item:hover {
   color: var(--set-bright);
 }
-
 .set-item:hover .set-arrow {
   opacity: 1;
 }
-
 /* Divider */
 .set-divider {
   height: 1px;
   background: var(--set-border);
   margin: 6px 16px;
 }
-
 /* Content pane */
 .settings-content {
   position: fixed;
@@ -235,17 +209,14 @@
   flex-direction: column;
   overflow: hidden;
 }
-
 .settings-content.open {
   transform: translateX(0);
 }
-
 .set-content-header {
   padding: 16px 20px 12px;
   border-bottom: 1px solid var(--set-border);
   flex-shrink: 0;
 }
-
 .set-content-header h2 {
   font-family: var(--font-stencil);
   font-size: 16px;
@@ -255,7 +226,6 @@
   color: var(--set-bright);
   margin-bottom: 4px;
 }
-
 .set-content-header p {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -263,7 +233,6 @@
   letter-spacing: 0.06em;
   line-height: 1.5;
 }
-
 .set-content-body {
   flex: 1;
   overflow-y: auto;
@@ -271,15 +240,12 @@
   scrollbar-width: thin;
   scrollbar-color: var(--set-border) transparent;
 }
-
 .set-content-body::-webkit-scrollbar {
   width: 4px;
 }
-
 .set-content-body::-webkit-scrollbar-thumb {
   background: var(--set-border);
 }
-
 .set-row {
   display: flex;
   align-items: center;
@@ -293,20 +259,16 @@
   cursor: pointer;
   transition: background 0.15s;
 }
-
 .set-row:hover {
   background: rgba(138, 170, 106, 0.05);
 }
-
 .set-row-label {
   color: var(--set-text);
 }
-
 .set-row-value {
   color: var(--set-muted);
   font-size: 10px;
 }
-
 .set-row-chevron {
   color: var(--set-olive);
   font-size: 10px;

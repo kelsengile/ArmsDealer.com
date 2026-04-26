@@ -2,20 +2,16 @@
    productsstyles.css — ArmsDealer Products Page
    Tactical mil-spec design — matches global design system
 ══════════════════════════════════════════════════════════════════ */
-
 @import url("https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Share+Tech+Mono&display=swap");
-
 /* ══════════════════════════════════════════════════════════════════
    PRODUCTS PAGE — ROOT
 ══════════════════════════════════════════════════════════════════ */
-
 main.products-page {
   min-height: calc(100vh - var(--header-h, 98px));
   display: flex;
   flex-direction: column;
   position: relative;
 }
-
 /* Scanline overlay */
 main.products-page::before {
   content: "";
@@ -24,11 +20,9 @@ main.products-page::before {
   pointer-events: none;
   z-index: 0;
 }
-
 /* ══════════════════════════════════════════════════════════════════
    PRODUCTS HERO SECTION
 ══════════════════════════════════════════════════════════════════ */
-
 .products-hero {
   position: relative;
   z-index: 1;
@@ -45,7 +39,6 @@ main.products-page::before {
     0 4px 24px rgba(0, 0, 0, 0.55),
     inset 0 1px 0 rgba(168, 196, 122, 0.06);
 }
-
 /* Scanline texture on hero */
 .products-hero::before {
   content: "";
@@ -59,7 +52,6 @@ main.products-page::before {
   pointer-events: none;
   z-index: 0;
 }
-
 /* Left accent bar */
 .products-hero::after {
   content: "";
@@ -74,7 +66,6 @@ main.products-page::before {
       transparent);
   z-index: 1;
 }
-
 /* ── Hero Copy (left) ─────────────────────────────────────────── */
 .hero-copy {
   position: relative;
@@ -93,7 +84,6 @@ main.products-page::before {
   background-position: center;
   background-repeat: no-repeat;
 }
-
 .hero-label {
   font-family: var(--font-stencil, "Oswald", sans-serif);
   font-size: 52px;
@@ -105,11 +95,9 @@ main.products-page::before {
   line-height: 1;
   display: block;
 }
-
 .hero-label::before {
   display: none;
 }
-
 .hero-subtitle {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
   font-size: 12px;
@@ -122,13 +110,11 @@ main.products-page::before {
   align-items: center;
   gap: 10px;
 }
-
 .hero-subtitle::before {
   content: "—";
   color: var(--mil-olive, #6b7c4e);
   font-size: 11px;
 }
-
 /* ── Hero Sign (right) ────────────────────────────────────────── */
 .hero-sign {
   position: relative;
@@ -142,7 +128,6 @@ main.products-page::before {
   background: rgba(0, 0, 0, 0.2);
   min-width: 320px;
 }
-
 .hero-sign-top {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
   font-size: 14px;
@@ -150,7 +135,6 @@ main.products-page::before {
   text-transform: uppercase;
   color: var(--mil-muted, #4a5e4a);
 }
-
 .hero-sign-title {
   font-family: var(--font-stencil, "Oswald", sans-serif);
   font-size: 40px;
@@ -162,14 +146,12 @@ main.products-page::before {
   line-height: 1;
   transition: color 0.3s ease;
 }
-
 /* ── Toggle Buttons ───────────────────────────────────────────── */
 .hero-sign-toggle {
   display: flex;
   gap: 0;
   border: 1px solid var(--mil-border, #2e3a2e);
 }
-
 .toggle-btn {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
   font-size: 12px;
@@ -185,25 +167,20 @@ main.products-page::before {
     background 0.2s,
     color 0.2s;
 }
-
 .toggle-btn:last-child {
   border-right: none;
 }
-
 .toggle-btn:hover {
   background: rgba(107, 124, 78, 0.1);
   color: var(--mil-text, #c8d4b8);
 }
-
 .toggle-btn.active {
   background: var(--mil-olive, #6b7c4e);
   color: var(--mil-black, #0d0f0d);
 }
-
 /* ══════════════════════════════════════════════════════════════════
    PRODUCTS LAYOUT — SIDEBAR + CONTENT
 ══════════════════════════════════════════════════════════════════ */
-
 .products-layout {
   position: relative;
   z-index: 1;
@@ -215,11 +192,9 @@ main.products-page::before {
   gap: 0;
   border: 1px solid var(--mil-border, #2e3a2e);
 }
-
 /* ══════════════════════════════════════════════════════════════════
    SIDEBAR
 ══════════════════════════════════════════════════════════════════ */
-
 .products-sidebar {
   width: 250px;
   flex-shrink: 0;
@@ -227,7 +202,6 @@ main.products-page::before {
   background: var(--mil-dark, #131713);
   position: relative;
 }
-
 /* Sidebar top accent line */
 .products-sidebar::before {
   content: "";
@@ -238,7 +212,6 @@ main.products-page::before {
   height: 2px;
   background: linear-gradient(90deg, var(--mil-olive, #6b7c4e), transparent);
 }
-
 .sidebar-panel {
   padding: 24px 0 24px;
   display: flex;
@@ -246,7 +219,6 @@ main.products-page::before {
   position: sticky;
   top: var(--header-h, 98px);
 }
-
 .productsidebartitle {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
   font-size: 8.5px;
@@ -259,13 +231,11 @@ main.products-page::before {
   align-items: center;
   gap: 8px;
 }
-
 .productsidebartitle::before {
   content: "//";
   color: var(--mil-olive, #6b7c4e);
   font-size: 10px;
 }
-
 /* ── Filter Buttons ───────────────────────────────────────────── */
 .filter-btn {
   font-family: var(--font-stencil, "Oswald", sans-serif);
@@ -292,7 +262,6 @@ main.products-page::before {
   position: relative;
   overflow: hidden;
 }
-
 .filter-btn::after {
   content: "▸";
   position: absolute;
@@ -305,23 +274,19 @@ main.products-page::before {
     opacity 0.2s,
     transform 0.2s;
 }
-
 .filter-btn:hover {
   background: rgba(107, 124, 78, 0.07);
   color: var(--mil-bright, #a8c47a);
 }
-
 .filter-btn:hover::after {
   opacity: 1;
   transform: translateX(0);
 }
-
 .filter-btn.active {
   color: var(--mil-bright, #a8c47a);
   background: rgba(138, 170, 106, 0.09);
   border-left-color: var(--mil-bright, #a8c47a);
 }
-
 .filter-btn.active::after {
   margin-left: auto;
   font-size: 20px;
@@ -330,7 +295,6 @@ main.products-page::before {
   transform: translateX(1);
   color: var(--mil-bright, #a8c47a);
 }
-
 /* Sidebar bottom system readout */
 .sidebar-panel::after {
   content: "SYS: ONLINE\A NODE: 04\A STATUS: READY";
@@ -344,11 +308,9 @@ main.products-page::before {
   line-height: 2;
   display: block;
 }
-
 /* ══════════════════════════════════════════════════════════════════
    CONTENT PANEL
 ══════════════════════════════════════════════════════════════════ */
-
 .products-content {
   flex: 1;
   min-width: 0;
@@ -356,7 +318,6 @@ main.products-page::before {
   background: rgba(13, 15, 13, 0.55);
   position: relative;
 }
-
 /* Top-right bracket decoration */
 .products-content::before {
   content: "";
@@ -370,13 +331,11 @@ main.products-page::before {
   pointer-events: none;
   z-index: 2;
 }
-
 .content-panel {
   height: 2000px;
   display: flex;
   flex-direction: column;
 }
-
 /* ── Content Header ───────────────────────────────────────────── */
 .content-header {
   display: flex;
@@ -388,7 +347,6 @@ main.products-page::before {
   flex-shrink: 0;
   position: relative;
 }
-
 /* Header bottom accent */
 .content-header::after {
   content: "";
@@ -399,7 +357,6 @@ main.products-page::before {
   height: 2px;
   background: var(--mil-bright, #a8c47a);
 }
-
 .content-tag {
   font-family: var(--font-mono, "Share Tech Mono", monospace);
   font-size: 10px;
@@ -410,7 +367,6 @@ main.products-page::before {
   padding: 4px 10px;
   clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 100%, 0 100%);
 }
-
 .content-title {
   font-family: var(--font-stencil, "Oswald", sans-serif);
   font-size: 18px;
@@ -419,14 +375,12 @@ main.products-page::before {
   text-transform: uppercase;
   color: var(--mil-olive, #e2ead4);
 }
-
 /* ── Selection Content ────────────────────────────────────────── */
 .selection-content {
   padding: 36px 28px;
   flex: 1;
   position: relative;
 }
-
 /* Grid-line background on content area */
 .selection-content::before {
   content: "";
@@ -438,7 +392,6 @@ main.products-page::before {
   background-size: 40px 40px;
   pointer-events: none;
 }
-
 /* Placeholder / status text */
 .selection-content>p,
 .selection-status {
@@ -452,36 +405,30 @@ main.products-page::before {
   align-items: center;
   gap: 10px;
 }
-
 .selection-content>p::before,
 .selection-status::before {
   content: ">";
   color: var(--mil-olive, #6b7c4e);
   font-size: 12px;
 }
-
 /* ══════════════════════════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════════════════════════ */
-
 @media (max-width: 1100px) {
   .products-hero {
     flex-direction: column;
     min-height: 250px;
     margin: 16px 16px 0;
   }
-
   .hero-copy {
     padding: 28px 24px;
     border-right: none;
     border-bottom: 1px solid var(--mil-border, #2e3a2e);
     gap: 8px;
   }
-
   .hero-label {
     font-size: 36px;
   }
-
   .hero-sign {
     flex-direction: row;
     flex-wrap: wrap;
@@ -491,22 +438,18 @@ main.products-page::before {
     min-width: 0;
     width: 100%;
   }
-
   .hero-sign-title {
     font-size: 25px;
   }
-
   .products-layout {
     flex-direction: column;
     margin: 16px 16px 24px;
   }
-
   .products-sidebar {
     width: 100%;
     border-right: none;
     border-bottom: 1px solid var(--mil-border, #2e3a2e);
   }
-
   .sidebar-panel {
     flex-direction: row;
     flex-wrap: wrap;
@@ -515,13 +458,11 @@ main.products-page::before {
     position: static;
     gap: 0;
   }
-
   .productsidebartitle {
     width: 100%;
     padding: 0 0 10px;
     margin-bottom: 8px;
   }
-
   .filter-btn {
     flex: 1;
     justify-content: center;
@@ -532,47 +473,37 @@ main.products-page::before {
     padding: 10px 12px;
     min-width: 100px;
   }
-
   .filter-btn.active {
     border-left: none;
     border-top-color: var(--mil-bright, #a8c47a);
     background: rgba(138, 170, 106, 0.09);
   }
-
   .filter-btn:last-child {
     border-right: none;
   }
-
   .filter-btn::after {
     display: none;
   }
-
   .sidebar-panel::after {
     display: none;
   }
 }
-
 @media (max-width: 480px) {
   .hero-label {
     font-size: 26px;
   }
-
   .hero-subtitle {
     font-size: 10px;
   }
-
   .hero-sign-title {
     font-size: 17px;
   }
-
   .content-header {
     padding: 14px 16px;
   }
-
   .selection-content {
     padding: 24px 16px;
   }
-
   .content-title {
     font-size: 14px;
   }

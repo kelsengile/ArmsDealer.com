@@ -1,13 +1,11 @@
 // ───────────────────────────────────────────────────────────────────────────── //
 //     TRANSLATIONS
 // ───────────────────────────────────────────────────────────────────────────── //
-
 const translations = {
     english: {
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
-
         homepage: "ArmsDealer--Home",
         products: "ArmsDealer--Products",
         services: "ArmsDealer--Services",
@@ -20,7 +18,6 @@ const translations = {
         login: "ArmsDealer--LogIn",
         register: "ArmsDealer--Register",
         password: "ArmsDealer--Password",
-
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
@@ -45,11 +42,9 @@ const translations = {
         navbarservices: "Services",
         navbarsearch: "Search",
         navbarcart: "Cart",
-
         // ──────────────────────────────────── //
         //     HOMEPAGE TRANSLATIONS
         // ──────────────────────────────────── //
-
         // Hero Section
         homepageslide1heropageherotag: "New Arrivals — 2026",
         homepageslide1heropagetitle: "Precision,",
@@ -81,7 +76,6 @@ const translations = {
         homepageslide5heropageherosubtitle:
             "Maintenance, customization, and consultation — our certified gunsmiths keep your firearms in peak condition.",
         homepageslide5heropageherocta: "Our Services",
-
         // Feature Section
         homepagefeaturetimer: "Valid until: July 29, 2026",
         homepagefeatureheadertag: "Products & Services",
@@ -93,7 +87,6 @@ const translations = {
         homepagefeaturepage5: "Services",
         homepagefeatureknowmore: "Know More",
         homepagefeaturecart: "+ Cart",
-
         // Category Section
         homepagecategorytitle: "Explore Our Categories:",
         homepagecategoryBtnWeapons: "Weapons",
@@ -130,7 +123,6 @@ const translations = {
         homepagecategoryDisposal: "Disposal",
         homepagecategorySurveillance: "Surveillance",
         homepagecategoryContracting: "Contracting",
-
         // Why Choose Us Section
         homepagewhychooseusheader: "Why Choose ArmsDealer?",
         homepagewhychooseusheaderp:
@@ -144,7 +136,6 @@ const translations = {
         homepagewhychooseustittle3: "Expert Support",
         homepagewhychooseusdesc3:
             "Dedicated team available for consultation, verification assistance, and compliance guidance throughout your purchase journey.",
-
         // Purchase Process Section
         homepagepurchaseprocessheader: "Purchase Process",
         homepagepurchaseprocessdesc: "Simple, secure, and fully compliant",
@@ -166,13 +157,11 @@ const translations = {
         homepagepurchaseprocessprocessinfostrong: "Trust is our priority.",
         homepagepurchaseprocessprocessinfop:
             "Every transaction undergoes federal compliance verification. Our streamlined five-step process ensures both legal compliance and customer satisfaction. From browsing to delivery, we maintain the highest standards of security and transparency.",
-
         // Call to Action Section
         homepagecalltoactionheading: "Ready to Get Started?",
         homepagecalltoactionsubheading:
             "Join thousands of satisfied customers. Browse our comprehensive selection or speak with a specialist today.",
         homepagecalltoactionbutton: "Shop Now",
-
         //Footer Section
         homepagefootertitle1: "Quick Links",
         homepagefooterlinkshome: "Home",
@@ -180,32 +169,27 @@ const translations = {
         homepagefooterlinksservices: "Services",
         homepagefooterlinksaccount: "Account",
         homepagefooterlinkssettings: "Settings",
-
         homepagefootertitle2: "Customer Service",
         homepagefooterlinkscontactus: "Contact Us",
         homepagefooterlinksfaq: "FAQ",
         homepagefooterlinksshipping: "Shipping Information",
         homepagefooterlinksreturns: "Returns & Exchanges",
         homepagefooterlinkswarranty: "Warranty Information",
-
         homepagefootertitle3: "About",
         homepagefooterlinksaboutus: "About Us",
         homepagefooterlinksourstory: "Our Story",
         homepagefooterlinksblog: "Blog & Resources",
         homepagefooterlinkscarreer: "Careers",
         homepagefooterlinkspartnership: "Partnerships",
-
         homepagefootertitle4: "Legal",
         homepagefooterlinksterms: "Terms of Service",
         homepagefooterlinkspolicy: "Privacy Policy",
         homepagefooterlinkscompliance: "Compliance Info",
         homepagefooterlinksdisclaimer: "Disclaimer",
         homepagefooterlinkscookies: "Cookie Policy",
-
         homepagefootertitle5: "Contact Info",
         homepagefootercopywright:
             "© 2025 Armsdealer. All rights reserved. Licensed and regulated by federal authorities. | FFL Dealer License: 12-AB-12345",
-
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
         // ──────────────────────────────────── //
@@ -245,7 +229,6 @@ const translations = {
         authresetcode: "Reset Code:",
         authclickhere: "Click Here",
         authhome: "Home",
-
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
         // ──────────────────────────────────── //
@@ -277,12 +260,10 @@ const translations = {
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "No active session",
     },
-
     filipino: {
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
-
         homepage: "ArmsDealer--Tahanan",
         products: "ArmsDealer--Mga Produkto",
         services: "ArmsDealer--Mga Serbisyo",
@@ -295,7 +276,6 @@ const translations = {
         login: "ArmsDealer--Mag-login",
         register: "ArmsDealer--Magrehistro",
         password: "ArmsDealer--Password",
-
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
@@ -320,11 +300,9 @@ const translations = {
         navbarservices: "Mga Serbisyo",
         navbarsearch: "Maghanap",
         navbarcart: "Kariton",
-
         // ──────────────────────────────────── //
         //     HOMEPAGE TRANSLATIONS
         // ──────────────────────────────────── //
-
         // Hero Section
         homepageslide1heropageherotag: "Mga Bagong Dating — 2026",
         homepageslide1heropagetitle: "Katumpakan,",
@@ -356,7 +334,6 @@ const translations = {
         homepageslide5heropageherosubtitle:
             "Maintenance, customization, at consultation — pinapanatili ng aming certified gunsmiths ang iyong armas sa pinakamahusay na kondisyon.",
         homepageslide5heropageherocta: "Aming Serbisyo",
-
         // Feature Section
         homepagefeaturetimer: "May bisa hanggang: Hulyo 29, 2026",
         homepagefeatureheadertag: "Mga Produkto at Serbisyo",
@@ -368,7 +345,6 @@ const translations = {
         homepagefeaturepage5: "Mga Serbisyo",
         homepagefeatureknowmore: "Know More",
         homepagefeaturecart: "+ Cart",
-
         // Category Section
         homepagecategorytitle: "Tuklasin ang Aming Mga Kategorya:",
         homepagecategoryBtnWeapons: "Mga Sandata",
@@ -405,7 +381,6 @@ const translations = {
         homepagecategoryDisposal: "Pagtatapon",
         homepagecategorySurveillance: "Pagmamatyag",
         homepagecategoryContracting: "Kontrata",
-
         // Why Choose Us Section
         homepagewhychooseusheader: "Bakit Piliin ang ArmsDealer?",
         homepagewhychooseusheaderp:
@@ -419,7 +394,6 @@ const translations = {
         homepagewhychooseustittle3: "Suporta ng Eksperto",
         homepagewhychooseusdesc3:
             "Nakatalagang koponan na handang tumulong sa konsultasyon, beripikasyon, at gabay sa pagsunod sa regulasyon sa buong proseso ng inyong pagbili.",
-
         // Purchase Process Section
         homepagepurchaseprocessheader: "Proseso ng Pagbili",
         homepagepurchaseprocessdesc:
@@ -443,13 +417,11 @@ const translations = {
             "Ang tiwala ang aming prayoridad.",
         homepagepurchaseprocessprocessinfop:
             "Ang bawat transaksyon ay dumadaan sa beripikasyon ng pederal na pagsunod. Ang aming pinasimpleng limang-hakbang na proseso ay tinitiyak ang legal na pagsunod at kasiyahan ng customer. Mula sa pag-browse hanggang delivery, pinananatili namin ang pinakamataas na antas ng seguridad at transparency.",
-
         // Call to Action Section
         homepagecalltoactionheading: "Handa ka na bang magsimula?",
         homepagecalltoactionsubheading:
             "Sumali sa libo-libong nasisiyahang customer. Tuklasin ang aming malawak na pagpipilian o makipag-usap sa isang espesyalista ngayon.",
         homepagecalltoactionbutton: "Mamili Ngayon",
-
         // Footer Section
         homepagefootertitle1: "Mabilis na Link",
         homepagefooterlinkshome: "Home",
@@ -457,32 +429,27 @@ const translations = {
         homepagefooterlinksservices: "Mga Serbisyo",
         homepagefooterlinksaccount: "Account",
         homepagefooterlinkssettings: "Mga Setting",
-
         homepagefootertitle2: "Serbisyo sa Customer",
         homepagefooterlinkscontactus: "Makipag-ugnayan sa Amin",
         homepagefooterlinksfaq: "FAQ",
         homepagefooterlinksshipping: "Impormasyon sa Pagpapadala",
         homepagefooterlinksreturns: "Pagbabalik at Palitan",
         homepagefooterlinkswarranty: "Impormasyon sa Warranty",
-
         homepagefootertitle3: "Tungkol",
         homepagefooterlinksaboutus: "Tungkol sa Amin",
         homepagefooterlinksourstory: "Aming Kwento",
         homepagefooterlinksblog: "Blog at Mga Mapagkukunan",
         homepagefooterlinkscarreer: "Mga Karera",
         homepagefooterlinkspartnership: "Mga Pakikipagtulungan",
-
         homepagefootertitle4: "Legal",
         homepagefooterlinksterms: "Mga Tuntunin ng Serbisyo",
         homepagefooterlinkspolicy: "Patakaran sa Privacy",
         homepagefooterlinkscompliance: "Impormasyon sa Pagsunod",
         homepagefooterlinksdisclaimer: "Paunawa",
         homepagefooterlinkscookies: "Patakaran sa Cookie",
-
         homepagefootertitle5: "Impormasyon sa Pakikipag-ugnayan",
         homepagefootercopywright:
             "© 2025 Armsdealer. Lahat ng karapatan ay nakalaan. Lisensyado at kinokontrol ng mga pederal na awtoridad. | Lisensya ng FFL Dealer: 12-AB-12345",
-
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
         // ──────────────────────────────────── //
@@ -523,7 +490,6 @@ const translations = {
         authresetcode: "Reset Code:",
         authclickhere: "I-click dito",
         authhome: "Tahanan",
-
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
         // ──────────────────────────────────── //
@@ -555,12 +521,10 @@ const translations = {
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "Walang aktibong session",
     },
-
     japanese: {
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
-
         homepage: "ArmsDealer--ホーム",
         products: "ArmsDealer--商品",
         services: "ArmsDealer--サービス",
@@ -573,7 +537,6 @@ const translations = {
         login: "ArmsDealer--ログイン",
         register: "ArmsDealer--登録",
         password: "ArmsDealer--Password",
-
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
@@ -598,11 +561,9 @@ const translations = {
         navbarservices: "サービス",
         navbarsearch: "検索",
         navbarcart: "カート",
-
         // ──────────────────────────────────── //
         //     HOMEPAGE TRANSLATIONS
         // ──────────────────────────────────── //
-
         // Hero Section
         homepageslide1heropageherotag: "新着商品 — 2026",
         homepageslide1heropagetitle: "精密さ、",
@@ -634,7 +595,6 @@ const translations = {
         homepageslide5heropageherosubtitle:
             "メンテナンス、カスタマイズ、相談サービス。認定ガンスミスが最高の状態を維持します。",
         homepageslide5heropageherocta: "サービスを見る",
-
         // Feature Section
         homepagefeaturetimer: "有効期限: 2026年7月29日",
         homepagefeatureheadertag: "製品とサービス",
@@ -646,7 +606,6 @@ const translations = {
         homepagefeaturepage5: "サービス",
         homepagefeatureknowmore: "もっと知る",
         homepagefeaturecart: "+ カート",
-
         // Category Section
         homepagecategorytitle: "カテゴリーを探る：",
         homepagecategoryBtnWeapons: "武器",
@@ -683,7 +642,6 @@ const translations = {
         homepagecategoryDisposal: "廃棄",
         homepagecategorySurveillance: "監視",
         homepagecategoryContracting: "請負",
-
         // Why Choose Us Section
         homepagewhychooseusheader: "なぜArmsDealerを選ぶのか？",
         homepagewhychooseusheaderp:
@@ -697,7 +655,6 @@ const translations = {
         homepagewhychooseustittle3: "専門サポート",
         homepagewhychooseusdesc3:
             "専任チームが相談、確認支援、規制遵守のガイダンスを購入プロセス全体を通じて提供します。",
-
         // Purchase Process Section
         homepagepurchaseprocessheader: "購入プロセス",
         homepagepurchaseprocessdesc: "シンプルで安全、完全に規制に準拠",
@@ -719,13 +676,11 @@ const translations = {
         homepagepurchaseprocessprocessinfostrong: "信頼が最優先です。",
         homepagepurchaseprocessprocessinfop:
             "すべての取引は連邦規制の確認を受けます。当社のシンプルな5ステップのプロセスは、法令遵守と顧客満足の両方を保証します。閲覧から配送まで、最高水準のセキュリティと透明性を維持します。",
-
         // Call to Action Section
         homepagecalltoactionheading: "始める準備はできましたか？",
         homepagecalltoactionsubheading:
             "何千もの満足した顧客に加わりましょう。幅広い商品ラインナップをご覧いただくか、今すぐ専門スタッフにご相談ください。",
         homepagecalltoactionbutton: "今すぐ購入",
-
         // Footer Section
         homepagefootertitle1: "クイックリンク",
         homepagefooterlinkshome: "ホーム",
@@ -733,32 +688,27 @@ const translations = {
         homepagefooterlinksservices: "サービス",
         homepagefooterlinksaccount: "アカウント",
         homepagefooterlinkssettings: "設定",
-
         homepagefootertitle2: "カスタマーサービス",
         homepagefooterlinkscontactus: "お問い合わせ",
         homepagefooterlinksfaq: "よくある質問",
         homepagefooterlinksshipping: "配送情報",
         homepagefooterlinksreturns: "返品・交換",
         homepagefooterlinkswarranty: "保証情報",
-
         homepagefootertitle3: "会社情報",
         homepagefooterlinksaboutus: "会社概要",
         homepagefooterlinksourstory: "私たちのストーリー",
         homepagefooterlinksblog: "ブログとリソース",
         homepagefooterlinkscarreer: "採用情報",
         homepagefooterlinkspartnership: "パートナーシップ",
-
         homepagefootertitle4: "法的情報",
         homepagefooterlinksterms: "利用規約",
         homepagefooterlinkspolicy: "プライバシーポリシー",
         homepagefooterlinkscompliance: "コンプライアンス情報",
         homepagefooterlinksdisclaimer: "免責事項",
         homepagefooterlinkscookies: "クッキーポリシー",
-
         homepagefootertitle5: "連絡先情報",
         homepagefootercopywright:
             "© 2025 Armsdealer. 無断転載を禁じます。連邦当局により認可・規制されています。 | FFLディーラーライセンス: 12-AB-12345",
-
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
         // ──────────────────────────────────── //
@@ -798,7 +748,6 @@ const translations = {
         authresetcode: "リセットコード:",
         authclickhere: "ここをクリック",
         authhome: "ホーム",
-
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
         // ──────────────────────────────────── //
@@ -830,12 +779,10 @@ const translations = {
         accountpanelcustomerclearance: "CUSTOMER CLEARANCE",
         accountpanelnoactivesession: "アクティブなセッションなし",
     },
-
     spanish: {
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
-
         homepage: "ArmsDealer--Inicio",
         products: "ArmsDealer--Productos",
         services: "ArmsDealer--Servicios",
@@ -848,7 +795,6 @@ const translations = {
         login: "ArmsDealer--Iniciar sesión",
         register: "ArmsDealer--Registrarse",
         password: "ArmsDealer--Contraseña",
-
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
@@ -873,11 +819,9 @@ const translations = {
         navbarservices: "Servicios",
         navbarsearch: "Buscar",
         navbarcart: "Carrito",
-
         // ──────────────────────────────────── //
         //     HOMEPAGE TRANSLATIONS
         // ──────────────────────────────────── //
-
         // Hero Section
         homepageslide1heropageherotag: "Nuevos productos — 2026",
         homepageslide1heropagetitle: "Precisión,",
@@ -909,7 +853,6 @@ const translations = {
         homepageslide5heropageherosubtitle:
             "Mantenimiento, personalización y asesoría — nuestros armeros certificados mantienen tus armas en óptimas condiciones.",
         homepageslide5heropageherocta: "Nuestros servicios",
-
         // Feature Section
         homepagefeaturetimer: "Válido hasta: 29 de julio de 2026",
         homepagefeatureheadertag: "Productos y Servicios",
@@ -921,7 +864,6 @@ const translations = {
         homepagefeaturepage5: "Servicios",
         homepagefeatureknowmore: "Saber más",
         homepagefeaturecart: "+ Añadir al carrito",
-
         // Category Section
         homepagecategorytitle: "Explora nuestras categorías:",
         homepagecategoryBtnWeapons: "Armas",
@@ -958,7 +900,6 @@ const translations = {
         homepagecategoryDisposal: "Eliminación",
         homepagecategorySurveillance: "Vigilancia",
         homepagecategoryContracting: "Contratación",
-
         // Why Choose Us Section
         homepagewhychooseusheader: "¿Por qué elegir ArmsDealer?",
         homepagewhychooseusheaderp:
@@ -972,7 +913,6 @@ const translations = {
         homepagewhychooseustittle3: "Soporte Experto",
         homepagewhychooseusdesc3:
             "Equipo dedicado disponible para consultas, asistencia en verificación y orientación de cumplimiento durante todo su proceso de compra.",
-
         // Purchase Process Section
         homepagepurchaseprocessheader: "Proceso de Compra",
         homepagepurchaseprocessdesc: "Simple, seguro y totalmente conforme",
@@ -995,13 +935,11 @@ const translations = {
             "La confianza es nuestra prioridad.",
         homepagepurchaseprocessprocessinfop:
             "Cada transacción pasa por una verificación de cumplimiento federal. Nuestro proceso simplificado de cinco pasos garantiza tanto el cumplimiento legal como la satisfacción del cliente. Desde la exploración hasta la entrega, mantenemos los más altos estándares de seguridad y transparencia.",
-
         // Call to Action Section
         homepagecalltoactionheading: "¿Listo para comenzar?",
         homepagecalltoactionsubheading:
             "Únase a miles de clientes satisfechos. Explore nuestra amplia selección o hable con un especialista hoy mismo.",
         homepagecalltoactionbutton: "Comprar Ahora",
-
         // Footer Section
         homepagefootertitle1: "Enlaces Rápidos",
         homepagefooterlinkshome: "Inicio",
@@ -1009,32 +947,27 @@ const translations = {
         homepagefooterlinksservices: "Servicios",
         homepagefooterlinksaccount: "Cuenta",
         homepagefooterlinkssettings: "Configuración",
-
         homepagefootertitle2: "Atención al Cliente",
         homepagefooterlinkscontactus: "Contáctenos",
         homepagefooterlinksfaq: "Preguntas Frecuentes",
         homepagefooterlinksshipping: "Información de Envío",
         homepagefooterlinksreturns: "Devoluciones y Cambios",
         homepagefooterlinkswarranty: "Información de Garantía",
-
         homepagefootertitle3: "Acerca de",
         homepagefooterlinksaboutus: "Sobre Nosotros",
         homepagefooterlinksourstory: "Nuestra Historia",
         homepagefooterlinksblog: "Blog y Recursos",
         homepagefooterlinkscarreer: "Carreras",
         homepagefooterlinkspartnership: "Alianzas",
-
         homepagefootertitle4: "Legal",
         homepagefooterlinksterms: "Términos de Servicio",
         homepagefooterlinkspolicy: "Política de Privacidad",
         homepagefooterlinkscompliance: "Información de Cumplimiento",
         homepagefooterlinksdisclaimer: "Descargo de Responsabilidad",
         homepagefooterlinkscookies: "Política de Cookies",
-
         homepagefootertitle5: "Información de Contacto",
         homepagefootercopywright:
             "© 2025 Armsdealer. Todos los derechos reservados. Licenciado y regulado por autoridades federales. | Licencia FFL del distribuidor: 12-AB-12345",
-
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1075,7 +1008,6 @@ const translations = {
         authresetcode: "Código de Restablecimiento:",
         authclickhere: "Haz clic aquí",
         authhome: "Inicio",
-
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1107,12 +1039,10 @@ const translations = {
         accountpanelcustomerclearance: "AUTORIZACIÓN DE CLIENTE",
         accountpanelnoactivesession: "Sin sesión activa",
     },
-
     mandarin: {
         // ──────────────────────────────────── //
         //     PAGE TITLE TRANSLATIONS
         // ──────────────────────────────────── //
-
         homepage: "ArmsDealer--首页",
         products: "ArmsDealer--产品",
         services: "ArmsDealer--服务",
@@ -1125,7 +1055,6 @@ const translations = {
         login: "ArmsDealer--登录",
         register: "ArmsDealer--注册",
         password: "ArmsDealer--密码",
-
         // ──────────────────────────────────── //
         //     NAVBAR TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1150,11 +1079,9 @@ const translations = {
         navbarservices: "服务",
         navbarsearch: "搜索",
         navbarcart: "购物车",
-
         // ──────────────────────────────────── //
         //     HOMEPAGE TRANSLATIONS
         // ──────────────────────────────────── //
-
         // Hero Section
         homepageslide1heropageherotag: "新品上市 — 2026",
         homepageslide1heropagetitle: "精准，",
@@ -1186,7 +1113,6 @@ const translations = {
         homepageslide5heropageherosubtitle:
             "维护、定制与咨询服务——认证枪械师确保您的装备始终处于最佳状态。",
         homepageslide5heropageherocta: "查看服务",
-
         // Feature Section
         homepagefeaturetimer: "有效期至：2026年7月29日",
         homepagefeatureheadertag: "产品与服务",
@@ -1198,7 +1124,6 @@ const translations = {
         homepagefeaturepage5: "服务",
         homepagefeatureknowmore: "了解更多",
         homepagefeaturecart: "+ 加入购物车",
-
         // Category Section
         homepagecategorytitle: "探索我们的类别：",
         homepagecategoryBtnWeapons: "武器",
@@ -1235,7 +1160,6 @@ const translations = {
         homepagecategoryDisposal: "处置",
         homepagecategorySurveillance: "监控",
         homepagecategoryContracting: "承包",
-
         // Why Choose Us Section
         homepagewhychooseusheader: "为什么选择ArmsDealer？",
         homepagewhychooseusheaderp: "受到全球收藏家、射击者和专业人士的信赖",
@@ -1248,7 +1172,6 @@ const translations = {
         homepagewhychooseustittle3: "专家支持",
         homepagewhychooseusdesc3:
             "专业团队在整个购买过程中提供咨询、验证协助以及合规指导服务。",
-
         // Purchase Process Section
         homepagepurchaseprocessheader: "购买流程",
         homepagepurchaseprocessdesc: "简单、安全且完全合规",
@@ -1270,13 +1193,11 @@ const translations = {
         homepagepurchaseprocessprocessinfostrong: "信任是我们的首要任务。",
         homepagepurchaseprocessprocessinfop:
             "每笔交易都经过联邦合规验证。我们简化的五步流程确保法律合规和客户满意。从浏览到交付，我们始终保持最高水平的安全性和透明度。",
-
         // Call to Action Section
         homepagecalltoactionheading: "准备开始了吗？",
         homepagecalltoactionsubheading:
             "加入成千上万满意的客户。浏览我们丰富的产品选择，或立即与专家联系。",
         homepagecalltoactionbutton: "立即购买",
-
         // Footer Section
         homepagefootertitle1: "快速链接",
         homepagefooterlinkshome: "首页",
@@ -1284,32 +1205,27 @@ const translations = {
         homepagefooterlinksservices: "服务",
         homepagefooterlinksaccount: "账户",
         homepagefooterlinkssettings: "设置",
-
         homepagefootertitle2: "客户服务",
         homepagefooterlinkscontactus: "联系我们",
         homepagefooterlinksfaq: "常见问题",
         homepagefooterlinksshipping: "运输信息",
         homepagefooterlinksreturns: "退货与换货",
         homepagefooterlinkswarranty: "保修信息",
-
         homepagefootertitle3: "关于",
         homepagefooterlinksaboutus: "关于我们",
         homepagefooterlinksourstory: "我们的故事",
         homepagefooterlinksblog: "博客与资源",
         homepagefooterlinkscarreer: "招聘",
         homepagefooterlinkspartnership: "合作伙伴",
-
         homepagefootertitle4: "法律",
         homepagefooterlinksterms: "服务条款",
         homepagefooterlinkspolicy: "隐私政策",
         homepagefooterlinkscompliance: "合规信息",
         homepagefooterlinksdisclaimer: "免责声明",
         homepagefooterlinkscookies: "Cookie政策",
-
         homepagefootertitle5: "联系信息",
         homepagefootercopywright:
             "© 2025 Armsdealer。保留所有权利。由联邦机构许可并监管。 | FFL经销商许可证：12-AB-12345",
-
         // ──────────────────────────────────── //
         //     AUTH TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1348,7 +1264,6 @@ const translations = {
         authresetcode: "重置代码:",
         authclickhere: "点击这里",
         authhome: "首页",
-
         // ──────────────────────────────────── //
         //     ACCOUNT PANEL TRANSLATIONS
         // ──────────────────────────────────── //
@@ -1381,7 +1296,6 @@ const translations = {
         accountpanelnoactivesession: "无活跃会话",
     },
 };
-
 // ─── LANGUAGE ─────────────────────────────────────────────────────
 function setLanguage(lang) {
     // UI strings update instantly (navbar, homepage copy, etc.)
@@ -1390,7 +1304,6 @@ function setLanguage(lang) {
         const key = el.getAttribute("data-translate");
         const value =
             translations[lang]?.[key] || translations["english"][key] || key;
-
         if (el.children.length === 0) {
             el.textContent = value;
         }
@@ -1398,9 +1311,7 @@ function setLanguage(lang) {
             el.setAttribute("data-label", value);
         }
     });
-
     localStorage.setItem("lang", lang);
-
     // Reload so Flask re-queries the DB with the new lang_code
     // Only reload if the language actually changed
     const prev = document.cookie.match(/lang=([^;]+)/)?.[1];
@@ -1409,9 +1320,7 @@ function setLanguage(lang) {
         location.reload();
     }
 }
-
 window.setLanguage = setLanguage;
-
 // ─── CURRENCY ─────────────────────────────────────────────────────
 const currencyRates = {
     PHP: { symbol: "₱", rate: 1.0 },
@@ -1420,11 +1329,9 @@ const currencyRates = {
     JPY: { symbol: "JP¥", rate: 2.627 },
     CNY: { symbol: "CN¥", rate: 0.127 },
 };
-
 function formatPrice(phpAmount, currency) {
     const converted = phpAmount * currencyRates[currency].rate;
     const symbol = currencyRates[currency].symbol;
-
     const noDecimals = ["PHP", "JPY"];
     const formatted = noDecimals.includes(currency)
         ? converted.toLocaleString("en-US", { maximumFractionDigits: 0 })
@@ -1432,20 +1339,16 @@ function formatPrice(phpAmount, currency) {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2,
         });
-
     return symbol + formatted;
 }
-
 function setCurrency(currency) {
     localStorage.setItem("currency", currency);
     document.cookie = `currency=${currency}; path=/`;
-
     // Update every price element that has a data-php-price attribute
     document.querySelectorAll("[data-php-price]").forEach((el) => {
         const php = parseFloat(el.getAttribute("data-php-price"));
         el.textContent = formatPrice(php, currency);
     });
-
     // Also update data-popup prices on fc-cards
     document.querySelectorAll("[data-popup]").forEach((card) => {
         try {
@@ -1460,20 +1363,15 @@ function setCurrency(currency) {
         } catch (e) { }
     });
 }
-
 window.setCurrency = setCurrency;
-
 // ─── INIT ──────────────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
     const savedLang = localStorage.getItem("lang") || "english";
     setLanguage(savedLang);
-
     const langSelect = document.getElementById("languageSelect");
     if (langSelect) langSelect.value = savedLang;
-
     const savedCurrency = localStorage.getItem("currency") || "PHP";
     setCurrency(savedCurrency);
-
     const currSelect = document.getElementById("currencySelect");
     if (currSelect) currSelect.value = savedCurrency;
 });

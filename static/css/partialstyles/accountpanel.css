@@ -2,7 +2,6 @@
    accountpanel.css — ArmsDealer
    Account slide-in panel — matches navbarstyles.css design system
 ══════════════════════════════════════════════════════════════════ */
-
 /* ── Panel overlay ──────────────────────────────────────────────── */
 .account-overlay {
   position: fixed;
@@ -13,12 +12,10 @@
   transition: opacity 0.28s ease;
   z-index: 1100;
 }
-
 .account-overlay.active {
   opacity: 1;
   pointer-events: all;
 }
-
 /* ── Sidebar panel ──────────────────────────────────────────────── */
 .account-sidebar {
   position: fixed;
@@ -35,7 +32,6 @@
   z-index: 1200;
   overflow: hidden;
 }
-
 /* Right accent bar */
 .account-sidebar::before {
   content: "";
@@ -50,7 +46,6 @@
       transparent);
   z-index: 1;
 }
-
 /* Scanline texture */
 .account-sidebar::after {
   content: "";
@@ -63,11 +58,9 @@
       rgba(0, 0, 0, 0.06) 4px);
   pointer-events: none;
 }
-
 .account-sidebar.open {
   transform: translateX(0);
 }
-
 /* ── Panel header ───────────────────────────────────────────────── */
 .acct-header {
   display: flex;
@@ -80,7 +73,6 @@
   position: relative;
   z-index: 2;
 }
-
 .acct-header-title {
   font-family: var(--font-stencil);
   font-size: 14px;
@@ -89,13 +81,11 @@
   text-transform: uppercase;
   color: var(--mil-bright);
 }
-
 .acct-header-title::before {
   content: "⍝ ";
   opacity: 0.7;
   font-size: 11px;
 }
-
 .acct-close {
   background: none;
   border: 1px solid var(--mil-border);
@@ -113,13 +103,11 @@
     background 0.2s;
   font-family: var(--font-mono);
 }
-
 .acct-close:hover {
   color: var(--mil-bright);
   border-color: var(--mil-olive);
   background: rgba(138, 170, 106, 0.08);
 }
-
 /* ── Panel body ─────────────────────────────────────────────────── */
 .acct-body {
   flex: 1;
@@ -129,15 +117,12 @@
   scrollbar-width: thin;
   scrollbar-color: var(--mil-border) transparent;
 }
-
 .acct-body::-webkit-scrollbar {
   width: 4px;
 }
-
 .acct-body::-webkit-scrollbar-thumb {
   background: var(--mil-border);
 }
-
 /* ── Section labels & dividers ──────────────────────────────────── */
 .acct-section-label {
   padding: 14px 20px 5px;
@@ -147,13 +132,11 @@
   text-transform: uppercase;
   color: var(--mil-muted);
 }
-
 .acct-divider {
   height: 1px;
   background: var(--mil-border);
   margin: 6px 16px;
 }
-
 /* ── Avatar block ───────────────────────────────────────────────── */
 .acct-avatar-block {
   display: flex;
@@ -162,7 +145,6 @@
   padding: 18px 20px 14px;
   border-bottom: 1px solid var(--mil-border);
 }
-
 .acct-avatar {
   width: 52px;
   height: 52px;
@@ -174,7 +156,6 @@
   flex-shrink: 0;
   position: relative;
 }
-
 .acct-avatar-initials {
   font-family: var(--font-stencil);
   font-size: 18px;
@@ -182,7 +163,6 @@
   color: var(--mil-bright);
   letter-spacing: 0.1em;
 }
-
 .acct-avatar-online {
   position: absolute;
   bottom: -3px;
@@ -195,24 +175,19 @@
   box-shadow: 0 0 6px var(--mil-green);
   animation: acctPulse 2.4s ease-in-out infinite;
 }
-
 @keyframes acctPulse {
-
   0%,
   100% {
     opacity: 1;
   }
-
   50% {
     opacity: 0.25;
   }
 }
-
 .acct-avatar-info {
   flex: 1;
   min-width: 0;
 }
-
 .acct-username {
   font-family: var(--font-stencil);
   font-size: 15px;
@@ -225,7 +200,6 @@
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
 .acct-role-badge {
   display: inline-flex;
   align-items: center;
@@ -238,13 +212,11 @@
   border: 1px solid var(--mil-border);
   padding: 2px 7px;
 }
-
 .acct-role-badge.admin {
   color: var(--mil-bright);
   border-color: var(--mil-olive);
   background: rgba(138, 170, 106, 0.08);
 }
-
 /* ── Info rows ──────────────────────────────────────────────────── */
 .acct-info-row {
   display: flex;
@@ -256,14 +228,12 @@
   font-size: 11px;
   gap: 8px;
 }
-
 .acct-info-label {
   color: var(--mil-muted);
   text-transform: uppercase;
   letter-spacing: 0.14em;
   flex-shrink: 0;
 }
-
 .acct-info-value {
   color: var(--mil-text);
   text-align: right;
@@ -272,11 +242,9 @@
   text-overflow: ellipsis;
   white-space: nowrap;
 }
-
 .acct-info-value.bright {
   color: var(--mil-bright);
 }
-
 /* ── Cart row ───────────────────────────────────────────────────── */
 .acct-cart-row {
   display: flex;
@@ -288,11 +256,9 @@
   transition: background 0.15s;
   text-decoration: none;
 }
-
 .acct-cart-row:hover {
   background: rgba(138, 170, 106, 0.05);
 }
-
 .acct-cart-left {
   display: flex;
   align-items: center;
@@ -303,18 +269,15 @@
   text-transform: uppercase;
   letter-spacing: 0.14em;
 }
-
 .acct-cart-icon {
   font-size: 14px;
   color: var(--mil-olive);
 }
-
 .acct-cart-right {
   display: flex;
   align-items: center;
   gap: 8px;
 }
-
 .acct-cart-count {
   background: var(--mil-redbright);
   color: #fff;
@@ -326,18 +289,15 @@
   min-width: 20px;
   text-align: center;
 }
-
 .acct-cart-empty {
   font-family: var(--font-mono);
   font-size: 10px;
   color: var(--mil-muted);
 }
-
 .acct-cart-arrow {
   color: var(--mil-olive);
   font-size: 10px;
 }
-
 /* ── Action buttons ─────────────────────────────────────────────── */
 .acct-action-btn {
   display: flex;
@@ -361,7 +321,6 @@
   text-decoration: none;
   color: var(--mil-text);
 }
-
 .acct-action-btn .acct-btn-icon {
   font-size: 13px;
   width: 16px;
@@ -369,7 +328,6 @@
   opacity: 0.65;
   flex-shrink: 0;
 }
-
 .acct-action-btn .acct-btn-arrow {
   margin-left: auto;
   font-size: 9px;
@@ -377,23 +335,18 @@
   opacity: 0;
   transition: opacity 0.15s;
 }
-
 .acct-action-btn:hover {
   background: rgba(138, 170, 106, 0.06);
 }
-
 .acct-action-btn:hover .acct-btn-arrow {
   opacity: 1;
 }
-
 .acct-action-btn.danger {
   color: var(--mil-redbright);
 }
-
 .acct-action-btn.danger:hover {
   background: rgba(192, 57, 43, 0.06);
 }
-
 /* ── Auth block (logged out) ────────────────────────────────────── */
 .acct-auth-block {
   padding: 28px 20px;
@@ -401,7 +354,6 @@
   flex-direction: column;
   gap: 10px;
 }
-
 .acct-auth-message {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -412,14 +364,12 @@
   line-height: 1.8;
   margin-bottom: 10px;
 }
-
 .acct-auth-separator {
   display: flex;
   align-items: center;
   gap: 10px;
   margin: 4px 0;
 }
-
 .acct-auth-separator::before,
 .acct-auth-separator::after {
   content: "";
@@ -427,7 +377,6 @@
   height: 1px;
   background: var(--mil-border);
 }
-
 .acct-auth-sep-text {
   font-family: var(--font-mono);
   font-size: 9px;
@@ -435,7 +384,6 @@
   color: var(--mil-muted);
   text-transform: uppercase;
 }
-
 .acct-login-btn,
 .acct-register-btn {
   display: flex;
@@ -454,28 +402,23 @@
   width: 100%;
   text-decoration: none;
 }
-
 .acct-login-btn {
   background: rgba(138, 170, 106, 0.12);
   border: 1px solid var(--mil-olive);
   color: var(--mil-bright);
 }
-
 .acct-login-btn:hover {
   background: rgba(138, 170, 106, 0.22);
 }
-
 .acct-register-btn {
   background: transparent;
   border: 1px solid var(--mil-border);
   color: var(--mil-muted);
 }
-
 .acct-register-btn:hover {
   border-color: var(--mil-muted);
   color: var(--mil-text);
 }
-
 /* ── Panel footer ───────────────────────────────────────────────── */
 .acct-footer {
   padding: 10px 20px 14px;
@@ -484,7 +427,6 @@
   z-index: 2;
   flex-shrink: 0;
 }
-
 .acct-session-info {
   font-family: var(--font-mono);
   font-size: 8.5px;
@@ -493,7 +435,6 @@
   line-height: 1.8;
   text-transform: uppercase;
 }
-
 .acct-session-dot {
   display: inline-block;
   width: 5px;
@@ -504,12 +445,10 @@
   vertical-align: middle;
   margin-right: 5px;
 }
-
 .acct-session-dot.offline {
   background: var(--mil-muted);
   box-shadow: none;
 }
-
 /* ── Forgot Password Block ──────────────────────────────────────── */
 .acct-forgot-block {
   padding: 28px 20px;
@@ -517,7 +456,6 @@
   flex-direction: column;
   gap: 10px;
 }
-
 .acct-forgot-btn {
   display: flex;
   align-items: center;
@@ -536,19 +474,16 @@
   transition: all 0.2s;
   width: 100%;
 }
-
 .acct-forgot-btn:hover {
   border-color: var(--mil-muted);
   color: var(--mil-text);
 }
-
 .acct-form-group {
   display: flex;
   flex-direction: column;
   gap: 6px;
   margin-bottom: 12px;
 }
-
 .acct-form-group label {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -556,7 +491,6 @@
   color: var(--mil-muted);
   text-transform: uppercase;
 }
-
 .acct-form-group input {
   padding: 8px 12px;
   background: rgba(46, 58, 46, 0.3);
@@ -566,12 +500,10 @@
   font-size: 12px;
   transition: border-color 0.2s;
 }
-
 .acct-form-group input:focus {
   outline: none;
   border-color: var(--mil-olive);
 }
-
 .acct-forgot-submit,
 .acct-forgot-resend {
   display: flex;
@@ -590,28 +522,23 @@
   width: 100%;
   margin-bottom: 8px;
 }
-
 .acct-forgot-submit {
   background: rgba(138, 170, 106, 0.12);
   border: 1px solid var(--mil-olive);
   color: var(--mil-bright);
 }
-
 .acct-forgot-submit:hover {
   background: rgba(138, 170, 106, 0.22);
 }
-
 .acct-forgot-resend {
   background: transparent;
   border: 1px solid var(--mil-border);
   color: var(--mil-muted);
 }
-
 .acct-forgot-resend:hover {
   border-color: var(--mil-muted);
   color: var(--mil-text);
 }
-
 .acct-back-btn {
   display: flex;
   align-items: center;
@@ -630,7 +557,6 @@
   transition: all 0.2s;
   width: 100%;
 }
-
 .acct-back-btn:hover {
   border-color: var(--mil-muted);
   color: var(--mil-text);

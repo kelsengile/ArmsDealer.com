@@ -1,11 +1,9 @@
 /* ============================================================================
    GLOBAL STYLES - TACTICAL ARMS DEALER WEBSITE
    ============================================================================ */
-
 /* ============================================================================
    CSS CUSTOM PROPERTIES (VARIABLES)
    ============================================================================ */
-
 :root {
   /* Color Palette */
   --color-primary: #3e4a3f;
@@ -30,7 +28,6 @@
   /* Border color */
   --color-hover: #556155;
   /* Hover state */
-
   /* Typography */
   --font-family-base: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   --font-family-heading: "Arial", sans-serif;
@@ -40,7 +37,6 @@
   --font-size-xl: 30px;
   --font-size-2xl: 36px;
   --line-height-base: 1.5;
-
   /* Spacing */
   --spacing-xs: 4px;
   --spacing-sm: 8px;
@@ -49,28 +45,23 @@
   --spacing-xl: 20px;
   --spacing-2xl: 30px;
   --spacing-3xl: 40px;
-
   /* Shadows & Effects */
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
   --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.2);
   --shadow-inset: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-
   /* Border Radius */
   --radius-sm: 2px;
   --radius-md: 4px;
   --radius-lg: 8px;
-
   /* Transitions */
   --transition-fast: 150ms ease-in-out;
   --transition-base: 300ms ease-in-out;
   --transition-slow: 500ms ease-in-out;
-
   /* Dimensions */
   --container-max-width: 1700px;
   --navbar-height: 50px;
   --topbar-height: 40px;
-
   --mil-black: #0d0f0d;
   --mil-dark: #131713;
   --mil-panel: #1c211c;
@@ -85,7 +76,6 @@
   --font-stencil: "Oswald", "Impact", sans-serif;
   --font-times: "Times New Roman", "monospace";
   --font-mono: "Share Tech Mono", "Courier New", monospace;
-
   /* Settings sidebar */
   --set-width: 280px;
   --set-bg: #131713;
@@ -97,34 +87,28 @@
   --set-green: #8aaa6a;
   --set-bright: #a8c47a;
   --set-active-bg: rgba(138, 170, 106, 0.1);
-
   --topbar-h: 32px;
   --navbar-h: 66px;
   --header-h: 98px;
   /* topbar + navbar combined */
 }
-
 /* ============================================================================
    RESET & BASE STYLES
    ============================================================================ */
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
 *::before,
 *::after {
   box-sizing: inherit;
 }
-
 html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
 body {
   font-family: var(--font-mono);
   font-size: 10px;
@@ -139,29 +123,23 @@ body {
   background-attachment: fixed;
   min-height: 100vh;
 }
-
 /* ============================================================================================================================
     UTILITY CLASSES
    ============================================================================================================================ */
-
 /* ============================================================================
    SCROLLBAR STYLING
    ============================================================================ */
-
 ::-webkit-scrollbar {
   width: 10px;
   height: 10px;
 }
-
 ::-webkit-scrollbar-track {
   background: var(--color-primary);
 }
-
 ::-webkit-scrollbar-thumb {
   background: var(--color-primary-light);
   border-radius: var(--radius-md);
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-hover);
 }

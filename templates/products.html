@@ -2,7 +2,6 @@
 {% block title %}<title data-translate="products"></title>{% endblock %}
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/productsstyles.css') }}">{% endblock %}
-
 {% block main %}
 <main class="products-page">
     <section class="products-hero">
@@ -13,14 +12,12 @@
         <div class="hero-sign">
             <div class="hero-sign-top">CURRENT</div>
             <div class="hero-sign-title" data-active-type="">WEAPONS</div>
-
             <div class="hero-sign-toggle">
                 <button class="toggle-btn" data-type="weapons">WEAPONS</button>
                 <button class="toggle-btn" data-type="equipment">EQUIPMENT</button>
             </div>
         </div>
     </section>
-
     <div class="products-layout">
         <aside class="products-sidebar">
             <div class="sidebar-panel">
@@ -30,7 +27,6 @@
                 <button class="filter-btn" data-filter="brands">Brands</button>
             </div>
         </aside>
-
         <section class="products-content">
             <div class="content-panel">
                 <div class="content-header">
@@ -41,14 +37,11 @@
             </div>
         </section>
     </div>
-
-
     <!-- ═══════════════════════════════════════════════════════════
          PANEL CONTENT TEMPLATES
          Naming convention:  panel-{type}-{filter}
          These are never rendered directly — JS clones them on demand.
     ════════════════════════════════════════════════════════════════ -->
-
     <!-- WEAPONS · PROMOTIONS -->
     <template id="panel-weapons-promotions">
         <div class="promo-grid">
@@ -72,7 +65,6 @@
             </div>
         </div>
     </template>
-
     <!-- WEAPONS · CATEGORIES -->
     <template id="panel-weapons-categories">
         <div class="category-list">
@@ -110,7 +102,6 @@
             </div>
         </div>
     </template>
-
     <!-- WEAPONS · BRANDS -->
     <template id="panel-weapons-brands">
         <div class="brand-grid">
@@ -136,7 +127,6 @@
             </div>
         </div>
     </template>
-
     <!-- EQUIPMENT · PROMOTIONS -->
     <template id="panel-equipment-promotions">
         <div class="promo-grid">
@@ -160,7 +150,6 @@
             </div>
         </div>
     </template>
-
     <!-- EQUIPMENT · CATEGORIES -->
     <template id="panel-equipment-categories">
         <div class="category-list">
@@ -198,7 +187,6 @@
             </div>
         </div>
     </template>
-
     <!-- EQUIPMENT · BRANDS -->
     <template id="panel-equipment-brands">
         <div class="brand-grid">
@@ -224,8 +212,6 @@
             </div>
         </div>
     </template>
-
 </main>
-
 <script src="{{ url_for('static', filename='js/pagefunctions/productsfunctions.js') }}"></script>
 {% endblock %}

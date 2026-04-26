@@ -1,10 +1,8 @@
 /**
  * NavbarScript.js — ArmsDealer
  **/
-
 (function () {
     // 'use strict';
-
     // /* ──────────────────────────────────────────────────────────────────────────
     //     SCROLL-HIDE BEHAVIOUR
     // ───────────────────────────────────────────────────────────────────────────── */
@@ -13,18 +11,15 @@
     //     let lastScrollY = window.scrollY;
     //     let ticking = false;
     //     const SCROLL_THRESHOLD = 80; // px before hide kicks in
-
     //     function handleScroll() {
     //         const currentY = window.scrollY;
     //         const delta = currentY - lastScrollY;
-
     //         // Add scrolled shadow class
     //         if (currentY > 10) {
     //             header.classList.add('nav-scrolled');
     //         } else {
     //             header.classList.remove('nav-scrolled');
     //         }
-
     //         // Only hide after threshold
     //         if (currentY > SCROLL_THRESHOLD) {
     //             if (delta > 0) {
@@ -39,11 +34,9 @@
     //             // Near top — always visible
     //             header.classList.remove('nav-hidden');
     //         }
-
     //         lastScrollY = currentY;
     //         ticking = false;
     //     }
-
     //     window.addEventListener('scroll', () => {
     //         if (!ticking) {
     //             requestAnimationFrame(handleScroll);
@@ -51,12 +44,10 @@
     //         }
     //     }, { passive: true });
     // }
-
     /* /* ──────────────────────────────────────────────────────────────────────────
       //     ACTIVE PAGE HIGHLIGHT 
       // ───────────────────────────────────────────────────────────────────────────── */
     const currentPage = (document.body.dataset.page || "home").toLowerCase();
-
     if (currentPage !== "home") {
         // Match anchors whose href contains the page keyword
         const allNavLinks = document.querySelectorAll(
@@ -71,7 +62,6 @@
             }
         });
     }
-
     /* ────────────────────────────────────────────────────────────────────────── 
   // HAMBURGER MENU 
   // ───────────────────────────────────────────────────────────────────────── */
@@ -80,7 +70,6 @@
     let lastScrollY = window.scrollY;
     const SCROLL_THRESHOLD = 100;
     const DRAWER_BREAKPOINT = 980; // ← change this to your desired breakpoint
-
     function openDrawer() {
         if (!hamburger || !drawer) return;
         hamburger.classList.add("open");
@@ -88,14 +77,12 @@
         drawer.classList.add("open");
         document.body.style.overflow = "";
     }
-
     function closeDrawer() {
         if (!hamburger || !drawer) return;
         hamburger.classList.remove("open");
         hamburger.setAttribute("aria-expanded", "false");
         drawer.classList.remove("open");
     }
-
     function toggleDrawer() {
         if (drawer && drawer.classList.contains("open")) {
             closeDrawer();
@@ -103,14 +90,12 @@
             openDrawer();
         }
     }
-
     // ── Close drawer when viewport exceeds breakpoint ──────────────────────────
     function handleBreakpoint() {
         if (window.innerWidth > DRAWER_BREAKPOINT) {
             closeDrawer();
         }
     }
-
     // ResizeObserver watches the <body> width (fires less often than scroll)
     if (typeof ResizeObserver !== "undefined") {
         const resizeObserver = new ResizeObserver(() => handleBreakpoint());
@@ -120,14 +105,12 @@
         window.addEventListener("resize", handleBreakpoint);
     }
     // ──────────────────────────────────────────────────────────────────────────
-
     if (hamburger) {
         hamburger.addEventListener("click", (e) => {
             e.stopPropagation();
             toggleDrawer();
         });
     }
-
     // Close on scroll after threshold
     window.addEventListener("scroll", () => {
         const currentScrollY = window.scrollY;
@@ -140,7 +123,6 @@
         }
         lastScrollY = currentScrollY;
     });
-
     // Close on outside click
     document.addEventListener("click", (e) => {
         if (
@@ -152,12 +134,10 @@
             closeDrawer();
         }
     });
-
     // Close on Escape key
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape") closeDrawer();
     });
-
     // Close drawer when a drawer link is clicked
     if (drawer) {
         drawer.querySelectorAll("a").forEach((link) => {

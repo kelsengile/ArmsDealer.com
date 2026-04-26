@@ -1,66 +1,54 @@
 <!-- ═══════════════════════════════════════════════════════════ -->
 <!-- SETTINGS SIDEBAR                                            -->
 <!-- ═══════════════════════════════════════════════════════════ -->
-
 <div class="settings-overlay" id="settingsOverlay"></div>
 <aside class="settings-sidebar" id="settingsSidebar" aria-label="Settings">
-
     <div class="set-header">
         <span class="set-header-title" data-translate="navbarsettings"></span>
         <button class="set-close" id="settingsClose" aria-label="Close settings">✕</button>
     </div>
-
     <nav class="set-nav">
         <div class="set-section-label" data-translate="navbarpreferences"></div>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbaraccount"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarappearance"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarnotifications"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarprivacy_security"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <div class="set-divider"></div>
         <div class="set-section-label" data-translate="navbargeneral"></div>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarlanguage_region"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarhelp_support"></span>
             <span class="set-arrow">▶</span>
         </a>
-
         <div class="set-divider"></div>
         <div class="set-section-label" data-translate="navbaradvanced"></div>
-
         <a href="{{ url_for('settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
@@ -68,5 +56,4 @@
             <span class="set-arrow">▶</span>
         </a>
     </nav>
-
 </aside>
