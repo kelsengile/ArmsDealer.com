@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS users (
     username      TEXT    NOT NULL UNIQUE,
     email         TEXT    NOT NULL UNIQUE,
     password_hash TEXT    NOT NULL,
-    role          TEXT    NOT NULL DEFAULT 'customer',   -- 'customer' | 'admin'
+    role          TEXT    NOT NULL DEFAULT 'customer',
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -57,8 +57,8 @@ CREATE TABLE IF NOT EXISTS brands_translations (
     name        TEXT    NOT NULL,
     description TEXT,
     UNIQUE (brand_id, lang_code),
-    FOREIGN KEY (brand_id)   REFERENCES brands(id)    ON DELETE CASCADE,
-    FOREIGN KEY (lang_code)  REFERENCES languages(code)
+    FOREIGN KEY (brand_id)  REFERENCES brands(id) ON DELETE CASCADE,
+    FOREIGN KEY (lang_code) REFERENCES languages(code)
 );
 
 -- ─────────────────────────────────────────────────────────────────
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS categories (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     name        TEXT    NOT NULL UNIQUE,
     slug        TEXT    NOT NULL UNIQUE,
-    type        TEXT    NOT NULL DEFAULT 'product',     -- 'product' | 'service'
+    type        TEXT    NOT NULL DEFAULT 'product',
     icon_file   TEXT,
     description TEXT
 );
@@ -121,8 +121,8 @@ CREATE TABLE IF NOT EXISTS products (
     rating         REAL    NOT NULL DEFAULT 0 CHECK (rating >= 0 AND rating <= 5),
     sales_count    INTEGER NOT NULL DEFAULT 0,
     image_file     TEXT,
-    tags           TEXT,                                -- JSON array string
-    is_featured    INTEGER NOT NULL DEFAULT 0,
+    tags           TEXT,
+    is_authorized  INTEGER NOT NULL DEFAULT 0,
     created_at     TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at     TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -154,7 +154,7 @@ CREATE TABLE IF NOT EXISTS services (
     sales_count    INTEGER NOT NULL DEFAULT 0,
     image_file     TEXT,
     tags           TEXT,
-    is_featured    INTEGER NOT NULL DEFAULT 0,
+    is_authorized  INTEGER NOT NULL DEFAULT 0,
     created_at     TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at     TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -175,7 +175,7 @@ CREATE TABLE IF NOT EXISTS services_translations (
 CREATE TABLE IF NOT EXISTS orders (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id     INTEGER NOT NULL REFERENCES users(id),
-    status      TEXT    NOT NULL DEFAULT 'pending',     -- 'pending' | 'verified' | 'paid' | 'shipped' | 'completed' | 'cancelled'
+    status      TEXT    NOT NULL DEFAULT 'pending',
     total       REAL    NOT NULL DEFAULT 0,
     notes       TEXT,
     created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
@@ -186,7 +186,7 @@ CREATE TABLE IF NOT EXISTS order_items (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     order_id    INTEGER NOT NULL REFERENCES orders(id) ON DELETE CASCADE,
     item_type   TEXT    NOT NULL DEFAULT 'product'
-                CHECK (item_type IN ('product', 'service')),  -- 'product' | 'service'
+                CHECK (item_type IN ('product', 'service')),
     item_id     INTEGER NOT NULL,
     quantity    INTEGER NOT NULL DEFAULT 1,
     unit_price  REAL    NOT NULL
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS inquiries (
     email       TEXT NOT NULL,
     subject     TEXT,
     message     TEXT NOT NULL,
-    status      TEXT NOT NULL DEFAULT 'new',            -- 'new' | 'read' | 'resolved'
+    status      TEXT NOT NULL DEFAULT 'new',
     created_at  TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
@@ -248,18 +248,15 @@ CREATE INDEX IF NOT EXISTS idx_order_items_order  ON order_items   (order_id);
 -- TRIGGERS
 -- ─────────────────────────────────────────────────────────────────
 
--- When order status changes TO 'completed' → increment sales_count
 CREATE TRIGGER IF NOT EXISTS trg_order_completed
 AFTER UPDATE OF status ON orders
 WHEN NEW.status = 'completed' AND OLD.status != 'completed'
 BEGIN
     UPDATE products
     SET sales_count = sales_count + (
-        SELECT COALESCE(SUM(oi.quantity), 0)
-        FROM order_items oi
-        WHERE oi.order_id = NEW.id
-          AND oi.item_type = 'product'
-          AND oi.item_id = products.id
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product' AND item_id = products.id
     )
     WHERE id IN (
         SELECT item_id FROM order_items
@@ -268,11 +265,9 @@ BEGIN
 
     UPDATE services
     SET sales_count = sales_count + (
-        SELECT COALESCE(SUM(oi.quantity), 0)
-        FROM order_items oi
-        WHERE oi.order_id = NEW.id
-          AND oi.item_type = 'service'
-          AND oi.item_id = services.id
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service' AND item_id = services.id
     )
     WHERE id IN (
         SELECT item_id FROM order_items
@@ -280,18 +275,15 @@ BEGIN
     );
 END;
 
--- When order status changes FROM 'completed' (reversal/refund) → decrement sales_count
 CREATE TRIGGER IF NOT EXISTS trg_order_uncompleted
 AFTER UPDATE OF status ON orders
 WHEN OLD.status = 'completed' AND NEW.status != 'completed'
 BEGIN
     UPDATE products
     SET sales_count = MAX(0, sales_count - (
-        SELECT COALESCE(SUM(oi.quantity), 0)
-        FROM order_items oi
-        WHERE oi.order_id = NEW.id
-          AND oi.item_type = 'product'
-          AND oi.item_id = products.id
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product' AND item_id = products.id
     ))
     WHERE id IN (
         SELECT item_id FROM order_items
@@ -300,11 +292,9 @@ BEGIN
 
     UPDATE services
     SET sales_count = MAX(0, sales_count - (
-        SELECT COALESCE(SUM(oi.quantity), 0)
-        FROM order_items oi
-        WHERE oi.order_id = NEW.id
-          AND oi.item_type = 'service'
-          AND oi.item_id = services.id
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service'
     ))
     WHERE id IN (
         SELECT item_id FROM order_items
