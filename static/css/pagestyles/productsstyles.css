@@ -569,7 +569,7 @@ main.products-page::before {
   border-bottom: 1px solid var(--mil-border, #2e3a2e);
   padding: 0 0 40px;
   margin-bottom: 0;
-  scroll-margin-top: 16px;
+  scroll-margin-top: 250px;
 }
 .promo-section:last-child {
   border-bottom: none;
