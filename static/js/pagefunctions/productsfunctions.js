@@ -83,6 +83,11 @@ document.addEventListener("DOMContentLoaded", () => {
         selectionContent.innerHTML = "";
         selectionContent.appendChild(template.content.cloneNode(true));
 
+        // Toggle restricted-mode class for red-glow hover on category rects
+        selectionContent.closest(".products-content").classList.toggle(
+            "restricted-mode", state.access === "restricted"
+        );
+
         // Wire up clickable items inside the newly injected panel
         bindCategoryItems();
 
@@ -454,5 +459,67 @@ document.addEventListener("DOMContentLoaded", () => {
     // ─────────────────────────────────────────────
     restoreSubmenus();
     loadPanel();
+
+    // ─────────────────────────────────────────────
+    // HAMBURGER / SIDEBAR DRAWER (≤1100px)
+    // ─────────────────────────────────────────────
+    const hamburgerBtn = document.getElementById("sidebar-hamburger");
+    const sidebarEl = document.getElementById("products-sidebar");
+    const overlayEl = document.getElementById("sidebar-overlay");
+
+    function openSidebar() {
+        sidebarEl.classList.add("drawer-open");
+        overlayEl.classList.add("visible");
+        hamburgerBtn.classList.add("is-open");
+        hamburgerBtn.setAttribute("aria-expanded", "true");
+        document.body.style.overflow = "hidden";
+    }
+
+    function closeSidebar() {
+        sidebarEl.classList.remove("drawer-open");
+        overlayEl.classList.remove("visible");
+        hamburgerBtn.classList.remove("is-open");
+        hamburgerBtn.setAttribute("aria-expanded", "false");
+        document.body.style.overflow = "";
+    }
+
+    function isMobileBreakpoint() {
+        return window.matchMedia("(max-width: 1100px)").matches;
+    }
+
+    if (hamburgerBtn) {
+        hamburgerBtn.addEventListener("click", () => {
+            if (sidebarEl.classList.contains("drawer-open")) {
+                closeSidebar();
+            } else {
+                openSidebar();
+            }
+        });
+    }
+
+    if (overlayEl) {
+        overlayEl.addEventListener("click", closeSidebar);
+    }
+
+    // Close drawer when a nav-panel link is clicked (auto-close on selection)
+    document.querySelectorAll(".toc-link, .filter-btn:not(.filter-btn--has-sub)").forEach(el => {
+        el.addEventListener("click", () => {
+            if (isMobileBreakpoint()) closeSidebar();
+        });
+    });
+
+    // Reset body scroll if window is resized above 1100px
+    window.addEventListener("resize", () => {
+        if (!isMobileBreakpoint()) {
+            closeSidebar();
+        }
+    });
+
+    // Escape key closes drawer
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && sidebarEl.classList.contains("drawer-open")) {
+            closeSidebar();
+        }
+    });
 
 });

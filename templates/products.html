@@ -22,7 +22,7 @@
     </section>
 
     <div class="products-layout">
-        <aside class="products-sidebar">
+        <aside class="products-sidebar" id="products-sidebar">
             <div class="sidebar-panel">
                 <p class="productsidebartitle">Products: Nav Panel</p>
 
@@ -175,10 +175,18 @@
             </div>
         </aside>
 
+        <!-- Sidebar overlay backdrop (mobile/1100px) -->
+        <div class="sidebar-overlay" id="sidebar-overlay"></div>
+
         <section class="products-content">
             <div class="content-panel">
                 <div class="content-header">
                     <div class="content-header-left">
+                        <button class="sidebar-hamburger" id="sidebar-hamburger" aria-label="Toggle nav panel" aria-expanded="false">
+                            <span class="sidebar-hamburger-bar"></span>
+                            <span class="sidebar-hamburger-bar"></span>
+                            <span class="sidebar-hamburger-bar"></span>
+                        </button>
                         <div class="content-tag">SELECTION</div>
                         <h2 class="content-title" id="selection-title">Authorized · Promotions</h2>
                     </div>
@@ -324,6 +332,100 @@
             <!-- All Categories -->
             <section class="cat-main-section cat-all-section">
                 <h2 class="cat-main-heading cat-main-heading--center">All Categories</h2>
+                <div class="cat-rect-layout">
+                    <!-- Weapons Column -->
+                    <div class="cat-rect-column">
+                        <div class="cat-rect-column-header">Weapons</div>
+                        <div class="cat-rect-grid">
+                            <div class="category-rect" data-category="firearms">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/firearms.png" alt="Firearms"></div>
+                                <span class="category-label">Firearms</span>
+                            </div>
+                            <div class="category-rect" data-category="blades">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/blade.png" alt="Blades"></div>
+                                <span class="category-label">Blades</span>
+                            </div>
+                            <div class="category-rect" data-category="blunts">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/blunt.png" alt="Blunts"></div>
+                                <span class="category-label">Blunts</span>
+                            </div>
+                            <div class="category-rect" data-category="projectiles">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/projectile.png" alt="Projectiles"></div>
+                                <span class="category-label">Projectiles</span>
+                            </div>
+                            <div class="category-rect" data-category="explosive">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/explosives.png" alt="Explosive"></div>
+                                <span class="category-label">Explosive</span>
+                            </div>
+                            <div class="category-rect" data-category="electronic">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/electronic.png" alt="Electronic"></div>
+                                <span class="category-label">Electronic</span>
+                            </div>
+                            <div class="category-rect" data-category="chemical">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/chemical.png" alt="Chemical"></div>
+                                <span class="category-label">Chemical</span>
+                            </div>
+                            <div class="category-rect" data-category="biological">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/biological.png" alt="Biological"></div>
+                                <span class="category-label">Biological</span>
+                            </div>
+                            <div class="category-rect" data-category="vehicle">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/vehicle.png" alt="Vehicle"></div>
+                                <span class="category-label">Vehicle</span>
+                            </div>
+                            <div class="category-rect" data-category="cyber">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/cyber.png" alt="Cyber"></div>
+                                <span class="category-label">Cyber</span>
+                            </div>
+                            <div class="category-rect" data-category="security">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/security.png" alt="Security"></div>
+                                <span class="category-label">Security</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Equipment Column -->
+                    <div class="cat-rect-column">
+                        <div class="cat-rect-column-header">Equipment</div>
+                        <div class="cat-rect-grid">
+                            <div class="category-rect" data-category="ammunition">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/ammunition.png" alt="Ammunition"></div>
+                                <span class="category-label">Ammunition</span>
+                            </div>
+                            <div class="category-rect" data-category="protective">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/protective.png" alt="Protective"></div>
+                                <span class="category-label">Protective</span>
+                            </div>
+                            <div class="category-rect" data-category="tactical">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/tactical.png" alt="Tactical"></div>
+                                <span class="category-label">Tactical</span>
+                            </div>
+                            <div class="category-rect" data-category="attachments">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/attachments.png" alt="Attachments"></div>
+                                <span class="category-label">Attachments</span>
+                            </div>
+                            <div class="category-rect" data-category="maintenance">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/maintenance.png" alt="Maintenance"></div>
+                                <span class="category-label">Maintenance</span>
+                            </div>
+                            <div class="category-rect" data-category="storage">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/storage.png" alt="Storage"></div>
+                                <span class="category-label">Storage</span>
+                            </div>
+                            <div class="category-rect" data-category="communication">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/communication.png" alt="Communication"></div>
+                                <span class="category-label">Communication</span>
+                            </div>
+                            <div class="category-rect" data-category="survival">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/survival.png" alt="Survival"></div>
+                                <span class="category-label">Survival</span>
+                            </div>
+                            <div class="category-rect" data-category="training">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/training.png" alt="Training"></div>
+                                <span class="category-label">Training</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Popular Categories -->
@@ -352,6 +454,100 @@
             <!-- All Categories -->
             <section class="cat-main-section cat-all-section">
                 <h2 class="cat-main-heading cat-main-heading--center">All Categories</h2>
+                <div class="cat-rect-layout">
+                    <!-- Weapons Column -->
+                    <div class="cat-rect-column">
+                        <div class="cat-rect-column-header">Weapons</div>
+                        <div class="cat-rect-grid">
+                            <div class="category-rect" data-category="firearms">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/firearms.png" alt="Firearms"></div>
+                                <span class="category-label">Firearms</span>
+                            </div>
+                            <div class="category-rect" data-category="blades">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/blade.png" alt="Blades"></div>
+                                <span class="category-label">Blades</span>
+                            </div>
+                            <div class="category-rect" data-category="blunts">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/blunt.png" alt="Blunts"></div>
+                                <span class="category-label">Blunts</span>
+                            </div>
+                            <div class="category-rect" data-category="projectiles">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/projectile.png" alt="Projectiles"></div>
+                                <span class="category-label">Projectiles</span>
+                            </div>
+                            <div class="category-rect" data-category="explosive">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/explosives.png" alt="Explosive"></div>
+                                <span class="category-label">Explosive</span>
+                            </div>
+                            <div class="category-rect" data-category="electronic">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/electronic.png" alt="Electronic"></div>
+                                <span class="category-label">Electronic</span>
+                            </div>
+                            <div class="category-rect" data-category="chemical">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/chemical.png" alt="Chemical"></div>
+                                <span class="category-label">Chemical</span>
+                            </div>
+                            <div class="category-rect" data-category="biological">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/biological.png" alt="Biological"></div>
+                                <span class="category-label">Biological</span>
+                            </div>
+                            <div class="category-rect" data-category="vehicle">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/vehicle.png" alt="Vehicle"></div>
+                                <span class="category-label">Vehicle</span>
+                            </div>
+                            <div class="category-rect" data-category="cyber">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/cyber.png" alt="Cyber"></div>
+                                <span class="category-label">Cyber</span>
+                            </div>
+                            <div class="category-rect" data-category="security">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/security.png" alt="Security"></div>
+                                <span class="category-label">Security</span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Equipment Column -->
+                    <div class="cat-rect-column">
+                        <div class="cat-rect-column-header">Equipment</div>
+                        <div class="cat-rect-grid">
+                            <div class="category-rect" data-category="ammunition">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/ammunition.png" alt="Ammunition"></div>
+                                <span class="category-label">Ammunition</span>
+                            </div>
+                            <div class="category-rect" data-category="protective">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/protective.png" alt="Protective"></div>
+                                <span class="category-label">Protective</span>
+                            </div>
+                            <div class="category-rect" data-category="tactical">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/tactical.png" alt="Tactical"></div>
+                                <span class="category-label">Tactical</span>
+                            </div>
+                            <div class="category-rect" data-category="attachments">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/attachments.png" alt="Attachments"></div>
+                                <span class="category-label">Attachments</span>
+                            </div>
+                            <div class="category-rect" data-category="maintenance">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/maintenance.png" alt="Maintenance"></div>
+                                <span class="category-label">Maintenance</span>
+                            </div>
+                            <div class="category-rect" data-category="storage">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/storage.png" alt="Storage"></div>
+                                <span class="category-label">Storage</span>
+                            </div>
+                            <div class="category-rect" data-category="communication">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/communication.png" alt="Communication"></div>
+                                <span class="category-label">Communication</span>
+                            </div>
+                            <div class="category-rect" data-category="survival">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/survival.png" alt="Survival"></div>
+                                <span class="category-label">Survival</span>
+                            </div>
+                            <div class="category-rect" data-category="training">
+                                <div class="category-image"><img src="../static/assets/icons/categoriesicons/training.png" alt="Training"></div>
+                                <span class="category-label">Training</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </section>
 
             <!-- Popular Categories -->

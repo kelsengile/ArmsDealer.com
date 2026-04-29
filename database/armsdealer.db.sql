@@ -261,7 +261,7 @@ INSERT INTO "brands" ("id","name","slug","logo_file","description","is_authorize
  (66,'Hikvision','hikvision','hikvision.png','Video surveillance systems.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (67,'SGS','sgs','sgs.png','Inspection, verification, and certification services.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (68,'KBR','kbr','kbr.png','Defense and government contracting.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
- (69,'Anonymous','anonymous','anonymous.png','Seller identity not disclosed or verified.',1,'2026-04-24 10:23:23','2026-04-24 10:23:23'),
+ (69,'Anonymous','anonymous','anonymous.png','Seller identity not disclosed or verified.',0,'2026-04-24 10:23:23','2026-04-24 10:23:23'),
  (70,'Winchester','winchester','winchester.png','Legendary American firearms manufacturer; maker of the iconic Model 1894 lever-action rifle and Model 1897 trench shotgun.',1,'2026-04-25 12:10:27','2026-04-25 12:10:27'),
  (71,'Walther','walther','walther.png','German precision firearms manufacturer famous for the PPK compact pistol, adopted worldwide by police and intelligence agencies.',1,'2026-04-25 12:10:27','2026-04-25 12:10:27'),
  (72,'Mauser','mauser','mauser.png','Historic German arms manufacturer known for the C96 Broomhandle pistol and the Kar98k bolt-action infantry rifle.',1,'2026-04-25 12:10:27','2026-04-25 12:10:27'),

@@ -814,7 +814,7 @@
   /* responsive width */
   height: clamp(120px, 30vw, 250px);
   /* responsive height */
-  background: linear-gradient(135deg, #3e4a3f 0%, #2a3129 100%);
+  background: linear-gradient(135deg, #313831c2 0%, #2a3129 100%);
   border: 1px solid rgba(168, 196, 154, 0.3);
   border-radius: 8px;
   display: flex;

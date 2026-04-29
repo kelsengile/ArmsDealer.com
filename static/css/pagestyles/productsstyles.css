@@ -616,7 +616,73 @@ main.products-page::before {
 .empty-section { padding: 20px 0 8px; }
 
 /* ============================================================================
-   RESPONSIVE
+   HAMBURGER BUTTON (hidden above 1100px)
+   ============================================================================ */
+.sidebar-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 34px;
+  height: 34px;
+  background: transparent;
+  border: 1px solid var(--mil-border, #2e3a2e);
+  cursor: pointer;
+  padding: 6px;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+}
+.sidebar-hamburger:hover {
+  background: rgba(107,124,78,0.1);
+  border-color: var(--mil-olive, #6b7c4e);
+}
+.sidebar-hamburger.is-open {
+  background: rgba(107,124,78,0.15);
+  border-color: var(--mil-bright, #a8c47a);
+}
+.sidebar-hamburger-bar {
+  display: block;
+  width: 16px;
+  height: 2px;
+  background: var(--mil-text, #c8d4b8);
+  transition: transform 0.25s ease, opacity 0.25s ease, background 0.2s;
+  transform-origin: center;
+}
+.sidebar-hamburger.is-open .sidebar-hamburger-bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+  background: var(--mil-bright, #a8c47a);
+}
+.sidebar-hamburger.is-open .sidebar-hamburger-bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+.sidebar-hamburger.is-open .sidebar-hamburger-bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+  background: var(--mil-bright, #a8c47a);
+}
+
+/* Sidebar overlay backdrop */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  top: var(--header-h, 98px);
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.55);
+  z-index: 999;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+.sidebar-overlay.visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ============================================================================
+   RESPONSIVE — 1100px
    ============================================================================ */
 @media (max-width: 1100px) {
   .products-hero {
@@ -643,47 +709,90 @@ main.products-page::before {
   }
   .hero-sign-title { font-size: 30px; }
   .hero-toggle-row { flex-wrap: wrap; }
+
+  /* Layout: hide sidebar, full-width content */
   .products-layout {
-    flex-direction: column;
+    flex-direction: row;
     margin: 16px 16px 24px;
   }
+
+  /* Sidebar becomes a fixed drawer */
   .products-sidebar {
-    width: 100%;
-    border-right: none;
-    border-bottom: 1px solid var(--mil-border, #2e3a2e);
+    position: fixed;
+    top: var(--header-h, 98px);
+    left: 0;
+    bottom: 0;
+    width: 270px;
+    z-index: 1000;
+    border-right: 1px solid var(--mil-border, #2e3a2e);
+    border-top: 1px solid var(--mil-border, #2e3a2e);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    overflow-y: auto;
+    background: var(--mil-dark, #131713);
   }
+  .products-sidebar.drawer-open {
+    transform: translateX(0);
+  }
+  .sidebar-overlay {
+    display: block;
+    pointer-events: none;
+  }
+  .sidebar-overlay.visible {
+    pointer-events: all;
+  }
+
+  /* Restore sidebar-panel to vertical layout (undo previous horizontal layout) */
   .sidebar-panel {
-    flex-direction: row;
-    flex-wrap: wrap;
-    align-items: center;
-    padding: 14px 16px;
-    position: static;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    padding: 24px 0;
+    position: sticky;
+    top: 0;
   }
   .productsidebartitle {
-    width: 100%;
-    padding: 0 0 10px;
-    margin-bottom: 8px;
+    width: auto;
+    padding: 0 20px 16px;
+    margin-bottom: 0;
+    border-bottom: 1px solid var(--mil-border, #2e3a2e);
   }
-  .filter-group { flex: 1; min-width: 100px; }
+  .filter-group {
+    flex: none;
+    min-width: auto;
+    width: 100%;
+  }
   .filter-btn {
-    border-left: none;
-    border-bottom: none;
-    border-right: 1px solid var(--mil-border, #2e3a2e);
-    border-top: 2px solid transparent;
-    padding: 10px 12px;
-    justify-content: center;
-    min-width: 100px;
+    border-left: 3px solid transparent;
+    border-bottom: 1px solid var(--mil-border, #2e3a2e);
+    border-right: none;
+    border-top: none;
+    padding: 14px 20px;
+    justify-content: space-between;
+    min-width: auto;
   }
   .filter-btn.active {
-    border-left: none;
-    border-top-color: var(--mil-bright, #a8c47a);
+    border-left-color: var(--mil-bright, #a8c47a);
+    border-top-color: transparent;
   }
   .filter-btn:last-child { border-right: none; }
-  .filter-btn::after { display: none; }
-  .sidebar-panel::after { display: none; }
+  .filter-btn::after { display: block; }
+  .sidebar-panel::after { display: block; }
+
+  /* Show hamburger */
+  .sidebar-hamburger {
+    display: flex;
+  }
+
+  /* Keep filter labels always visible */
+  .header-filter-label {
+    display: inline-block !important;
+    white-space: nowrap;
+  }
   .content-header-filters {
     gap: 8px;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 }
 @media (max-width: 600px) {
@@ -708,7 +817,7 @@ main.products-page::before {
    CATEGORIES SUBMENU — extended height for long list
    ============================================================================ */
 #categories-toc.filter-submenu.open {
-  max-height: 600px;
+  max-height: 550px;
   overflow-y: auto;
 }
 
@@ -772,6 +881,129 @@ main.products-page::before {
 .cat-main-heading--center {
   justify-content: center;
   text-align: center;
+}
+
+/* ── Category Rect Visual Display ───────────────────────────── */
+.cat-rect-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  margin-top: 4px;
+}
+
+.cat-rect-column {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.cat-rect-column-header {
+  font-family: var(--font-stencil, "Oswald", sans-serif);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--mil-olive, #6b7c4e);
+  padding: 8px 14px;
+  border: 1px solid var(--mil-border, #2e3a2e);
+  background: rgba(107,124,78,0.05);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.cat-rect-column-header::before {
+  content: "//";
+  font-family: var(--font-mono, "Share Tech Mono", monospace);
+  font-size: 10px;
+  color: var(--mil-muted, #4a5e4a);
+}
+
+.cat-rect-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(6px, 1.2vw, 12px);
+}
+
+.category-rect {
+  flex-shrink: 1;
+  width: clamp(50px, 20vw,170px);
+  height: clamp(90px, 30vw, 220px);
+  background: linear-gradient(135deg, #313831c2 0%, #2a3129 100%);
+  border: 1px solid rgba(168, 196, 154, 0.3);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem;
+  font-size: clamp(8px, 2vw, 20px);
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+.category-rect:hover {
+  background: linear-gradient(135deg, #4a5a50 0%, #3a4139 100%);
+  border-color: rgba(168, 196, 154, 0.7);
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+}
+.category-rect.active {
+  background: linear-gradient(135deg, #6c7a6b 0%, #4a5a50 100%);
+  border-color: #a8c49a;
+  color: #a8c49a;
+  box-shadow: 0 0 0 2px rgba(168, 196, 154, 0.4);
+}
+.category-rect.active .category-label {
+  color: #a8c49a;
+}
+
+/* Restricted mode: red glow on hover */
+.restricted-mode .category-rect:hover {
+  border-color: rgba(255, 60, 60, 0.8);
+  box-shadow:
+    0 0 18px rgba(255, 40, 40, 0.55),
+    0 0 36px rgba(200, 0, 0, 0.3),
+    0 6px 16px rgba(0, 0, 0, 0.3);
+  background: linear-gradient(135deg, #5a3535 0%, #3a2020 100%);
+}
+
+.category-image {
+  width: 70%;
+  height: 70%;
+  object-fit: contain;
+  margin-bottom: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.category-image img {
+  max-width: 100%;
+  max-height: 100%;
+  opacity: 0.75;
+  object-fit: contain;
+}
+
+.category-label {
+  font-size: clamp(8px, 1vw, 15px);
+  font-weight: 500;
+  color: #e8ede8;
+  text-align: center;
+  letter-spacing: 0.05em;
+  line-height: 1.2;
+  margin-top: auto;
+  width: 100%;
+  padding: 0.25rem 0;
+  font-family: "Courier New", Courier, monospace;
+}
+
+@media (max-width: 900px) {
+  .cat-rect-layout {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
 }
 
 /* ── All Categories Grid ──────────────────────────────────────── */
@@ -1055,7 +1287,7 @@ main.products-page::before {
    ============================================================================ */
 #brands-toc-authorized.open,
 #brands-toc-restricted.open {
-  max-height: 400px;
+  max-height: 550px;
   overflow-y: auto;
 }
 
