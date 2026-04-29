@@ -1210,6 +1210,72 @@ main.products-page::before {
   padding: 12px 0;
 }
 
+/* ── Popular Brands List (header-only entries) ────────────────── */
+.brand-popular-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid rgba(107,124,78,0.25);
+}
+
+.brand-popular-entry {
+  padding: 14px 20px;
+  border-bottom: 1px solid rgba(107,124,78,0.15);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.brand-popular-entry:last-child {
+  border-bottom: none;
+}
+
+.brand-popular-entry:hover {
+  background: rgba(107,124,78,0.08);
+}
+
+.brand-popular-entry-title {
+  font-family: var(--font-stencil, "Oswald", sans-serif);
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mil-bright, #a8c47a);
+  margin: 0;
+}
+
+/* ── Specific Brand Page ──────────────────────────────────────── */
+.specific-brand {
+  padding: 0;
+}
+
+.specific-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px 0 16px;
+  border-bottom: 2px solid var(--mil-olive, #6b7c4e);
+  margin-bottom: 20px;
+}
+
+.specific-brand-title {
+  font-family: var(--font-stencil, "Oswald", sans-serif);
+  font-size: 22px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mil-bright, #a8c47a);
+  margin: 0;
+}
+
+/* ── Main Brands Footer Bar ───────────────────────────────────── */
+.brand-main-footer-bar {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 20px 0 8px;
+  margin-top: 4px;
+}
+
 /* ── Main Brands Footer ───────────────────────────────────────── */
 .brand-main-footer {
   display: flex;
