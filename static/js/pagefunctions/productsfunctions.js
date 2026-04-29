@@ -43,6 +43,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const categoriesToggleBtn = document.querySelector('[data-filter="categories"]');
     const categoriesSubmenu = document.getElementById("categories-toc");
 
+    const brandsToggleBtn = document.querySelector('[data-filter="brands"]');
+    const brandsSubmenu = document.getElementById("brands-toc");
+
     // ─────────────────────────────────────────────
     // LOAD PANEL
     // ─────────────────────────────────────────────
@@ -52,6 +55,9 @@ document.addEventListener("DOMContentLoaded", () => {
         if (state.filter === "categories" && state.category) {
             // Specific category panel — access-agnostic
             templateId = `panel-category-${state.category}`;
+        } else if (state.filter === "brands" && state.brand) {
+            // Specific brand panel — access-agnostic
+            templateId = `panel-brand-${state.brand}`;
         } else {
             templateId = `panel-${state.access}-${state.filter}`;
         }
@@ -97,6 +103,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadPanel();
             });
         });
+
+        // Brand icon/popular items open a specific brand panel
+        const brandItems = selectionContent.querySelectorAll("[data-brand]");
+        brandItems.forEach(item => {
+            item.addEventListener("click", () => {
+                const brand = item.dataset.brand;
+                if (!brand) return;
+                state.brand = brand;
+                highlightBrandLink(brand);
+                loadPanel();
+            });
+        });
     }
 
     // ─────────────────────────────────────────────
@@ -105,6 +123,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function highlightCategoryLink(cat) {
         document.querySelectorAll(".toc-link--category").forEach(l => {
             l.classList.toggle("toc-active", l.dataset.category === cat);
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // HIGHLIGHT SIDEBAR BRAND LINK
+    // ─────────────────────────────────────────────
+    function highlightBrandLink(brand) {
+        document.querySelectorAll(".toc-link--brand").forEach(l => {
+            l.classList.toggle("toc-active", l.dataset.brand === brand);
         });
     }
 
@@ -119,6 +146,10 @@ document.addEventListener("DOMContentLoaded", () => {
         let filterText;
         if (state.filter === "categories" && state.category) {
             filterText = `Categories · ${cap(state.category)}`;
+        } else if (state.filter === "brands" && state.brand) {
+            // Prettify brand slug to display name
+            const brandName = state.brand.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
+            filterText = `Brands · ${brandName}`;
         } else {
             filterText = cap(state.filter);
         }
@@ -144,6 +175,15 @@ document.addEventListener("DOMContentLoaded", () => {
             highlightCategoryLink(state.category);
         } else {
             document.querySelectorAll(".toc-link--category").forEach(l =>
+                l.classList.remove("toc-active")
+            );
+        }
+
+        // If a specific brand is active, reflect on sidebar links
+        if (state.filter === "brands" && state.brand) {
+            highlightBrandLink(state.brand);
+        } else {
+            document.querySelectorAll(".toc-link--brand").forEach(l =>
                 l.classList.remove("toc-active")
             );
         }
@@ -209,6 +249,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Toggle categories submenu; close promo submenu
                 toggleSubmenu(categoriesToggleBtn, categoriesSubmenu);
                 closeSubmenu(promoToggleBtn, promoSubmenu);
+                closeSubmenu(brandsToggleBtn, brandsSubmenu);
                 // Clicking "Categories" root always shows the main index panel
                 state.filter = "categories";
                 state.category = null;
@@ -216,11 +257,23 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Brands (or any other future flat filter)
+            if (filter === "brands") {
+                toggleSubmenu(brandsToggleBtn, brandsSubmenu);
+                closeSubmenu(promoToggleBtn, promoSubmenu);
+                closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
+                state.filter = "brands";
+                state.brand = null;
+                loadPanel();
+                return;
+            }
+
+            // Any other flat filter
             closeSubmenu(promoToggleBtn, promoSubmenu);
             closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
+            closeSubmenu(brandsToggleBtn, brandsSubmenu);
             state.filter = filter;
             state.category = null;
+            state.brand = null;
             loadPanel();
         });
     });
@@ -267,6 +320,18 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     // ─────────────────────────────────────────────
+    // EVENTS — BRANDS SIDEBAR LINKS (specific brand)
+    // ─────────────────────────────────────────────
+    document.querySelectorAll(".toc-link--brand").forEach(link => {
+        link.addEventListener("click", () => {
+            const brand = link.dataset.brand;
+            state.filter = "brands";
+            state.brand = brand;
+            loadPanel();
+        });
+    });
+
+    // ─────────────────────────────────────────────
     // EVENTS — HEADER FILTER UI
     // ─────────────────────────────────────────────
     hfSelects.forEach(select => {
@@ -291,6 +356,9 @@ document.addEventListener("DOMContentLoaded", () => {
         }
         if (state.filter === "categories") {
             openSubmenu(categoriesToggleBtn, categoriesSubmenu);
+        }
+        if (state.filter === "brands") {
+            openSubmenu(brandsToggleBtn, brandsSubmenu);
         }
     }
 
