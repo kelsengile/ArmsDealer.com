@@ -219,7 +219,6 @@ CATEGORIES
         Electronic ....... Tasers, Stun Guns, EMP Devices, Jamming Devices, Directed Energy Weapons, Sonic Devices, Laser Dazzlers
         Chemical ......... Tear Gas, Smoke Agents, Incendiary Compounds, Pepper Sprays, Aerosol Dispersants, Riot Control Agents
         Biological ....... Delivery Systems, Containment Units, Detection Equipment, Neutralization Agents
-        Radiological ..... Shielded Devices, Dispersal Systems, Detection Countermeasures
         Vehicle .......... Armed Vehicles, Drones, Naval Weapon Systems, Aerial Weapon Systems, Anti-vehicle Weapons
         Cyber ............ Malware Tools, Exploit Kits, Hacking Devices, Intrusion Systems, Data Exfiltration Tools, Ransomware Platforms
         Security ......... Access Control Weapons, Crowd Control Devices, Non-lethal Weapons, Deterrent Systems, Restraint Devices
@@ -234,9 +233,6 @@ CATEGORIES
         Maintenance ...... Cleaning Kits, Repair Tools, Lubricants, Bore Snakes, Armorer Tools, Parts Kits, Solvent Traps
         Storage .......... Safes, Cases, Lockers, Ammunition Cans, Weapon Racks, Concealment Furniture, Transport Containers
         Communication .... Radios, Signal Devices, Encryption Units, Earpieces, Tactical Headsets, Satellite Communicators, Covert Devices
-        Detection ........ Metal Detectors, Explosive Sniffers, Radiation Sensors, Chemical Detectors, Surveillance Cameras, Motion Sensors
-        Mobility ......... Tactical Vehicles, All-terrain Gear, Rappelling Equipment, Fast Rope Systems, Breaching Tools
-        Power ............ Batteries, Portable Generators, Solar Charging Units, Power Banks, Field Cables
         Survival ......... First Aid Kits, Rations, Water Purification, Navigation Tools, Emergency Shelters, Fire Starters, Multi-tools, Tourniquets
         Training ......... Simulators, Dummy Equipment, Targets, Training Manuals, Blue Guns, Force-on-Force Gear, Recoil Trainers
 
@@ -254,7 +250,6 @@ CATEGORIES
     Testing .......... Performance Testing, Safety Testing, Certification, Ballistic Testing, Environmental Testing, Proof Testing
     Disposal ......... Decommissioning, Hazardous Disposal, Recycling, Demilitarization, Ammunition Destruction, EOD Services
     Surveillance ..... Monitoring Services, Reconnaissance, Intelligence Gathering, Aerial Surveillance, Counter-surveillance, SIGINT Services
-    Licensing ........ Import/Export Licensing, Dealer Licensing, Compliance Filing, End-user Certification, Brokering Permits
     Contracting ...... Private Contracts, Government Contracts, Defense Contracts, Subcontracting, Joint Venture Agreements, Grant Procurement
 
 

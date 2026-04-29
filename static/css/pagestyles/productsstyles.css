@@ -1325,3 +1325,64 @@ main.products-page::before {
   }
   .brand-main-heading { font-size: 14px; }
 }
+/* ============================================================================
+   SPECIFIC CATEGORY — ICON BOX (no border)
+   ============================================================================ */
+.specific-cat-icon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: transparent;
+  filter: drop-shadow(0 0 6px rgba(168, 196, 122, 0.378));
+  /* No border for category icons */
+}
+
+.specific-cat-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Align header items to center now that there's an image */
+.specific-cat-header {
+  align-items: center;
+}
+
+/* ============================================================================
+   SPECIFIC BRAND — ICON BOX (with border)
+   ============================================================================ */
+.specific-brand-icon {
+  width: 72px;
+  height: 72px;
+  flex-shrink: 0;
+  overflow: hidden;
+  background: rgba(0,0,0,0.3);
+  border: 1px solid var(--mil-olive, #6b7c4e);
+  box-shadow: 0 0 8px rgba(107,124,78,0.2);
+}
+
+.specific-brand-icon-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Align brand header items to center now that there's an image */
+.specific-brand-header {
+  align-items: center;
+}
+
+/* ── Specific Brand Badge (mirrors .specific-cat-badge) ─────────── */
+.specific-brand-badge {
+  font-family: var(--font-mono, "Share Tech Mono", monospace);
+  font-size: 9px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--mil-black, #0d0f0d);
+  background: var(--mil-olive, #6b7c4e);
+  padding: 3px 10px;
+  clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 100%, 0 100%);
+}
