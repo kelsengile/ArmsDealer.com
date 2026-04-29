@@ -6,7 +6,7 @@ CREATE TABLE brands (
     slug        TEXT    NOT NULL UNIQUE,
     logo_file   TEXT,
     description TEXT,
-    is_active   INTEGER NOT NULL DEFAULT 1,
+    is_authorized   INTEGER NOT NULL DEFAULT 1,
     created_at  TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at  TEXT    NOT NULL DEFAULT (datetime('now'))
 );
@@ -193,7 +193,7 @@ CREATE TABLE users (
     created_at    TEXT    NOT NULL DEFAULT (datetime('now')),
     updated_at    TEXT    NOT NULL DEFAULT (datetime('now'))
 );
-INSERT INTO "brands" ("id","name","slug","logo_file","description","is_active","created_at","updated_at") VALUES (1,'Glock','glock','glock.png','Austrian manufacturer of polymer-framed pistols.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
+INSERT INTO "brands" ("id","name","slug","logo_file","description","is_authorized","created_at","updated_at") VALUES (1,'Glock','glock','glock.png','Austrian manufacturer of polymer-framed pistols.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (2,'Colt','colt','colt.png','Historic American firearms manufacturer.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (3,'Heckler & Koch','heckler-koch','hecklerkoch.png','German defense manufacturer of firearms.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
  (4,'Sig Sauer','sig-sauer','sigsauer.png','Global firearms and optics manufacturer.',1,'2026-04-24 09:14:11','2026-04-24 09:14:11'),
