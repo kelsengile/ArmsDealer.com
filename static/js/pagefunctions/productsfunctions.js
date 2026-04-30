@@ -7,10 +7,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // ─────────────────────────────────────────────
     // STATE
-    // state.filter: "promotions" | "categories" | "brands"
-    // state.category: null | "firearms" | "blades" | etc.
-    //   when filter === "categories" and category is set → show specific category panel
-    //   when filter === "categories" and category is null → show main categories panel
     // ─────────────────────────────────────────────
     let state = loadState() || {
         access: "authorized",
@@ -33,26 +29,376 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const accessBtns = document.querySelectorAll(".toggle-access");
     const filterBtns = document.querySelectorAll(".filter-btn");
-
     const hfSelects = document.querySelectorAll(".hf-select");
     const clearBtn = document.getElementById("hf-clear-btn");
 
     const promoToggleBtn = document.querySelector('[data-filter="promotions"]');
     const promoSubmenu = document.getElementById("promotions-toc");
-
     const categoriesToggleBtn = document.querySelector('[data-filter="categories"]');
     const categoriesSubmenu = document.getElementById("categories-toc");
-
     const brandsToggleBtn = document.querySelector('[data-filter="brands"]');
     const brandsSubmenuAuthorized = document.getElementById("brands-toc-authorized");
     const brandsSubmenuRestricted = document.getElementById("brands-toc-restricted");
 
-    // Returns the correct brands submenu for the current access state
+    // ─────────────────────────────────────────────
+    // CATEGORY → API SLUG MAP
+    // Maps the sidebar data-category values to the
+    // slugs used in the categories table of the DB.
+    // ─────────────────────────────────────────────
+    const CATEGORY_SLUG_MAP = {
+        firearms: "firearms",
+        blades: "blades",
+        blunts: "blunts",
+        projectiles: "projectile",
+        explosive: "explosives",
+        electronic: "electronic",
+        chemical: "chemical",
+        biological: "biological",
+        vehicle: "vehicle",
+        cyber: "cyber",
+        security: "security",
+        ammunition: "ammunition",
+        protective: "protective",
+        tactical: "tactical",
+        attachments: "attachments",
+        maintenance: "maintenance-equipment",
+        storage: "storage-equipment",
+        communication: "communication",
+        survival: "survival",
+        training: "training-equipment",
+    };
+
+    // ─────────────────────────────────────────────
+    // LANG / CURRENCY CHANGE → BUST CACHE
+    // Listen for cookie changes triggered by the
+    // navbar language / currency selectors so that
+    // product cards re-fetch with fresh translations
+    // and converted prices without needing a reload.
+    // ─────────────────────────────────────────────
+    function getCookie(name) {
+        const m = document.cookie.match(new RegExp('(?:^|;\\s*)' + name + '=([^;]*)'));
+        return m ? m[1] : null;
+    }
+
+    let _trackedLang = getCookie('lang') || 'english';
+    let _trackedCurrency = getCookie('currency') || 'PHP';
+
+    function clearProductCache() {
+        Object.keys(_productCache).forEach(k => delete _productCache[k]);
+    }
+
+    // Poll every 300 ms — negligible overhead, fires only on change
+    setInterval(() => {
+        const lang = getCookie('lang') || 'english';
+        const currency = getCookie('currency') || 'PHP';
+        if (lang !== _trackedLang || currency !== _trackedCurrency) {
+            _trackedLang = lang;
+            _trackedCurrency = currency;
+            clearProductCache();
+            // Re-render the current panel so cards update immediately
+            loadPanel();
+        }
+    }, 300);
+
+    // ─────────────────────────────────────────────
+    // PRODUCT CARD CACHE (per category + access)
+    // ─────────────────────────────────────────────
+    const _productCache = {};
+
+    async function fetchCategoryProducts(categoryKey, access) {
+        const cacheKey = `${categoryKey}__${access}`;
+        if (_productCache[cacheKey]) return _productCache[cacheKey];
+
+        const slug = CATEGORY_SLUG_MAP[categoryKey];
+        if (!slug) return [];
+
+        try {
+            const resp = await fetch(`/api/products/${slug}?access=${access}`);
+            if (!resp.ok) return [];
+            const data = await resp.json();
+            _productCache[cacheKey] = data.products || [];
+            return _productCache[cacheKey];
+        } catch (e) {
+            console.error("Product fetch error:", e);
+            return [];
+        }
+    }
+
+    // ─────────────────────────────────────────────
+    // RENDER FC-CARDS INTO SUB-SECTIONS
+    // ─────────────────────────────────────────────
+
+    /** Format a number with commas */
+    function fmt(n) {
+        return Number(n).toLocaleString("en-US");
+    }
+
+    /** Build a single fc-card element */
+    function buildCard(p) {
+        const card = document.createElement("div");
+        card.className = "fc-card";
+        card.dataset.slug = p.slug;
+        card.style.cursor = "pointer";
+
+        const hasDiscount = p.discount > 0;
+        const imgPath = p.image_file
+            ? `/static/assets/images/productsimages/${p.image_file}`
+            : "";
+
+        card.innerHTML = `
+            <div class="fc-card-bg" ${imgPath ? `style="background-image:url('${imgPath}')"` : ""}>
+                <div class="fc-overlay"></div>
+            </div>
+            <div class="fc-content">
+                <div class="fc-name large">${p.name}</div>
+                <div class="fc-pricing">
+                    ${hasDiscount ? `<div class="fc-discount">–${Math.round(p.discount)}%</div>` : ""}
+                    <div class="fc-prices">
+                        ${hasDiscount ? `<span class="fc-old">${p.currency_symbol}${fmt(p.old_price)}</span>` : ""}
+                        <span class="fc-new large">${p.currency_symbol}${fmt(p.new_price)}</span>
+                    </div>
+                </div>
+            </div>`;
+
+        card.addEventListener("click", () => {
+            window.location.href = `/product/${p.slug}`;
+        });
+
+        return card;
+    }
+
+    /**
+     * Explicit map from HTML section id → exact DB subcategory slug.
+     * This avoids the fragile suffix-guessing approach which fails whenever
+     * the section id abbreviation doesn't match the DB slug suffix
+     * (e.g. sub-smg → firearms-submachine-guns, sub-mg → firearms-machine-guns).
+     */
+    const SECTION_ID_TO_SUBCAT_SLUG = {
+        // ── Firearms ────────────────────────────────────────────────────────────
+        "sub-handguns": "firearms-handguns",
+        "sub-rifles": "firearms-rifles",
+        "sub-shotguns": "firearms-shotguns",
+        "sub-smg": "firearms-submachine-guns",
+        "sub-mg": "firearms-machine-guns",
+        "sub-sniper": "firearms-sniper-rifles",
+        "sub-carbines": "firearms-carbines",
+        "sub-pdw": "firearms-pdw",
+        // ── Blades ──────────────────────────────────────────────────────────────
+        "sub-knives": "blades-knives",
+        "sub-swords": "blades-swords",
+        "sub-daggers": "blades-daggers",
+        "sub-machetes": "blades-machetes",
+        "sub-bayonets": "blades-bayonets",
+        "sub-axes": "blades-axes",
+        "sub-hatchets": "blades-hatchets",
+        "sub-spears": "blades-combat-spears",
+        "sub-polearms": "blades-polearms",
+        "sub-throwing": "blades-throwing-knives",
+        // ── Blunts ──────────────────────────────────────────────────────────────
+        "sub-batons": "blunts-batons",
+        "sub-clubs": "blunts-clubs",
+        "sub-maces": "blunts-maces",
+        "sub-hammers": "blunts-hammers",
+        "sub-flails": "blunts-flails",
+        "sub-nunchaku": "blunts-nunchaku",
+        "sub-staves": "blunts-staves",
+        "sub-saps": "blunts-saps",
+        "sub-blackjacks": "blunts-blackjacks",
+        // ── Projectiles ─────────────────────────────────────────────────────────
+        "sub-bows": "projectile-bows",
+        "sub-crossbows": "projectile-crossbows",
+        "sub-slingshots": "projectile-slingshots",
+        "sub-spearlaunchers": "projectile-spear-launchers",
+        "sub-blowguns": "projectile-blowguns",
+        "sub-javelin": "projectile-javelin-systems",
+        "sub-pneumatic": "projectile-pneumatic-launchers",
+        // ── Explosives ──────────────────────────────────────────────────────────
+        "sub-grenades": "explosives-grenades",
+        "sub-bombs": "explosives-bombs",
+        "sub-mines": "explosives-mines",
+        "sub-demolition": "explosives-demolition-charges",
+        "sub-rockets": "explosives-rocket-launchers",
+        "sub-mortars": "explosives-mortars",
+        "sub-artillery": "explosives-artillery-shells",
+        "sub-breaching": "explosives-breaching-charges",
+        "sub-flashbangs": "explosives-flash-bangs",
+        // ── Electronic ──────────────────────────────────────────────────────────
+        "sub-tasers": "electronic-tasers",
+        "sub-stunguns": "electronic-stun-guns",
+        "sub-emp": "electronic-emp-devices",
+        "sub-jamming": "electronic-jamming-devices",
+        "sub-dew": "electronic-directed-energy-weapons",
+        "sub-sonic": "electronic-sonic-devices",
+        "sub-laser": "electronic-laser-dazzlers",
+        // ── Chemical ────────────────────────────────────────────────────────────
+        "sub-teargas": "chemical-tear-gas",
+        "sub-smoke": "chemical-smoke-agents",
+        "sub-incendiary": "chemical-incendiary",
+        "sub-peppersprays": "chemical-pepper-sprays",
+        "sub-aerosol": "chemical-aerosol-dispersants",
+        "sub-rca": "chemical-riot-control",
+        // ── Biological ──────────────────────────────────────────────────────────
+        "sub-delivery": "biological-delivery-systems",
+        "sub-containment": "biological-containment-units",
+        "sub-biodetection": "biological-detection-equipment",
+        "sub-neutralize": "biological-neutralization-agents",
+        // ── Vehicle ─────────────────────────────────────────────────────────────
+        "sub-armed": "vehicle-armed",
+        "sub-drones": "vehicle-drones",
+        "sub-naval": "vehicle-naval",
+        "sub-aerial": "vehicle-aerial",
+        "sub-antivehicle": "vehicle-anti-vehicle",
+        // ── Cyber ───────────────────────────────────────────────────────────────
+        "sub-malware": "cyber-malware-tools",
+        "sub-exploits": "cyber-exploit-kits",
+        "sub-hackdevices": "cyber-hacking-devices",
+        "sub-intrusion": "cyber-intrusion-systems",
+        "sub-exfil": "cyber-data-exfiltration",
+        "sub-ransomware": "cyber-ransomware-platforms",
+        // ── Security ────────────────────────────────────────────────────────────
+        "sub-accesscontrol": "security-access-control",
+        "sub-crowdcontrol": "security-crowd-control",
+        "sub-nonlethal": "security-non-lethal",
+        "sub-deterrent": "security-deterrent",
+        "sub-restraint": "security-restraint",
+        // ── Ammunition ──────────────────────────────────────────────────────────
+        "sub-bullets": "ammo-bullets",
+        "sub-shells": "ammo-shells",
+        "sub-cartridges": "ammo-cartridges",
+        "sub-energycells": "ammo-energy-cells",
+        "sub-primers": "ammo-primers",
+        "sub-propellants": "ammo-propellants",
+        "sub-specialty": "ammo-specialty-rounds",
+        "sub-caseless": "ammo-caseless",
+        // ── Protective ──────────────────────────────────────────────────────────
+        "sub-helmets": "protective-helmets",
+        "sub-bodyarmor": "protective-body-armor",
+        "sub-shields": "protective-shields",
+        "sub-suits": "protective-suits",
+        "sub-glasses": "protective-ballistic-glasses",
+        "sub-hearing": "protective-hearing",
+        "sub-gasmasks": "protective-gas-masks",
+        "sub-blast": "protective-blast-resistant",
+        // ── Tactical ────────────────────────────────────────────────────────────
+        "sub-loadbearing": "tactical-load-bearing",
+        "sub-holsters": "tactical-holsters",
+        "sub-utilitybelts": "tactical-utility-belts",
+        "sub-fieldkits": "tactical-field-kits",
+        "sub-chestrigs": "tactical-chest-rigs",
+        "sub-platecarriers": "tactical-plate-carriers",
+        "sub-dropleg": "tactical-drop-leg",
+        "sub-pouches": "tactical-modular-pouches",
+        // ── Attachments ─────────────────────────────────────────────────────────
+        "sub-suppressors": "attachments-suppressors",
+        "sub-grips": "attachments-grips",
+        "sub-lasersights": "attachments-laser-sights",
+        "sub-foregrips": "attachments-foregrips",
+        "sub-bipods": "attachments-bipods",
+        "sub-muzzlebrakes": "attachments-muzzle-brakes",
+        "sub-flashlights": "attachments-flashlights",
+        "sub-bayonetmounts": "attachments-bayonet-mounts",
+        // ── Maintenance ─────────────────────────────────────────────────────────
+        "sub-cleaningkits": "maint-cleaning-kits",
+        "sub-repairtools": "maint-repair-tools",
+        "sub-lubricants": "maint-lubricants",
+        "sub-boresnakes": "maint-bore-snakes",
+        "sub-armorertools": "maint-armorer-tools",
+        "sub-partskits": "maint-parts-kits",
+        "sub-solventtraps": "maint-solvent-traps",
+        // ── Storage ─────────────────────────────────────────────────────────────
+        "sub-safes": "storage-safes",
+        "sub-cases": "storage-cases",
+        "sub-lockers": "storage-lockers",
+        "sub-ammocans": "storage-ammo-cans",
+        "sub-weaponracks": "storage-weapon-racks",
+        "sub-concealment": "storage-concealment-furniture",
+        "sub-transport": "storage-transport-containers",
+        // ── Communication ───────────────────────────────────────────────────────
+        "sub-radios": "comm-radios",
+        "sub-signal": "comm-signal-devices",
+        "sub-encryption": "comm-encryption-units",
+        "sub-earpieces": "comm-earpieces",
+        "sub-headsets": "comm-tactical-headsets",
+        "sub-satellite": "comm-satellite",
+        "sub-covert": "comm-covert-devices",
+        // ── Survival ────────────────────────────────────────────────────────────
+        "sub-firstaid": "survival-first-aid",
+        "sub-rations": "survival-rations",
+        "sub-water": "survival-water-purification",
+        "sub-navigation": "survival-navigation",
+        "sub-shelters": "survival-shelters",
+        "sub-firestarters": "survival-fire-starters",
+        "sub-multitools": "survival-multi-tools",
+        "sub-tourniquets": "survival-tourniquets",
+        // ── Training ────────────────────────────────────────────────────────────
+        "sub-simulators": "training-simulators",
+        "sub-dummy": "training-dummy-equipment",
+        "sub-targets": "training-targets",
+        "sub-manuals": "training-manuals",
+        "sub-blueguns": "training-blue-guns",
+        "sub-fof": "training-force-on-force",
+        "sub-recoil": "training-recoil-trainers",
+    };
+
+    /**
+     * After the category panel HTML is injected, fetch its products
+     * and fill each `.specific-sub-body` with cards grouped by subcategory slug.
+     * Uses the explicit SECTION_ID_TO_SUBCAT_SLUG map for exact matching.
+     */
+    async function populateCategoryProducts(categoryKey) {
+        const products = await fetchCategoryProducts(categoryKey, state.access);
+
+        // Index products by their subcategory_slug for O(1) lookup
+        const bySubcat = {};
+        for (const p of products) {
+            const key = p.subcategory_slug || "__none__";
+            if (!bySubcat[key]) bySubcat[key] = [];
+            bySubcat[key].push(p);
+        }
+
+        // Find all sub-sections currently rendered in selectionContent
+        const subSections = selectionContent.querySelectorAll(".specific-sub");
+
+        subSections.forEach(section => {
+            const sectionId = section.id; // e.g. "sub-smg"
+            const body = section.querySelector(".specific-sub-body");
+            if (!body) return;
+
+            // Look up the exact DB slug from the explicit map
+            const dbSlug = SECTION_ID_TO_SUBCAT_SLUG[sectionId];
+            if (!dbSlug) return; // unmapped section — leave as-is
+
+            const matched = bySubcat[dbSlug] || [];
+
+            if (matched.length === 0) {
+                // Leave the empty-section message in place
+                return;
+            }
+
+            // Replace empty-section placeholder with a card grid
+            body.classList.remove("empty-section");
+            body.innerHTML = "";
+
+            const grid = document.createElement("div");
+            grid.className = "fc-grid";
+
+            matched.forEach(p => grid.appendChild(buildCard(p)));
+            body.appendChild(grid);
+        });
+    }
+
+    // ─────────────────────────────────────────────
+    // BRAND SUBMENU HELPERS
+    // ─────────────────────────────────────────────
     function activeBrandsSubmenu() {
-        return state.access === "restricted" ? brandsSubmenuRestricted : brandsSubmenuAuthorized;
+        return state.access === "restricted"
+            ? brandsSubmenuRestricted
+            : brandsSubmenuAuthorized;
     }
     function inactiveBrandsSubmenu() {
-        return state.access === "restricted" ? brandsSubmenuAuthorized : brandsSubmenuRestricted;
+        return state.access === "restricted"
+            ? brandsSubmenuAuthorized
+            : brandsSubmenuRestricted;
     }
 
     // ─────────────────────────────────────────────
@@ -62,10 +408,8 @@ document.addEventListener("DOMContentLoaded", () => {
         let templateId;
 
         if (state.filter === "categories" && state.category) {
-            // Specific category panel — access-agnostic
             templateId = `panel-category-${state.category}`;
         } else if (state.filter === "brands" && state.brand) {
-            // Specific brand panel — access-agnostic
             templateId = `panel-brand-${state.brand}`;
         } else {
             templateId = `panel-${state.access}-${state.filter}`;
@@ -83,44 +427,37 @@ document.addEventListener("DOMContentLoaded", () => {
         selectionContent.innerHTML = "";
         selectionContent.appendChild(template.content.cloneNode(true));
 
-        // Toggle restricted-mode class for red-glow hover on category rects
         selectionContent.closest(".products-content").classList.toggle(
             "restricted-mode", state.access === "restricted"
         );
 
-        // Wire up clickable items inside the newly injected panel
         bindCategoryItems();
-
-        // Promo: give each section a minimum height for TOC scrolling
         addScrollSpacing();
-
         updateHeaderTitle();
         syncActiveStates();
         saveState();
+
+        // After the panel is rendered, populate products if it's a specific category
+        if (state.filter === "categories" && state.category && CATEGORY_SLUG_MAP[state.category]) {
+            populateCategoryProducts(state.category);
+        }
     }
 
     // ─────────────────────────────────────────────
-    // BIND CATEGORY ITEM CLICKS (main categories panel)
+    // BIND CATEGORY/BRAND ITEM CLICKS
     // ─────────────────────────────────────────────
     function bindCategoryItems() {
-        // Both .cat-all-item and .cat-popular-item open a specific category
-        const catItems = selectionContent.querySelectorAll(
-            "[data-category]"
-        );
-        catItems.forEach(item => {
+        selectionContent.querySelectorAll("[data-category]").forEach(item => {
             item.addEventListener("click", () => {
                 const cat = item.dataset.category;
                 if (!cat) return;
                 state.category = cat;
-                // Highlight the matching sidebar link
                 highlightCategoryLink(cat);
                 loadPanel();
             });
         });
 
-        // Brand icon/popular items open a specific brand panel
-        const brandItems = selectionContent.querySelectorAll("[data-brand]");
-        brandItems.forEach(item => {
+        selectionContent.querySelectorAll("[data-brand]").forEach(item => {
             item.addEventListener("click", () => {
                 const brand = item.dataset.brand;
                 if (!brand) return;
@@ -132,7 +469,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────
-    // HIGHLIGHT SIDEBAR CATEGORY LINK
+    // SIDEBAR HIGHLIGHT HELPERS
     // ─────────────────────────────────────────────
     function highlightCategoryLink(cat) {
         document.querySelectorAll(".toc-link--category").forEach(l => {
@@ -140,12 +477,8 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-    // ─────────────────────────────────────────────
-    // HIGHLIGHT SIDEBAR BRAND LINK
-    // ─────────────────────────────────────────────
     function highlightBrandLink(brand) {
         document.querySelectorAll(".toc-link--brand").forEach(l => {
-            // Only highlight non-cross-access links that match the brand
             if (!l.dataset.crossAccess) {
                 l.classList.toggle("toc-active", l.dataset.brand === brand);
             }
@@ -157,14 +490,12 @@ document.addEventListener("DOMContentLoaded", () => {
     // ─────────────────────────────────────────────
     function updateHeaderTitle() {
         const cap = str => str.charAt(0).toUpperCase() + str.slice(1);
-
         const accessText = cap(state.access);
-
         let filterText;
+
         if (state.filter === "categories" && state.category) {
             filterText = `Categories · ${cap(state.category)}`;
         } else if (state.filter === "brands" && state.brand) {
-            // Prettify brand slug to display name
             const brandName = state.brand.replace(/-/g, " ").replace(/\b\w/g, c => c.toUpperCase());
             filterText = `Brands · ${brandName}`;
         } else {
@@ -176,18 +507,16 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────
-    // ACTIVE STATES
+    // SYNC ACTIVE STATES
     // ─────────────────────────────────────────────
     function syncActiveStates() {
         accessBtns.forEach(btn => {
             btn.classList.toggle("active", btn.dataset.access === state.access);
         });
-
         filterBtns.forEach(btn => {
             btn.classList.toggle("active", btn.dataset.filter === state.filter);
         });
 
-        // If a specific category is active, also reflect on sidebar links
         if (state.filter === "categories" && state.category) {
             highlightCategoryLink(state.category);
         } else {
@@ -196,7 +525,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-        // If a specific brand is active, reflect on sidebar links
         if (state.filter === "brands" && state.brand) {
             highlightBrandLink(state.brand);
         } else {
@@ -205,7 +533,6 @@ document.addEventListener("DOMContentLoaded", () => {
             );
         }
 
-        // Show/hide the correct brand submenu based on current access
         if (state.filter === "brands") {
             openSubmenu(brandsToggleBtn, activeBrandsSubmenu());
             closeSubmenu(brandsToggleBtn, inactiveBrandsSubmenu());
@@ -216,8 +543,9 @@ document.addEventListener("DOMContentLoaded", () => {
     // SCROLL SPACING (promo panels)
     // ─────────────────────────────────────────────
     function addScrollSpacing() {
-        const sections = selectionContent.querySelectorAll(".promo-section");
-        sections.forEach(sec => sec.style.minHeight = "260px");
+        selectionContent.querySelectorAll(".promo-section").forEach(
+            sec => (sec.style.minHeight = "260px")
+        );
     }
 
     // ─────────────────────────────────────────────
@@ -234,11 +562,9 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function toggleSubmenu(btn, menu) {
-        if (menu.classList.contains("open")) {
-            closeSubmenu(btn, menu);
-        } else {
-            openSubmenu(btn, menu);
-        }
+        menu.classList.contains("open")
+            ? closeSubmenu(btn, menu)
+            : openSubmenu(btn, menu);
     }
 
     // ─────────────────────────────────────────────
@@ -247,12 +573,13 @@ document.addEventListener("DOMContentLoaded", () => {
     accessBtns.forEach(btn => {
         btn.addEventListener("click", () => {
             state.access = btn.dataset.access;
-            // If currently browsing brands, swap to the correct submenu
             if (state.filter === "brands") {
                 state.brand = null;
                 openSubmenu(brandsToggleBtn, activeBrandsSubmenu());
                 closeSubmenu(brandsToggleBtn, inactiveBrandsSubmenu());
             }
+            // Clear product cache so fresh data is fetched for new access level
+            Object.keys(_productCache).forEach(k => delete _productCache[k]);
             loadPanel();
         });
     });
@@ -265,7 +592,6 @@ document.addEventListener("DOMContentLoaded", () => {
             const filter = btn.dataset.filter;
 
             if (filter === "promotions") {
-                // Toggle promo submenu; close categories submenu
                 toggleSubmenu(promoToggleBtn, promoSubmenu);
                 closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
                 closeSubmenu(brandsToggleBtn, brandsSubmenuAuthorized);
@@ -282,22 +608,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 closeSubmenu(brandsToggleBtn, brandsSubmenuAuthorized);
                 closeSubmenu(brandsToggleBtn, brandsSubmenuRestricted);
 
-                // If submenu is open AND we're viewing a specific category,
-                // go back to the main categories index instead of closing the submenu
                 if (isOpen && state.category) {
                     state.filter = "categories";
                     state.category = null;
                     loadPanel();
                     return;
                 }
-
-                // If submenu is open and no specific category is selected, just close it
                 if (isOpen) {
                     closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
                     return;
                 }
-
-                // Submenu was closed — open it and load the categories index
                 openSubmenu(categoriesToggleBtn, categoriesSubmenu);
                 state.filter = "categories";
                 state.category = null;
@@ -313,22 +633,16 @@ document.addEventListener("DOMContentLoaded", () => {
                 closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
                 closeSubmenu(brandsToggleBtn, inactive);
 
-                // If submenu is open AND we're viewing a specific brand,
-                // go back to the main brands index instead of closing the submenu
                 if (isOpen && state.brand) {
                     state.filter = "brands";
                     state.brand = null;
                     loadPanel();
                     return;
                 }
-
-                // If submenu is open and no specific brand is selected, just close it
                 if (isOpen) {
                     closeSubmenu(brandsToggleBtn, active);
                     return;
                 }
-
-                // Submenu was closed — open it and load the brands index
                 openSubmenu(brandsToggleBtn, active);
                 state.filter = "brands";
                 state.brand = null;
@@ -336,7 +650,6 @@ document.addEventListener("DOMContentLoaded", () => {
                 return;
             }
 
-            // Any other flat filter
             closeSubmenu(promoToggleBtn, promoSubmenu);
             closeSubmenu(categoriesToggleBtn, categoriesSubmenu);
             closeSubmenu(brandsToggleBtn, brandsSubmenuAuthorized);
@@ -353,12 +666,10 @@ document.addEventListener("DOMContentLoaded", () => {
     // ─────────────────────────────────────────────
     document.querySelectorAll("#promotions-toc .toc-link").forEach(link => {
         link.addEventListener("click", () => {
-            // Make sure we're on the promotions panel first
             if (state.filter !== "promotions") {
                 state.filter = "promotions";
                 state.category = null;
                 loadPanel();
-                // Scroll after a brief tick to allow the panel to render
                 setTimeout(() => scrollToTarget(link.dataset.target, link), 80);
             } else {
                 scrollToTarget(link.dataset.target, link);
@@ -368,9 +679,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     function scrollToTarget(targetId, activeLink) {
         const target = document.getElementById(targetId);
-        if (target) {
-            target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
+        if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
         document.querySelectorAll("#promotions-toc .toc-link").forEach(l =>
             l.classList.remove("toc-active")
         );
@@ -378,44 +687,32 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     // ─────────────────────────────────────────────
-    // EVENTS — CATEGORIES SIDEBAR LINKS (specific category)
+    // EVENTS — CATEGORIES SIDEBAR LINKS
     // ─────────────────────────────────────────────
     document.querySelectorAll(".toc-link--category").forEach(link => {
         link.addEventListener("click", () => {
-            const cat = link.dataset.category;
             state.filter = "categories";
-            state.category = cat;
+            state.category = link.dataset.category;
             loadPanel();
         });
     });
 
     // ─────────────────────────────────────────────
-    // EVENTS — BRANDS SIDEBAR LINKS (specific brand)
+    // EVENTS — BRANDS SIDEBAR LINKS
     // ─────────────────────────────────────────────
     document.querySelectorAll(".toc-link--brand:not(.toc-link--cross-access)").forEach(link => {
         link.addEventListener("click", () => {
-            const brand = link.dataset.brand;
             state.filter = "brands";
-            state.brand = brand;
+            state.brand = link.dataset.brand;
             loadPanel();
         });
     });
 
-    // ─────────────────────────────────────────────
-    // EVENTS — CROSS-ACCESS BRAND LINKS
-    // Clicking these switches access (authorized ↔ restricted)
-    // and navigates to the brand panel on the other side
-    // ─────────────────────────────────────────────
     document.querySelectorAll(".toc-link--cross-access").forEach(link => {
         link.addEventListener("click", () => {
-            const targetAccess = link.dataset.crossAccess;
-            const targetBrand = link.dataset.brand;
-            // Switch access mode
-            state.access = targetAccess;
-            // Stay in brands filter, select the target brand
+            state.access = link.dataset.crossAccess;
             state.filter = "brands";
-            state.brand = targetBrand;
-            // Swap submenu visibility
+            state.brand = link.dataset.brand;
             openSubmenu(brandsToggleBtn, activeBrandsSubmenu());
             closeSubmenu(brandsToggleBtn, inactiveBrandsSubmenu());
             loadPanel();
@@ -442,12 +739,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // RESTORE SUBMENU OPEN STATE ON LOAD
     // ─────────────────────────────────────────────
     function restoreSubmenus() {
-        if (state.filter === "promotions") {
-            openSubmenu(promoToggleBtn, promoSubmenu);
-        }
-        if (state.filter === "categories") {
-            openSubmenu(categoriesToggleBtn, categoriesSubmenu);
-        }
+        if (state.filter === "promotions") openSubmenu(promoToggleBtn, promoSubmenu);
+        if (state.filter === "categories") openSubmenu(categoriesToggleBtn, categoriesSubmenu);
         if (state.filter === "brands") {
             openSubmenu(brandsToggleBtn, activeBrandsSubmenu());
             closeSubmenu(brandsToggleBtn, inactiveBrandsSubmenu());
@@ -489,34 +782,25 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (hamburgerBtn) {
         hamburgerBtn.addEventListener("click", () => {
-            if (sidebarEl.classList.contains("drawer-open")) {
-                closeSidebar();
-            } else {
-                openSidebar();
-            }
+            sidebarEl.classList.contains("drawer-open")
+                ? closeSidebar()
+                : openSidebar();
         });
     }
 
-    if (overlayEl) {
-        overlayEl.addEventListener("click", closeSidebar);
-    }
+    if (overlayEl) overlayEl.addEventListener("click", closeSidebar);
 
-    // Close drawer when a nav-panel link is clicked (auto-close on selection)
     document.querySelectorAll(".toc-link, .filter-btn:not(.filter-btn--has-sub)").forEach(el => {
         el.addEventListener("click", () => {
             if (isMobileBreakpoint()) closeSidebar();
         });
     });
 
-    // Reset body scroll if window is resized above 1100px
     window.addEventListener("resize", () => {
-        if (!isMobileBreakpoint()) {
-            closeSidebar();
-        }
+        if (!isMobileBreakpoint()) closeSidebar();
     });
 
-    // Escape key closes drawer
-    document.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", e => {
         if (e.key === "Escape" && sidebarEl.classList.contains("drawer-open")) {
             closeSidebar();
         }

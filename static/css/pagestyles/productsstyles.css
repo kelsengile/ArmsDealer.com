@@ -1636,3 +1636,195 @@ main.products-page::before {
   padding: 3px 10px;
   clip-path: polygon(0 0, calc(100% - 5px) 0, 100% 100%, 0 100%);
 }
+
+/* ============================================================================
+   FC-CARD GRID — product cards inside specific-sub-body sections
+   ============================================================================ */
+
+.fc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: clamp(8px, 1.5vw, 16px);
+  position: relative;
+  z-index: 1;
+}
+
+/* ── fc-card ───────────────────────────────────────────────────────── */
+.fc-card {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  min-height: 230px;
+  max-height: 350px;
+  overflow: hidden;
+  border: 1px solid rgba(168, 196, 154, 0.18);
+  background: #0d100d;
+  transition: border-color 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+
+.fc-card:hover {
+  border-color: rgba(168, 196, 154, 0.55);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Restricted mode: red glow on card hover */
+.restricted-mode .fc-card:hover {
+  border-color: rgba(255, 77, 77, 0.6);
+  box-shadow:
+    0 0 18px rgba(255, 40, 40, 0.4),
+    0 8px 24px rgba(0, 0, 0, 0.5);
+}
+
+.fc-card-bg {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.35s ease;
+}
+
+.fc-card:hover .fc-card-bg {
+  transform: scale(1.04);
+}
+
+.fc-img-placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  opacity: 0.18;
+}
+
+.fc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top,
+      rgba(10, 24, 10, 0.92) 0%,
+      rgba(10, 49, 10, 0.35) 55%,
+      rgba(10, 14, 10, 0.15) 100%);
+}
+
+.fc-content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 10px 12px;
+  z-index: 2;
+}
+
+/* ── Name ──────────────────────────────────────────────────────────── */
+.fc-name {
+  font-family: "Courier New", monospace;
+  font-size: clamp(5px, 1.5vw, 10px);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #cfcfcf;
+  background: rgba(10, 14, 10, 0.6);
+  display: inline-block;
+  padding: 3px 8px;
+  border-left: 2px solid #a8c49a;
+  align-self: flex-start;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: calc(100% - 4px);
+}
+
+.fc-name.large {
+  font-size: clamp(5px, 1.8vw, 10px);
+  padding: 4px 10px;
+}
+
+/* ── Pricing ───────────────────────────────────────────────────────── */
+.fc-pricing {
+  background: rgba(10, 14, 10, 0.85);
+  border: 1px solid rgba(168, 196, 154, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.fc-discount {
+  font-family: "Courier New", monospace;
+  font-size: clamp(8px, 1.4vw, 10px);
+  font-weight: bold;
+  color: #e8644a;
+  background: rgba(232, 100, 74, 0.15);
+  border: 1px solid rgba(232, 100, 74, 0.4);
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+
+.fc-prices {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  min-width: 0;
+}
+
+.fc-old {
+  font-family: "Courier New", monospace;
+  font-size: clamp(5px, 1.4vw, 10px);
+  color: rgba(168, 196, 154, 0.45);
+  text-decoration: line-through;
+  min-width: 0;
+}
+
+.fc-new {
+  font-family: "Courier New", monospace;
+  font-size: clamp(5px, 1.8vw, 10px);
+  font-weight: bold;
+  color: #a8c49a;
+  min-width: 0;
+}
+
+.fc-new.large {
+  font-size: clamp(7px, 2.2vw, 12px);
+}
+
+/* ── Responsive ────────────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .fc-grid {
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 10px;
+  }
+}
+
+@media (max-width: 600px) {
+  .fc-grid {
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+    gap: 8px;
+  }
+  .fc-card {
+    min-height: 150px;
+  }
+}
+
+/* ── Sub-body loading state ─────────────────────────────────────────── */
+.specific-sub-body.loading::after {
+  content: "LOADING...";
+  display: block;
+  font-family: "Share Tech Mono", monospace;
+  font-size: 9px;
+  letter-spacing: 0.3em;
+  color: var(--mil-muted, #4a5e4a);
+  padding: 16px 0 8px;
+  animation: blink-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes blink-pulse {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1;   }
+}

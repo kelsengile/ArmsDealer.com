@@ -1,0 +1,480 @@
+{% extends 'partials/base.html' %}
+{% block title %}<title>{{ product.name }} — ArmsDealer</title>{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/productsstyles.css') }}">
+<style>
+/* ── Product Detail Page ────────────────────────────────────────── */
+.product-detail-page {
+    min-height: calc(100vh - var(--header-h, 98px));
+    background: var(--mil-dark, #131713);
+    padding: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ── Breadcrumb ────────────────────────────────────────────────── */
+.pd-breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--mil-muted, #6b7c5e);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+}
+.pd-breadcrumb a {
+    color: var(--mil-muted, #6b7c5e);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.pd-breadcrumb a:hover { color: var(--mil-bright, #a8c47a); }
+.pd-breadcrumb span { color: var(--mil-border, #2e3a2e); }
+
+/* ── Main Layout ───────────────────────────────────────────────── */
+.pd-main {
+    display: grid;
+    grid-template-columns: 1fr 480px;
+    gap: 32px;
+    align-items: start;
+}
+@media (max-width: 1000px) {
+    .pd-main { grid-template-columns: 1fr; }
+}
+
+/* ── Image Panel ───────────────────────────────────────────────── */
+.pd-image-wrap {
+    position: relative;
+    background: var(--mil-dark2, #0e1210);
+    border: 1px solid var(--mil-border, #2e3a2e);
+    border-left: 3px solid var(--mil-olive, #6b7c4e);
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.pd-image-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 24px;
+}
+.pd-image-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--mil-border, #2e3a2e);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+}
+.pd-badge-access {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    padding: 4px 10px;
+    border: 1px solid;
+    text-transform: uppercase;
+}
+.pd-badge-access.authorized {
+    color: var(--mil-bright, #a8c47a);
+    border-color: var(--mil-bright, #a8c47a);
+    background: rgba(168,196,122,0.08);
+}
+.pd-badge-access.restricted {
+    color: #e05c5c;
+    border-color: #e05c5c;
+    background: rgba(224,92,92,0.08);
+}
+
+/* ── Info Panel ────────────────────────────────────────────────── */
+.pd-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.pd-brand-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.pd-brand-logo {
+    width: 32px;
+    height: 32px;
+    object-fit: contain;
+    filter: grayscale(0.3);
+}
+.pd-brand-name {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--mil-muted, #6b7c5e);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+}
+.pd-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.2rem);
+    font-weight: 700;
+    color: var(--mil-light, #dde8cc);
+    line-height: 1.15;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    border-bottom: 1px solid var(--mil-border, #2e3a2e);
+    padding-bottom: 16px;
+}
+.pd-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+.pd-rating {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--mil-muted, #6b7c5e);
+}
+.pd-stars {
+    color: var(--mil-bright, #a8c47a);
+    letter-spacing: -2px;
+}
+.pd-sales {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--mil-muted, #6b7c5e);
+    letter-spacing: 0.06em;
+}
+.pd-stock {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    padding: 3px 8px;
+    border: 1px solid;
+}
+.pd-stock.in-stock { color: var(--mil-bright, #a8c47a); border-color: var(--mil-bright, #a8c47a); }
+.pd-stock.low-stock { color: #e0a040; border-color: #e0a040; }
+.pd-stock.out-of-stock { color: #e05c5c; border-color: #e05c5c; }
+
+.pd-description {
+    font-size: 0.9rem;
+    color: var(--mil-muted2, #8fa07a);
+    line-height: 1.7;
+    border-left: 2px solid var(--mil-border, #2e3a2e);
+    padding-left: 14px;
+}
+
+/* ── Pricing ───────────────────────────────────────────────────── */
+.pd-pricing {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    padding: 16px;
+    background: var(--mil-dark2, #0e1210);
+    border: 1px solid var(--mil-border, #2e3a2e);
+    border-left: 3px solid var(--mil-olive, #6b7c4e);
+}
+.pd-price-old {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 1rem;
+    color: var(--mil-muted, #6b7c5e);
+    text-decoration: line-through;
+}
+.pd-price-new {
+    font-family: 'Oswald', sans-serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--mil-bright, #a8c47a);
+    letter-spacing: 0.04em;
+}
+.pd-discount-badge {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: #131713;
+    background: var(--mil-bright, #a8c47a);
+    padding: 3px 8px;
+    letter-spacing: 0.06em;
+}
+
+/* ── Actions ───────────────────────────────────────────────────── */
+.pd-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+.pd-btn {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 12px 28px;
+    cursor: pointer;
+    border: 1px solid;
+    transition: all 0.2s;
+    flex: 1;
+    min-width: 140px;
+    text-align: center;
+}
+.pd-btn-primary {
+    background: var(--mil-bright, #a8c47a);
+    color: #131713;
+    border-color: var(--mil-bright, #a8c47a);
+}
+.pd-btn-primary:hover {
+    background: transparent;
+    color: var(--mil-bright, #a8c47a);
+}
+.pd-btn-secondary {
+    background: transparent;
+    color: var(--mil-muted, #6b7c5e);
+    border-color: var(--mil-border, #2e3a2e);
+}
+.pd-btn-secondary:hover {
+    border-color: var(--mil-muted, #6b7c5e);
+    color: var(--mil-light, #dde8cc);
+}
+
+/* ── Tags ──────────────────────────────────────────────────────── */
+.pd-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+.pd-tag {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.65rem;
+    color: var(--mil-muted, #6b7c5e);
+    border: 1px solid var(--mil-border, #2e3a2e);
+    padding: 3px 8px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+/* ── Related Products ──────────────────────────────────────────── */
+.pd-related {
+    border-top: 1px solid var(--mil-border, #2e3a2e);
+    padding-top: 24px;
+}
+.pd-related-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--mil-muted, #6b7c5e);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.pd-related-title::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--mil-border, #2e3a2e);
+}
+.pd-related-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 16px;
+}
+.pd-related-card {
+    background: var(--mil-dark2, #0e1210);
+    border: 1px solid var(--mil-border, #2e3a2e);
+    cursor: pointer;
+    transition: border-color 0.2s, transform 0.2s;
+    overflow: hidden;
+    text-decoration: none;
+    display: block;
+}
+.pd-related-card:hover {
+    border-color: var(--mil-olive, #6b7c4e);
+    transform: translateY(-2px);
+}
+.pd-related-img {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: contain;
+    background: #0a0d0a;
+    padding: 12px;
+}
+.pd-related-info {
+    padding: 10px 12px 12px;
+}
+.pd-related-name {
+    font-family: 'Oswald', sans-serif;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--mil-light, #dde8cc);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+    line-height: 1.2;
+}
+.pd-related-price {
+    font-family: 'Share Tech Mono', monospace;
+    font-size: 0.75rem;
+    color: var(--mil-bright, #a8c47a);
+}
+</style>
+{% endblock %}
+
+{% block main %}
+<main class="product-detail-page">
+
+    <!-- ── Breadcrumb ─────────────────────────────── -->
+    <nav class="pd-breadcrumb" aria-label="Breadcrumb">
+        <a href="{{ url_for('homepage') }}">Home</a>
+        <span>/</span>
+        <a href="{{ url_for('products') }}">Products</a>
+        {% if product.category_slug %}
+        <span>/</span>
+        <a href="{{ url_for('products') }}">{{ product.category_name or product.category_slug | title }}</a>
+        {% endif %}
+        {% if product.subcategory_slug %}
+        <span>/</span>
+        <span>{{ product.subcategory_name or product.subcategory_slug | title }}</span>
+        {% endif %}
+        <span>/</span>
+        <span style="color: var(--mil-muted2, #8fa07a);">{{ product.name }}</span>
+    </nav>
+
+    <!-- ── Main Content ───────────────────────────── -->
+    <div class="pd-main">
+
+        <!-- Image -->
+        <div class="pd-image-wrap">
+            {% if product.image_file %}
+                <img src="{{ url_for('static', filename='assets/images/productsimages/' + product.image_file) }}"
+                     alt="{{ product.name }}">
+            {% else %}
+                <div class="pd-image-placeholder">[ NO IMAGE ]</div>
+            {% endif %}
+            <div class="pd-badge-access {{ 'authorized' if product.is_authorized else 'restricted' }}">
+                {{ 'AUTHORIZED' if product.is_authorized else 'RESTRICTED' }}
+            </div>
+        </div>
+
+        <!-- Info -->
+        <div class="pd-info">
+
+            {% if product.brand_name %}
+            <div class="pd-brand-row">
+                {% if product.logo_file %}
+                <img class="pd-brand-logo"
+                     src="{{ url_for('static', filename='assets/icons/brandslogo/' + product.logo_file) }}"
+                     alt="{{ product.brand_name }}">
+                {% endif %}
+                <span class="pd-brand-name">{{ product.brand_name }}</span>
+            </div>
+            {% endif %}
+
+            <h1 class="pd-name">{{ product.name }}</h1>
+
+            <!-- Meta -->
+            <div class="pd-meta-row">
+                {% if product.rating %}
+                <div class="pd-rating">
+                    <span class="pd-stars">
+                        {% set full = product.rating | int %}
+                        {% for i in range(full) %}★{% endfor %}{% for i in range(5 - full) %}☆{% endfor %}
+                    </span>
+                    <span>{{ "%.1f"|format(product.rating) }}</span>
+                </div>
+                {% endif %}
+                {% if product.sales_count %}
+                <span class="pd-sales">{{ "{:,}".format(product.sales_count) }} sold</span>
+                {% endif %}
+                {% if product.stock is not none %}
+                    {% if product.stock > 10 %}
+                    <span class="pd-stock in-stock">IN STOCK</span>
+                    {% elif product.stock > 0 %}
+                    <span class="pd-stock low-stock">LOW STOCK · {{ product.stock }} left</span>
+                    {% else %}
+                    <span class="pd-stock out-of-stock">OUT OF STOCK</span>
+                    {% endif %}
+                {% endif %}
+            </div>
+
+            <!-- Description -->
+            {% if product.description %}
+            <p class="pd-description">{{ product.description }}</p>
+            {% endif %}
+
+            <!-- Pricing -->
+            <div class="pd-pricing">
+                {% set discounted = product.price - (product.price * (product.discount / 100)) %}
+                {% set new_price = (discounted * currency.rate_to_php) | round | int %}
+                {% set old_price = (product.price * currency.rate_to_php) | round | int %}
+                {% if product.discount > 0 %}
+                <span class="pd-price-old">{{ currency.symbol }}{{ "{:,}".format(old_price) }}</span>
+                <span class="pd-price-new">{{ currency.symbol }}{{ "{:,}".format(new_price) }}</span>
+                <span class="pd-discount-badge">–{{ product.discount | int }}%</span>
+                {% else %}
+                <span class="pd-price-new">{{ currency.symbol }}{{ "{:,}".format(new_price) }}</span>
+                {% endif %}
+            </div>
+
+            <!-- Actions -->
+            <div class="pd-actions">
+                <button class="pd-btn pd-btn-primary" onclick="alert('Cart functionality coming soon.')">
+                    Add to Cart
+                </button>
+                <button class="pd-btn pd-btn-secondary" onclick="alert('Inquiry functionality coming soon.')">
+                    Inquire
+                </button>
+            </div>
+
+            <!-- Tags -->
+            {% if product.tags %}
+            {% set tags = product.tags | from_json if product.tags.startswith('[') else [] %}
+            {% if tags %}
+            <div class="pd-tags">
+                {% for tag in tags %}
+                <span class="pd-tag">{{ tag }}</span>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- ── Related Products ───────────────────────── -->
+    {% if related %}
+    <section class="pd-related">
+        <h2 class="pd-related-title">Related Products</h2>
+        <div class="pd-related-grid">
+            {% for r in related %}
+            {% set r_discounted = r.price - (r.price * (r.discount / 100)) %}
+            {% set r_price = (r_discounted * currency.rate_to_php) | round | int %}
+            <a class="pd-related-card" href="{{ url_for('product_detail', slug=r.slug) }}">
+                {% if r.image_file %}
+                <img class="pd-related-img"
+                     src="{{ url_for('static', filename='assets/images/productsimages/' + r.image_file) }}"
+                     alt="{{ r.name }}">
+                {% else %}
+                <div class="pd-related-img" style="display:flex;align-items:center;justify-content:center;
+                     font-family:monospace;font-size:0.6rem;color:#2e3a2e;">NO IMAGE</div>
+                {% endif %}
+                <div class="pd-related-info">
+                    <div class="pd-related-name">{{ r.name }}</div>
+                    <div class="pd-related-price">{{ currency.symbol }}{{ "{:,}".format(r_price) }}</div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </section>
+    {% endif %}
+
+</main>
+{% endblock %}
