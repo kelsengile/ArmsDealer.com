@@ -73,6 +73,7 @@ def homepage():
     currency = get_currency(db)
     product_rows = db.execute("""
     SELECT p.id, p.price, p.discount, p.image_file, p.tags,
+           p.rating, p.sales_count,
            COALESCE(pt.name, p.name)               AS name,
            COALESCE(pt.description, p.description) AS description
     FROM products p
@@ -84,6 +85,7 @@ def homepage():
     products = {row["id"]: row for row in product_rows}
     service_rows = db.execute("""
     SELECT s.id, s.price, s.discount, s.image_file, s.tags,
+           s.rating, s.sales_count,
            COALESCE(st.name, s.name)               AS name,
            COALESCE(st.description, s.description) AS description
     FROM services s

@@ -754,43 +754,57 @@ document.addEventListener("DOMContentLoaded", () => {
 
     /**
      * Sort all .fc-grid elements currently in selectionContent.
-     * Only one sort axis is active at a time; activating a new one
-     * clears the others.
+     * Multiple filters can be active simultaneously — they are applied
+     * as a priority chain: rating → price → sales (last applied wins ties).
+     * When NO filters are active the original insertion order is restored
+     * using the data-original-index stamps set when cards are first built.
      */
     function applySort() {
         const salesVal = document.getElementById("hf-sales") ? document.getElementById("hf-sales").value : "";
         const priceVal = document.getElementById("hf-price") ? document.getElementById("hf-price").value : "";
         const ratingVal = document.getElementById("hf-rating") ? document.getElementById("hf-rating").value : "";
 
-        // Determine active sort axis (last changed wins via the change handler)
-        let key = null, dir = 1;
-        if (salesVal) { key = "sales"; dir = salesVal === "high-low" ? -1 : 1; }
-        if (priceVal) { key = "price"; dir = priceVal === "high-low" ? -1 : 1; }
-        if (ratingVal) { key = "rating"; dir = ratingVal === "high-low" ? -1 : 1; }
+        const hasAny = salesVal || priceVal || ratingVal;
 
         selectionContent.querySelectorAll(".fc-grid").forEach(grid => {
             const cards = Array.from(grid.querySelectorAll(".fc-card"));
-            if (key) {
+
+            // Stamp original order on first encounter (persists even after re-sorts)
+            cards.forEach((c, i) => {
+                if (c.dataset.originalIndex === undefined) c.dataset.originalIndex = i;
+            });
+
+            if (!hasAny) {
+                // Restore original insertion order
+                cards.sort((a, b) => parseInt(a.dataset.originalIndex) - parseInt(b.dataset.originalIndex));
+            } else {
+                // Build an ordered list of active sort criteria (first = least significant)
+                const criteria = [];
+                if (salesVal) criteria.push({ key: "sales", dir: salesVal === "high-low" ? -1 : 1 });
+                if (priceVal) criteria.push({ key: "price", dir: priceVal === "high-low" ? -1 : 1 });
+                if (ratingVal) criteria.push({ key: "rating", dir: ratingVal === "high-low" ? -1 : 1 });
+
                 cards.sort((a, b) => {
-                    const va = parseFloat(a.dataset[key]) || 0;
-                    const vb = parseFloat(b.dataset[key]) || 0;
-                    return (va - vb) * dir;
+                    // Evaluate criteria in reverse priority (most recently added = highest priority)
+                    for (let ci = criteria.length - 1; ci >= 0; ci--) {
+                        const { key, dir } = criteria[ci];
+                        const va = parseFloat(a.dataset[key]) || 0;
+                        const vb = parseFloat(b.dataset[key]) || 0;
+                        const diff = (va - vb) * dir;
+                        if (diff !== 0) return diff;
+                    }
+                    return 0;
                 });
             }
-            // Re-append in sorted order (detach + append = reorder, no clone needed)
+
+            // Re-append in sorted order
             cards.forEach(c => grid.appendChild(c));
         });
     }
 
     hfSelects.forEach(select => {
         select.addEventListener("change", () => {
-            // When one select changes, clear the others so only one axis is active
-            hfSelects.forEach(s => {
-                if (s !== select) {
-                    s.value = "";
-                    s.style.borderColor = "";
-                }
-            });
+            // Highlight active selects; allow multiple to be active at once
             select.style.borderColor = select.value ? "#a8c47a" : "";
             applySort();
         });
@@ -801,7 +815,7 @@ document.addEventListener("DOMContentLoaded", () => {
             select.value = "";
             select.style.borderColor = "";
         });
-        applySort(); // restores original insertion order (no-op sort)
+        applySort(); // restores original insertion order
     });
 
     // ─────────────────────────────────────────────

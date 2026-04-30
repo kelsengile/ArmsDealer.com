@@ -140,8 +140,9 @@
                             <div class="fc-content">
                                 <div class="fc-name large">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -151,7 +152,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -173,8 +179,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -184,7 +191,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -206,8 +218,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -217,7 +230,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -246,8 +264,9 @@
                             <div class="fc-content">
                                 <div class="fc-name large">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -257,7 +276,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -279,8 +303,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -290,7 +315,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -312,8 +342,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -323,7 +354,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -345,8 +381,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -356,7 +393,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -378,8 +420,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -389,7 +432,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -418,8 +466,9 @@
                             <div class="fc-content">
                                 <div class="fc-name large">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -429,7 +478,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -451,8 +505,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -462,7 +517,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -484,8 +544,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -495,7 +556,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -524,8 +590,9 @@
                             <div class="fc-content">
                                 <div class="fc-name large">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -535,7 +602,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -557,8 +629,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -568,7 +641,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -590,8 +668,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -601,7 +680,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -623,8 +707,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -634,7 +719,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -656,8 +746,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ p.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(p.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ p.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(p.price * currency.rate_to_php) }}
                                         </span>
@@ -667,7 +758,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(p.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (p.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ p.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -696,8 +792,9 @@
                             <div class="fc-content">
                                 <div class="fc-name large">{{ s.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ s.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(s.price * currency.rate_to_php) }}
                                         </span>
@@ -707,7 +804,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(s.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (s.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ s.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -729,8 +831,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ s.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ s.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(s.price * currency.rate_to_php) }}
                                         </span>
@@ -740,7 +843,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(s.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (s.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ s.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}
@@ -762,8 +870,9 @@
                             <div class="fc-content">
                                 <div class="fc-name">{{ s.name }}</div>
                                 <div class="fc-pricing">
-                                    <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
-                                    <div class="fc-prices">
+                                    <div class="fc-pricing-row fc-pricing-row--price">
+                                        <div class="fc-discount">–{{ "%.0f"|format(s.discount) }}%</div>
+                                        <div class="fc-prices">
                                         <span class="fc-old" data-php-price="{{ s.price }}">
                                             {{ currency.symbol }}{{ "{:,.0f}".format(s.price * currency.rate_to_php) }}
                                         </span>
@@ -773,7 +882,12 @@
                                             100))) * currency.rate_to_php) }}
                                         </span>
                                     </div>
-                                </div>
+                                    </div>
+                                    <div class="fc-pricing-row fc-pricing-row--meta">
+                                        <span class="fc-stars">{% for i in range(s.rating | int) %}<svg class="fc-star fc-star--full" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="#f0c040"/></svg>{% endfor %}{% for i in range(5 - (s.rating | int)) %}<svg class="fc-star fc-star--empty" width="9" height="9" viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg"><polygon points="6,1 7.8,4.2 11.5,4.7 8.8,7.3 9.5,11 6,9.2 2.5,11 3.2,7.3 0.5,4.7 4.2,4.2" fill="rgba(168,196,100,0.22)"/></svg>{% endfor %}</span>
+                                        <span class="fc-sold"><svg class="fc-cart-icon" width="9" height="9" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="rgba(168,196,154,0.55)" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/><circle cx="11.5" cy="13" r="1" fill="rgba(168,196,154,0.55)"/></svg><span class="fc-sold-count">{{ s.sales_count | int }}</span></span>
+                                    </div>
+</div>
                             </div>
                         </div>
                         {% endif %}

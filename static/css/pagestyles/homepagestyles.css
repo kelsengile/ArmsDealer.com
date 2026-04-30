@@ -460,16 +460,59 @@
   font-size: clamp(10px, 1.8vw, 22px);
   padding: 4px 10px;
 }
-/* Pricing container */
+/* Pricing container — column so meta row always sits below price row */
 .fc-pricing {
   background: rgba(10, 14, 10, 0.82);
   border: 1px solid rgba(168, 196, 154, 0.2);
   display: flex;
+  flex-direction: column;
+  padding: 5px 10px 6px;
+  gap: 5px;
+}
+/* ── Row 1: discount badge + prices ── */
+.fc-pricing-row--price {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 5px 10px;
   gap: 8px;
   flex-wrap: wrap;
+}
+/* ── Row 2: stars (left) + cart/sales (right) ── */
+.fc-pricing-row--meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px;
+  padding-top: 4px;
+}
+/* Stars */
+.fc-stars {
+  display: flex;
+  align-items: center;
+  gap: 1px;
+  line-height: 1;
+}
+.fc-star {
+  display: inline-block;
+  flex-shrink: 0;
+}
+/* Cart icon + sold count */
+.fc-sold {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  margin-left: auto;
+}
+.fc-cart-icon {
+  display: inline-block;
+  flex-shrink: 0;
+}
+.fc-sold-count {
+  font-family: "Courier New", monospace;
+  font-size: clamp(7px, 1.1vw, 10px);
+  color: rgba(168, 196, 154, 0.55);
+  letter-spacing: 0.05em;
+  line-height: 1;
 }
 /* Discount badge */
 .fc-discount {
@@ -489,7 +532,11 @@
   gap: 8px;
   flex-wrap: wrap;
   justify-content: flex-end;
+  margin-left: auto;
   min-width: 0;
+}
+.fc-prices.fc-prices--nodiscount {
+  margin-left: 0;
 }
 /* Old price */
 .fc-old {

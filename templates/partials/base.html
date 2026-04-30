@@ -98,10 +98,13 @@
             <button class="nav-btn-search" role="menuitem"><span class="nav-drawer-icon"></span><span
                     data-translate="navbarsearch"></span></button>
             <button class="nav-btn-cart" role="menuitem">
-                <span class="nav-drawer-icon"></span><span data-translate="navbarcart"></span><span class="cart-badge"
-                    aria-hidden="true"></span></button>
-            <button class="nav-btn-account" role="menuitem"><span class="nav-drawer-icon"></span><span
-                    data-translate="navbaraccount"></span></button>
+                <span class="nav-drawer-icon">
+                    <svg width="14" height="14" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><path d="M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6.5" cy="13" r="1" fill="currentColor"/><circle cx="11.5" cy="13" r="1" fill="currentColor"/></svg>
+                </span><span data-translate="navbarcart"></span><span class="cart-badge" aria-hidden="true"></span></button>
+            <button class="nav-btn-account" role="menuitem">
+                <span class="nav-drawer-icon">
+                    <svg width="13" height="13" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg"><circle cx="8" cy="5" r="3" fill="currentColor"/><path d="M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/></svg>
+                </span><span data-translate="navbaraccount"></span></button>
         </div>
     </header>
     {% block main %}

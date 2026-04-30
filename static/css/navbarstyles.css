@@ -321,15 +321,41 @@
   font-size: 14px;
   opacity: 0.75;
 }
+
+/* Cart — shopping cart SVG via inline background on a pseudo-element */
 .nav-btn-cart::before {
-  content: "⊡";
-  font-size: 11px;
-  opacity: 0.75;
+  content: "";
+  display: inline-block;
+  width: 17px;
+  height: 17px;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4' stroke='%23a8c47a' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='6.5' cy='13' r='1' fill='%23a8c47a'/%3E%3Ccircle cx='11.5' cy='13' r='1' fill='%23a8c47a'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  vertical-align: middle;
+  transition: filter 0.2s;
 }
+.nav-btn-cart:hover::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M1 1h2l2.4 8.4a1 1 0 0 0 1 .6h5.2a1 1 0 0 0 .97-.76L14 5H4' stroke='%23d4eaa8' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3Ccircle cx='6.5' cy='13' r='1' fill='%23d4eaa8'/%3E%3Ccircle cx='11.5' cy='13' r='1' fill='%23d4eaa8'/%3E%3C/svg%3E");
+}
+
+/* Account — person silhouette SVG */
 .nav-btn-account::before {
-  content: "⍝";
-  font-size: 11px;
-  opacity: 0.75;
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='5' r='3' fill='%23a8c47a'/%3E%3Cpath d='M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6' stroke='%23a8c47a' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  vertical-align: middle;
+  transition: filter 0.2s;
+}
+.nav-btn-account:hover::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='5' r='3' fill='%23d4eaa8'/%3E%3Cpath d='M2 14c0-3.3 2.7-6 6-6s6 2.7 6 6' stroke='%23d4eaa8' stroke-width='1.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 .nav-btn-cart {
   border-right: 1px solid var(--mil-border);
@@ -460,6 +486,12 @@
   background: rgba(138, 170, 106, 0.1);
   border-left: 3px solid var(--mil-bright);
   padding-left: 25px;
+}
+/* Suppress desktop ::before icon backgrounds inside the drawer —
+   drawer buttons use inline SVGs in .nav-drawer-icon spans instead */
+.nav-drawer .nav-btn-cart::before,
+.nav-drawer .nav-btn-account::before {
+  display: none;
 }
 .nav-drawer-icon {
   font-size: 13px;
