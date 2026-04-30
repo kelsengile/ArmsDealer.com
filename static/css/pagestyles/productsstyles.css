@@ -1204,7 +1204,7 @@ main.products-page::before {
 
 .specific-cat-title {
   font-family: var(--font-stencil, "Oswald", sans-serif);
-  font-size: 28px;
+  font-size: 35px;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
@@ -1238,7 +1238,7 @@ main.products-page::before {
 
 .specific-sub-title {
   font-family: var(--font-stencil, "Oswald", sans-serif);
-  font-size: 16px;
+  font-size: 22px;
   font-weight: 600;
   letter-spacing: 0.2em;
   text-transform: uppercase;

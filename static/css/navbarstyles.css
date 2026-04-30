@@ -317,9 +317,20 @@
   background: rgba(138, 170, 106, 0.08);
 }
 .nav-btn-search::before {
-  content: "⌕";
-  font-size: 14px;
-  opacity: 0.75;
+  content: "";
+  display: inline-block;
+  width: 15px;
+  height: 15px;
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='6.5' cy='6.5' r='4' stroke='%23a8c47a' stroke-width='1.4' fill='none'/%3E%3Cpath d='M10 10l3.5 3.5' stroke='%23a8c47a' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+  vertical-align: middle;
+  transition: filter 0.2s;
+}
+.nav-btn-search:hover::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='6.5' cy='6.5' r='4' stroke='%23d4eaa8' stroke-width='1.4' fill='none'/%3E%3Cpath d='M10 10l3.5 3.5' stroke='%23d4eaa8' stroke-width='1.4' stroke-linecap='round'/%3E%3C/svg%3E");
 }
 
 /* Cart — shopping cart SVG via inline background on a pseudo-element */
@@ -489,6 +500,7 @@
 }
 /* Suppress desktop ::before icon backgrounds inside the drawer —
    drawer buttons use inline SVGs in .nav-drawer-icon spans instead */
+.nav-drawer .nav-btn-search::before,
 .nav-drawer .nav-btn-cart::before,
 .nav-drawer .nav-btn-account::before {
   display: none;
