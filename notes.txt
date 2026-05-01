@@ -68,7 +68,7 @@ GLOBAL
   PRODUCTS PAGE
   -------------
     [ ] Products Page  
-      [ ] Weapons / Equipments && Authorized / Restricted
+      [/] Weapons / Equipments && Authorized / Restricted
           [ ] Promotions
             [ ] Bundles ................. Grouped products sold together at a discounted price
             [ ] Rankings ................ Highlighting top-selling or most popular items
@@ -77,11 +77,11 @@ GLOBAL
             [ ] Event-Based Sales ....... Live or special event promotions
             [ ] Vouchers ............... Discount codes or credits used to reduce purchase cost
           [ ] Categories
-            [ ] Main Categories Content
-            [ ] Specific Categories Content      
+            [/] Main Categories Content
+            [/] Specific Categories Content      
           [ ] Brands
-            [ ] Main Brands Content
-            [ ] Specific Brands Content
+            [/] Main Brands Content
+            [/] Specific Brands Content
 
     [ ] Specific Product Page
 
