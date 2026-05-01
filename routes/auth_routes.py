@@ -13,8 +13,9 @@ from flask import (
     redirect, url_for, session, flash, g, jsonify
 )
 from werkzeug.security import generate_password_hash, check_password_hash
+from db_helpers import get_db
+
 auth_bp = Blueprint('auth', __name__)
-DATABASE = os.path.join(os.path.dirname(__file__), 'database', 'armsdealer.db')
 
 
 def _send_otp_email(email, code, purpose='registration'):
@@ -51,15 +52,6 @@ def _send_otp_email(email, code, purpose='registration'):
         return True
     except Exception:
         return False
-
-
-def get_db():
-    """Return a database connection, reusing g._database within a request."""
-    db = getattr(g, '_database', None)
-    if db is None:
-        db = g._database = sqlite3.connect(DATABASE)
-        db.row_factory = sqlite3.Row
-    return db
 
 
 def login_required(f):

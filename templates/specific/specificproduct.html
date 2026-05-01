@@ -333,12 +333,12 @@
 
     <!-- ── Breadcrumb ─────────────────────────────── -->
     <nav class="pd-breadcrumb" aria-label="Breadcrumb">
-        <a href="{{ url_for('homepage') }}">Home</a>
+        <a href="{{ url_for('main.homepage') }}">Home</a>
         <span>/</span>
-        <a href="{{ url_for('products') }}">Products</a>
+        <a href="{{ url_for('main.products') }}">Products</a>
         {% if product.category_slug %}
         <span>/</span>
-        <a href="{{ url_for('products') }}">{{ product.category_name or product.category_slug | title }}</a>
+        <a href="{{ url_for('main.products') }}">{{ product.category_name or product.category_slug | title }}</a>
         {% endif %}
         {% if product.subcategory_slug %}
         <span>/</span>
@@ -457,7 +457,7 @@
             {% for r in related %}
             {% set r_discounted = r.price - (r.price * (r.discount / 100)) %}
             {% set r_price = (r_discounted * currency.rate_to_php) | round | int %}
-            <a class="pd-related-card" href="{{ url_for('product_detail', slug=r.slug) }}">
+            <a class="pd-related-card" href="{{ url_for('main.product_detail', slug=r.slug) }}">
                 {% if r.image_file %}
                 <img class="pd-related-img"
                      src="{{ url_for('static', filename='assets/images/productsimages/' + r.image_file) }}"

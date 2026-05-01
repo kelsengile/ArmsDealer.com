@@ -1,20 +1,16 @@
 # ──────────────────────────────────────────────────────────────────────────────────
-# DATABASE INITIALIZATION
+# CART & CHECKOUT ROUTES
 # ──────────────────────────────────────────────────────────────────────────────────
-import sqlite3
-import os
+from flask import Blueprint, render_template
 
-DATABASE = os.path.join(os.path.dirname(__file__), 'database', 'armsdealer.db')
-SCHEMA = os.path.join(os.path.dirname(__file__), 'database', 'schema.sql')
+cart_bp = Blueprint('cart', __name__)
 
 
-def init_db():
-    os.makedirs(os.path.dirname(DATABASE), exist_ok=True)
-    with sqlite3.connect(DATABASE) as conn:
-        with open(SCHEMA, 'r') as f:
-            conn.executescript(f.read())
-    print(f"Database initialized at: {DATABASE}")
+@cart_bp.route('/cart')
+def cart():
+    return render_template('user/cart.html')
 
 
-if __name__ == '__main__':
-    init_db()
+@cart_bp.route('/checkout')
+def checkout():
+    return render_template('user/checkout.html')

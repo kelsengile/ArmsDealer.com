@@ -46,11 +46,11 @@
                     <option value="JPY">JPY (JP¥)</option>
                     <option value="CNY">CNY (CN¥)</option>
                 </select>
-                <a href="{{ url_for('about') }}" class="{% if request.endpoint == 'about' %}nav-active{% endif %}"
+                <a href="{{ url_for('main.about') }}" class="{% if request.endpoint == 'about' %}nav-active{% endif %}"
                     data-translate="navbarabout"></a>
-                <a href="{{ url_for('contacts') }}" class="{% if request.endpoint == 'contacts' %}nav-active{% endif %}"
+                <a href="{{ url_for('main.contacts') }}" class="{% if request.endpoint == 'contacts' %}nav-active{% endif %}"
                     data-translate="navbarcontacts"></a>
-                <a href="{{ url_for('legal') }}" class="{% if request.endpoint == 'legal' %}nav-active{% endif %}"
+                <a href="{{ url_for('main.legal') }}" class="{% if request.endpoint == 'legal' %}nav-active{% endif %}"
                     data-translate="navbarlegal"></a>
             </div>
         </div>
@@ -58,7 +58,7 @@
         <!-- NAV BAR                                       -->
         <!-- ═══════════════════════════════════════════════════════════ -->
         <nav class="navbar" aria-label="Main navigation">
-            <a href="{{ url_for('homepage') }}" class="logo-container" aria-label="ArmsDealer Home">
+            <a href="{{ url_for('main.homepage') }}" class="logo-container" aria-label="ArmsDealer Home">
                 <div class="logoimage" role="img" aria-label="ArmsDealer logo"></div>
                 <div class="logo-text-wrap">
                     <div class="logo" data-translate="navbarcompanyname"></div>
@@ -67,9 +67,9 @@
             </a>
             <!-- Desktop nav links -->
             <div class="nav-links">
-                <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
+                <a href="{{ url_for('main.products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
                     data-translate="navbarproducts"></a>
-                <a href="{{ url_for('services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
+                <a href="{{ url_for('main.services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
                     data-translate="navbarservices"></a>
                 <button class="nav-btn-search" aria-label="Search"></button>
                 <button class="nav-btn-cart" aria-label="Cart">
@@ -91,9 +91,9 @@
         </nav>
         <!-- Mobile drawer -->
         <div class="nav-drawer" id="navDrawer" role="menu">
-            <a href="{{ url_for('products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
+            <a href="{{ url_for('main.products') }}" class="{% if request.endpoint == 'products' %}nav-active{% endif %}"
                 role="menuitem"><span class="nav-drawer-icon">◈</span><span data-translate="navbarproducts"></span></a>
-            <a href="{{ url_for('services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
+            <a href="{{ url_for('main.services') }}" class="{% if request.endpoint == 'services' %}nav-active{% endif %}"
                 role="menuitem"><span class="nav-drawer-icon">◈</span><span data-translate="navbarservices"></span></a>
             <button class="nav-btn-search" role="menuitem"><span class="nav-drawer-icon"></span><span
                     data-translate="navbarsearch"></span></button>

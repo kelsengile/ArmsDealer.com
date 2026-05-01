@@ -69,6 +69,95 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ─────────────────────────────────────────────
+    // BRAND → API SLUG MAP
+    // Maps sidebar data-brand values to brand slugs
+    // used in the brands table of the DB.
+    // ─────────────────────────────────────────────
+    const BRAND_SLUG_MAP = {
+        "glock": "glock",
+        "colt": "colt",
+        "heckler-koch": "heckler-koch",
+        "sig-sauer": "sig-sauer",
+        "fn-herstal": "fn-herstal",
+        "benchmade": "benchmade",
+        "ka-bar": "ka-bar",
+        "cold-steel": "cold-steel",
+        "asp": "asp",
+        "barnett": "barnett-outdoors",
+        "bear-archery": "bear-archery",
+        "raytheon": "raytheon",
+        "lockheed": "lockheed-martin",
+        "northrop": "northrop-grumman",
+        "axon": "axon",
+        "combined-systems": "combined-systems",
+        "defense-technology": "defense-technology",
+        "thermo-fisher": "thermo-fisher-scientific",
+        "mirion": "mirion-technologies",
+        "oshkosh": "oshkosh-defense",
+        "general-dynamics": "general-dynamics",
+        "crowdstrike": "crowdstrike",
+        "palo-alto": "palo-alto-networks",
+        "safariland": "safariland",
+        "peerless": "peerless-handcuff",
+        "hornady": "hornady",
+        "federal-premium": "federal-premium",
+        "3m": "3m",
+        "armor-express": "armor-express",
+        "511-tactical": "511-tactical",
+        "crye": "crye-precision",
+        "trijicon": "trijicon",
+        "eotech": "eotech",
+        "vortex": "vortex-optics",
+        "magpul": "magpul",
+        "surefire": "surefire",
+        "otis": "otis-technology",
+        "hoppes": "hoppes",
+        "liberty-safe": "liberty-safe",
+        "pelican": "pelican",
+        "motorola": "motorola-solutions",
+        "garmin": "garmin",
+        "flir": "flir-systems",
+        "garrett": "garrett-metal-detectors",
+        "polaris": "polaris-defense",
+        "duracell": "duracell",
+        "goal-zero": "goal-zero",
+        "lifestraw": "lifestraw",
+        "leatherman": "leatherman",
+        "bluegun": "bluegun",
+        "action-target": "action-target",
+        "honeywell": "honeywell",
+        "zev": "zev-technologies",
+        "agency-arms": "agency-arms",
+        "amentum": "amentum",
+        "brinks": "brinks",
+        "gardaworld": "gardaworld",
+        "iron-mountain": "iron-mountain",
+        "academi": "academi",
+        "g4s": "g4s",
+        "allied-universal": "allied-universal",
+        "control-risks": "control-risks",
+        "mitre": "mitre",
+        "ul-solutions": "ul-solutions",
+        "veolia": "veolia",
+        "hikvision": "hikvision",
+        "sgs": "sgs",
+        "kbr": "kbr",
+        "anonymous": "anonymous",
+        "winchester": "winchester",
+        "walther": "walther",
+        "mauser": "mauser",
+        "kalashnikov": "kalashnikov-concern",
+        "remington": "remington-arms",
+        "smith-wesson": "smith-wesson",
+        "beretta": "beretta",
+        "springfield": "springfield-armory",
+        "steyr": "steyr-mannlicher",
+        "imi": "imi-systems",
+        "accuracy-intl": "accuracy-international",
+        "l3": "l3-technologies",
+    };
+
+    // ─────────────────────────────────────────────
     // LANG / CURRENCY CHANGE → BUST CACHE
     // Listen for cookie changes triggered by the
     // navbar language / currency selectors so that
@@ -120,6 +209,25 @@ document.addEventListener("DOMContentLoaded", () => {
             return _productCache[cacheKey];
         } catch (e) {
             console.error("Product fetch error:", e);
+            return [];
+        }
+    }
+
+    async function fetchBrandProducts(brandKey, access) {
+        const cacheKey = `brand__${brandKey}__${access}`;
+        if (_productCache[cacheKey]) return _productCache[cacheKey];
+
+        const slug = BRAND_SLUG_MAP[brandKey];
+        if (!slug) return [];
+
+        try {
+            const resp = await fetch(`/api/brands/${slug}?access=${access}`);
+            if (!resp.ok) return [];
+            const data = await resp.json();
+            _productCache[cacheKey] = data.products || [];
+            return _productCache[cacheKey];
+        } catch (e) {
+            console.error("Brand product fetch error:", e);
             return [];
         }
     }
@@ -416,8 +524,35 @@ document.addEventListener("DOMContentLoaded", () => {
         applySort();
     }
 
-    // ─────────────────────────────────────────────
-    // BRAND SUBMENU HELPERS
+    /**
+     * After the brand panel HTML is injected, fetch all products for that brand
+     * and render them as a single flat fc-grid (no subcategory grouping).
+     * Supports the same sort filters as category panels.
+     */
+    async function populateBrandProducts(brandKey) {
+        const products = await fetchBrandProducts(brandKey, state.access);
+
+        const body = selectionContent.querySelector(".brand-products-body");
+        if (!body) return;
+
+        if (products.length === 0) {
+            body.classList.add("empty-section");
+            body.innerHTML = `<p class="selection-status">No products listed for this brand.</p>`;
+            return;
+        }
+
+        body.classList.remove("empty-section");
+        body.innerHTML = "";
+
+        const grid = document.createElement("div");
+        grid.className = "fc-grid";
+
+        products.forEach(p => grid.appendChild(buildCard(p)));
+        body.appendChild(grid);
+
+        // Re-apply any active sort after grids are populated
+        applySort();
+    }
     // ─────────────────────────────────────────────
     function activeBrandsSubmenu() {
         return state.access === "restricted"
@@ -469,6 +604,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // After the panel is rendered, populate products if it's a specific category
         if (state.filter === "categories" && state.category && CATEGORY_SLUG_MAP[state.category]) {
             populateCategoryProducts(state.category);
+        }
+
+        // Populate brand products if a specific brand is selected
+        if (state.filter === "brands" && state.brand && BRAND_SLUG_MAP[state.brand]) {
+            populateBrandProducts(state.brand);
         }
     }
 
