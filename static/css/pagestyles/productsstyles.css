@@ -922,6 +922,8 @@ main.products-page::before {
   display: flex;
   flex-wrap: wrap;
   gap: clamp(6px, 1.2vw, 12px);
+  justify-content: center; 
+  align-items: center;    
 }
 
 .category-rect {
