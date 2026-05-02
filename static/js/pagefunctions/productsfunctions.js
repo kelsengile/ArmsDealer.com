@@ -376,9 +376,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "sub-delivery": "biological-delivery-systems",
         "sub-containment": "biological-containment-units",
         "sub-biodetection": "biological-detection-equipment",
-        "sub-neutralize": "biological-neutralization-agents",
+        "sub-neutralization": "biological-neutralization-agents",  // HTML uses sub-neutralization
         // ── Vehicle ─────────────────────────────────────────────────────────────
-        "sub-armed": "vehicle-armed",
+        "sub-armedvehicles": "vehicle-armed",       // HTML uses sub-armedvehicles
         "sub-drones": "vehicle-drones",
         "sub-naval": "vehicle-naval",
         "sub-aerial": "vehicle-aerial",
@@ -386,9 +386,9 @@ document.addEventListener("DOMContentLoaded", () => {
         // ── Cyber ───────────────────────────────────────────────────────────────
         "sub-malware": "cyber-malware-tools",
         "sub-exploits": "cyber-exploit-kits",
-        "sub-hackdevices": "cyber-hacking-devices",
+        "sub-hackingdevices": "cyber-hacking-devices",  // HTML uses sub-hackingdevices
         "sub-intrusion": "cyber-intrusion-systems",
-        "sub-exfil": "cyber-data-exfiltration",
+        "sub-exfiltration": "cyber-data-exfiltration",  // HTML uses sub-exfiltration
         "sub-ransomware": "cyber-ransomware-platforms",
         // ── Security ────────────────────────────────────────────────────────────
         "sub-accesscontrol": "security-access-control",
@@ -403,26 +403,26 @@ document.addEventListener("DOMContentLoaded", () => {
         "sub-energycells": "ammo-energy-cells",
         "sub-primers": "ammo-primers",
         "sub-propellants": "ammo-propellants",
-        "sub-specialty": "ammo-specialty-rounds",
+        "sub-specialtyrounds": "ammo-specialty-rounds",  // HTML uses sub-specialtyrounds
         "sub-caseless": "ammo-caseless",
         // ── Protective ──────────────────────────────────────────────────────────
         "sub-helmets": "protective-helmets",
         "sub-bodyarmor": "protective-body-armor",
         "sub-shields": "protective-shields",
-        "sub-suits": "protective-suits",
-        "sub-glasses": "protective-ballistic-glasses",
-        "sub-hearing": "protective-hearing",
+        "sub-protectivesuits": "protective-suits",         // HTML uses sub-protectivesuits
+        "sub-ballisticglasses": "protective-ballistic-glasses", // HTML uses sub-ballisticglasses
+        "sub-hearingprotection": "protective-hearing",     // HTML uses sub-hearingprotection
         "sub-gasmasks": "protective-gas-masks",
-        "sub-blast": "protective-blast-resistant",
+        "sub-blastresistant": "protective-blast-resistant", // HTML uses sub-blastresistant
         // ── Tactical ────────────────────────────────────────────────────────────
-        "sub-loadbearing": "tactical-load-bearing",
+        "sub-lbg": "tactical-load-bearing",           // HTML uses sub-lbg
         "sub-holsters": "tactical-holsters",
         "sub-utilitybelts": "tactical-utility-belts",
         "sub-fieldkits": "tactical-field-kits",
         "sub-chestrigs": "tactical-chest-rigs",
         "sub-platecarriers": "tactical-plate-carriers",
         "sub-dropleg": "tactical-drop-leg",
-        "sub-pouches": "tactical-modular-pouches",
+        "sub-modular": "tactical-modular-pouches",    // HTML uses sub-modular
         // ── Attachments ─────────────────────────────────────────────────────────
         "sub-suppressors": "attachments-suppressors",
         "sub-grips": "attachments-grips",
@@ -437,7 +437,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "sub-repairtools": "maint-repair-tools",
         "sub-lubricants": "maint-lubricants",
         "sub-boresnakes": "maint-bore-snakes",
-        "sub-armorertools": "maint-armorer-tools",
+        "sub-armorer": "maint-armorer-tools",       // HTML uses sub-armorer
         "sub-partskits": "maint-parts-kits",
         "sub-solventtraps": "maint-solvent-traps",
         // ── Storage ─────────────────────────────────────────────────────────────
@@ -450,16 +450,16 @@ document.addEventListener("DOMContentLoaded", () => {
         "sub-transport": "storage-transport-containers",
         // ── Communication ───────────────────────────────────────────────────────
         "sub-radios": "comm-radios",
-        "sub-signal": "comm-signal-devices",
+        "sub-signaldevices": "comm-signal-devices",     // HTML uses sub-signaldevices
         "sub-encryption": "comm-encryption-units",
         "sub-earpieces": "comm-earpieces",
-        "sub-headsets": "comm-tactical-headsets",
+        "sub-tacticalheadsets": "comm-tactical-headsets", // HTML uses sub-tacticalheadsets
         "sub-satellite": "comm-satellite",
         "sub-covert": "comm-covert-devices",
         // ── Survival ────────────────────────────────────────────────────────────
         "sub-firstaid": "survival-first-aid",
         "sub-rations": "survival-rations",
-        "sub-water": "survival-water-purification",
+        "sub-waterpurif": "survival-water-purification",  // HTML uses sub-waterpurif
         "sub-navigation": "survival-navigation",
         "sub-shelters": "survival-shelters",
         "sub-firestarters": "survival-fire-starters",
@@ -472,7 +472,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "sub-manuals": "training-manuals",
         "sub-blueguns": "training-blue-guns",
         "sub-fof": "training-force-on-force",
-        "sub-recoil": "training-recoil-trainers",
+        "sub-recoiltrainers": "training-recoil-trainers",  // HTML uses sub-recoiltrainers
     };
 
     /**
