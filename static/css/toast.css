@@ -157,11 +157,11 @@
 
 /* INFO — muted teal */
 .toast--info {
-    border-left-color: #2a6e7e;
+    border-left-color: #ffffff;
 }
-.toast--info .toast__label  { color: #4a9fb5; }
-.toast--info .toast__progress { background: #2a6e7e; }
-.toast--info .toast__icon   { color: #4a9fb5; }
+.toast--info .toast__label  { color: #aeaeae; }
+.toast--info .toast__progress { background: #aeaeae;; }
+.toast--info .toast__icon   { color: #aeaeae; }
 
 /* ── Mobile ────────────────────────────────────────────────────── */
 @media (max-width: 480px) {
