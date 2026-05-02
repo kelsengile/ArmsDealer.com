@@ -71,7 +71,7 @@ def admin_required(f):
     def decorated(*args, **kwargs):
         if session.get('role') != 'admin':
             flash('Admin access required.', 'danger')
-            return redirect(url_for('homepage'))
+            return redirect(url_for('main.homepage'))
         return f(*args, **kwargs)
     return decorated
 
@@ -95,7 +95,7 @@ def _populate_session(user):
 def login():
     # Already logged in — go home
     if session.get('user_id'):
-        return redirect(url_for('homepage'))
+        return redirect(url_for('main.homepage'))
     if request.method == 'POST':
         identifier = request.form.get(
             'identifier', '').strip()  # username OR email
@@ -113,7 +113,7 @@ def login():
             return render_template('auth/login.html')
         _populate_session(user)
         flash(f'Welcome back, {user["username"]}.', 'success')
-        return redirect(request.args.get('next') or url_for('homepage'))
+        return redirect(request.args.get('next') or url_for('main.homepage'))
     return render_template('auth/login.html')
 # ─── PASSWORD ──────────────────────────────────────────────
 
@@ -155,7 +155,7 @@ def forgot_password():
         if request.headers.get('X-Requested-With') == 'XMLHttpRequest':
             return jsonify({'success': 'Password changed successfully.'})
         flash('Password changed successfully.', 'success')
-        return redirect(url_for('homepage'))
+        return redirect(url_for('main.homepage'))
     pending = session.get('password_reset_pending')
     if request.method == 'POST' and pending:
         if request.form.get('resend_otp'):
@@ -247,7 +247,7 @@ def forgot_password():
 @auth_bp.route('/register', methods=['GET', 'POST'])
 def register():
     if session.get('user_id'):
-        return redirect(url_for('homepage'))
+        return redirect(url_for('main.homepage'))
     pending = session.get('register_pending')
     if request.method == 'POST' and pending:
         if request.form.get('resend_otp'):
@@ -288,7 +288,7 @@ def register():
         session.pop('register_pending', None)
         _populate_session(user)
         flash(f'Account created. Welcome, {user["username"]}!', 'success')
-        return redirect(url_for('homepage'))
+        return redirect(url_for('main.homepage'))
     if request.method == 'POST':
         username = request.form.get('username', '').strip()
         email = request.form.get('email', '').strip().lower()
@@ -339,4 +339,4 @@ def logout():
     username = session.get('username', 'Operator')
     session.clear()
     flash(f'Session terminated. Goodbye, {username}.', 'info')
-    return redirect(url_for('homepage'))
+    return redirect(url_for('main.homepage'))
