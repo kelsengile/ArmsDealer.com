@@ -188,9 +188,9 @@ def product_detail(slug):
                COALESCE(pt.name, p.name)               AS name,
                COALESCE(pt.description, p.description) AS description
         FROM products p
-        LEFT JOIN categories c   ON c.id = p.category_id
+        LEFT JOIN categories c     ON c.id = p.category_id
         LEFT JOIN subcategories sc ON sc.id = p.subcategory_id
-        LEFT JOIN brands b       ON b.id = p.brand_id
+        LEFT JOIN brands b         ON b.id = p.brand_id
         LEFT JOIN products_translations pt
                ON pt.product_id = p.id AND pt.lang_code = ?
         WHERE p.slug = ?
@@ -199,9 +199,28 @@ def product_detail(slug):
     if not product:
         return "Product not found", 404
 
-    # Related products — same subcategory, same access level, different slug
+    # ── Additional product images (for the 5-slot gallery) ──────────────
+    product_images = db.execute("""
+        SELECT image_file, sort_order
+        FROM product_images
+        WHERE product_id = ?
+        ORDER BY sort_order ASC
+        LIMIT 4
+    """, (product['id'],)).fetchall()
+
+    # ── Brand product count ──────────────────────────────────────────────
+    brand_product_count = 0
+    if product['brand_id']:
+        row = db.execute(
+            "SELECT COUNT(*) AS cnt FROM products WHERE brand_id = ?",
+            (product['brand_id'],)
+        ).fetchone()
+        brand_product_count = row['cnt'] if row else 0
+
+    # ── Related products — same subcategory, same access, different slug ─
     related = db.execute("""
         SELECT p.id, p.slug, p.price, p.discount, p.image_file,
+               p.rating, p.sales_count,
                COALESCE(pt.name, p.name) AS name
         FROM products p
         LEFT JOIN products_translations pt
@@ -209,8 +228,8 @@ def product_detail(slug):
         WHERE p.subcategory_id = (
                 SELECT subcategory_id FROM products WHERE slug = ?
               )
-          AND p.slug      != ?
-          AND p.is_authorized = (
+          AND p.slug          != ?
+          AND p.is_authorized  = (
                 SELECT is_authorized FROM products WHERE slug = ?
               )
         ORDER BY p.sales_count DESC
@@ -218,8 +237,10 @@ def product_detail(slug):
     """, (lang, slug, slug, slug)).fetchall()
 
     return render_template(
-        '/templates/specific/specificproduct.html',
+        'specific/specificproduct.html',
         product=product,
+        product_images=product_images,
+        brand_product_count=brand_product_count,
         related=related,
         currency=currency
     )

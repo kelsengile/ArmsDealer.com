@@ -2348,6 +2348,25 @@
     // guard the RESTRICTED access toggle for unauthenticated visitors.
     window.IS_AUTHENTICATED = "{{ 'yes' if session.get('user_id') else 'no' }}" === "yes";
     window.LOGIN_URL = "{{ url_for('auth.login') }}";
+
+    // ── Brand redirect from specific product page ──────────────────────
+    // When a user clicks the brand button on a product page, we store the
+    // target brand slug in sessionStorage and navigate here. On load we
+    // pick it up and trigger the brand filter/panel, then clear the entry.
+    window.addEventListener('DOMContentLoaded', function () {
+        const brandSlug = sessionStorage.getItem('sp_open_brand');
+        if (!brandSlug) return;
+        sessionStorage.removeItem('sp_open_brand');
+
+        // Find the matching brand link and click it to trigger the panel
+        const link = document.querySelector(
+            '.toc-link--brand[data-brand="' + CSS.escape(brandSlug) + '"]'
+        );
+        if (link) {
+            // Give productsfunctions.js time to initialise
+            setTimeout(function () { link.click(); }, 120);
+        }
+    });
 </script>
 <script src="{{ url_for('static', filename='js/pagefunctions/productsfunctions.js') }}"></script>
 {% endblock %}
