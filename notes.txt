@@ -257,11 +257,6 @@ CATEGORIES
   ACCOUNTS
 ================================================================================
 
-  AUTH / ACCOUNT
-  --------------
-    [ ] Customer Account
-    [ ] Admin Account
-
   Customer:
     username : spongebob
     email    : spongebob@bikini.bottom
