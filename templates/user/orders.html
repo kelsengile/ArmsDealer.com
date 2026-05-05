@@ -3,6 +3,7 @@
 
 {% block styles %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/user/orders.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/user/orders_extra.css') }}">
 {% endblock %}
 
 {% block main %}
@@ -18,13 +19,16 @@
                 <button class="ordpage-tab" data-tab="cart" id="tab-cart">
                     <span class="ordpage-tab-icon">⊡</span>
                     <span class="ordpage-tab-label">CART</span>
-                    {% if session.get('cart_count', 0) > 0 %}
-                    <span class="ordpage-tab-badge">{{ session.get('cart_count', 0) }}</span>
+                    {% if cart_items and cart_items | length > 0 %}
+                    <span class="ordpage-tab-badge">{{ cart_items | length }}</span>
                     {% endif %}
                 </button>
                 <button class="ordpage-tab" data-tab="shipping" id="tab-shipping">
                     <span class="ordpage-tab-icon">◎</span>
                     <span class="ordpage-tab-label">SHIPPING</span>
+                    {% if active_orders and active_orders | length > 0 %}
+                    <span class="ordpage-tab-badge">{{ active_orders | length }}</span>
+                    {% endif %}
                 </button>
                 <button class="ordpage-tab" data-tab="history" id="tab-history">
                     <span class="ordpage-tab-icon">☰</span>
@@ -65,7 +69,7 @@
                                 </div>
                             </div>
                             <div class="ordpage-item-price">
-                                ₱{{ '{:,.0f}'.format(item.price * item.quantity) }}
+                                {{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(item.price * item.quantity) }}
                             </div>
                         </div>
                         {% endfor %}
@@ -73,9 +77,9 @@
                     <div class="ordpage-cart-footer">
                         <div class="ordpage-cart-total">
                             <span class="ordpage-cart-total-label">TOTAL</span>
-                            <span class="ordpage-cart-total-val">₱{{ '{:,.0f}'.format(cart_total) }}</span>
+                            <span class="ordpage-cart-total-val">{{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(cart_total) }}</span>
                         </div>
-                        <a href="#" class="ordpage-checkout-btn">PROCEED TO CHECKOUT ▶</a>
+                        <a href="{{ url_for('cart.checkout') }}" class="ordpage-checkout-btn">PROCEED TO CHECKOUT ▶</a>
                     </div>
                     {% else %}
                     <div class="ordpage-empty">
@@ -94,11 +98,57 @@
                     <span class="ordpage-panel-sub">Active shipments & tracking</span>
                 </div>
                 <div class="ordpage-panel-body">
+                    {% if active_orders and active_orders | length > 0 %}
+                    <div class="ordpage-item-list">
+                        {% for order in active_orders %}
+                        <div class="ordpage-shipping-card">
+                            <div class="ordpage-shipping-top">
+                                <div class="ordpage-shipping-id">ORD-{{ '%06d' % order.id }}</div>
+                                <div class="ordpage-shipping-date">{{ order.created_at[:10] if order.created_at else '—' }}</div>
+                                <div class="ordpage-status-pill ordpage-status-{{ order.status | lower | replace(' ', '-') }}">
+                                    {{ order.status | upper }}
+                                </div>
+                            </div>
+                            <!-- Status progress bar -->
+                            <div class="ordpage-progress-track">
+                                {% set steps = ['order placed', 'packing', 'shipping', 'delivered'] %}
+                                {% set current_idx = steps.index(order.status | lower) if order.status | lower in steps else 0 %}
+                                {% for step in steps %}
+                                {% set i = loop.index0 %}
+                                <div class="ordpage-progress-step {% if i <= current_idx %}active{% endif %} {% if i < current_idx %}done{% endif %}">
+                                    <div class="ordpage-progress-dot"></div>
+                                    <div class="ordpage-progress-label">{{ step | upper }}</div>
+                                </div>
+                                {% if not loop.last %}
+                                <div class="ordpage-progress-line {% if i < current_idx %}done{% endif %}"></div>
+                                {% endif %}
+                                {% endfor %}
+                            </div>
+                            <!-- Order items in this order -->
+                            {% if order.order_lines %}
+                            <div class="ordpage-shipping-items">
+                                {% for oi in order.order_lines %}
+                                <div class="ordpage-shipping-item-row">
+                                    <span class="ordpage-shipping-item-name">{{ oi.name }}</span>
+                                    <span class="ordpage-shipping-item-qty">× {{ oi.quantity }}</span>
+                                    <span class="ordpage-shipping-item-price">{{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format((oi.unit_price or 0) * oi.quantity) }}</span>
+                                </div>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
+                            <div class="ordpage-shipping-total">
+                                TOTAL: {{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(order.total) }}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% else %}
                     <div class="ordpage-empty">
                         <div class="ordpage-empty-icon">◎</div>
                         <div class="ordpage-empty-text">No active shipments</div>
                         <div class="ordpage-empty-sub">Orders in transit will appear here</div>
                     </div>
+                    {% endif %}
                 </div>
             </div>
 
@@ -106,19 +156,26 @@
             <div class="ordpage-panel hidden" id="panel-history">
                 <div class="ordpage-panel-header">
                     <span class="ordpage-panel-title">ORDER HISTORY</span>
-                    <span class="ordpage-panel-sub">Completed & past orders</span>
+                    <span class="ordpage-panel-sub">Completed & delivered orders</span>
                 </div>
                 <div class="ordpage-panel-body">
-                    {% if orders and orders | length > 0 %}
+                    {% if delivered_orders and delivered_orders | length > 0 %}
                     <div class="ordpage-item-list">
-                        {% for order in orders %}
-                        <div class="ordpage-history-row">
-                            <div class="ordpage-history-id">ORD-{{ '%06d' % order.id }}</div>
-                            <div class="ordpage-history-date">{{ order.created_at[:10] if order.created_at else '—' }}</div>
-                            <div class="ordpage-history-status ordpage-status-{{ order.status | lower }}">
-                                {{ order.status | upper }}
+                        {% for order in delivered_orders %}
+                        <div class="ordpage-history-card">
+                            <div class="ordpage-history-row">
+                                <div class="ordpage-history-id">ORD-{{ '%06d' % order.id }}</div>
+                                <div class="ordpage-history-date">{{ (order.updated_at or order.created_at or '')[:10] }}</div>
+                                <div class="ordpage-history-status ordpage-status-delivered">DELIVERED</div>
+                                <div class="ordpage-history-total">{{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(order.total) }}</div>
                             </div>
-                            <div class="ordpage-history-total">₱{{ '{:,.0f}'.format(order.total) }}</div>
+                            {% if order.order_lines %}
+                            <div class="ordpage-history-items">
+                                {% for oi in order.order_lines %}
+                                <span class="ordpage-history-item-chip">{{ oi.name }} ×{{ oi.quantity }}</span>
+                                {% endfor %}
+                            </div>
+                            {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -126,7 +183,7 @@
                     <div class="ordpage-empty">
                         <div class="ordpage-empty-icon">☰</div>
                         <div class="ordpage-empty-text">No order history</div>
-                        <div class="ordpage-empty-sub">Completed orders will appear here</div>
+                        <div class="ordpage-empty-sub">Delivered orders will appear here</div>
                     </div>
                     {% endif %}
                 </div>
@@ -138,26 +195,21 @@
 
 <script>
     (function () {
-        // Determine initial tab from URL param or default to 'cart'
         const params = new URLSearchParams(window.location.search);
         const initTab = params.get('tab') || 'cart';
 
         function activateTab(tabName) {
-            // Deactivate all
             document.querySelectorAll('.ordpage-tab').forEach(t => t.classList.remove('active'));
             document.querySelectorAll('.ordpage-panel').forEach(p => p.classList.add('hidden'));
-            // Activate chosen
             const btn = document.getElementById('tab-' + tabName);
             const panel = document.getElementById('panel-' + tabName);
             if (btn) btn.classList.add('active');
             if (panel) panel.classList.remove('hidden');
         }
 
-        // Wire tab buttons
         document.querySelectorAll('.ordpage-tab').forEach(btn => {
             btn.addEventListener('click', function () {
                 activateTab(this.dataset.tab);
-                // Update URL without reload
                 const url = new URL(window.location);
                 url.searchParams.set('tab', this.dataset.tab);
                 window.history.replaceState({}, '', url);

@@ -1,86 +1,252 @@
 {% extends 'partials/subbase.html' %}
-{% block title %}<title>Dashboard — Arms Dealer</title>{% endblock %}
+{% block title %}<title>Admin Dashboard — Arms Dealer</title>{% endblock %}
 
 {% block styles %}
-<link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/admin/dashboard.css') }}">
 {% endblock %}
 
 {% block main %}
-<main class="dash-main">
-    <div class="dash-container">
+<main class="adm-main">
+    <div class="adm-wrapper">
 
-        {# ══════════════════════════════════════════════
-           HEADER
-        ══════════════════════════════════════════════ #}
-        <section class="dash-header-strip">
-            <div class="dash-header-left">
-                <span class="dash-header-icon">⌕</span>
+        <!-- ══════════════════════════════════
+             LEFT NAVIGATION PANEL
+        ══════════════════════════════════ -->
+        <nav class="adm-sidenav" id="admSidenav">
+            <div class="adm-sidenav-header">
+                <span class="adm-sidenav-icon">◈</span>
                 <div>
-                    <h1 class="dash-title">ADMIN DASHBOARD</h1>
-                    <p class="dash-sub">System overview &amp; management</p>
+                    <div class="adm-sidenav-title">ADMIN</div>
+                    <div class="adm-sidenav-user">{{ session.get('username', 'Admin') | upper }}</div>
                 </div>
             </div>
-            <div class="dash-header-badge">
-                <span class="dash-badge-icon">◈</span>
-                <span class="dash-badge-text">{{ session.get('username', 'Admin') | upper }}</span>
-            </div>
-        </section>
 
-        {# ══════════════════════════════════════════════
-           STATS ROW
-        ══════════════════════════════════════════════ #}
-        <section class="dash-stats-row">
-            <div class="dash-stat-card">
-                <div class="dash-stat-icon">◉</div>
-                <div class="dash-stat-label">TOTAL USERS</div>
-                <div class="dash-stat-value">—</div>
-            </div>
-            <div class="dash-stat-card">
-                <div class="dash-stat-icon">⊡</div>
-                <div class="dash-stat-label">TOTAL ORDERS</div>
-                <div class="dash-stat-value">—</div>
-            </div>
-            <div class="dash-stat-card">
-                <div class="dash-stat-icon">◈</div>
-                <div class="dash-stat-label">PRODUCTS</div>
-                <div class="dash-stat-value">—</div>
-            </div>
-            <div class="dash-stat-card">
-                <div class="dash-stat-icon">◎</div>
-                <div class="dash-stat-label">SERVICES</div>
-                <div class="dash-stat-value">—</div>
-            </div>
-        </section>
+            <ul class="adm-nav-list">
+                <li>
+                    <button class="adm-nav-item active" data-section="analytics">
+                        <span class="adm-nav-icon">◉</span>
+                        <span class="adm-nav-label">ANALYTICS</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="adm-nav-item" data-section="orders">
+                        <span class="adm-nav-icon">⊡</span>
+                        <span class="adm-nav-label">ORDERS</span>
+                        {% if stats.pending_orders > 0 %}
+                        <span class="adm-nav-badge">{{ stats.pending_orders }}</span>
+                        {% endif %}
+                    </button>
+                </li>
+                <li>
+                    <button class="adm-nav-item" data-section="users">
+                        <span class="adm-nav-icon">☰</span>
+                        <span class="adm-nav-label">USERS</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="adm-nav-item" data-section="inventory">
+                        <span class="adm-nav-icon">◎</span>
+                        <span class="adm-nav-label">INVENTORY</span>
+                    </button>
+                </li>
+            </ul>
 
-        {# ══════════════════════════════════════════════
-           QUICK ACTIONS
-        ══════════════════════════════════════════════ #}
-        <section class="dash-actions-section">
-            <div class="dash-section-label">QUICK ACTIONS</div>
-            <div class="dash-actions-grid">
-                <a href="#" class="dash-action-btn">
-                    <span class="dash-action-icon">☰</span>
-                    <span class="dash-action-label">Manage Users</span>
-                    <span class="dash-action-arrow">▶</span>
-                </a>
-                <a href="#" class="dash-action-btn">
-                    <span class="dash-action-icon">◈</span>
-                    <span class="dash-action-label">Manage Products</span>
-                    <span class="dash-action-arrow">▶</span>
-                </a>
-                <a href="#" class="dash-action-btn">
-                    <span class="dash-action-icon">◎</span>
-                    <span class="dash-action-label">Manage Services</span>
-                    <span class="dash-action-arrow">▶</span>
-                </a>
-                <a href="{{ url_for('main.orders') }}" class="dash-action-btn">
-                    <span class="dash-action-icon">⊡</span>
-                    <span class="dash-action-label">View Orders</span>
-                    <span class="dash-action-arrow">▶</span>
-                </a>
+            <div class="adm-sidenav-footer">
+                <a href="{{ url_for('main.homepage') }}" class="adm-back-site-btn">← BACK TO SITE</a>
             </div>
-        </section>
+        </nav>
 
+        <!-- ══════════════════════════════════
+             RIGHT CONTENT PANEL
+        ══════════════════════════════════ -->
+        <div class="adm-content" id="admContent">
+
+            <!-- ─── ANALYTICS SECTION ──────────────────────── -->
+            <section class="adm-section active" id="section-analytics">
+                <div class="adm-section-header">
+                    <h2 class="adm-section-title">ANALYTICS</h2>
+                    <span class="adm-section-sub">System overview</span>
+                </div>
+
+                <div class="adm-stats-grid">
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">◉</div>
+                        <div class="adm-stat-label">TOTAL USERS</div>
+                        <div class="adm-stat-value">{{ stats.total_users }}</div>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">⊡</div>
+                        <div class="adm-stat-label">TOTAL ORDERS</div>
+                        <div class="adm-stat-value">{{ stats.total_orders }}</div>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">◈</div>
+                        <div class="adm-stat-label">PRODUCTS</div>
+                        <div class="adm-stat-value">{{ stats.total_products }}</div>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">◎</div>
+                        <div class="adm-stat-label">SERVICES</div>
+                        <div class="adm-stat-value">{{ stats.total_services }}</div>
+                    </div>
+                    <div class="adm-stat-card adm-stat-highlight">
+                        <div class="adm-stat-icon">▶</div>
+                        <div class="adm-stat-label">PENDING ORDERS</div>
+                        <div class="adm-stat-value">{{ stats.pending_orders }}</div>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">✓</div>
+                        <div class="adm-stat-label">DELIVERED</div>
+                        <div class="adm-stat-value">{{ stats.delivered_orders }}</div>
+                    </div>
+                    <div class="adm-stat-card">
+                        <div class="adm-stat-icon">₱</div>
+                        <div class="adm-stat-label">TOTAL REVENUE</div>
+                        <div class="adm-stat-value">₱{{ '{:,.0f}'.format(stats.total_revenue) }}</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ─── ORDERS SECTION ─────────────────────────── -->
+            <section class="adm-section" id="section-orders">
+                <div class="adm-section-header">
+                    <h2 class="adm-section-title">ALL ORDERS</h2>
+                    <span class="adm-section-sub">Manage and update order statuses</span>
+                </div>
+
+                {% if orders and orders | length > 0 %}
+                <div class="adm-orders-table-wrap">
+                    <table class="adm-orders-table">
+                        <thead>
+                            <tr>
+                                <th>ORDER ID</th>
+                                <th>USER</th>
+                                <th>DATE</th>
+                                <th>ITEMS</th>
+                                <th>TOTAL</th>
+                                <th>STATUS</th>
+                                <th>ACTION</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for order in orders %}
+                            <tr class="adm-order-row" id="order-row-{{ order.id }}">
+                                <td class="adm-order-id">ORD-{{ '%06d' % order.id }}</td>
+                                <td class="adm-order-user">{{ order.username or '—' }}</td>
+                                <td class="adm-order-date">{{ order.created_at[:10] if order.created_at else '—' }}</td>
+                                <td class="adm-order-items">{{ order.item_count or 0 }}</td>
+                                <td class="adm-order-total">₱{{ '{:,.0f}'.format(order.total) }}</td>
+                                <td class="adm-order-status">
+                                    <span class="adm-status-pill adm-status-{{ order.status | lower | replace(' ', '-') }}" id="status-{{ order.id }}">
+                                        {{ order.status | upper }}
+                                    </span>
+                                </td>
+                                <td class="adm-order-action">
+                                    <div class="adm-status-controls">
+                                        <select class="adm-status-select" id="select-{{ order.id }}" data-order-id="{{ order.id }}">
+                                            <option value="order placed" {% if order.status == 'order placed' %}selected{% endif %}>Order Placed</option>
+                                            <option value="packing" {% if order.status == 'packing' %}selected{% endif %}>Packing</option>
+                                            <option value="shipping" {% if order.status == 'shipping' %}selected{% endif %}>Shipping</option>
+                                            <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>Delivered</option>
+                                        </select>
+                                        <button class="adm-update-btn" onclick="updateOrderStatus({{ order.id | int }})">UPDATE &rsaquo;</button>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                <div class="adm-empty">
+                    <div class="adm-empty-icon">⊡</div>
+                    <div class="adm-empty-text">No orders yet</div>
+                </div>
+                {% endif %}
+            </section>
+
+            <!-- ─── USERS SECTION ──────────────────────────── -->
+            <section class="adm-section" id="section-users">
+                <div class="adm-section-header">
+                    <h2 class="adm-section-title">USERS</h2>
+                    <span class="adm-section-sub">Coming soon</span>
+                </div>
+                <div class="adm-empty">
+                    <div class="adm-empty-icon">☰</div>
+                    <div class="adm-empty-text">User management — coming soon</div>
+                </div>
+            </section>
+
+            <!-- ─── INVENTORY SECTION ──────────────────────── -->
+            <section class="adm-section" id="section-inventory">
+                <div class="adm-section-header">
+                    <h2 class="adm-section-title">INVENTORY</h2>
+                    <span class="adm-section-sub">Coming soon</span>
+                </div>
+                <div class="adm-empty">
+                    <div class="adm-empty-icon">◎</div>
+                    <div class="adm-empty-text">Inventory management — coming soon</div>
+                </div>
+            </section>
+
+        </div>
     </div>
 </main>
+
+<!-- ── Toast feedback ── -->
+<div class="adm-toast" id="admToast"></div>
+
+<script>
+(function () {
+    // ── Section switching ──────────────────────────────
+    const navItems = document.querySelectorAll('.adm-nav-item');
+    const sections = document.querySelectorAll('.adm-section');
+
+    navItems.forEach(btn => {
+        btn.addEventListener('click', function () {
+            const target = this.dataset.section;
+            navItems.forEach(b => b.classList.remove('active'));
+            sections.forEach(s => s.classList.remove('active'));
+            this.classList.add('active');
+            const sec = document.getElementById('section-' + target);
+            if (sec) sec.classList.add('active');
+        });
+    });
+
+    // ── Toast helper ──────────────────────────────────
+    function showToast(msg, type) {
+        const t = document.getElementById('admToast');
+        t.textContent = msg;
+        t.className = 'adm-toast adm-toast-' + (type || 'ok') + ' show';
+        setTimeout(() => t.classList.remove('show'), 3000);
+    }
+
+    // ── Update order status ───────────────────────────
+    window.updateOrderStatus = function (orderId) {
+        const sel = document.getElementById('select-' + orderId);
+        if (!sel) return;
+        const newStatus = sel.value;
+
+        fetch('/admin/order/' + orderId + '/status', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ status: newStatus })
+        })
+        .then(r => r.json())
+        .then(data => {
+            if (data.ok) {
+                const pill = document.getElementById('status-' + orderId);
+                if (pill) {
+                    pill.textContent = newStatus.toUpperCase();
+                    pill.className = 'adm-status-pill adm-status-' + newStatus.toLowerCase().replace(' ', '-');
+                }
+                showToast('ORD-' + String(orderId).padStart(6, '0') + ' → ' + newStatus.toUpperCase(), 'ok');
+            } else {
+                showToast(data.error || 'Update failed', 'err');
+            }
+        })
+        .catch(() => showToast('Network error', 'err'));
+    };
+})();
+</script>
 {% endblock %}

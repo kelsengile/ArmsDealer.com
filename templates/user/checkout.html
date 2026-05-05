@@ -1,9 +1,105 @@
-{% extends 'partials/base.html' %}
-{% block title %}<title data-translate="checkout"></title>{% endblock %}
+{% extends 'partials/subbase.html' %}
+{% block title %}<title>Checkout — Arms Dealer</title>{% endblock %}
+
+{% block styles %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pagestyles/user/checkout.css') }}">
+{% endblock %}
 
 {% block main %}
-<main class="container">
-    <h1>Checkout</h1>
-    <p>Checkout functionality coming soon.</p>
+<main class="chk-main">
+    <div class="chk-container">
+
+        <!-- ── Header ─────────────────────────────────── -->
+        <section class="chk-header-strip">
+            <h1 class="chk-title">CHECKOUT</h1>
+            <span class="chk-sub">Review your order before placing</span>
+        </section>
+
+        {% if cart_items and cart_items | length > 0 %}
+        <div class="chk-body">
+
+            <!-- ── Order Items ─────────────────────────── -->
+            <div class="chk-items-panel">
+                <div class="chk-panel-label">ORDER ITEMS</div>
+                <div class="chk-item-list">
+                    {% for item in cart_items %}
+                    <div class="chk-item-row">
+                        <div class="chk-item-img-wrap">
+                            {% if item.image_file %}
+                            <img src="{{ url_for('static', filename='assets/images/' + item.image_file) }}"
+                                 alt="{{ item.name }}" class="chk-item-img">
+                            {% else %}
+                            <div class="chk-item-img-placeholder">⊡</div>
+                            {% endif %}
+                        </div>
+                        <div class="chk-item-info">
+                            <div class="chk-item-name">{{ item.name }}</div>
+                            <div class="chk-item-meta">
+                                <span class="chk-item-type">{{ item.item_type | upper }}</span>
+                                <span class="chk-item-qty">QTY: {{ item.quantity }}</span>
+                            </div>
+                        </div>
+                        <div class="chk-item-price">
+                            {{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(item.price) }}
+                            <span class="chk-item-unit">/ unit</span>
+                        </div>
+                        <div class="chk-item-subtotal">
+                            {{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(item.price * item.quantity) }}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- ── Cost Breakdown ─────────────────────── -->
+            <div class="chk-summary-panel">
+                <div class="chk-panel-label">COST BREAKDOWN</div>
+                <div class="chk-breakdown">
+                    <div class="chk-breakdown-row">
+                        <span class="chk-breakdown-label">Subtotal</span>
+                        <span class="chk-breakdown-val">{{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(cart_total) }}</span>
+                    </div>
+                    <div class="chk-breakdown-row">
+                        <span class="chk-breakdown-label">Shipping</span>
+                        <span class="chk-breakdown-val chk-free">FREE</span>
+                    </div>
+                    <div class="chk-breakdown-row">
+                        <span class="chk-breakdown-label">Tax (0%)</span>
+                        <span class="chk-breakdown-val">{{ currency.symbol if currency else '₱' }}0</span>
+                    </div>
+                    <div class="chk-breakdown-divider"></div>
+                    <div class="chk-breakdown-row chk-total-row">
+                        <span class="chk-breakdown-label">TOTAL</span>
+                        <span class="chk-breakdown-val chk-total-val">{{ currency.symbol if currency else '₱' }}{{ '{:,.0f}'.format(cart_total) }}</span>
+                    </div>
+                </div>
+
+                <!-- ── Action Buttons ──────────────────── -->
+                <div class="chk-actions">
+                    <form method="POST" action="{{ url_for('cart.place_order') }}">
+                        <input type="hidden" name="csrf_token" value="{{ session.get('_csrf_token', '') }}">
+                        <button type="submit" class="chk-place-btn">
+                            <span>PLACE ORDER ▶</span>
+                        </button>
+                    </form>
+                    <a href="{{ url_for('main.orders') }}" class="chk-cancel-btn">✕ CANCEL</a>
+                </div>
+
+                <div class="chk-note">
+                    <span class="chk-note-icon">◈</span>
+                    <span>Orders are reviewed and processed by our team. You will be notified of status changes.</span>
+                </div>
+            </div>
+
+        </div>
+        {% else %}
+        <div class="chk-empty">
+            <div class="chk-empty-icon">⊡</div>
+            <div class="chk-empty-text">Your cart is empty</div>
+            <a href="{{ url_for('main.products') }}" class="chk-empty-btn">BROWSE PRODUCTS ▶</a>
+        </div>
+        {% endif %}
+
+    </div>
 </main>
 {% endblock %}
