@@ -1,7 +1,7 @@
 # ──────────────────────────────────────────────────────────────────────────────────
 # MAIN ROUTES
 # ──────────────────────────────────────────────────────────────────────────────────
-from flask import Blueprint, render_template, request, g
+from flask import Blueprint, render_template, request, g, session, redirect, url_for
 from db_helpers import get_db, get_locale, get_currency
 
 main_bp = Blueprint('main', __name__)
@@ -68,3 +68,106 @@ def settings():
 @main_bp.route('/legal')
 def legal():
     return render_template('legal.html')
+
+
+# ─────────────────────────────────────────
+# ACCOUNT PAGE
+# ─────────────────────────────────────────
+
+@main_bp.route('/account')
+def account():
+    """User account profile page. Requires login."""
+    if not session.get('user_id'):
+        return redirect(url_for('auth.login'))
+
+    db = get_db()
+    user = db.execute(
+        'SELECT * FROM users WHERE id = ?', (session['user_id'],)
+    ).fetchone()
+
+    if not user:
+        session.clear()
+        return redirect(url_for('auth.login'))
+
+    return render_template('user/account.html', user=user)
+
+
+# ─────────────────────────────────────────
+# ORDERS PAGE
+# ─────────────────────────────────────────
+
+@main_bp.route('/orders')
+def orders():
+    """Orders, cart, and shipping page. Requires login."""
+    if not session.get('user_id'):
+        return redirect(url_for('auth.login'))
+
+    db = get_db()
+    user_id = session['user_id']
+    currency = get_currency(db)
+
+    # Fetch cart items with product/service details
+    cart_rows = db.execute("""
+        SELECT
+            ci.item_type,
+            ci.item_id,
+            ci.quantity,
+            CASE
+                WHEN ci.item_type = 'product' THEN p.name
+                WHEN ci.item_type = 'service' THEN s.name
+            END AS name,
+            CASE
+                WHEN ci.item_type = 'product' THEN p.price
+                WHEN ci.item_type = 'service' THEN s.price
+            END AS price,
+            CASE
+                WHEN ci.item_type = 'product' THEN p.image_file
+                WHEN ci.item_type = 'service' THEN s.image_file
+            END AS image_file
+        FROM cart_items ci
+        LEFT JOIN products p ON ci.item_type = 'product' AND ci.item_id = p.id
+        LEFT JOIN services s ON ci.item_type = 'service' AND ci.item_id = s.id
+        WHERE ci.user_id = ?
+        ORDER BY ci.id DESC
+    """, (user_id,)).fetchall()
+
+    cart_items = [dict(row) for row in cart_rows]
+
+    # Calculate total BEFORE currency conversion
+    cart_total_php = sum(
+        (item['price'] or 0) * item['quantity'] for item in cart_items
+    )
+
+    # Convert to selected currency
+    rate = currency['rate_to_php'] if currency else 1
+    for item in cart_items:
+        item['price'] = round((item['price'] or 0) * rate)
+    cart_total = round(cart_total_php * rate)
+
+    # Order history
+    orders_rows = db.execute(
+        'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC',
+        (user_id,)
+    ).fetchall()
+
+    return render_template(
+        'user/orders.html',
+        cart_items=cart_items,
+        cart_total=cart_total,
+        orders=orders_rows,
+        currency=currency
+    )
+
+
+# ─────────────────────────────────────────
+# ADMIN DASHBOARD
+# ─────────────────────────────────────────
+
+@main_bp.route('/dashboard')
+def dashboard():
+    """Admin dashboard. Requires admin role."""
+    if not session.get('user_id'):
+        return redirect(url_for('auth.login'))
+    if session.get('role') != 'admin':
+        return redirect(url_for('main.homepage'))
+    return render_template('user/dashboard.html')
