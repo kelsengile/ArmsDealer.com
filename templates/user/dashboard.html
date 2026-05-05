@@ -149,7 +149,7 @@
                                             <option value="shipping" {% if order.status == 'shipping' %}selected{% endif %}>Shipping</option>
                                             <option value="delivered" {% if order.status == 'delivered' %}selected{% endif %}>Delivered</option>
                                         </select>
-                                        <button class="adm-update-btn" onclick="updateOrderStatus({{ order.id | int }})">UPDATE &rsaquo;</button>
+                                        <button class="adm-update-btn" data-order-id="{{ order.id | int }}">UPDATE &rsaquo;</button>
                                     </div>
                                 </td>
                             </tr>
@@ -222,7 +222,11 @@
     }
 
     // ── Update order status ───────────────────────────
-    window.updateOrderStatus = function (orderId) {
+    document.addEventListener('click', function (e) {
+        const btn = e.target.closest('.adm-update-btn');
+        if (!btn) return;
+        const orderId = parseInt(btn.dataset.orderId, 10);
+        if (!orderId) return;
         const sel = document.getElementById('select-' + orderId);
         if (!sel) return;
         const newStatus = sel.value;
@@ -246,7 +250,7 @@
             }
         })
         .catch(() => showToast('Network error', 'err'));
-    };
+    });
 })();
 </script>
 {% endblock %}
