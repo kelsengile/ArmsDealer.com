@@ -106,7 +106,7 @@ def orders():
     user_id = session['user_id']
     currency = get_currency(db)
 
-    # Fetch cart items with product/service details
+    # ── Cart items ──────────────────────────────────────────────────
     cart_rows = db.execute("""
         SELECT
             ci.item_type,
@@ -132,29 +132,75 @@ def orders():
     """, (user_id,)).fetchall()
 
     cart_items = [dict(row) for row in cart_rows]
+    cart_total_php = sum((item['price'] or 0) * item['quantity']
+                         for item in cart_items)
 
-    # Calculate total BEFORE currency conversion
-    cart_total_php = sum(
-        (item['price'] or 0) * item['quantity'] for item in cart_items
-    )
-
-    # Convert to selected currency
     rate = currency['rate_to_php'] if currency else 1
     for item in cart_items:
         item['price'] = round((item['price'] or 0) * rate)
     cart_total = round(cart_total_php * rate)
 
-    # Order history
-    orders_rows = db.execute(
-        'SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC',
+    # ── Active orders (all statuses except delivered) ───────────────
+    active_order_rows = db.execute(
+        """SELECT * FROM orders WHERE user_id = ? AND status != 'delivered'
+           ORDER BY created_at DESC""",
         (user_id,)
     ).fetchall()
+
+    # Attach items to each active order
+    active_orders = []
+    for row in active_order_rows:
+        order = dict(row)
+        items = db.execute("""
+            SELECT oi.quantity, COALESCE(oi.unit_price, 0) AS unit_price,
+                   COALESCE(
+                       CASE
+                           WHEN oi.item_type = 'product' THEN p.name
+                           WHEN oi.item_type = 'service' THEN s.name
+                       END,
+                       '[Deleted Item]'
+                   ) AS name
+            FROM order_items oi
+            LEFT JOIN products p ON oi.item_type = 'product' AND oi.item_id = p.id
+            LEFT JOIN services s ON oi.item_type = 'service' AND oi.item_id = s.id
+            WHERE oi.order_id = ?
+        """, (order['id'],)).fetchall()
+        order['order_lines'] = [dict(i) for i in items]
+        active_orders.append(order)
+
+    # ── Delivered orders (history) ──────────────────────────────────
+    delivered_rows = db.execute(
+        """SELECT * FROM orders WHERE user_id = ? AND status = 'delivered'
+           ORDER BY COALESCE(updated_at, created_at) DESC""",
+        (user_id,)
+    ).fetchall()
+
+    delivered_orders = []
+    for row in delivered_rows:
+        order = dict(row)
+        items = db.execute("""
+            SELECT oi.quantity, COALESCE(oi.unit_price, 0) AS unit_price,
+                   COALESCE(
+                       CASE
+                           WHEN oi.item_type = 'product' THEN p.name
+                           WHEN oi.item_type = 'service' THEN s.name
+                       END,
+                       '[Deleted Item]'
+                   ) AS name
+            FROM order_items oi
+            LEFT JOIN products p ON oi.item_type = 'product' AND oi.item_id = p.id
+            LEFT JOIN services s ON oi.item_type = 'service' AND oi.item_id = s.id
+            WHERE oi.order_id = ?
+        """, (order['id'],)).fetchall()
+        order['order_lines'] = [dict(i) for i in items]
+        delivered_orders.append(order)
 
     return render_template(
         'user/orders.html',
         cart_items=cart_items,
         cart_total=cart_total,
-        orders=orders_rows,
+        active_orders=active_orders,
+        delivered_orders=delivered_orders,
         currency=currency
     )
 
@@ -170,4 +216,47 @@ def dashboard():
         return redirect(url_for('auth.login'))
     if session.get('role') != 'admin':
         return redirect(url_for('main.homepage'))
-    return render_template('user/dashboard.html')
+
+    db = get_db()
+
+    # ── Stats ───────────────────────────────────────────────────────
+    total_users = db.execute('SELECT COUNT(*) FROM users').fetchone()[0]
+    total_orders = db.execute('SELECT COUNT(*) FROM orders').fetchone()[0]
+    total_products = db.execute('SELECT COUNT(*) FROM products').fetchone()[0]
+    total_services = db.execute('SELECT COUNT(*) FROM services').fetchone()[0]
+    pending_orders = db.execute(
+        "SELECT COUNT(*) FROM orders WHERE status != 'delivered'"
+    ).fetchone()[0]
+    delivered_orders = db.execute(
+        "SELECT COUNT(*) FROM orders WHERE status = 'delivered'"
+    ).fetchone()[0]
+    revenue_row = db.execute(
+        "SELECT COALESCE(SUM(total), 0) FROM orders WHERE status = 'delivered'"
+    ).fetchone()
+    total_revenue = revenue_row[0] if revenue_row else 0
+
+    stats = {
+        'total_users': total_users,
+        'total_orders': total_orders,
+        'total_products': total_products,
+        'total_services': total_services,
+        'pending_orders': pending_orders,
+        'delivered_orders': delivered_orders,
+        'total_revenue': total_revenue,
+    }
+
+    # ── All orders with username and item count ─────────────────────
+    order_rows = db.execute("""
+        SELECT o.id, o.status, o.total, o.created_at, o.updated_at,
+               u.username,
+               COUNT(oi.id) AS item_count
+        FROM orders o
+        LEFT JOIN users u ON u.id = o.user_id
+        LEFT JOIN order_items oi ON oi.order_id = o.id
+        GROUP BY o.id
+        ORDER BY o.created_at DESC
+    """).fetchall()
+
+    orders = [dict(row) for row in order_rows]
+
+    return render_template('user/dashboard.html', stats=stats, orders=orders)
