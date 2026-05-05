@@ -18,6 +18,12 @@
         <a href="{{ url_for('main.settings') }}"
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
+            <span data-translate="navbarprivacy_security"></span>
+            <span class="set-arrow">▶</span>
+        </a>
+        <a href="{{ url_for('main.settings') }}"
+            class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
+            <span class="set-icon">◉</span>
             <span data-translate="navbarappearance"></span>
             <span class="set-arrow">▶</span>
         </a>
@@ -25,12 +31,6 @@
             class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
             <span class="set-icon">◉</span>
             <span data-translate="navbarnotifications"></span>
-            <span class="set-arrow">▶</span>
-        </a>
-        <a href="{{ url_for('main.settings') }}"
-            class="set-item active {% if request.endpoint == 'settings' %}nav-active{% endif %}">
-            <span class="set-icon">◉</span>
-            <span data-translate="navbarprivacy_security"></span>
             <span class="set-arrow">▶</span>
         </a>
         <div class="set-divider"></div>
