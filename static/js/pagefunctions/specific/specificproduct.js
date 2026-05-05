@@ -7,7 +7,6 @@ function spGoToBrand(e, el) {
     e.preventDefault();
     const slug = el.dataset.brandSlug;
     if (!slug) { window.location.href = el.href; return; }
-    // Store the target brand slug so products page can auto-open it
     sessionStorage.setItem('sp_open_brand', slug);
     window.location.href = el.href;
 }
@@ -17,20 +16,17 @@ function spGoToCategory(e, el) {
     e.preventDefault();
     const cat = el.dataset.categorySlug;
     if (!cat) { window.location.href = el.href; return; }
-    // Store category so products page opens the correct panel
     sessionStorage.setItem('sp_open_category', cat);
-    // Clear any leftover subcategory target
     sessionStorage.removeItem('sp_open_subcategory');
     window.location.href = el.href;
 }
 
-// ── Subcategory Navigation — go to category panel + scroll to subcategory ──
+// ── Subcategory Navigation ──────────────────────────────────────────
 function spGoToSubcategory(e, el) {
     e.preventDefault();
     const cat = el.dataset.categorySlug;
     const sub = el.dataset.subcategorySlug;
     if (!cat) { window.location.href = el.href; return; }
-    // Store both so products page opens the panel and scrolls to the section
     sessionStorage.setItem('sp_open_category', cat);
     if (sub) sessionStorage.setItem('sp_open_subcategory', sub);
     window.location.href = el.href;
@@ -41,14 +37,10 @@ const spActiveImg = document.getElementById('sp-active-img');
 const spThumbs = document.querySelectorAll('.sp-thumb');
 
 function spSetActive(thumb) {
-    // Remove active from all
     spThumbs.forEach(t => t.classList.remove('active'));
     thumb.classList.add('active');
-
     const newSrc = thumb.dataset.img;
     if (!newSrc || !spActiveImg) return;
-
-    // Fade transition
     spActiveImg.style.opacity = '0';
     setTimeout(() => {
         spActiveImg.src = newSrc;
@@ -59,18 +51,115 @@ function spSetActive(thumb) {
 // ── Quantity Stepper ─────────────────────────────────────────────────
 let spQtyVal = 1;
 const spQtyDisplay = document.getElementById('sp-qty-display');
+const spQtyMinus = document.getElementById('sp-qty-minus');
+const spQtyPlus = document.getElementById('sp-qty-plus');
 
-function spQty(delta) {
-    spQtyVal = Math.max(1, Math.min(99, spQtyVal + delta));
+function spSetQty(val) {
+    spQtyVal = Math.max(1, Math.min(99, val));
     if (spQtyDisplay) spQtyDisplay.textContent = spQtyVal;
 }
 
+if (spQtyMinus) spQtyMinus.addEventListener('click', function (e) {
+    e.stopPropagation();
+    spSetQty(spQtyVal - 1);
+});
+
+if (spQtyPlus) spQtyPlus.addEventListener('click', function (e) {
+    e.stopPropagation();
+    spSetQty(spQtyVal + 1);
+});
+
+// ── Toast helper ─────────────────────────────────────────────────────
+function spShowToast(msg, type) {
+    let toast = document.getElementById('sp-toast');
+    if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'sp-toast';
+        toast.style.cssText = [
+            'position:fixed', 'bottom:24px', 'right:24px', 'z-index:9999',
+            'padding:10px 18px', 'border-radius:6px', 'font-size:13px',
+            'font-family:inherit', 'letter-spacing:.04em',
+            'box-shadow:0 4px 18px rgba(0,0,0,.35)',
+            'opacity:0', 'transition:opacity .25s',
+            'pointer-events:none'
+        ].join(';');
+        document.body.appendChild(toast);
+    }
+    if (type === 'err') {
+        toast.style.background = '#c46a6a';
+        toast.style.color = '#fff';
+    } else {
+        toast.style.background = 'var(--clr-accent, #a8c496)';
+        toast.style.color = '#111';
+    }
+    toast.textContent = msg;
+    toast.style.opacity = '1';
+    clearTimeout(toast._timer);
+    toast._timer = setTimeout(() => { toast.style.opacity = '0'; }, 3000);
+}
+
+// ── Update cart badge in navbar ───────────────────────────────────────
+function spUpdateCartBadge(count) {
+    document.querySelectorAll('.cart-badge').forEach(badge => {
+        if (count > 0) {
+            badge.textContent = count > 99 ? '99+' : count;
+            badge.style.display = '';
+        } else {
+            badge.textContent = '';
+            badge.style.display = 'none';
+        }
+    });
+}
+
 // ── Add to Cart ──────────────────────────────────────────────────────
-// Wire up here — no inline Jinja needed
 const spCartBtn = document.getElementById('sp-add-cart-btn');
+
 if (spCartBtn) {
-    spCartBtn.addEventListener('click', function () {
-        // Stub — replace with your actual cart endpoint call
-        console.log('Add to cart qty:', spQtyVal);
+    spCartBtn.addEventListener('click', function (e) {
+        // Ignore clicks that came from the qty stepper buttons
+        if (e.target.classList.contains('sp-qty-btn')) return;
+
+        const productId = parseInt(this.dataset.productId, 10);
+        if (!productId) {
+            spShowToast('Product ID missing', 'err');
+            return;
+        }
+
+        // Disable button during request
+        this.style.opacity = '0.6';
+        this.style.pointerEvents = 'none';
+
+        fetch('/api/cart/add', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            credentials: 'same-origin',
+            body: JSON.stringify({
+                item_type: 'product',
+                item_id: productId,
+                quantity: spQtyVal
+            })
+        })
+            .then(r => {
+                if (r.status === 401) {
+                    window.location.href = '/login';
+                    return null;
+                }
+                return r.json();
+            })
+            .then(data => {
+                if (!data) return;
+                if (data.ok) {
+                    spShowToast('Added to cart \u00d7' + spQtyVal, 'ok');
+                    spUpdateCartBadge(data.cart_count);
+                    spSetQty(1);
+                } else {
+                    spShowToast(data.error || 'Could not add to cart', 'err');
+                }
+            })
+            .catch(() => spShowToast('Network error', 'err'))
+            .finally(() => {
+                this.style.opacity = '';
+                this.style.pointerEvents = '';
+            });
     });
 }
