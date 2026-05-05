@@ -1,10 +1,11 @@
 -- =========================================
--- FULL DATABASE SCHEMA (SQLITE)
+-- FULL DATABASE SCHEMA + INDEXES + TRIGGERS
+-- SQLITE EXECUTABLE SCRIPT (COMPLETE)
 -- =========================================
 
 BEGIN TRANSACTION;
 
-
+-- Temporarily disable foreign keys for clean rebuild
 PRAGMA foreign_keys = OFF;
 
 -- =========================================
@@ -13,10 +14,10 @@ PRAGMA foreign_keys = OFF;
 DROP TABLE IF EXISTS users;
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    username TEXT NOT NULL UNIQUE,              -- unique username
-    email TEXT NOT NULL UNIQUE,                 -- unique email
-    password_hash TEXT NOT NULL,                -- hashed password
-    role TEXT NOT NULL DEFAULT 'customer',      -- 'customer' | 'admin'
+    username TEXT NOT NULL UNIQUE,
+    email TEXT NOT NULL UNIQUE,
+    password_hash TEXT NOT NULL,
+    role TEXT NOT NULL DEFAULT 'customer',   -- 'customer' | 'admin'
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -26,9 +27,9 @@ CREATE TABLE users (
 -- =========================================
 DROP TABLE IF EXISTS languages;
 CREATE TABLE languages (
-    code TEXT PRIMARY KEY,                      -- e.g. 'en', 'ph'
-    label TEXT NOT NULL,                        -- readable name
-    locale TEXT NOT NULL,                       -- e.g. 'en_US'
+    code TEXT PRIMARY KEY,
+    label TEXT NOT NULL,
+    locale TEXT NOT NULL,
     is_active INTEGER NOT NULL DEFAULT 1,
     sort_order INTEGER NOT NULL DEFAULT 0
 );
@@ -43,14 +44,12 @@ CREATE TABLE brands (
     slug TEXT NOT NULL UNIQUE,
     logo_file TEXT,
     description TEXT,
-    is_authorized INTEGER NOT NULL DEFAULT 1,   -- approved brand
+    is_authorized INTEGER NOT NULL DEFAULT 1,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
 
--- =========================================
 -- BRAND TRANSLATIONS
--- =========================================
 DROP TABLE IF EXISTS brands_translations;
 CREATE TABLE brands_translations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -71,14 +70,12 @@ CREATE TABLE categories (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name TEXT NOT NULL UNIQUE,
     slug TEXT NOT NULL UNIQUE,
-    type TEXT NOT NULL DEFAULT 'product',       -- 'product' | 'service'
+    type TEXT NOT NULL DEFAULT 'product', -- 'product' | 'service'
     icon_file TEXT,
     description TEXT
 );
 
--- =========================================
 -- CATEGORY TRANSLATIONS
--- =========================================
 DROP TABLE IF EXISTS category_translations;
 CREATE TABLE category_translations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -106,9 +103,7 @@ CREATE TABLE subcategories (
     FOREIGN KEY (category_id) REFERENCES categories(id) ON DELETE CASCADE
 );
 
--- =========================================
 -- SUBCATEGORY TRANSLATIONS
--- =========================================
 DROP TABLE IF EXISTS subcategory_translations;
 CREATE TABLE subcategory_translations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -139,7 +134,7 @@ CREATE TABLE products (
     rating REAL NOT NULL DEFAULT 0 CHECK (rating >= 0 AND rating <= 5),
     sales_count INTEGER NOT NULL DEFAULT 0,
     image_file TEXT,
-    tags TEXT,                                  -- JSON string
+    tags TEXT,
     is_authorized INTEGER NOT NULL DEFAULT 0,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
     updated_at TEXT NOT NULL DEFAULT (datetime('now')),
@@ -148,9 +143,7 @@ CREATE TABLE products (
     FOREIGN KEY (brand_id) REFERENCES brands(id)
 );
 
--- =========================================
 -- PRODUCT IMAGES
--- =========================================
 DROP TABLE IF EXISTS product_images;
 CREATE TABLE product_images (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -162,9 +155,7 @@ CREATE TABLE product_images (
     FOREIGN KEY (product_id) REFERENCES products(id) ON DELETE CASCADE
 );
 
--- =========================================
 -- PRODUCT TRANSLATIONS
--- =========================================
 DROP TABLE IF EXISTS products_translations;
 CREATE TABLE products_translations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -204,9 +195,7 @@ CREATE TABLE services (
     FOREIGN KEY (brand_id) REFERENCES brands(id)
 );
 
--- =========================================
 -- SERVICE TRANSLATIONS
--- =========================================
 DROP TABLE IF EXISTS services_translations;
 CREATE TABLE services_translations (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -227,7 +216,7 @@ DROP TABLE IF EXISTS orders;
 CREATE TABLE orders (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL,
-    status TEXT NOT NULL DEFAULT 'pending',     -- order lifecycle
+    status TEXT NOT NULL DEFAULT 'pending',
     total REAL NOT NULL DEFAULT 0,
     notes TEXT,
     created_at TEXT NOT NULL DEFAULT (datetime('now')),
@@ -235,9 +224,7 @@ CREATE TABLE orders (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
--- =========================================
 -- ORDER ITEMS
--- =========================================
 DROP TABLE IF EXISTS order_items;
 CREATE TABLE order_items (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -251,7 +238,7 @@ CREATE TABLE order_items (
 );
 
 -- =========================================
--- CART ITEMS
+-- CART
 -- =========================================
 DROP TABLE IF EXISTS cart_items;
 CREATE TABLE cart_items (
@@ -279,7 +266,7 @@ CREATE TABLE currencies (
 );
 
 -- =========================================
--- UI STRINGS (LOCALIZATION)
+-- UI STRINGS
 -- =========================================
 DROP TABLE IF EXISTS ui_strings;
 CREATE TABLE ui_strings (
@@ -292,7 +279,7 @@ CREATE TABLE ui_strings (
 );
 
 -- =========================================
--- INQUIRIES (CONTACT FORM)
+-- INQUIRIES
 -- =========================================
 DROP TABLE IF EXISTS inquiries;
 CREATE TABLE inquiries (
@@ -301,9 +288,86 @@ CREATE TABLE inquiries (
     email TEXT NOT NULL,
     subject TEXT,
     message TEXT NOT NULL,
-    status TEXT NOT NULL DEFAULT 'new',         -- 'new' | 'read' | 'resolved'
+    status TEXT NOT NULL DEFAULT 'new',
     created_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
+
+-- =========================================
+-- INDEXES (PERFORMANCE OPTIMIZATION)
+-- =========================================
+
+CREATE INDEX idx_order_items_order ON order_items(order_id);
+CREATE INDEX idx_orders_status ON orders(status);
+CREATE INDEX idx_orders_user ON orders(user_id);
+CREATE INDEX idx_product_images_product ON product_images(product_id);
+CREATE INDEX idx_products_brand ON products(brand_id);
+CREATE INDEX idx_products_category ON products(category_id);
+CREATE INDEX idx_products_subcat ON products(subcategory_id);
+CREATE INDEX idx_services_brand ON services(brand_id);
+CREATE INDEX idx_services_category ON services(category_id);
+CREATE INDEX idx_services_subcat ON services(subcategory_id);
+CREATE INDEX idx_subcats_category ON subcategories(category_id);
+CREATE INDEX idx_ui_strings_lang ON ui_strings(lang_code);
+
+-- =========================================
+-- TRIGGERS (AUTO SALES COUNT MANAGEMENT)
+-- =========================================
+
+-- When order becomes COMPLETED → add sales
+CREATE TRIGGER trg_order_completed
+AFTER UPDATE OF status ON orders
+WHEN NEW.status = 'completed' AND OLD.status != 'completed'
+BEGIN
+    UPDATE products
+    SET sales_count = sales_count + (
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product' AND item_id = products.id
+    )
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product'
+    );
+
+    UPDATE services
+    SET sales_count = sales_count + (
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service' AND item_id = services.id
+    )
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service'
+    );
+END;
+
+-- When order is reverted → subtract sales
+CREATE TRIGGER trg_order_uncompleted
+AFTER UPDATE OF status ON orders
+WHEN OLD.status = 'completed' AND NEW.status != 'completed'
+BEGIN
+    UPDATE products
+    SET sales_count = MAX(0, sales_count - (
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product' AND item_id = products.id
+    ))
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'product'
+    );
+
+    UPDATE services
+    SET sales_count = MAX(0, sales_count - (
+        SELECT COALESCE(SUM(quantity), 0)
+        FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service' AND item_id = services.id
+    ))
+    WHERE id IN (
+        SELECT item_id FROM order_items
+        WHERE order_id = NEW.id AND item_type = 'service'
+    );
+END;
 
 -- Re-enable foreign keys
 PRAGMA foreign_keys = ON;
