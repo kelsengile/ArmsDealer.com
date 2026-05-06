@@ -612,7 +612,6 @@ INSERT INTO "brands_translations" ("id","brand_id","lang_code","name","descripti
  (326,82,'japanese','Armsdealer','Armsdealerのハウスブランド — 当社の調達チームが厳選、検証、直接調達。Armsdealer ブランドのすべての商品はプラットフォーム最高水準の品質と真正性を満たしています。'),
  (327,82,'spanish','Armsdealer','La marca propia de Armsdealer — seleccionada, verificada y abastecida directamente por nuestro equipo de adquisiciones. Cada listado con la marca Armsdealer cumple los más altos estándares de calidad y autenticidad de la plataforma.'),
  (328,82,'mandarin','Armsdealer','Armsdealer自有品牌——由我们的采购团队精心挑选、核实并直接采购。每件Armsdealer品牌商品均符合平台最高的质量与真实性标准。');
-INSERT INTO "cart_items" ("id","user_id","item_type","item_id","quantity","added_at") VALUES (3,1,'product',23,1,'2026-05-05 10:48:27');
 INSERT INTO "categories" ("id","name","slug","type","icon_file","description") VALUES (1,'Firearms','firearms','product',NULL,'Guns and ranged weapons'),
  (2,'Blades','blades','product',NULL,'Knives, swords, and edged weapons'),
  (3,'Blunts','blunts','product',NULL,'Impact weapons like bats and clubs'),
@@ -788,10 +787,6 @@ INSERT INTO "languages" ("code","label","locale","is_active","sort_order") VALUE
  ('japanese','Japanese','ja',1,3),
  ('spanish','Spanish','es',1,4),
  ('mandarin','Mandarin','zh',1,5);
-INSERT INTO "order_items" ("id","order_id","item_type","item_id","quantity","unit_price") VALUES (1,1,'product',302,1,79990.0),
- (2,2,'product',302,2,79990.0);
-INSERT INTO "orders" ("id","user_id","status","total","notes","created_at","updated_at") VALUES (1,1,'delivered',79990.0,NULL,'2026-05-05 08:04:44','2026-05-05 08:15:38'),
- (2,1,'delivered',159980.0,NULL,'2026-05-05 10:44:29','2026-05-05 10:45:44');
 INSERT INTO "product_images" ("id","product_id","image_file","sort_order","created_at") VALUES (1,1,'glock 19 gen5.png',1,'2026-05-03 12:48:09'),
  (2,1,'glock 43x.png',2,'2026-05-03 12:48:09'),
  (3,1,'glock 21 gen4.png',3,'2026-05-03 12:48:09'),
