@@ -4,7 +4,7 @@
 
 /* ── Layout ─────────────────────────────────────────────────────── */
 .setpage-main {
-    min-height: calc(100vh - var(--header-h, 56px));
+    min-height: 800px;
     display: flex;
     align-items: stretch;
 }
@@ -31,7 +31,6 @@
     border-top: 3px solid var(--mil-olive, #6b7c4e);
     position: sticky;
     top: 0;
-    height: 100vh;
     overflow-y: auto;
     overflow: hidden;
 }
@@ -44,10 +43,6 @@
     top: 0;
     bottom: 0;
     width: 2px;
-    background: linear-gradient(180deg,
-        var(--mil-bright, #a8c47a),
-        var(--mil-olive, #6b7c4e) 60%,
-        transparent);
     z-index: 1;
 }
 
@@ -60,7 +55,7 @@
     width: 24px;
     height: 24px;
     border-top: 3px solid var(--mil-bright, #a8c47a);
-    border-left: 3px solid var(--mil-bright, #a8c47a);
+
     pointer-events: none;
     z-index: 2;
 }
@@ -135,7 +130,6 @@
 .setpage-nav-item.active {
     background: rgba(138, 170, 106, 0.08);
     color: var(--mil-bright, #a8c47a);
-    border-left-color: var(--mil-bright, #a8c47a);
 }
 
 .setpage-nav-icon {
