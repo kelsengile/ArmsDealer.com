@@ -4,7 +4,7 @@
 
 /* ── Layout ─────────────────────────────────────────────────────── */
 .ordpage-main {
-    min-height: calc(100vh - var(--header-h, 98px));
+    min-height: calc(100vh - var(--header-h, 56px));
     display: flex;
     align-items: flex-start;
     justify-content: center;
@@ -16,22 +16,43 @@
     max-width: 1200px;
     display: flex;
     flex-direction: column;
-    gap: 0;
+    gap: 20px;
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   HEADER STRIP + TABS
+   HEADER STRIP + TABS (SEPARATED NAV RECTANGLE)
 ══════════════════════════════════════════════════════════════════ */
 .ordpage-header-strip {
-    background: var(--mil-dark, #131713);
+    /* Background image support — set --ordpage-nav-bg to a URL to use a custom image */
+    background-color: var(--mil-dark, #131713);
+    background-image: var(--ordpage-nav-bg, none);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
     border: 1px solid var(--mil-border, #2e3a2e);
     border-top: 3px solid var(--mil-olive, #6b7c4e);
-    border-bottom: none;
-    padding: 20px 28px 0;
+    padding: 28px 32px 24px;
     position: relative;
     display: flex;
     flex-direction: column;
     gap: 0;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+/* Overlay so text stays readable even with a bg image */
+.ordpage-header-strip::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: var(--ordpage-nav-overlay, rgba(13, 15, 13, 0.55));
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* All direct children go above the overlay */
+.ordpage-header-strip > * {
+    position: relative;
+    z-index: 1;
 }
 
 /* Corner bracket */
@@ -45,18 +66,20 @@
     border-top: 3px solid var(--mil-bright, #a8c47a);
     border-left: 3px solid var(--mil-bright, #a8c47a);
     pointer-events: none;
+    z-index: 2;
 }
 
 .ordpage-title {
     font-family: var(--font-stencil, "Oswald", sans-serif);
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 700;
     letter-spacing: 0.22em;
     text-transform: uppercase;
     color: var(--mil-light, #e2ead4);
-    margin-bottom: 16px;
+    margin-bottom: 20px;
     position: relative;
     display: inline-block;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.6);
 }
 
 .ordpage-title::after {
@@ -72,18 +95,17 @@
 /* Tabs */
 .ordpage-tabs {
     display: flex;
-    gap: 0;
-    margin-top: 16px;
+    gap: 10px;
+    margin-top: 8px;
 }
 
 .ordpage-tab {
     display: flex;
     align-items: center;
     gap: 8px;
-    padding: 12px 28px;
-    background: transparent;
+    padding: 10px 24px;
+    background: rgba(19, 23, 19, 0.7);
     border: 1px solid var(--mil-border, #2e3a2e);
-    border-bottom: none;
     color: var(--mil-muted, #4a5e4a);
     font-family: var(--font-stencil, "Oswald", sans-serif);
     font-size: 13px;
@@ -93,20 +115,19 @@
     cursor: pointer;
     position: relative;
     transition: all 0.2s;
-    margin-right: -1px;
+    backdrop-filter: blur(4px);
 }
 
 .ordpage-tab:hover {
     color: var(--mil-text, #c8d4b8);
-    background: rgba(138, 170, 106, 0.04);
+    background: rgba(138, 170, 106, 0.1);
+    border-color: var(--mil-olive, #6b7c4e);
 }
 
 .ordpage-tab.active {
-    background: var(--mil-dark, #131713);
+    background: rgba(168, 196, 122, 0.15);
     color: var(--mil-bright, #a8c47a);
     border-color: var(--mil-olive, #6b7c4e);
-    border-bottom: 2px solid var(--mil-dark, #131713);
-    z-index: 1;
 }
 
 .ordpage-tab.active::before {
@@ -141,12 +162,12 @@
 }
 
 /* ══════════════════════════════════════════════════════════════════
-   CONTENT SECTION
+   CONTENT SECTION (separate from nav rectangle)
 ══════════════════════════════════════════════════════════════════ */
 .ordpage-content {
     background: var(--mil-dark, #131713);
-    border: 1px solid var(--mil-olive, #6b7c4e);
-    border-top: none;
+    border: 1px solid var(--mil-border, #2e3a2e);
+    border-top: 2px solid var(--mil-olive, #6b7c4e);
     min-height: 420px;
     position: relative;
     overflow: hidden;
@@ -450,12 +471,15 @@
 /* ── Responsive ──────────────────────────────────────────────────── */
 @media (max-width: 640px) {
     .ordpage-tabs {
-        overflow-x: auto;
+        flex-wrap: wrap;
+        gap: 8px;
     }
 
     .ordpage-tab {
         padding: 10px 16px;
         font-size: 11px;
+        flex: 1;
+        justify-content: center;
     }
 
     .ordpage-history-row {

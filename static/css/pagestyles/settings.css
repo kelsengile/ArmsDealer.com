@@ -4,7 +4,7 @@
 
 /* ── Layout ─────────────────────────────────────────────────────── */
 .setpage-main {
-    min-height: calc(100vh - var(--header-h, 98px));
+    min-height: calc(100vh - var(--header-h, 56px));
     display: flex;
     align-items: stretch;
 }
@@ -12,23 +12,27 @@
 .setpage-layout {
     display: flex;
     width: 100%;
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 40px 16px;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
     gap: 0;
-    align-items: flex-start;
+    align-items: stretch;
+    flex: 1;
 }
 
 /* ══════════════════════════════════════════════════════════════════
    LEFT NAV PANEL
 ══════════════════════════════════════════════════════════════════ */
 .setpage-nav {
-    width: 260px;
+    width: 280px;
     flex-shrink: 0;
     background: var(--mil-dark, #131713);
-    border: 1px solid var(--mil-border, #2e3a2e);
+    border-right: 1px solid var(--mil-border, #2e3a2e);
     border-top: 3px solid var(--mil-olive, #6b7c4e);
-    position: relative;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow-y: auto;
     overflow: hidden;
 }
 
@@ -176,10 +180,9 @@
 .setpage-content {
     flex: 1;
     background: var(--mil-dark, #131713);
-    border: 1px solid var(--mil-border, #2e3a2e);
     border-top: 3px solid var(--mil-olive, #6b7c4e);
     border-left: none;
-    min-height: 500px;
+    min-height: 100vh;
     position: relative;
     overflow: hidden;
 }
@@ -305,16 +308,17 @@
 @media (max-width: 768px) {
     .setpage-layout {
         flex-direction: column;
-        padding: 20px 12px;
     }
 
     .setpage-nav {
         width: 100%;
-        border-top: 3px solid var(--mil-olive, #6b7c4e);
+        height: auto;
+        position: static;
+        border-right: none;
+        border-bottom: 1px solid var(--mil-border, #2e3a2e);
     }
 
     .setpage-content {
-        border-left: 1px solid var(--mil-border, #2e3a2e);
         border-top: none;
         min-height: 300px;
     }
