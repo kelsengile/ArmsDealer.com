@@ -144,4 +144,11 @@
             link.addEventListener("click", closeDrawer);
         });
     }
+
+    /* ── data-href buttons (cart redirect) ────────────────────────── */
+    document.querySelectorAll(".nav-btn-cart[data-href]").forEach((btn) => {
+        btn.addEventListener("click", () => {
+            window.location.href = btn.dataset.href;
+        });
+    });
 })();
