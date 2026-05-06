@@ -18,7 +18,11 @@
             <div class="acctpage-profile-left">
                 <div class="acctpage-avatar-wrap">
                     {% if user.profile_image %}
-                    <img src="{{ user.profile_image }}" alt="{{ user.username }}" class="acctpage-avatar-img">
+                        {% if user.profile_image.startswith('http') or user.profile_image.startswith('/') %}
+                        <img src="{{ user.profile_image }}" alt="{{ user.username }}" class="acctpage-avatar-img">
+                        {% else %}
+                        <img src="{{ url_for('static', filename=user.profile_image) }}" alt="{{ user.username }}" class="acctpage-avatar-img">
+                        {% endif %}
                     {% else %}
                     {% set initials = (user.username[:1] + user.username[1:2]).upper() %}
                     <div class="acctpage-avatar-placeholder">{{ initials }}</div>
