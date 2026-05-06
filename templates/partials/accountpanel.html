@@ -60,9 +60,9 @@
             </div>
             <div class="acct-cart-right">
                 {% if session.get('cart_count', 0) > 0 %}
-                <span class="acct-cart-count">{{ session.get('cart_count', 0) }}</span>
+                <span class="acct-cart-count" id="panelCartCount">{{ session.get('cart_count', 0) }}</span>
                 {% else %}
-                <span class="acct-cart-empty" data-translate="accountpanelempty">EMPTY</span>
+                <span class="acct-cart-empty" id="panelCartCount" data-translate="accountpanelempty">EMPTY</span>
                 {% endif %}
                 <span class="acct-cart-arrow">▶</span>
             </div>
